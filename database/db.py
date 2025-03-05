@@ -4,7 +4,7 @@ from mysql.connector import Error
 import datetime
 import json
 import datetime
-from config.config import DB_CONFIG
+from config import *
 
 # Configure logging
 logging.basicConfig(filename="foodbot.log", level=logging.INFO, 
@@ -80,7 +80,7 @@ class Database:
             estimated_delivery_time = delivery_time_obj.strftime("%I:%M %p")  # Format as HH:MM AM/PM
             
             return (f"📝 **Order Status:** {order_status}\n"
-                    f"🚚 **Estimated Delivery Time:** {estimated_delivery_time} and you have 20 minutes to cancel the order.")
+                    f"🚚 **Estimated Delivery Time:** {estimated_delivery_time} and you have 20 minutes from when you place order to cancel the order.")
         
         except Exception as e:
             return f"⚠ Error fetching order status: {e}"
