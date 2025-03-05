@@ -1,0 +1,12 @@
+FoodBot/
+│── config.py               # ✅ Stores API keys, DB credentials, constants
+│── main.py                 # ✅ Runs the chatbot (entry point)
+│── bot/
+│   ├── chatbot.py          # ✅ Core chatbot logic (LLM, LangGraph)
+│   ├── tools.py            # ✅ Defines all available chatbot tools
+│── database/
+│   ├── db.py               # ✅ Handles database operations
+│   ├── foodbot_schema.sql   # ✅ Your SQL file (schema, sample data)
+│── order/
+│   ├── order_handler.py    # ✅ Handles order processing logic
+│── README.md               # ✅ Project documentation
