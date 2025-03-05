@@ -4,7 +4,7 @@ from mysql.connector import Error
 import datetime
 import json
 import datetime
-from config import DB_CONFIG
+from config.config import DB_CONFIG
 
 # Configure logging
 logging.basicConfig(filename="foodbot.log", level=logging.INFO, 

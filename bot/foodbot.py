@@ -9,7 +9,7 @@ from langgraph.graph.message import add_messages
 from langchain_core.messages import ToolMessage
 from langchain.tools import Tool
 from tools.agent_tools import *
-from config import GROK_API_KEY
+from config.config import GROK_API_KEY
 
 # ✅ Load environment variables
 load_dotenv()
