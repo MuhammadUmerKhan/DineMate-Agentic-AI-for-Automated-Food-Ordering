@@ -3,17 +3,20 @@ import utils  # Utility functions for chatbot and session handling
 from streaming import StreamHandler  # Handles real-time streaming responses
 from bot.agent import stream_graph_updates  # Function to process chatbot responses
 from app.home import home  # Import Home page for navigation
+from app import kitchen  # Import Kitchen page for tracking orders
 
 # ✅ Set up Streamlit UI
 st.set_page_config(page_title="DineMate - Food Ordering Bot", page_icon="🍽️", layout="wide")
 # st.write("Welcome! You can order food, track your order, and more.")
 
 # ✅ Sidebar Navigation
-page = st.sidebar.radio("📌 Select Page", ["🏠 Home", "🍔 DineMate Chatbot"])
+page = st.sidebar.radio("📌 Select Page", ["🏠 Home", "🍔 DineMate Chatbot", "👨‍🍳 Kitchen Orders"])
 
 # 🎯 Load Home Page
 if page == "🏠 Home":
     home()
+elif page == "👨‍🍳 Kitchen Orders":
+    kitchen.show_kitchen_orders()
 elif page == "🍔 DineMate Chatbot":
     st.title("🍽️ DineMate - AI Food Ordering Chatbot")
     # ✅ Display GitHub Source Code Button
