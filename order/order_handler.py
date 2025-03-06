@@ -66,10 +66,10 @@ class OrderHandler:
         # ✅ Reset memory after confirming order
         self.order_items = {}
 
-        return f"✅ Your order has been confirmed! Your Order ID is **{order_id}**.\nUse this ID to check your order status later.\n{confirmation_message} and estimated time to deliver your order is {estimated_time}"
+        return f"✅ Your order has been confirmed! Your Order ID is **{order_id}**.\nUse this ID to check your order status later.\n{confirmation_message} and estimated time to deliver your order is {estimated_time} also you have 20 minutes to cancel order when you place your order"
 
     def remove_item(self, item_name: str):
-        """✅ Removes an item from the order and updates total price."""
+        """✅ Removes an item from the order and updates total price. Also shows available menu items with quantities."""
         if not self.order_items:
             return "⚠ No items in your order to remove."
         
@@ -81,15 +81,17 @@ class OrderHandler:
 
             # Deduct the removed item price from total price
             self.total_price -= removed_price
-            del self.order_items[item_lower]
+            del self.order_items[item_lower]  # Remove item from order
+
+            # ✅ Show Available Items in Inventory
+            inventory_list = "\n".join([f"- **{item.title()}** (Price: ${self.menu[item]:.2f})" for item in self.menu])
 
             return (f"✅ Removed **{item_name}** from your order.\n"
                     f"🛒 **Updated Order:** {self.order_items}\n"
-                    f"💰 **Updated Total Price: ${self.total_price:.2f}**")
+                    f"💰 **Updated Total Price: ${self.total_price:.2f}**\n\n"
+                    f"📌 **Available Items in Inventory:**\n{inventory_list}")
         
         return f"⚠ **{item_name}** is not in your order."
-
-
 
     def update_item(self, order_dict):
         """✅ Updates the quantity of an existing item and adjusts total price."""
@@ -137,7 +139,7 @@ class OrderHandler:
         return self.db.cancel_order_after_confirmation(user_id)
     
     def replace_item(self, old_item: str, new_item: str):
-        """✅ Replace an item in the order while keeping the same quantity and updating price."""
+        """✅ Replace an item in the order while keeping the same quantity and updating price correctly."""
         old_item_lower = old_item.lower()
         new_item_lower = new_item.lower()
 
@@ -155,12 +157,16 @@ class OrderHandler:
         new_price = self.menu.get(new_item_lower, 0) * quantity
         self.total_price = self.total_price - old_price + new_price
 
-        # Add new item with the same quantity
-        self.order_items[new_item_lower] = quantity
+        # ✅ If new item already exists, add the quantity instead of replacing it
+        if new_item_lower in self.order_items:
+            self.order_items[new_item_lower] += quantity
+        else:
+            self.order_items[new_item_lower] = quantity
 
         return (f"🔄 Replaced **{old_item}** with **{new_item}**.\n"
                 f"🛒 **Updated Order:** {self.order_items}\n"
                 f"💰 **Updated Total Price: ${self.total_price:.2f}**")
+
 
     def modify_order_after_confirmation(self, order_id, updated_items):
         """✅ Replace an order after confirmation with a new one, ensuring accurate pricing."""

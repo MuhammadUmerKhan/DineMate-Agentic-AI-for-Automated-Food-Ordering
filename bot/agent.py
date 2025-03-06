@@ -41,8 +41,13 @@ tools = [
     ),
     Tool(
         name="Take Order",
-        func=take_order,
-        description="Add multiple items to order. Use this dictionary format: {'item': quantity, 'item2': quantity2, ....}."
+        func=extract_items,
+        description="Take order items from user inputs. Use JSON format."
+    ),
+    Tool(
+        name="Update Item Quantity", 
+        func=update_item, 
+        description="Update the quantity of an existing item in your order. Use JSON format."
     ),
     Tool(
         name="Remove Item", 
@@ -50,9 +55,9 @@ tools = [
         description="Remove an item from your order."
     ),
     Tool(
-        name="Update Item Quantity", 
-        func=update_item, 
-        description="Update the quantity of an existing item in your order. Use JSON format: `{'item': quantity}`."
+        name="Add items",   
+        func=add_items,
+        description="Add items to existing order. Use JSON format."
     ),
     Tool(
         name="Total Price",

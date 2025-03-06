@@ -1,2 +1,7 @@
 .env
 app
+order
+tools
+bot
+database
+.gitignore
