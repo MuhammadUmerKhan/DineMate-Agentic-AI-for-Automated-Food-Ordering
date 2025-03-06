@@ -1,28 +1,59 @@
-from bot.agent import graph
+import streamlit as st  # Streamlit for UI
+import utils  # Utility functions for chatbot and session handling
+from streaming import StreamHandler  # Handles real-time streaming responses
+from bot.agent import stream_graph_updates  # Function to process chatbot responses
+from app.home import home  # Import Home page for navigation
 
-def stream_graph_updates(user_input: str) -> str:
-    """Streams chatbot responses and returns the final response."""
-    messages = [{"role": "system", "content": "Always respond in English. Do not use any other language."}]
-    messages.append({"role": "user", "content": user_input})
+# ✅ Set up Streamlit UI
+st.set_page_config(page_title="DineMate - Food Ordering Bot", page_icon="🍽️", layout="wide")
+# st.write("Welcome! You can order food, track your order, and more.")
 
-    final_response = ""  # Initialize empty response string
+# ✅ Sidebar Navigation
+page = st.sidebar.radio("📌 Select Page", ["🏠 Home", "🍔 DineMate Chatbot"])
 
-    for event in graph.stream({"messages": messages}):
-        for value in event.values():
-            assistant_message = value["messages"][-1].content  # Extract the latest assistant message
-            print("Assistant:", assistant_message)  # Debugging print statement
+# 🎯 Load Home Page
+if page == "🏠 Home":
+    home()
+elif page == "🍔 DineMate Chatbot":
+    st.title("🍽️ DineMate - AI Food Ordering Chatbot")
+    # ✅ Display GitHub Source Code Button
+    st.write('[![View Source Code](https://img.shields.io/badge/view_source_code-gray?logo=github)]'
+             '(https://github.com/MuhammadUmerKhan/DineMate-Food-Ordering-Chatbot)')
 
-            # Append to the final response
-            final_response += assistant_message + " "
+    # ✅ Enable Chat History
+    @utils.enable_chat_history
+    def main():
+        """Main function to handle chatbot interactions."""
 
-    return assistant_message.strip()  # Return cleaned response to display in Streamlit
+        user_query = st.chat_input(placeholder="Ask me anything about food ordering!")
 
+        if user_query:  # If user provides input
+            utils.display_msg(user_query, "user")  # Display user's message in UI
 
-# # ✅ Start Chatbot
-# print("\n🤖 Chatbot is ready! Type 'exit', 'quit', or 'bye' to stop.\n")
-# while True:
-#     user_input = input("You: ")
-#     if user_input.lower() in ["quit", "exit", "q"]:
-#         print("Goodbye!")
-#         break
-#     stream_graph_updates(user_input)
+            with st.chat_message("assistant"):  # Display assistant's response
+                st_sb = StreamHandler(st.empty())  # Create streaming handler for live updates
+
+                try:
+                    # ✅ Process the user query using LangChain graph
+                    response = stream_graph_updates(user_query)
+
+                    # ✅ Unicode-safe decoding
+                    # response = response.encode('utf-16', 'surrogatepass').decode('utf-16', 'ignore')
+
+                    # ✅ Display response in Streamlit
+                    st.write(response)
+
+                    # ✅ Store response in session history
+                    st.session_state.messages.append({"role": "assistant", "content": response})
+
+                    # ✅ Log the interaction
+                    utils.print_qa(main, user_query, response)
+
+                except Exception as e:
+                    error_msg = f"⚠ Error processing request: {str(e)}"
+                    st.write(error_msg)
+                    st.session_state.messages.append({"role": "assistant", "content": error_msg})
+
+    # ✅ Run the chatbot application
+    if __name__ == "__main__":
+        main()

@@ -1,6 +1,6 @@
 import streamlit as st  # Streamlit for UI
 
-def show_home():
+def home():
     """Displays the Home page content."""
     
     # ✅ Set up Streamlit UI
@@ -99,7 +99,3 @@ def show_home():
     # st.markdown("---")
     # st.markdown("🔗 **GitHub Repo:** [View Source Code](https://github.com/MuhammadUmerKhan/DineMate-Food-Ordering-Chatbot)")
     st.markdown("© 2025 **DineMate AI** | Built with ❤️ by **Muhammad Umer Khan**")
-
-# ✅ Run when Home is loaded
-if __name__ == "__main__":
-    show_home()
