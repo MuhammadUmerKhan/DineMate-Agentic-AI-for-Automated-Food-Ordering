@@ -2500,3 +2500,4 @@ Bot: An error occurred while processing your request. Please try again.
 2025-03-06 17:16:03,299 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
 2025-03-06 17:16:26,184 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
 2025-03-06 17:16:28,182 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-06 18:23:11,948 - INFO - Connected to the database successfully.

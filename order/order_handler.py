@@ -66,7 +66,7 @@ class OrderHandler:
         # ✅ Reset memory after confirming order
         self.order_items = {}
 
-        return f"✅ Your order has been confirmed! Your Order ID is **{order_id}**.\nUse this ID to check your order status later.\n{confirmation_message} and estimated time to deliver your order is {estimated_time} also you have 20 minutes to cancel order when you place your order"
+        return f"✅ Your order has been confirmed! Your Order ID is **{order_id}**.\nUse this ID to check your order status later.\n{confirmation_message} and estimated time to deliver your order is {estimated_time} also you have 10 minutes to cancel order when you place your order"
 
     def remove_item(self, item_name: str):
         """✅ Removes an item from the order and updates total price. Also shows available menu items with quantities."""
@@ -194,7 +194,7 @@ class OrderHandler:
 
             # Validate time constraints
             time_diff = (current_time_obj - order_time_obj).total_seconds() / 60  
-            if time_diff > 20:
+            if time_diff > 10:
                 return "⚠ **Your order cannot be modified now. It has been more than 20 minutes.**"
             elif order_status != "Pending":
                 return f"⚠ Order {order_id} is already **{order_status}** and cannot be modified."
