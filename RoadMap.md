@@ -91,5 +91,4 @@ DineMate is an **AI-powered food ordering chatbot** that allows users to **brows
 DineMate is a cutting-edge AI-powered food ordering chatbot that simplifies the ordering experience. With **real-time interaction, order modifications, and tracking**, it provides a seamless user experience. This roadmap ensures a structured and efficient development process for successful implementation.  
 
 ---
-🔗 **GitHub Repository:** [DineMate Food Ordering Chatbot](https://github.com/MuhammadUmerKhan/DineMate-Food-Ordering-Chatbot)  
 👨‍💻 **Developed by:** Muhammad Umer Khan
