@@ -2,7 +2,7 @@ import streamlit as st  # Streamlit for UI
 import utils  # Utility functions for chatbot and session handling
 from streaming import StreamHandler  # Handles real-time streaming responses
 from main import stream_graph_updates  # Function to process chatbot responses
-import Home  # Import Home page for navigation
+import home  # Import Home page for navigation
 
 # ✅ Set up Streamlit UI
 st.set_page_config(page_title="DineMate - Food Ordering Bot", page_icon="🍽️", layout="wide")
@@ -13,7 +13,7 @@ page = st.sidebar.radio("📌 Select Page", ["🏠 Home", "🍔 DineMate Chatbot
 
 # 🎯 Load Home Page
 if page == "🏠 Home":
-    Home.show_home()
+    home.show_home()
 elif page == "🍔 DineMate Chatbot":
     st.title("🍽️ DineMate - AI Food Ordering Chatbot")
     # ✅ Display GitHub Source Code Button
