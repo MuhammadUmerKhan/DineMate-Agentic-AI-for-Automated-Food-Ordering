@@ -2,7 +2,7 @@ import streamlit as st  # Streamlit for UI
 import utils  # Utility functions for chatbot and session handling
 from streaming import StreamHandler  # Handles real-time streaming responses
 from main import stream_graph_updates  # Function to process chatbot responses
-import home  # Import Home page for navigation
+import app.home as home  # Import Home page for navigation
 
 # ✅ Set up Streamlit UI
 st.set_page_config(page_title="DineMate - Food Ordering Bot", page_icon="🍽️", layout="wide")
