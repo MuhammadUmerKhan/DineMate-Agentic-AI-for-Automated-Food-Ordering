@@ -1,7 +1,7 @@
 import streamlit as st  # Streamlit for UI
 import utils  # Utility functions for chatbot and session handling
 from streaming import StreamHandler  # Handles real-time streaming responses
-from main import stream_graph_updates  # Function to process chatbot responses
+from bot.agent import stream_graph_updates  # Function to process chatbot responses
 import app.home as home  # Import Home page for navigation
 
 # ✅ Set up Streamlit UI
