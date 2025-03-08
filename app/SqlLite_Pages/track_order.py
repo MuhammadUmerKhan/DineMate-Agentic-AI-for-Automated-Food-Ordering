@@ -2,6 +2,7 @@ import streamlit as st
 import sqlite3
 import time
 from config import *
+import json
 
 def get_connection():
     """🔌 Establish connection to the SQLite database."""
@@ -55,8 +56,11 @@ def show_order_tracking():
             col1, col2 = st.columns(2)
             with col1:
                 st.write(f"📦 **Order ID:** {order['id']}")
-                st.write(f"🛒 **Items Ordered:** {order['items']}")
-                st.write(f"💰 **Total Price:** ${order['total_price']:.2f}")                
+                items_dict = json.loads((order['items']))
+                items_list = "".join([f"<li><strong>{item.title()}</strong>: {quantity}</li>" for item, quantity in items_dict.items()])
+                st.markdown("🛒 **Items Ordered:**\n\n" + items_list, unsafe_allow_html=True)
+                st.markdown("</br>", unsafe_allow_html=True)
+                st.write(f"💰 **Total Price:** ${order['total_price']:.2f}")           
 
             # ✅ Display Status with Color Codes
             status = order["status"]
@@ -66,7 +70,8 @@ def show_order_tracking():
                 "Preparing": "🟡 **Preparing** - Your food is being cooked.",
                 "Ready": "🟢 **Ready** - Your order is ready for pickup/delivery.",
                 "Completed": "✅ **Completed** - Your order has been delivered!",
-                "Canceled": "❌ **Canceled** - This order was canceled."
+                "Canceled": "❌ **Canceled** - This order was canceled.",
+                "Delivered": "🚚 **Delivered** - Your order has been delivered!"
             }
 
             st.markdown(f"📌 **Current Status:** {status_colors.get(status, '🔘 Unknown Status')}")
