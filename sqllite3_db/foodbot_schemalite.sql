@@ -47,12 +47,12 @@
 --     time TEXT DEFAULT (TIME('now'))          -- Order placement time
 -- );
 -- ✅ Insert sample orders
--- INSERT INTO orders (items, total_price, status) VALUES
--- ('{"Cheese Burger": 2, "French Fries": 1, "Coca-Cola": 1}', 17.46, 'Pending'),
--- ('{"Pepperoni Pizza": 1, "Garlic Bread": 1, "Pepsi": 1}', 19.97, 'In Process'),
--- ('{"Chicken Biryani": 2, "Mango Smoothie": 1}', 23.47, 'Completed'),
--- ('{"Club Sandwich": 1, "Strawberry Shake": 1}', 11.98, 'Pending'),
--- ('{"Beef Steak": 1, "Fresh Orange Juice": 1}', 20.98, 'In Process');
+INSERT INTO orders (items, total_price, status) VALUES
+('{"Cheese Burger": 2, "French Fries": 1, "Coca-Cola": 1}', 17.46, 'Pending'),
+('{"Pepperoni Pizza": 1, "Garlic Bread": 1, "Pepsi": 1}', 19.97, 'In Process'),
+('{"Chicken Biryani": 2, "Mango Smoothie": 1}', 23.47, 'Completed'),
+('{"Club Sandwich": 1, "Strawberry Shake": 1}', 11.98, 'Pending'),
+('{"Beef Steak": 1, "Fresh Orange Juice": 1}', 20.98, 'In Process');
 
 -- ✅ Create staff table
 -- CREATE TABLE staff (

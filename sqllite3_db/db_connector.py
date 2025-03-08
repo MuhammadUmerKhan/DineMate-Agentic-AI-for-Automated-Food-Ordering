@@ -1,12 +1,12 @@
 import sqlite3
-from config import *
+# from config import *
 
 # ✅ Connect to SQLite database
-conn = sqlite3.connect(DB_PATH)
+conn = sqlite3.connect("./foodbot.db")
 cursor = conn.cursor()
 
 # ✅ Retrieve all menu items
-cursor.execute("SELECT * FROM staff")
+cursor.execute("SELECT * FROM orders")
 rows = cursor.fetchall()  # Fetch all results
 
 # ✅ Print results
