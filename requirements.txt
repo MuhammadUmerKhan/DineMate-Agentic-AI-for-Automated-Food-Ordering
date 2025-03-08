@@ -1,9 +1,10 @@
 streamlit
 python-dotenv
-db-sqlite3
 pandas
 langchain_groq
 langgraph
 langchain_core
 langchain
 bcrypt
+sqlite3
+json5
