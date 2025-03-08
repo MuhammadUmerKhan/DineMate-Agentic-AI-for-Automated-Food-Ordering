@@ -36,7 +36,7 @@ def login():
 
     with col1:
         st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
-        if st.button("🚀 Sign In", use_container_width=True, disabled=not username or not password):
+        if st.button("🚀 Sign In", use_container_width=True):
             role = db.verify_user(username, password)
             if role:
                 st.session_state["authenticated"] = True
