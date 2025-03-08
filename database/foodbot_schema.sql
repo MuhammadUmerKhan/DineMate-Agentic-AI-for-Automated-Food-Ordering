@@ -81,7 +81,33 @@ ALTER TABLE orders MODIFY COLUMN status VARCHAR(15);
 SHOW COLUMNS FROM orders;
 
 -- ✅ Update an order's status to 'Canceled' based on order ID
-UPDATE orders SET status = "Canceled" WHERE id = 29;
+UPDATE orders SET status = "Pending" WHERE id = 27;
 
 -- ✅ Retrieve all orders to verify the update
 SELECT * FROM orders;
+
+DELETE FROM orders WHERE id < 27;
+SELECT id, items, total_price, status
+        FROM orders
+        WHERE status = 'Pending'
+        AND STR_TO_DATE(CONCAT(date, ' ', time), '%Y-%m-%d %H:%i:%s') <= NOW() - INTERVAL 10 MINUTE;
+
+CREATE TABLE staff (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    role ENUM('admin', 'kitchen_staff', 'customer_support') NOT NULL
+);
+ALTER TABLE staff ADD COLUMN is_staff BOOLEAN DEFAULT TRUE;
+
+select * from staff;
+
+CREATE TABLE customers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+select * from customers;
+delete from customers where id = 2;

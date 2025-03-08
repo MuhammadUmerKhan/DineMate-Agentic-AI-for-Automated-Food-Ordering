@@ -1,12 +1,9 @@
 import streamlit as st  # Streamlit for UI
 
 def home():
-    """Displays the Home page content."""
+    """Displays the Home page content with user roles and functionalities."""
     
-    # ✅ Set up Streamlit UI
-    # st.set_page_config(page_title="DineMate - Home", page_icon="🍽️", layout="wide")
-
-    # 🎉 Title and Intro
+    # 🎉 Title and Introduction
     st.title("🍽️ DineMate - AI Food Ordering Chatbot")
     st.subheader("Seamless AI-Powered Food Ordering Experience!")
 
@@ -14,16 +11,56 @@ def home():
         """
         ---
         ## 📌 **Project Overview**
-        **DineMate** is an advanced AI-powered chatbot designed to **simplify online food ordering**.  
-        With an **interactive and human-like chat interface**, users can:
-        - 🛒 **Browse the menu** and explore available food items.
-        - 🍔 **Place an order** using natural language.
-        - 🔄 **Modify or replace items** in an existing order.
-        - 🚫 **Cancel an order** before or after confirmation (within time limits).
-        - ⏳ **Track an order** in real time, including delivery estimates.
-        - 🧠 **Intelligently handle user requests**, focusing on food-related conversations.
+        **DineMate** is an **AI-powered chatbot** that enables users to **order food effortlessly**.  
+        With an intelligent chat-based interface, users can:  
+        - 🛒 **Browse menu items** and check prices.  
+        - 🍔 **Place an order** in natural language.  
+        - 🔄 **Modify or replace items** in an existing order.  
+        - 🚫 **Cancel an order** within the allowed time.  
+        - ⏳ **Track an order** and receive live status updates.  
+        - 🤖 **Conversational AI** ensures an engaging user experience.  
+        
+        Whether you're craving **pizza, burgers, or fresh juice**, DineMate makes food ordering **simple & fun!** 🍕🥤  
+        ---
 
-        Whether you're craving **pizza, burgers, or fresh juice**, DineMate makes **food ordering effortless and fun!** 🍕🥤
+        ## 🏗️ **Who Can Do What? (User Roles & Access)**
+        DineMate follows a **role-based access system**, where each user type has specific functionalities:
+
+        ### 👤 **Customers (Users)**
+        - ✅ Can access **🏠 Home** and **🍔 DineMate Chatbot** pages.  
+        - 🛒 **Place food orders** using the chatbot.  
+        - 🔄 **Modify orders** before confirmation.  
+        - 🚫 **Cancel orders** within **10 minutes** of placement.  
+        - 📦 **Track orders** and check status updates.  
+
+        **Customers CANNOT access:** Kitchen, Order Management, or Admin functionalities.
+
+        ---
+
+        ### 👨‍🍳 **Kitchen Staff (Chefs)**
+        - ✅ Can access **👨‍🍳 Kitchen Orders** page.  
+        - 📌 **View only non-cancelable orders** (orders placed **10+ minutes ago**).  
+        - 🔄 **Update order status** (*e.g., In Process, Ready, Completed*).  
+
+        **Kitchen Staff CANNOT access:** Admin or Customer Support functionalities.
+
+        ---
+
+        ### 📦 **Customer Support Staff**
+        - ✅ Can access **📦 Order Management** page.  
+        - 📝 **Modify existing orders** (update items, prices, or quantities).  
+        - 🚫 **Cancel orders** on behalf of customers (if within allowed time).  
+
+        **Customer Support Staff CANNOT access:** Kitchen or Admin functionalities.
+
+        ---
+
+        ### 🛡️ **Admin (Restaurant Owner / Manager)**
+        - ✅ Can access **🛡️ Update Prices** page.  
+        - 💰 **Change food item prices** dynamically.  
+        - 🛠️ **Manage system functionalities** (e.g., add new items).  
+
+        **Admins CANNOT place orders or manage kitchen operations.**  
         ---
 
         ## 🚀 **How to Use?**
@@ -37,55 +74,45 @@ def home():
         3️⃣ **DineMate processes your request**, calculates the total price, and confirms your order.  
         4️⃣ **Track your order** and receive updates on estimated delivery time.  
 
-        DineMate ensures a **fast, reliable, and intelligent** food ordering experience! 🎯
+        DineMate ensures a **fast, reliable, and intelligent** food ordering experience! 🎯  
         ---
 
         ## 🏗️ **Technologies Used**
-        DineMate leverages cutting-edge AI and software engineering practices:
+        DineMate is built using advanced AI and modern backend technologies:
 
-        - **🧠 LLM (Large Language Model):**  
-          - Uses **Qwen-2.5-32B**, a powerful AI model trained for conversational tasks.  
-          - Understands food-related queries and intelligently manages orders.  
+        - **🧠 AI-Powered Chatbot:**  
+          - Uses **Qwen-2.5-32B**, a powerful LLM trained for **food ordering tasks**.  
+          - Understands menu queries, order requests, and user modifications.  
 
         - **🛠️ Backend Technologies:**  
-          - **LangChain** – A framework that connects LLM with external tools (like databases).  
-          - **LangGraph** – Handles conversation flow, decision-making, and tool execution.  
-          - **Python** – Custom-built AI agent and order management system.  
+          - **LangChain & LangGraph** – For structured conversation flow and decision-making.  
+          - **Python** – AI-powered chatbot logic and order management system.  
 
         - **📊 Database Management:**  
-          - **MySQL** – Stores menu items, order details, and tracks order status.  
-          - **SQL Queries** – Efficient data retrieval and storage.  
+          - **MySQL** – Stores menu items, order details, and user data.  
+          - **Secure Login System** – Uses **hashed passwords** for authentication.  
 
         - **🌐 Web UI & Integration:**  
-          - **Streamlit** – Provides an interactive web interface for chatbot interaction.  
-          - **Session Management** – Stores user conversations and order history.  
+          - **Streamlit** – Provides a **clean and interactive UI** for users.  
+          - **Session-Based Authentication** – Only allows registered users access.  
 
         ---
+
         ## 🔍 **What Happens Behind the Scenes?**
-        When you interact with **DineMate**, here's what happens behind the scenes:
+        1️⃣ **User Request Processing:**  
+        - Extracts **items & quantities** from chat input.  
+        - Checks **menu availability** using **MySQL database**.  
 
-        1️⃣ **User Input Handling:**  
-        - You type a request like *"I want a Pepperoni Pizza and a Coke."*  
-        - The chatbot processes it using **Qwen-2.5-32B**.
+        2️⃣ **Order Processing:**  
+        - Stores **orders in memory** until confirmed.  
+        - Calculates **total price dynamically**.  
 
-        2️⃣ **LLM Understanding & Parsing:**  
-        - The AI extracts food items and quantities.  
-        - Checks **menu availability** using the database.  
-
-        3️⃣ **Order Processing & Database Update:**  
-        - Adds food items to an **in-memory order session**.  
-        - Calculates **total price** from the database.  
-        - Updates the order in **MySQL** when confirmed.  
-
-        4️⃣ **Order Tracking & Delivery Estimation:**  
-        - When you request *"Track my order 27,"*  
-        - The bot fetches the **status and estimated delivery time** from the database.  
-
-        5️⃣ **Response Generation & UI Display:**  
-        - The AI generates a **human-like response** with emojis and structured formatting.  
-        - Displays the message in **Streamlit UI** in an interactive chat format.  
+        3️⃣ **Order Tracking & Status Updates:**  
+        - Fetches **real-time order status** from the database.  
+        - Displays estimated delivery time dynamically.  
 
         ---
+
         ## 🔗 **Project Repository & Contributions**
         **View Source Code:** [GitHub Repository](https://github.com/MuhammadUmerKhan/DineMate-Food-Ordering-Chatbot)  
         Built with ❤️ by **Muhammad Umer Khan**  
@@ -96,6 +123,4 @@ def home():
     )
 
     # 📌 Footer
-    # st.markdown("---")
-    # st.markdown("🔗 **GitHub Repo:** [View Source Code](https://github.com/MuhammadUmerKhan/DineMate-Food-Ordering-Chatbot)")
     st.markdown("© 2025 **DineMate AI** | Built with ❤️ by **Muhammad Umer Khan**")

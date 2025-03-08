@@ -1,0 +1,13 @@
+2025-03-07 12:49:03,850 - ERROR - Database connection failed: 1045 (28000): Access denied for user 'muhammadumerkhan'@'localhost' (using password: NO)
+2025-03-07 14:15:57,090 - INFO - Connected to the database successfully.
+2025-03-07 14:16:51,054 - INFO - Connected to the database successfully.
+2025-03-07 14:17:33,256 - INFO - Connected to the database successfully.
+2025-03-07 14:18:17,807 - INFO - Connected to the database successfully.
+2025-03-07 14:58:28,205 - INFO - Connected to the database successfully.
+2025-03-07 14:58:34,350 - INFO - Connected to the database successfully.
+2025-03-07 15:05:47,494 - INFO - Connected to the database successfully.
+2025-03-07 15:08:24,551 - INFO - Connected to the database successfully.
+2025-03-07 15:09:09,940 - INFO - Connected to the database successfully.
+2025-03-07 15:15:00,362 - INFO - Connected to the database successfully.
+2025-03-07 15:16:39,639 - INFO - Connected to the database successfully.
+2025-03-07 15:16:52,523 - INFO - Connected to the database successfully.

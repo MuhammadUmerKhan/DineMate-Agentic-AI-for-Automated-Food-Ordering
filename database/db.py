@@ -3,8 +3,18 @@ import logging
 from mysql.connector import Error
 import datetime
 import json
+import bcrypt
 import datetime
-from config import *
+# from config import *
+import os
+
+DB_CONFIG = {
+    "host": "localhost",
+    "user": "root",
+    "password": "MUK546@!",
+    "database": "foodbot",
+    "port": 3306,
+}
 
 # Configure logging
 logging.basicConfig(filename="foodbot.log", level=logging.INFO, 
@@ -181,7 +191,55 @@ class Database:
 
         except Exception as e:
             return f"⚠ Error updating order: {e}"
+    
+    def add_user(self, username, password, email, role="customer"):
+        """✅ Add a new user (either staff or customer)."""
+        try:
+            password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
+            if role in ["admin", "kitchen_staff", "customer_support"]:
+                query = "INSERT INTO staff (username, password_hash, role) VALUES (%s, %s, %s)"
+                self.cursor.execute(query, (username, password_hash, role))
+            else:
+                query = "INSERT INTO customers (username, password_hash, email) VALUES (%s, %s, %s)"
+                self.cursor.execute(query, (username, password_hash, email))
+
+            self.connection.commit()
+            # print("✅ User successfully added!")  # Debugging ✅
+            return True  
+
+        except mysql.connector.Error as e:
+            print(f"⚠ Error adding user: {e}")  # Debugging ⚠
+            return False  
+
+
+    def verify_user(self, username, password):
+        """✅ Verify user credentials and return role if valid."""
+        
+        # ✅ Check if the user is in the staff table
+        query_staff = "SELECT password_hash, role FROM staff WHERE username = %s"
+        self.cursor.execute(query_staff, (username,))
+        staff_user = self.cursor.fetchone()
+
+        if staff_user and bcrypt.checkpw(password.encode('utf-8'), staff_user["password_hash"].encode('utf-8')):
+            return staff_user["role"]  # ✅ Return role for staff members
+
+        # ✅ If not found in staff, check in customers table
+        query_customer = "SELECT password_hash FROM customers WHERE username = %s"
+        self.cursor.execute(query_customer, (username,))
+        customer_user = self.cursor.fetchone()
+
+        if customer_user and bcrypt.checkpw(password.encode('utf-8'), customer_user["password_hash"].encode('utf-8')):
+            return "customer"  # ✅ Return "customer" for regular users
+        
+        return None  # ❌ Invalid credentials
+    
+    def check_existing_user(self, username, email):
+        """✅ Check if the username OR email already exists in the database."""
+        query = "SELECT * FROM customers WHERE username = %s OR email = %s"
+        self.cursor.execute(query, (username, email))
+        existing_user = self.cursor.fetchone()
+        return existing_user  # Returns user if found, else None
 
     def close_connection(self):
         """✅ Close database connection."""
@@ -196,7 +254,16 @@ if __name__ == "__main__":
     # db.update_order_status("user_007", "Completed")  # Update order status
     # db.close_connection()
     # print(db.get_max_id())
-    print(db.store_order(33, {"Pepsi": 3}, 3, "Pending"))
+    # print(db.store_order(33, {"Pepsi": 3}, 3, "Pending"))
     # print(db.get_order_status(17))
     # print(db.estimated_delivery_time(30))
     # print(db.modify_order_after_confirmation(33, {"Pepsi": 3}))
+    # print(db.add_user("admin", "admin123", "admin"))
+    # print(db.add_user("chef", "chef123", "kitchen_staff"))
+    # print(db.add_user("support", "support123", "customer_support"))
+    # print(db.verify_user("admin", "admin123"))
+    # print(db.verify_user("chef", "chef123"))
+    # print(db.verify_user("support", "support123"))
+    # print(db.verify_user("admin", "admin123"))
+    # print(db.add_user("umer", "umer123", "muhammadumerk546@gmail.com"))
+    # print(db.verify_user("umer", "umer123"))
