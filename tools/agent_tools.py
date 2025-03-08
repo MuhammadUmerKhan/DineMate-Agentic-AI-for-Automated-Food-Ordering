@@ -1,5 +1,5 @@
 import json
-from order.order_handler import OrderHandler
+from order.order_handler_lite import OrderHandler
 import ast
 import re
 
