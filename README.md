@@ -2,6 +2,7 @@
 
 ## 📌 **Overview**  
 DineMate is an **AI-powered chatbot** designed to **streamline food ordering** for restaurants, customers, kitchen staff, and admins. This chatbot allows users to **order food, track their orders, manage the restaurant’s menu, update item prices, and manage orders efficiently**.  
+
 ---
 ![](https://www.streebo.com/blog/wp-content/uploads/2020/02/restaurant-chatbot-thumbnail.jpg)
 
@@ -68,7 +69,7 @@ DineMate-Food-Ordering-Chatbot/
 │   ├── kitchen.py            # 👨‍🍳 Kitchen Staff Order Dashboard
 │   ├── register.py           # 📝 User Registration Page - Allows new customers to sign up.
 │── bot/
-│   ├── agent.py              # 🤖 AI Chatbot logic using LangChain
+│   ├── agent.py              # 🤖 AI Chatbot logic using LangGraph
 │── database/
 │   ├── db.py                 # 🗄️ Database connection & query functions
 │── foodbot_schema.sql
