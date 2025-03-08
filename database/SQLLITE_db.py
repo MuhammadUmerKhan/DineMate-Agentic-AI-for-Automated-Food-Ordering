@@ -15,7 +15,7 @@ class Database:
     def __init__(self):
         """Initialize and connect to the database."""
         try:
-            self.connection = mysql.connector.connect(**DB_CONFIG)
+            self.connection = get_db_connection()
             self.cursor = self.connection.cursor(dictionary=True)
             logging.info("Connected to the database successfully.")
         except Error as e:
