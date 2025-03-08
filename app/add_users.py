@@ -1,4 +1,4 @@
-from database.db import Database
+from database.MySQL_db import Database
 
 db = Database()
 
