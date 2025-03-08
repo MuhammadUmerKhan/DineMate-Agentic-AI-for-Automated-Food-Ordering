@@ -5,16 +5,7 @@ import datetime
 import json
 import bcrypt
 import datetime
-# from config import *
-import os
-
-DB_CONFIG = {
-    "host": "localhost",
-    "user": "root",
-    "password": "MUK546@!",
-    "database": "foodbot",
-    "port": 3306,
-}
+from config import *
 
 # Configure logging
 logging.basicConfig(filename="foodbot.log", level=logging.INFO, 
