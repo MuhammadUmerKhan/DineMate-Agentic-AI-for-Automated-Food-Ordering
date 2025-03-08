@@ -80,68 +80,62 @@ def cancel_order(order_id):
 # ✅ Streamlit UI for Order Management
 def show_order_management():
     """✅ Customer Support Panel to manage orders (Modify, Cancel, Update Status)."""
-    st.title("📦 Order Management - Customer Support")
-    st.write("### View, Modify, or Cancel Customer Orders")
+    st.markdown("<h1 style='text-align: center;'>📦 Order Management - Customer Support</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center;'>🔄 Modify, cancel, or update customer orders efficiently.</p>", unsafe_allow_html=True)
+    st.divider()
 
     orders = get_all_orders()
     
     if not orders:
         st.info("✅ No orders found.")
     else:
-        st.markdown("---")
         # ✅ Show orders in a table
-        st.write("### 📝 Customer Orders")
-        
-        # ✅ Create DataFrame
+        st.write("### 📝 **Customer Orders Overview**")
+
+        # ✅ Create DataFrame & Rename Columns
         df = pd.DataFrame(orders)
-
-        # ✅ Rename columns properly
         df.rename(columns={
-            "id": "📦 ID",
-            "items": "🍲 Items",
-            "total_price": "$ Total Price",
-            "status": "🟢 Status",
-            "time": "🕰️ Time"
+            "id": "📦 Order ID",
+            "items": "🍲 Ordered Items",
+            "total_price": "💰 Total Price ($)",
+            "status": "🟢 Order Status",
+            "time": "🕰️ Order Time"
         }, inplace=True)
-        st.dataframe(df, use_container_width=True, width=400)
 
-        st.markdown("---")
+        # ✅ Display Orders Table
+        st.dataframe(df, use_container_width=True)
+        st.divider()
         
         # ✅ Select an order
-        order_ids = [order["id"] for order in orders]
-
+        st.markdown("### ✏️ **Modify or Cancel Order**")
         col1, col2 = st.columns(2, gap="medium")
 
         with col1:
-            st.markdown("#### Select Order to Modify")  
-            selected_order = st.selectbox("", order_ids, key="select_order", label_visibility="collapsed")
+            selected_order = st.selectbox("📌 Select an Order ID", [order["id"] for order in orders])
+            if st.button("✔ Update Items", use_container_width=True):
+                update_order_item(selected_order, new_items)
+                time.sleep(1.2)
+                st.rerun()
 
         with col2:
-            st.markdown("#### Modify Items (Enter JSON Format)")  
-            new_items = st.text_area("", height=68, key="modify_items", label_visibility="collapsed")
+            new_items = st.text_area("📝 Modify Items (JSON Format)", height=68, key="modify_items")
         
-        # ✅ Buttons in the same row
-        # col1 = st.columns(1)
+        st.divider()
 
-        # with col1:
-        if st.button("✔ Update Items", use_container_width=True):
-            update_order_item(selected_order, new_items)
-            time.sleep(1.2)  
-            st.rerun()  
+        # ✅ Order Status Update Section
+        st.markdown("### 🔄 **Update Order Status**")
+        col5, col6 = st.columns([2, 2], gap="small")
 
-        st.markdown("---")
-        
-        # with col4:
-        #     if st.button("❌ Cancel Order", use_container_width=True):
-        #         cancel_order(selected_order)
-        #         time.sleep(1.2)  
-        #         st.rerun()  
+        with col5:
+            new_status = st.selectbox(
+                "🔄 Select New Status", 
+                ["Pending", "In Process", "Preparing", "Ready", "Completed", "Canceled"],
+                key="update_status"
+            )
+            if st.button("✅ Update Status", use_container_width=True):
+                update_order_status(selected_order, new_status)
+                time.sleep(1.2)
+                st.rerun()            
 
-        # with col5:
-        st.markdown("#### Update Order Status")
-        new_status = st.selectbox("", ["Pending", "In Process", "Preparing", "Ready", "Completed", "Canceled"], key="update_status", label_visibility="collapsed")
-
-        if st.button("🔄 Update Status", use_container_width=True):
-            update_order_status(selected_order, new_status)
-            time.sleep(1.2)  
-            st.rerun()  
+    st.divider()
+    st.markdown("<p style='text-align: center;'>📞 Need help? Customer support is here for you! 🤝</p>", unsafe_allow_html=True)

@@ -24,26 +24,26 @@ def login():
     # ✅ Login Form with Icons 🏆
     st.markdown("### 👤 **User Login**")
     
-    # ✅ Place Username & Password Side by Side
+    # ✅ Username & Password Fields with Toggle Visibility
     col1, col2 = st.columns([2, 2], gap="small")
     with col1:
-        username = st.text_input("👨‍💻 Username")
+        username = st.text_input("👨‍💻 Username", key="login_username")
     with col2:
-        password = st.text_input("🔑 Password", type="password")
+        password = st.text_input("🔑 Password", type="password", key="login_password")
 
-    # ✅ Small Gap Between Buttons (Use `st.columns([x, y])` for better control)
+    # ✅ Small Gap Between Buttons (Centered)
     col1, col2 = st.columns([1, 1], gap="small")
 
     with col1:
         st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
-        if st.button("🚀 Sign In", use_container_width=True):
+        if st.button("🚀 Sign In", use_container_width=True, disabled=not username or not password):
             role = db.verify_user(username, password)
             if role:
                 st.session_state["authenticated"] = True
                 st.session_state["username"] = username
                 st.session_state["role"] = role
                 st.success(f"✅ Welcome, {username}! You are logged in as **{role}**.")
-                time.sleep(1.2)  # ⏳ Delay for smooth transition
+                time.sleep(1.2)  # ⏳ Smooth transition
                 st.rerun()
             else:
                 st.error("⚠ Incorrect username or password. Please try again!")
@@ -53,13 +53,13 @@ def login():
         st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
         if st.button("📝 Sign Up", use_container_width=True):
             st.session_state["page"] = "signup"
-            time.sleep(1.2)  # ⏳ Delay for smooth transition
-            st.rerun()  # 🔄 Refresh to show the Sign-Up Page
+            time.sleep(1.2)  # ⏳ Smooth transition
+            st.rerun()
         st.markdown("</div>", unsafe_allow_html=True)
 
     st.divider()
     st.markdown("<p style='text-align: center;'>🍔 <b>Order faster with AI-powered food ordering!</b></p>", unsafe_allow_html=True)
-    
+
 
 def register():
     """📝 **User Registration Page - Interactive UI**"""
@@ -70,17 +70,18 @@ def register():
     # ✅ Input Fields with Side-by-Side Layout
     col1, col2 = st.columns([2, 2], gap="small")
     with col1:
-        username = st.text_input("👤 Choose a Username")
+        username = st.text_input("👤 Choose a Username", key="register_username")
     with col2:
-        email = st.text_input("📧 Enter Your Email")
+        email = st.text_input("📧 Enter Your Email", key="register_email")
 
-    password = st.text_input("🔒 Choose a Password", type="password")
-
+    # ✅ Password Field with "Show Password" Toggle
+    password = st.text_input("🔒 Choose a Password", type="password", key="register_password")
+    
     # ✅ Buttons with Small Gap
     col1, col2 = st.columns([1, 1], gap="small")
     with col1:
         st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
-        if st.button("✅ Register", use_container_width=True):
+        if st.button("✅ Register", use_container_width=True, disabled=not username or not email or not password):
             if not username or not password or not email:
                 st.warning("⚠ Please fill in **all fields** to continue.")
                 return
@@ -96,7 +97,7 @@ def register():
             if success:
                 st.success("🎉 **Registration Successful!** Redirecting to login...")
                 st.session_state["page"] = "login"  # ✅ Switch back to login
-                time.sleep(1.2)  # ⏳ Delay for a smooth transition
+                time.sleep(1.2)  # ⏳ Smooth transition
                 st.rerun()
             else:
                 st.error("⚠ Registration failed. Please try again.")
@@ -106,7 +107,7 @@ def register():
         st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
         if st.button("🔄 Go to Login", use_container_width=True):
             st.session_state["page"] = "login"
-            time.sleep(1.2)  # ⏳ Delay for smooth transition
+            time.sleep(1.2)  # ⏳ Smooth transition
             st.rerun()
         st.markdown("</div>", unsafe_allow_html=True)
 
@@ -120,5 +121,5 @@ def logout():
     st.session_state["username"] = None
     st.session_state["role"] = None
     st.success("🚪 Logging out... Redirecting to Login")
-    time.sleep(1.2)  # ⏳ Delay for smooth transition
+    time.sleep(1.2)  # ⏳ Smooth transition
     st.rerun()

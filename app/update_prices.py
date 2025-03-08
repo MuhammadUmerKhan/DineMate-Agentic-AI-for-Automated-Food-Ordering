@@ -42,8 +42,9 @@ def update_item_price(item_name, new_price):
 # ✅ Streamlit UI for Authorized Users
 def show_price_update_page():
     """✅ Page for updating item prices."""
-    st.title("🔑 Admin Panel - Update Item Prices")
-    st.write("### View & Update Menu Prices")
+    st.markdown("<h1 style='text-align: center; color: #007BFF;'>🔑 Admin Panel - Update Item Prices</h1>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center;'>📋 View & Modify Menu Prices</h3>", unsafe_allow_html=True)
+    st.divider()
 
     menu_items = get_menu_items()
 
@@ -51,32 +52,43 @@ def show_price_update_page():
         st.info("✅ No menu items found.")
     else:
         # ✅ Display menu items in a DataFrame
-        st.write("### 📋 Current Menu & Prices")
-
+        st.write("### 📜 **Current Menu & Prices**")
+        
         # ✅ Convert to DataFrame and format prices
         df_menu = pd.DataFrame(menu_items)
         df_menu["price"] = df_menu["price"].astype(float)  # ✅ Convert Decimal to float for display
-        df_menu.rename(columns={"name": "🍲 Item Name", "price": "Price ($)"}, inplace=True)
+        df_menu.rename(columns={"name": "🍲 Item Name", "price": "💰 Price ($)"}, inplace=True)
 
-        # # ✅ Show table with full width
-        # st.dataframe(df_menu, use_container_width=True, height=400)
-        
-        col1, col2 = st.columns(2)
-        
+        st.dataframe(df_menu, use_container_width=True, width=500)
+
+        st.markdown("---")
+
+        # ✅ Layout for Updating Price
+        st.write("### ✏ **Modify Item Price**")
+        col1, col2 = st.columns([2, 2])
+
         with col1:
             # ✅ Select an item to update
             item_dict = {item["name"]: float(item["price"]) for item in menu_items}  # ✅ Convert Decimal to float
-            selected_item = st.selectbox("Select Item to Update:", list(item_dict.keys()))
+            selected_item = st.selectbox("📌 Select Item:", list(item_dict.keys()))
             current_price = item_dict[selected_item]
+        
         with col2:
             # ✅ Input new price
-            new_price = st.number_input("Enter New Price ($)", min_value=0.01, value=current_price, step=0.01, format="%.2f")
+            new_price = st.number_input("💵 Enter New Price ($)", min_value=0.01, value=current_price, step=0.01, format="%.2f")
+
+        st.markdown("---")
 
         # ✅ Update Price Button
-        if st.button("✔ Update Price"):
-            update_item_price(selected_item, new_price)
-            time.sleep(1.2)  # ⏳ Delay for 2 seconds
-            st.rerun()  # Refresh the page after update
-        
-        # ✅ Show table with full width
-        st.dataframe(df_menu, use_container_width=True, width=400)
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("✔ Update Price", use_container_width=True):
+                st.info("⏳ Updating price... Please wait.")
+                time.sleep(1.5)  # ⏳ Simulate processing delay
+                update_item_price(selected_item, new_price)
+                st.rerun()  # Refresh the page after update
+
+        with col2:
+            if st.button("🔄 Reset Selection", use_container_width=True):
+                st.rerun()  # 🔄 Reset selections & refresh page
+

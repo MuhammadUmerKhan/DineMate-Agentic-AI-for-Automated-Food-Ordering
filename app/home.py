@@ -2,103 +2,107 @@ import streamlit as st  # Streamlit for UI
 
 def home():
     """Displays the Home page content with user roles and functionalities."""
-    
+
     # 🎉 Title and Introduction
-    st.title("🍽️ DineMate - AI Food Ordering Chatbot")
-    st.subheader("Seamless AI-Powered Food Ordering Experience!")
+    st.markdown("<h1 style='text-align: center; color: #FFA500;'>🍽️ Welcome to DineMate</h1>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center;'>🚀 Your AI-Powered Smart Food Ordering System</h3>", unsafe_allow_html=True)
+    st.divider()
 
-    st.markdown(
-        """
-        ---
-        ## 📌 **Project Overview**
-        **DineMate** is an **AI-powered chatbot** that enables users to **order food effortlessly**.  
-        With an intelligent chat-based interface, users can:  
-        - 🛒 **Browse menu items** and check prices.  
-        - 🍔 **Place an order** in natural language.  
+    # 📌 **Project Overview**
+    st.markdown("<h2 style='color: #007BFF;'>📌 About DineMate</h2>", unsafe_allow_html=True)
+    st.markdown("""
+        **DineMate** is an **AI-powered chatbot** that makes **food ordering seamless and intelligent**.  
+        It offers an interactive **conversational experience** where users can:  
+        - 🛒 **Browse menu items & prices**.  
+        - 🍔 **Place orders** via natural conversation.  
         - 🔄 **Modify or replace items** in an existing order.  
-        - 🚫 **Cancel an order** within the allowed time.  
-        - ⏳ **Track an order** and receive live status updates.  
-        - 🤖 **Conversational AI** ensures an engaging user experience.  
+        - 🚫 **Cancel orders** within 10 minutes of placement.  
+        - 📦 **Track orders in real time** with delivery status updates.  
+        - 🤖 **Get intelligent recommendations** for meals.  
+        - 🛠️ **Admins can update menu prices & manage inventory.**  
         
-        Whether you're craving **pizza, burgers, or fresh juice**, DineMate makes food ordering **simple & fun!** 🍕🥤  
-        ---
+        Whether you're craving **pizza, burgers, or fresh juice**, DineMate makes ordering **fast & fun!** 🍕🥤  
+    """)
 
-        ## 🏗️ **Who Can Do What? (User Roles & Access)**
-        DineMate follows a **role-based access system**, where each user type has specific functionalities:
+    st.divider()
 
-        ### 👤 **Customers (Users)**
-        - ✅ Can access **🏠 Home** and **🍔 DineMate Chatbot** pages.  
-        - 🛒 **Place food orders** using the chatbot.  
-        - 🔄 **Modify orders** before confirmation.  
-        - 🚫 **Cancel orders** within **10 minutes** of placement.  
-        - 📦 **Track orders** and check status updates.  
+    # 🆕 **New Functionalities**
+    st.markdown("<h2 style='color: #D63384;'>🆕 What’s New in DineMate?</h2>", unsafe_allow_html=True)
+    st.markdown("""
+        🚀 **Recent Enhancements:**  
+        - 📦 **Order Tracking** – Customers can now track their orders in real time!  
+        - 🛒 **Add/Remove Menu Items** – Admins can **add new dishes** or **remove outdated items**.  
+        - 💰 **Price Update System** – Admins can now **adjust menu prices dynamically**.  
+        - 🔄 **Customer Support Panel** – Support staff can now **cancel orders or modify order items**.  
+        - 👨‍🍳 **Kitchen Dashboard** – Kitchen staff get **a dedicated panel** to view & manage orders.  
+    """)
 
-        **Customers CANNOT access:** Kitchen, Order Management, or Admin functionalities.
+    st.divider()
 
-        ---
+    # 🏗️ **User Roles & Access**
+    st.markdown("<h2 style='color: #28A745;'>🏗️ User Roles & Permissions</h2>", unsafe_allow_html=True)
 
-        ### 👨‍🍳 **Kitchen Staff (Chefs)**
-        - ✅ Can access **👨‍🍳 Kitchen Orders** page.  
-        - 📌 **View only non-cancelable orders** (orders placed **10+ minutes ago**).  
-        - 🔄 **Update order status** (*e.g., In Process, Ready, Completed*).  
+    role_data = {
+        "👤 Customers": [
+            "✅ Order food using chatbot",
+            "✅ Modify/cancel orders (within time limits)",
+            "✅ Track orders in real time"
+        ],
+        "👨‍🍳 Kitchen Staff": [
+            "✅ View only non-cancelable orders (10+ minutes old)",
+            "✅ Update order status"
+        ],
+        "📦 Customer Support": [
+            "✅ Modify existing orders",
+            "✅ Cancel orders on behalf of customers"
+        ],
+        "🛡️ Admin": [
+            "✅ Add/remove menu items",
+            "✅ Change food item prices",
+            "✅ Manage system functionalities"
+        ]
+    }
 
-        **Kitchen Staff CANNOT access:** Admin or Customer Support functionalities.
+    for role, permissions in role_data.items():
+        st.markdown(f"<h3 style='color: #DC3545;'>{role}</h3>", unsafe_allow_html=True)
+        for perm in permissions:
+            st.markdown(f"✔ {perm}")
 
-        ---
+    st.divider()
 
-        ### 📦 **Customer Support Staff**
-        - ✅ Can access **📦 Order Management** page.  
-        - 📝 **Modify existing orders** (update items, prices, or quantities).  
-        - 🚫 **Cancel orders** on behalf of customers (if within allowed time).  
-
-        **Customer Support Staff CANNOT access:** Kitchen or Admin functionalities.
-
-        ---
-
-        ### 🛡️ **Admin (Restaurant Owner / Manager)**
-        - ✅ Can access **🛡️ Update Prices** page.  
-        - 💰 **Change food item prices** dynamically.  
-        - 🛠️ **Manage system functionalities** (e.g., add new items).  
-
-        **Admins CANNOT place orders or manage kitchen operations.**  
-        ---
-
-        ## 🚀 **How to Use?**
-        Using **DineMate** is simple! Just follow these steps:
-
+    # 🚀 **How to Use?**
+    st.markdown("<h2 style='color: #FFC107;'>🚀 How to Use DineMate?</h2>", unsafe_allow_html=True)
+    st.markdown("""
+        **Ordering is easy! Just follow these steps:**  
         1️⃣ **Go to the chatbot page** (Sidebar → "🍔 DineMate Chatbot")  
         2️⃣ **Start a conversation** – Chat naturally, like:  
-            - 📝 *"I want 2 cheeseburgers and 1 Pepsi."*  
-            - 🔄 *"Replace my Pepsi with a Mango Smoothie."*  
-            - 📦 *"Track my order with ID 33."*  
+        - 📝 *"I want 2 cheeseburgers and 1 Pepsi."*  
+        - 🔄 *"Replace my Pepsi with a Mango Smoothie."*  
+        - 📦 *"Track my order with ID 33."*  
         3️⃣ **DineMate processes your request**, calculates the total price, and confirms your order.  
         4️⃣ **Track your order** and receive updates on estimated delivery time.  
+    """)
 
-        DineMate ensures a **fast, reliable, and intelligent** food ordering experience! 🎯  
-        ---
+    st.divider()
 
-        ## 🏗️ **Technologies Used**
-        DineMate is built using advanced AI and modern backend technologies:
+    # 🏗️ **Technologies Used**
+    st.markdown("<h2 style='color: #17A2B8;'>🏗️ Technologies Used</h2>", unsafe_allow_html=True)
+    tech_data = {
+        "🧠 AI-Powered Chatbot": "Uses **Qwen-2.5-32B**, an advanced LLM for handling food orders.",
+        "🛠️ Backend Technologies": "Uses **LangChain & LangGraph** for structured chatbot interactions.",
+        "📊 Database Management": "Stores order details securely in **MySQL**.",
+        "🌐 Web UI": "Interactive UI powered by **Streamlit**."
+    }
 
-        - **🧠 AI-Powered Chatbot:**  
-          - Uses **Qwen-2.5-32B**, a powerful LLM trained for **food ordering tasks**.  
-          - Understands menu queries, order requests, and user modifications.  
+    for tech, desc in tech_data.items():
+        st.markdown(f"<h3 style='color: #6C757D;'>{tech}</h3>", unsafe_allow_html=True)
+        st.markdown(f"✔ {desc}")
 
-        - **🛠️ Backend Technologies:**  
-          - **LangChain & LangGraph** – For structured conversation flow and decision-making.  
-          - **Python** – AI-powered chatbot logic and order management system.  
+    st.divider()
 
-        - **📊 Database Management:**  
-          - **MySQL** – Stores menu items, order details, and user data.  
-          - **Secure Login System** – Uses **hashed passwords** for authentication.  
-
-        - **🌐 Web UI & Integration:**  
-          - **Streamlit** – Provides a **clean and interactive UI** for users.  
-          - **Session-Based Authentication** – Only allows registered users access.  
-
-        ---
-
-        ## 🔍 **What Happens Behind the Scenes?**
+    # 🔍 **What Happens Behind the Scenes?**
+    st.markdown("<h2 style='color: #6C757D;'>🔍 How DineMate Works?</h2>", unsafe_allow_html=True)
+    st.markdown("""
         1️⃣ **User Request Processing:**  
         - Extracts **items & quantities** from chat input.  
         - Checks **menu availability** using **MySQL database**.  
@@ -110,17 +114,13 @@ def home():
         3️⃣ **Order Tracking & Status Updates:**  
         - Fetches **real-time order status** from the database.  
         - Displays estimated delivery time dynamically.  
+    """)
 
-        ---
+    st.divider()
 
-        ## 🔗 **Project Repository & Contributions**
-        **View Source Code:** [GitHub Repository](https://github.com/MuhammadUmerKhan/DineMate-Food-Ordering-Chatbot)  
-        Built with ❤️ by **Muhammad Umer Khan**  
+    # 🔗 **Project Repository**
+    st.markdown("<h2 style='color: #343A40;'>🔗 View Source Code</h2>", unsafe_allow_html=True)
+    st.markdown("[GitHub Repository](https://github.com/MuhammadUmerKhan/DineMate-Food-Ordering-Chatbot) - Built with ❤️ by **Muhammad Umer Khan**")
 
-        ---
-        """,
-        unsafe_allow_html=True
-    )
-
-    # 📌 Footer
-    st.markdown("© 2025 **DineMate AI** | Built with ❤️ by **Muhammad Umer Khan**")
+    st.markdown("---")
+    st.markdown("<p style='text-align: center;'>© 2025 **DineMate AI** | Powered by ❤️</p>", unsafe_allow_html=True)

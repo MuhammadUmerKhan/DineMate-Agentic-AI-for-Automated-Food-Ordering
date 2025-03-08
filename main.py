@@ -7,8 +7,9 @@ from app import update_prices  # Import Admin page for updating item prices
 from app import login  # ✅ Import authentication system
 from app import order_management  # Import Order Management page
 from app import home  # Import Home page
-from app import add_remove_items # Import Add Items
-from app import track_order # Import Track Order
+from app import add_remove_items  # Import Add/Remove Items Page
+from app import track_order  # Import Order Tracking Page
+import time
 
 # ✅ Set up Streamlit UI
 st.set_page_config(page_title="DineMate - Food Ordering Bot", page_icon="🍽️", layout="wide")
@@ -24,51 +25,52 @@ if not st.session_state["authenticated"]:
     login.login()
     st.stop()  # 🚫 Prevent unauthorized users from proceeding
 
+# 🎨 **Stylish Sidebar - Navigation with Emojis**
+st.sidebar.markdown("<h2 style='text-align: center;'>📌 Navigation</h2>", unsafe_allow_html=True)
+st.sidebar.markdown(
+    f"<h3>👋 Welcome, <span style='color: #FFA500;'>{st.session_state['username'].title()}</span>!</h3>",
+    unsafe_allow_html=True
+    )
+
 # ✅ Define Role-Based Page Access (Each role gets only their assigned pages)
 ROLE_PAGES = {
-    "admin": ["🏠 Home", "🛡️ Update Prices", "👨‍🍳 Kitchen Orders"],  # ✅ Admin: Update Prices & Kitchen Orders
-    "kitchen_staff": ["🏠 Home", "👨‍🍳 Kitchen Orders"],  # ✅ Kitchen Staff: Only Kitchen Orders
-    "customer_support": ["🏠 Home", "📦 Order Management"],  # ✅ Support: Manage Orders
-    "customer": ["🏠 Home", "🍔 DineMate Chatbot", "📦 Track Order"]  # ✅ Customers: Order, Chat, & Track Orders
+    "admin": ["🏠 Home", "🛡️ Update Prices", "👨‍🍳 Kitchen Orders", "➕ Add/Remove Items"],  
+    "kitchen_staff": ["🏠 Home", "👨‍🍳 Kitchen Orders"],  
+    "customer_support": ["🏠 Home", "📦 Order Management"],  
+    "customer": ["🏠 Home", "🍔 DineMate Chatbot", "📦 Track Order"]  
 }
-
-# ✅ Sidebar Title & Welcome Message
-st.sidebar.title("📌 Navigation")
-st.sidebar.markdown(f"👋 **Welcome, {st.session_state['username']}!**")
 
 # ✅ Get allowed pages for the logged-in role
 available_pages = ROLE_PAGES.get(st.session_state["role"], [])
 
-# ✅ If the user has no assigned pages, show warning
+# 🚨 **If No Assigned Pages, Show Warning**
 if not available_pages:
-    st.warning("⚠ You do not have access to any pages.")
+    st.sidebar.warning("⚠ You do not have access to any pages.")
     st.stop()
 
-# ✅ Sidebar navigation
-page = st.sidebar.radio("📌 Select Page", available_pages)
+# ✅ Sidebar Navigation Menu
+page = st.sidebar.radio("📌 **Select a Page:**", available_pages)
 
-# 🎯 Load Selected Page
+# 🎯 **Load Selected Page**
 if page == "🏠 Home":
     home.home()
 
 elif page == "🍔 DineMate Chatbot":
-    st.title("🍽️ DineMate - AI Food Ordering Chatbot")
-
-    # ✅ Display GitHub Source Code Button
-    st.write('[![View Source Code](https://img.shields.io/badge/view_source_code-gray?logo=github)]'
-             '(https://github.com/MuhammadUmerKhan/DineMate-Food-Ordering-Chatbot)')
+    st.markdown("<h1 style='text-align: center;'>🤖 DineMate Chatbot</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center;'>🍽️ Your AI-Powered Food Ordering Assistant</p>", unsafe_allow_html=True)
+    st.divider()
 
     # ✅ Enable Chat History
     @utils.enable_chat_history
     def chatbot_main():
         """Main function to handle chatbot interactions."""
-        user_query = st.chat_input(placeholder="Ask me anything about food ordering!")
+        user_query = st.chat_input(placeholder="💬 Type your food order or ask a question...")
 
         if user_query:
-            utils.display_msg(user_query, "user")  
+            utils.display_msg(user_query, "user")
 
-            with st.chat_message("assistant"):  
-                st_sb = StreamHandler(st.empty())  
+            with st.chat_message("assistant"):
+                st_sb = StreamHandler(st.empty())
 
                 try:
                     response = stream_graph_updates(user_query)
@@ -91,11 +93,16 @@ elif page == "🛡️ Update Prices":
 
 elif page == "📦 Order Management":
     order_management.show_order_management()
+    
 elif page == "➕ Add/Remove Items":
     add_remove_items.show_add_remove_items_page()  
+
 elif page == "📦 Track Order":
     track_order.show_order_tracking()
   
-# ✅ Add Logout Button in Sidebar
-if st.sidebar.button("🚪 Logout"):
+# ✅ **Logout Button in Sidebar**
+st.sidebar.divider()
+if st.sidebar.button("🚪 Logout", use_container_width=True):
+    st.success("🚪 Logging out... Redirecting to Login Page")
+    time.sleep(1.2)  # ⏳ Delay for a smooth transition
     login.logout()
