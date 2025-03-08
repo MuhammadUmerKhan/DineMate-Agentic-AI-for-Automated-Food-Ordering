@@ -29,8 +29,10 @@ class OrderHandler:
             return {}
 
     def add_item(self, items_dict):
-        """✅ Adds items to the order while checking availability in the menu."""
+        """✅ Adds items to the order while checking availability in the menu and suggesting available items."""
         response = ""
+        unavailable_items = []  # List to store unavailable items
+
         for item, quantity in items_dict.items():
             item_lower = item.lower()
             if item_lower in self.menu:
@@ -38,9 +40,16 @@ class OrderHandler:
                 self.total_price += self.menu[item_lower] * quantity
                 response += f"✅ Added {quantity}x {item}.\n"
             else:
-                response += f"⚠ {item} is unavailable.\n"
+                unavailable_items.append(item)  # Store unavailable item
+
+        # ✅ If there are unavailable items, suggest available ones
+        if unavailable_items:
+            available_items_list = ", ".join([f"**{item.title()}**" for item in self.menu.keys()])
+            response += f"\n⚠ The following items are unavailable: {', '.join(unavailable_items)}.\n"
+            response += f"📌 Available items: {available_items_list}.\n"
 
         return response + f"\n🛒 **Updated Order: {self.order_items}**\n💰 **Total Price: ${self.total_price:.2f}**"
+
 
     def get_order(self):
         """✅ Returns the current order stored in memory."""
@@ -62,7 +71,7 @@ class OrderHandler:
         # ✅ Reset memory after confirming the order
         self.order_items = {}
 
-        return f"✅ Your order has been confirmed!\n{confirmation_message}\n⏳ Estimated Delivery Time: {estimated_time}"
+        return f"✅ Your order has been confirmed!\n{confirmation_message}\n and this is your ID {order_id} remember this to track your order \n ⏳ Estimated Delivery Time: {estimated_time}"
 
     def remove_item(self, item_name):
         """✅ Removes an item from the order and updates the total price."""
@@ -82,8 +91,9 @@ class OrderHandler:
     def update_item(self, order_dict):
         """✅ Updates the quantity of an existing item and adjusts total price."""
         if not isinstance(order_dict, dict):
-            return "⚠ Invalid format. Please provide {'item_name': quantity}."
+            return "⚠ Invalid format. Please provide items in dictionary format like: {'item_name': quantity}."
 
+        unavailable_items = []
         for item_name, quantity in order_dict.items():
             item_lower = item_name.lower()
 
@@ -97,10 +107,14 @@ class OrderHandler:
 
                 # Update item quantity
                 self.order_items[item_lower] = quantity
+            else:
+                unavailable_items.append(item_name)  # Track unavailable items
 
-                return f"✅ Updated **{item_name}** to **{quantity}**.\n🛒 **Updated Order:** {self.order_items}\n💰 **Total Price: ${self.total_price:.2f}**"
-        
-        return f"⚠ **{item_name}** is not in your order. Please add it first."
+        if unavailable_items:
+            return f"⚠ **The following items are not in your order:** {', '.join(unavailable_items)}.\nPlease add them first before updating."
+
+        return f"✅ **Updated Order:** {self.order_items}\n💰 **Total Price: ${self.total_price:.2f}**"
+
     
     def estimated_delivery_time(self, order_id):
         """✅ Track estimated delivery time of an order."""

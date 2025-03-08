@@ -13,59 +13,54 @@ def show_menu(_=None):
     return f"📜 Here's our menu:\n{menu}" if menu else "⚠ Sorry, the menu is currently unavailable."
 
 def extract_items(order_details):
-    """✅ Extracts item names and quantities using regex from JSON format."""
+    """✅ Extracts item names and quantities from structured LLM output and converts them into JSON."""
     try:
-        # Convert JSON string to a dictionary
-        order_dict = json.loads(order_details)
-        
-        # Convert dictionary to a string for regex processing
-        order_str = json.dumps(order_dict)
+        print("🔍 Raw LLM Output:", order_details)  # Debugging
 
-        # ✅ Match item names and quantities using regex
-        pattern = r'"([\w\s-]+)"\s*:\s*(\d+)'
-        matches = re.findall(pattern, order_str)
+        # ✅ Regular expression to extract items and their quantities
+        pattern = r"\(\s*'([^']+)'\s*,\s*(\d+)\s*\)"
+        matches = re.findall(pattern, order_details)
+
+        if not matches:
+            return "⚠ No valid items found in the input."
 
         # ✅ Convert extracted data to a structured dictionary
         extracted_order = {item.strip(): int(qty) for item, qty in matches}
-        try:
-            
-            response = order_handler.add_item(extracted_order)
-            return response
-        except Exception as e:
-            return f"��� Error occurred: {str(e)}"
 
-    except json.JSONDecodeError:
-        return "⚠ Invalid JSON format. Please use structured order format."
+        # ✅ Convert to JSON format
+        extracted_order_json = json.dumps(extracted_order)
+
+        print("✅ Extracted Order (JSON):", extracted_order_json)  # Debugging
+
+        # ✅ Pass to add_item() for further processing
+        response = order_handler.add_item(extracted_order)
+        return response
+
+    except Exception as e:
+        return f"⚠ Error extracting items: {str(e)}"
 
 def add_items(order_details):
     return extract_items(order_details)
     
 
-def update_item(item_details: str):
-    """✅ Update the quantity of an existing item in the order while correctly extracting item name and quantity."""
+def update_item(order_details: str):
+    """✅ Extracts item names and quantities using regex from structured order format."""
     try:
-        print(f"🔍 Extracting items from: {item_details}")
+        print(f"🔍 Extracting items from: {order_details}")
 
-        # ✅ Use regex to extract the "item" name and "quantity"
-        item_pattern = r'"item"\s*:\s*"([\w\s-]+)"'   # Extract item name
-        quantity_pattern = r'"quantity"\s*:\s*(\d+)'  # Extract quantity
+        # ✅ Use regex to extract item names and quantities
+        pattern = r"\(\s*'([\w\s-]+)'\s*,\s*(\d+)\s*\)"  # Matches ('item', quantity)
+        matches = re.findall(pattern, order_details)
 
-        item_match = re.search(item_pattern, item_details)
-        quantity_match = re.search(quantity_pattern, item_details)
+        if not matches:
+            return "⚠ No valid items found. Use structured format like: [('pepsi', 2), ('coca-cola', 3)]"
 
-        if not (item_match and quantity_match):
-            return "⚠ No valid items found. Use structured format like: {'item': 'pepsi', 'quantity': 2}"
+        # ✅ Convert extracted values into a structured dictionary
+        extracted_order = {item.strip().lower(): int(qty) for item, qty in matches}
+        print(f"✅ Extracted Order Update: {extracted_order}")
 
-        # ✅ Extracted values
-        item_name = item_match.group(1).strip()
-        quantity = int(quantity_match.group(1))
-
-        # ✅ Convert to required dictionary format
-        order_dict = {item_name: quantity}
-        print(f"✅ Extracted Order Update: {order_dict}")
-
-        # ✅ Pass structured data to order handler
-        response = order_handler.update_item(order_dict)
+        # ✅ Pass structured dictionary directly to the order handler (Not JSON)
+        response = order_handler.update_item(extracted_order)
         return response
 
     except Exception as e:

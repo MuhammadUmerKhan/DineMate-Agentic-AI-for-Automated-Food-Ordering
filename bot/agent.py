@@ -42,12 +42,12 @@ tools = [
     Tool(
         name="Take Order",
         func=extract_items,
-        description="Take order items from user inputs. Use JSON format."
+        description="Take order items from user inputs. Use structured format: [(item, quantity), (item, quantity), ...]"
     ),
     Tool(
         name="Update Item Quantity", 
         func=update_item, 
-        description="Update the quantity of an existing item in your order. Use JSON format."
+        description="Update the quantity of an existing item in your order. Use structured format: [(item, quantity), (item, quantity), ...]"
     ),
     Tool(
         name="Remove Item", 
@@ -57,7 +57,7 @@ tools = [
     Tool(
         name="Add items",   
         func=add_items,
-        description="Add items to existing order. Use JSON format."
+        description="Add items to existing order. Use structured format: [(item, quantity), (item, quantity), ...]"
     ),
     Tool(
         name="Total Price",
@@ -93,7 +93,7 @@ tools = [
     Tool(
         name="Cancel Order after confirmation",
         func=cancel_order_after_confirmation,
-        description="Cancel an order after confirmation using an Order ID. This is only possible within 20 minutes of order placement."
+        description="Cancel an order after confirmation using an Order ID. This is only possible within 10 minutes of order placement."
     ),
     Tool(
         name="Estimated Delivery Time",
