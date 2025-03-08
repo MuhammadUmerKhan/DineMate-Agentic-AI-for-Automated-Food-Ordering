@@ -3,14 +3,14 @@ import logging
 import datetime
 import json
 import bcrypt
-# from config import *
+from config import *
 
 # ✅ Configure logging
 logging.basicConfig(filename="foodbot.log", level=logging.INFO, 
                     format="%(asctime)s - %(levelname)s - %(message)s")
 
 class Database:
-    def __init__(self, db_path="../sqllite3_db/foodbot.db"):
+    def __init__(self, db_path=DB_PATH):
         """✅ Initialize and connect to the SQLite database."""
         try:
             self.connection = sqlite3.connect(db_path, check_same_thread=False)
