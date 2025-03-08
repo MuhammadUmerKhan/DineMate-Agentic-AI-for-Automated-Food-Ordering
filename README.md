@@ -46,7 +46,7 @@ It is built using **Large Language Models (LLMs)**, **LangChain**, **LangGraph**
 - 🐍 **Python** – Main programming language for the chatbot logic.  
 
 ### 🔹 **Database Management**  
-- 🛢️ **MySQL** – Stores **menu items, orders, users, and status updates**.  
+- 🛢️ **MySQL/SQLLITE3** – Stores **menu items, orders, users, and status updates** and different informations.  
 - 🔑 **Secure authentication** with **hashed passwords**.  
 
 ### 🔹 **Frontend & UI**  
