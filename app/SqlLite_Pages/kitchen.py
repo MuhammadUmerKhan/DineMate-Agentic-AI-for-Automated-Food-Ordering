@@ -59,9 +59,23 @@ def show_kitchen_orders():
     st.markdown("<h3 style='text-align: center;'>📦 View & Manage Active Orders</h3>", unsafe_allow_html=True)
     st.divider()
 
-    # ✅ Status Filter for Kitchen Orders
-    selected_status = st.selectbox("🔍 **Filter Orders by Status**:", ["Pending", "In Process", "Preparing", "Ready", "Delivered"])
+    # ✅ Mapping of statuses (UI display with emoji → Database values)
+    status_mapping = {
+        "⚪ Pending": "Pending",
+        "🔵 In Process": "In Process",
+        "🟡 Preparing": "Preparing",
+        "🟢 Ready": "Ready",
+        "✅ Completed": "Completed",
+        "❌ Canceled": "Canceled",
+        "🚚 Delivered": "Delivered"
+    }
     
+    # ✅ Show selectbox with emoji options
+    selected_display_status = st.selectbox("🔍 **Filter Orders by Status**:", list(status_mapping.keys()))
+
+    # ✅ Convert the selected display value to the actual database status
+    selected_status = status_mapping[selected_display_status]
+
     # ✅ Fetch Orders (Older than 10 minutes with selected status)
     orders = get_kitchen_orders(selected_status)
     
@@ -96,9 +110,22 @@ def show_kitchen_orders():
             with col1:
                 selected_order = st.selectbox("📌 Select Order to Update:", [order["id"] for order in orders])
 
+            # ✅ Mapping for UI display (emoji) and database values
+            status_mapping = {
+                "⚪ Pending": "Pending",
+                "🔵 In Process": "In Process",
+                "🟡 Preparing": "Preparing",
+                "🟢 Ready": "Ready",
+                "✅ Completed": "Completed",
+                "❌ Canceled": "Canceled",
+                "🚚 Delivered": "Delivered"
+            }
             with col2:
-                # ✅ Limit status updates to valid options
-                new_status = st.selectbox("🚀 Select New Status:", ["Pending", "In Process", "Preparing", "Ready", "Completed", "Delivered"])
+                # ✅ Show selectbox with emoji options
+                new_display_status = st.selectbox("🚀 **Select New Status:**", list(status_mapping.keys()))
+
+                # ✅ Convert selected emoji status to database-friendly value
+                new_status = status_mapping[new_display_status]
 
             # ✅ Button with Animation
             col3, col4, col5 = st.columns([1, 2, 1])
