@@ -2,29 +2,29 @@ import streamlit as st
 import sqlite3
 import pandas as pd
 import time  # ⏳ Import time module for delay
-from config import *
+from config import DB_PATH
+from datetime import datetime
 
 # ✅ Establish database connection
 def get_connection():
     """🔌 Establish connection to the SQLite database."""
     return sqlite3.connect(DB_PATH)
 
-# ✅ Fetch Kitchen Orders (Older than 10 min)
-def get_kitchen_orders():
-    """📦 Fetch only orders that were placed more than 10 minutes ago."""
+# ✅ Fetch Kitchen Orders based on status
+def get_kitchen_orders(status="Pending"):
+    """📦 Fetch only orders that were placed more than 10 minutes ago and match the selected status."""
     try:
         conn = get_connection()
         cursor = conn.cursor()
 
-        # ✅ Fetch orders that cannot be canceled
         query = """
-        SELECT id, items, total_price, status
+        SELECT id, items, total_price, status, time 
         FROM orders
-        WHERE status = 'Pending'
+        WHERE status = ?
         AND datetime(date || ' ' || time) <= datetime('now', '-10 minutes')
         """
-        cursor.execute(query)
-        orders = [{"id": row[0], "items": row[1], "total_price": row[2], "status": row[3]} for row in cursor.fetchall()]
+        cursor.execute(query, (status,))
+        orders = [{"id": row[0], "items": row[1], "total_price": row[2], "status": row[3], "time": row[4]} for row in cursor.fetchall()]
         
         conn.close()
         return orders
@@ -59,29 +59,37 @@ def show_kitchen_orders():
     st.markdown("<h3 style='text-align: center;'>📦 View & Manage Active Orders</h3>", unsafe_allow_html=True)
     st.divider()
 
-    # ✅ Fetch Orders (Older than 10 minutes)
-    orders = get_kitchen_orders()
+    # ✅ Status Filter for Kitchen Orders
+    selected_status = st.selectbox("🔍 **Filter Orders by Status**:", ["Pending", "In Process", "Preparing", "Ready", "Delivered"])
+    
+    # ✅ Fetch Orders (Older than 10 minutes with selected status)
+    orders = get_kitchen_orders(selected_status)
     
     if not orders:
-        st.info("✅ No active orders older than **10 minutes**.")
+        st.info(f"✅ No **{selected_status}** orders.")
     else:
         # ✅ Display Orders in a Styled Table
         st.markdown("### 📝 **Orders List**")
 
         # ✅ Convert Orders to DataFrame
+        for order in orders:
+            # Convert order time from 24-hour format to 12-hour format (e.g., "14:30:00" → "02:30 PM")
+            order["time"] = datetime.strptime(order["time"], "%H:%M:%S").strftime("%I:%M %p")
+
         order_data = pd.DataFrame(orders)
         order_data.rename(columns={
             "id": "📦 Order ID",
             "items": "🍲 Ordered Items",
             "total_price": "💰 Total Price ($)",
-            "status": "🟢 Current Status"
+            "status": "🟢 Current Status",
+            "time": "🕒 Order Time"
         }, inplace=True)
 
         # ✅ Show Orders in an Interactive Table
         st.dataframe(order_data, use_container_width=True, hide_index=True) 
 
         # ✅ Kitchen Staff - Order Status Update
-        if st.session_state["role"] == "kitchen_staff":
+        if st.session_state.get("role") == "kitchen_staff":
             st.markdown("### 🔄 **Update Order Status**")
             col1, col2 = st.columns(2)
 
@@ -90,7 +98,7 @@ def show_kitchen_orders():
 
             with col2:
                 # ✅ Limit status updates to valid options
-                new_status = st.selectbox("🚀 Select New Status:", ["Pending", "In Process", "Preparing", "Ready", "Completed"])
+                new_status = st.selectbox("🚀 Select New Status:", ["Pending", "In Process", "Preparing", "Ready", "Completed", "Delivered"])
 
             # ✅ Button with Animation
             col3, col4, col5 = st.columns([1, 2, 1])
@@ -99,6 +107,9 @@ def show_kitchen_orders():
                     update_order_status(selected_order, new_status)
                     time.sleep(1.2)  # ⏳ Delay for animation
                     st.rerun()  # 🔄 Refresh page after update
-
         else:
             st.warning("⚠ You do not have permission to update order status.", icon="🚫")  # ❌ Restrict Admin
+
+# ✅ Run the Kitchen Orders Page
+if __name__ == "__main__":
+    show_kitchen_orders()

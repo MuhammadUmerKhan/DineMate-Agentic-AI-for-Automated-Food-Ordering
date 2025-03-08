@@ -42,7 +42,7 @@
 --     id INTEGER PRIMARY KEY AUTOINCREMENT,   -- Unique order ID
 --     items TEXT NOT NULL,                    -- Ordered items in JSON format (e.g., {"burger": 2})
 --     total_price REAL NOT NULL,               -- Total price
---     status TEXT CHECK(status IN ('Pending', 'In Process', 'Completed', 'Canceled', 'Preparing', 'Ready')) DEFAULT 'Pending',  -- Status with default
+--     status TEXT CHECK(status IN ('Pending', 'In Process', 'Completed', 'Canceled', 'Preparing', 'Ready', 'Delivered')) DEFAULT 'Pending',  -- Status with default
 --     date TEXT DEFAULT (DATE('now')),         -- Order placement date
 --     time TEXT DEFAULT (TIME('now'))          -- Order placement time
 -- );
