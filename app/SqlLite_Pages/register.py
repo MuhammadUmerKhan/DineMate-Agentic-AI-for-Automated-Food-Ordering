@@ -1,5 +1,5 @@
 import streamlit as st
-from database.MySQL_db import Database
+from database.SQLLITE_db import Database
 import time
 
 db = Database()

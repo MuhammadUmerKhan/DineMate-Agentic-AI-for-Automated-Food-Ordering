@@ -201,14 +201,13 @@ class Database:
 # ✅ Example Usage
 if __name__ == "__main__":
     db = Database()
-    print(db.load_menu())  # Fetch menu
+    # print(db.load_menu())  # Fetch menu
     # print(db.get_max_id())
     # print(db.add_user("admin", "admin123", "admin"))
-    # print(db.add_user("chef", "chef123", "kitchen_staff"))
-    # print(db.add_user("support", "support123", "customer_support"))
+    # print(db.add_user("chef", "chef123", "kitchen_staff", "kitchen_staff"))
+    # print(db.add_user("support", "support123", "customer_support", "customer_support"))
     # print(db.verify_user("admin", "admin123"))
     # print(db.verify_user("chef", "chef123"))
     # print(db.verify_user("support", "support123"))
-    # print(db.verify_user("admin", "admin123"))
     # print(db.add_user("umer", "umer123", "muhammadumerk546@gmail.com"))
     # print(db.verify_user("umer", "umer123"))

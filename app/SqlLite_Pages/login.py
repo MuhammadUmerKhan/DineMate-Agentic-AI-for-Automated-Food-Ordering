@@ -1,5 +1,5 @@
 import streamlit as st
-from database.MySQL_db import Database
+from database.SQLLITE_db import Database
 import time
 
 db = Database()
@@ -81,7 +81,7 @@ def register():
     col1, col2 = st.columns([1, 1], gap="small")
     with col1:
         st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
-        if st.button("✅ Register", use_container_width=True, disabled=not username or not email or not password):
+        if st.button("✅ Register", use_container_width=True):
             if not username or not password or not email:
                 st.warning("⚠ Please fill in **all fields** to continue.")
                 return

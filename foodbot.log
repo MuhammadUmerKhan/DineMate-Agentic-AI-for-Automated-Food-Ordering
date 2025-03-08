@@ -3026,3 +3026,22 @@ Bot: An error occurred while processing your request. Please try again.
 2025-03-08 18:22:03,389 - INFO - ✅ Connected to the SQLite database successfully.
 2025-03-08 18:22:03,701 - INFO - Connected to the database successfully.
 2025-03-08 18:22:03,719 - INFO - Connected to the database successfully.
+2025-03-08 19:45:35,518 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-08 19:45:37,772 - INFO - Connected to the database successfully.
+2025-03-08 19:45:37,775 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-08 19:46:23,181 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-08 19:46:24,313 - INFO - Connected to the database successfully.
+2025-03-08 19:46:24,314 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-08 19:51:23,957 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-08 19:51:25,199 - INFO - Connected to the database successfully.
+2025-03-08 19:51:25,200 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-08 19:52:33,006 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-08 19:52:33,303 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-08 19:52:33,304 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-08 20:04:25,783 - ERROR - ⚠ Database connection failed: unable to open database file
+2025-03-08 20:05:23,056 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-08 20:05:23,259 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-08 20:05:23,260 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-08 20:09:56,371 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-08 20:09:56,820 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-08 20:09:56,822 - INFO - ✅ Connected to the SQLite database successfully.
