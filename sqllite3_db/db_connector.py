@@ -6,7 +6,7 @@ conn = sqlite3.connect("./foodbot.db")
 cursor = conn.cursor()
 
 # ✅ Retrieve all menu items
-cursor.execute("SELECT * FROM orders")
+cursor.execute("SELECT * FROM staff")
 rows = cursor.fetchall()  # Fetch all results
 
 # ✅ Print results

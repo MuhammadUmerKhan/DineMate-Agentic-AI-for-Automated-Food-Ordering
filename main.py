@@ -2,13 +2,13 @@ import streamlit as st  # Streamlit for UI
 import utils  # Utility functions for chatbot and session handling
 from streaming import StreamHandler  # Handles real-time streaming responses
 from bot.agent import stream_graph_updates  # Function to process chatbot responses
-from app import kitchen  # Import Kitchen page
-from app import update_prices  # Import Admin page for updating item prices
-from app import login  # ✅ Import authentication system
-from app import order_management  # Import Order Management page
-from app import home  # Import Home page
-from app import add_remove_items  # Import Add/Remove Items Page
-from app import track_order  # Import Order Tracking Page
+from app.MYSQL_Pages import kitchen  # Import Kitchen page
+from app.MYSQL_Pages import update_prices  # Import Admin page for updating item prices
+from app.MYSQL_Pages import login  # ✅ Import authentication system
+from app.MYSQL_Pages import order_management  # Import Order Management page
+from app.MYSQL_Pages import home  # Import Home page
+from app.MYSQL_Pages import add_remove_items  # Import Add/Remove Items Page
+from app.MYSQL_Pages import track_order  # Import Order Tracking Page
 import time
 
 # ✅ Set up Streamlit UI
