@@ -14,11 +14,11 @@ DB_CONFIG = {
     "port": int(os.getenv("DB_PORT", 3306)),
 }
 
-DB_PATH = "./foodbot.db"
+DB_PATH = "./sqllite3_db/foodbot.db"
 def get_db_connection():
     """Create and return a database connection to SQLite."""
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row  # ✅ Allows accessing columns by name
     return conn
 
-# print(get_db_connection())
+print(get_db_connection())
