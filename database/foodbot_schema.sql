@@ -109,5 +109,7 @@ CREATE TABLE customers (
     email VARCHAR(100) UNIQUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-select * from customers;
 delete from customers where id = 2;
+
+select * from customers;
+select * from staff;

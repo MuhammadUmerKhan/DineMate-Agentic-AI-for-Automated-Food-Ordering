@@ -3014,3 +3014,6 @@ Bot: An error occurred while processing your request. Please try again.
 2025-03-08 15:48:44,543 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
 2025-03-08 15:48:44,545 - INFO - Retrying request to /openai/v1/chat/completions in 1.000000 seconds
 2025-03-08 15:48:46,319 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-08 16:22:45,912 - INFO - Connected to the database successfully.
+2025-03-08 16:22:46,394 - INFO - Connected to the database successfully.
+2025-03-08 16:22:46,416 - INFO - Connected to the database successfully.
