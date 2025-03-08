@@ -1,11 +1,9 @@
-Here’s a **comprehensive, structured, and well-explained README** that covers everything from **project overview** to **detailed functionality** and **how to use the system**. This will be a **zero-to-100** guide for your **DineMate - AI Food Ordering Chatbot** project. 🚀🍽️  
-
----
-
 # 🍽️ **DineMate - AI Food Ordering Chatbot**  
 
 ## 📌 **Overview**  
 DineMate is an **AI-powered chatbot** designed to **streamline food ordering** for restaurants, customers, kitchen staff, and admins. This chatbot allows users to **order food, track their orders, manage the restaurant’s menu, update item prices, and manage orders efficiently**.  
+---
+![](https://www.streebo.com/blog/wp-content/uploads/2020/02/restaurant-chatbot-thumbnail.jpg)
 
 It is built using **Large Language Models (LLMs)**, **LangChain**, **LangGraph**, **MySQL**, and **Streamlit** for a **fully automated, real-time food ordering experience**.
 
