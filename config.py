@@ -21,4 +21,4 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row  # ✅ Allows accessing columns by name
     return conn
 
-print(get_db_connection())
+# print(get_db_connection())
