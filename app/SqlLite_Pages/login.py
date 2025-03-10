@@ -13,6 +13,25 @@ def login():
     st.markdown("<h3 style='text-align: center;'>🍽️ Your AI-Powered Food Ordering Assistant</h3>", unsafe_allow_html=True)
     st.divider()
 
+        # ✅ Show Demo Credentials (For Testing Purposes)
+    with st.expander("🔑 **Demo Login Credentials (Click to Expand)**"):
+        st.markdown("""
+        - 👨‍💼 **Admin**  
+          - **Username:** `admin`  
+          - **Password:** `admin123`  
+
+        - 🛠 **Support Staff**  
+          - **Username:** `support`  
+          - **Password:** `support123`  
+
+        - 👨‍🍳 **Chef (Kitchen Staff)**  
+          - **Username:** `chef`  
+          - **Password:** `chef123`  
+
+        - 👤 **Customer:** Please **sign up** to create an account.
+        """, unsafe_allow_html=True)
+
+    
     # ✅ Handle Page Switching
     if "page" not in st.session_state:
         st.session_state["page"] = "login"
