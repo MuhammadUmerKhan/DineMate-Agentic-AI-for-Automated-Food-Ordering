@@ -6,7 +6,6 @@ langgraph
 langchain_core
 langchain
 bcrypt
-sqlite3
 json5
 streamlit-autorefresh
 typing-extensions
