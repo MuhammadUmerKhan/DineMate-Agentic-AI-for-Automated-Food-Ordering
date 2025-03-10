@@ -3,7 +3,7 @@ import sqlite3
 import pandas as pd
 import time  # ⏳ Import time module for delay
 from config import DB_PATH
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # ✅ Establish database connection
 def get_connection():
@@ -12,23 +12,45 @@ def get_connection():
 
 # ✅ Fetch Kitchen Orders based on status
 def get_kitchen_orders(status="Pending"):
-    """📦 Fetch only orders that were placed more than 10 minutes ago and match the selected status."""
+    """📦 Fetch orders placed more than 10 minutes ago, considering both date & time correctly."""
     try:
         conn = get_connection()
         cursor = conn.cursor()
 
-        query = """
-        SELECT id, items, total_price, status, time 
-        FROM orders
-        WHERE status = ?
-        AND datetime(date || ' ' || time) <= datetime('now', '-10 minutes')
-        """
+        # ✅ Fetch all orders with the given status
+        query = "SELECT id, items, total_price, status, time, date FROM orders WHERE status = ?"
         cursor.execute(query, (status,))
-        orders = [{"id": row[0], "items": row[1], "total_price": row[2], "status": row[3], "time": row[4]} for row in cursor.fetchall()]
-        
+        orders = cursor.fetchall()
         conn.close()
-        return orders
-    
+
+        # ✅ Get current time
+        now = datetime.now()
+
+        # ✅ Filter orders older than 10 minutes
+        valid_orders = []
+        for row in orders:
+            order_id, items, total_price, order_status, time_str, date_str = row
+
+            # ✅ Convert stored date & time (which are strings) into datetime format
+            try:
+                order_datetime = datetime.strptime(f"{date_str} {time_str}", "%Y-%m-%d %I:%M:%S %p")
+            except ValueError as e:
+                st.error(f"⚠ Invalid date/time format for Order ID {order_id}: {date_str} {time_str} - {e}")
+                continue  # Skip this order if the format is incorrect
+
+            # ✅ Check if the order was placed more than 10 minutes ago
+            if order_datetime <= now - timedelta(minutes=10):
+                valid_orders.append({
+                    "id": order_id,
+                    "items": items,
+                    "total_price": total_price,
+                    "status": order_status,
+                    "time": order_datetime.strftime("%I:%M %p"),  # ✅ Convert back to readable format
+                    "date": date_str
+                })
+
+        return valid_orders
+
     except Exception as e:
         st.error(f"⚠ Database error: {e}")
         return []
@@ -88,7 +110,7 @@ def show_kitchen_orders():
         # ✅ Convert Orders to DataFrame
         for order in orders:
             # Convert order time from 24-hour format to 12-hour format (e.g., "14:30:00" → "02:30 PM")
-            order["time"] = datetime.strptime(order["time"], "%H:%M:%S").strftime("%I:%M %p")
+            order["time"] = datetime.strptime(order["time"], "%I:%M %p").strftime("%I:%M %p")
 
         order_data = pd.DataFrame(orders)
         order_data.rename(columns={
@@ -96,7 +118,8 @@ def show_kitchen_orders():
             "items": "🍲 Ordered Items",
             "total_price": "💰 Total Price ($)",
             "status": "🟢 Current Status",
-            "time": "🕒 Order Time"
+            "time": "🕒 Order Time",
+            "date": "🗓️ Date"
         }, inplace=True)
 
         # ✅ Show Orders in an Interactive Table
