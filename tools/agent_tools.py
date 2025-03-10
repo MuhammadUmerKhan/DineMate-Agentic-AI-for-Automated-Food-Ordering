@@ -18,7 +18,9 @@ def extract_items(order_details):
         print("🔍 Raw LLM Output:", order_details)  # Debugging
 
         # ✅ Regular expression to extract items and their quantities
-        pattern = r"\(\s*'([^']+)'\s*,\s*(\d+)\s*\)"
+        # pattern = r"\(\s*'([^']+)'\s*,\s*(\d+)\s*\)"
+        pattern = r"[\(\[\{]?\s*[\"']?([\w\s-]+?)[\"']?\s*[,:\-]\s*(\d+)\s*[\)\]\}]?"
+
         matches = re.findall(pattern, order_details)
 
         if not matches:
@@ -49,11 +51,11 @@ def update_item(order_details: str):
         print(f"🔍 Extracting items from: {order_details}")
 
         # ✅ Use regex to extract item names and quantities
-        pattern = r"\(\s*'([\w\s-]+)'\s*,\s*(\d+)\s*\)"  # Matches ('item', quantity)
+        pattern = r"[\(\[\{]?\s*[\"']?([\w\s-]+?)[\"']?\s*[,:\-]\s*(\d+)\s*[\)\]\}]?"  # Matches ('item', quantity)
         matches = re.findall(pattern, order_details)
 
         if not matches:
-            return "⚠ No valid items found. Use structured format like: [('pepsi', 2), ('coca-cola', 3)]"
+            return "⚠ No valid items found. Use structured format exactly like this: [('pepsi', 2), ('coca-cola', 3)]"
 
         # ✅ Convert extracted values into a structured dictionary
         extracted_order = {item.strip().lower(): int(qty) for item, qty in matches}

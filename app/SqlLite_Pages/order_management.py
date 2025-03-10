@@ -14,14 +14,18 @@ def get_connection():
     return sqlite3.connect(DB_PATH)
 
 def get_all_orders():
-    """✅ Fetch all customer orders from the database."""
+    """✅ Fetch all customer orders from the database sorted by latest date & time."""
     try:
         conn = get_connection()
         cursor = conn.cursor()
 
-        query = "SELECT id, items, total_price, status, time FROM orders"
+        query = """
+        SELECT id, items, total_price, status, time, date 
+        FROM orders 
+        ORDER BY date DESC, time DESC
+        """
         cursor.execute(query)
-        orders = [{"id": row[0], "items": row[1], "total_price": row[2], "status": row[3], "time": row[4]} for row in cursor.fetchall()]
+        orders = [{"id": row[0], "items": row[1], "total_price": row[2], "status": row[3], "time": row[4], "date": row[5]} for row in cursor.fetchall()]
 
         conn.close()
         return orders
@@ -109,7 +113,8 @@ def show_order_management():
             "items": "🍲 Ordered Items",
             "total_price": "💰 Total Price ($)",
             "status": "🟢 Order Status",
-            "time": "🕰️ Order Time"
+            "time": "🕰️ Order Time",
+            "date": "🗓️ Date"
         }, inplace=True)
 
         # ✅ Display Orders Table
