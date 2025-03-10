@@ -8,3 +8,7 @@ langchain
 bcrypt
 sqlite3
 json5
+streamlit-autorefresh
+typing-extensions
+mysql-connector-python
+logging
