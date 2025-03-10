@@ -89,7 +89,7 @@ DineMate-Food-Ordering-Chatbot/
 🔥 **Kitchen Agent:** Automatically updates kitchen staff with **non-cancelable orders**.  
 🛡️ **Admin Agent:** Allows **menu & price modifications** based on **real-time database queries**.  
 
-This **multi-agent system ensures smooth task execution** without requiring manual intervention.
+#### This **multi-agent system ensures smooth task execution** without requiring manual intervention.
 ---
 
 ## 🔑 **User Roles & Functionalities**  
