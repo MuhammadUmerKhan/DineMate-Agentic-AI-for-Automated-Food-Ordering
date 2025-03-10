@@ -4,6 +4,7 @@ import pandas as pd
 import time  # ⏳ Import time module for delay
 from config import DB_PATH
 from datetime import datetime, timedelta
+from streamlit_autorefresh import st_autorefresh
 
 # ✅ Establish database connection
 def get_connection():
@@ -12,6 +13,8 @@ def get_connection():
 
 # ✅ Fetch Kitchen Orders based on status
 def get_kitchen_orders(status="Pending"):
+    # ✅ Auto-refresh every 10 seconds
+    st_autorefresh(interval=10 * 1000, key="kitchen_refresh")  # 🔄 Refresh every 10 seconds
     """📦 Fetch orders placed more than 10 minutes ago, considering both date & time correctly."""
     try:
         conn = get_connection()
