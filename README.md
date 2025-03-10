@@ -79,7 +79,17 @@ DineMate-Food-Ordering-Chatbot/
 │── config.py                 # 🔧 Database Configuration
 │── README.md                  # 📖 Project Documentation
 ```
+---
+## 🛠️ **Agent-Based AI System**  
 
+**DineMate leverages AI agents** to automate various tasks dynamically:  
+
+🤖 **Chatbot Agent:** Extracts order details, answers queries, and handles menu browsing.  
+📦 **Order Management Agent:** Manages **order modifications & cancellations**.  
+🔥 **Kitchen Agent:** Automatically updates kitchen staff with **non-cancelable orders**.  
+🛡️ **Admin Agent:** Allows **menu & price modifications** based on **real-time database queries**.  
+
+This **multi-agent system ensures smooth task execution** without requiring manual intervention.
 ---
 
 ## 🔑 **User Roles & Functionalities**  
@@ -123,24 +133,20 @@ DineMate-Food-Ordering-Chatbot/
 
 ---
 
-## 🏗️ **What Happens Behind the Scenes?**  
+## 🏗️ **How It Works?**  
 
-### 🔹 **1️⃣ Order Processing**
-- AI extracts **items & quantities** from user messages.  
-- Checks **menu availability** in **MySQL database**.  
-- Calculates **total price dynamically**.  
+### **1️⃣ Order Processing**
+- AI **agents** extract **items & quantities** from user messages.  
+- The chatbot **queries the database** for menu availability.  
+- Calculates **total price dynamically** before confirmation.  
 
-### 🔹 **2️⃣ Order Confirmation & Status Updates**
-- Saves the order in **MySQL** after confirmation.  
-- Tracks **status changes** (**Pending → In Process → Ready → Completed**).  
+### **2️⃣ Order Confirmation & Status Updates**
+- Saves the order in **SQLite3/MySQL** after confirmation.  
+- The **Kitchen Agent auto-updates the kitchen dashboard**.  
 
-### 🔹 **3️⃣ Order Cancellation**
-- Allows **cancellation within 10 minutes**.  
+### **3️⃣ Order Cancellation Rules**
+- Customers can cancel **within 10 minutes**.  
 - After 10 minutes, **only Customer Support can cancel orders**.  
-
-### 🔹 **4️⃣ Secure Login & Authentication**
-- Uses **hashed passwords** for security.  
-- **Admins, Kitchen Staff, and Customer Support have restricted access**.  
 
 ---
 
@@ -169,10 +175,10 @@ streamlit run main.py
 ---
 
 ## 📌 **Where Can This Be Used?**  
-- **Restaurants & Cafés** 🏪 – Automate food ordering.  
-- **Online Food Delivery Apps** 🚀 – Improve customer engagement.  
-- **Hotels & Resorts** 🏨 – Offer AI-powered menu interaction.  
-- **Self-Ordering Kiosks** 📟 – Reduce human workload.  
+- **Restaurants & Cafés** 🏪 – AI-powered food ordering.  
+- **Online Food Delivery Apps** 🚀 – Seamless customer experience.  
+- **Hotels & Resorts** 🏨 – AI-driven menu interaction.  
+- **Self-Ordering Kiosks** 📟 – Reduce manual workload.  
 
 ---
 
