@@ -43,7 +43,7 @@ def create_yearly_revenue_chart(df):
         title="📆 Yearly Revenue Breakdown",
         labels={"total_price": "Total Revenue ($)", "year": "Year"},
         color="total_price",
-        color_continuous_scale="Viridis"
+        color_continuous_scale=px.colors.sequential.Viridis_r
     )
 
     fig.update_layout(
@@ -70,7 +70,7 @@ def create_product_countplot(df):
         title="🍽️ Top-Selling Menu Items",
         labels={"Total Orders": "Orders Count", "Product": "Menu Item"},
         color="Total Orders",
-        color_continuous_scale="Plasma"
+        color_continuous_scale=px.colors.sequential.Aggrnyl
     )
 
     fig.update_layout(
@@ -94,7 +94,7 @@ def create_product_pie_chart(df):
         values="Total Orders",
         title="🥧 Top 10 Best-Selling Menu Items",
         hole=0.3,
-        color_discrete_sequence=px.colors.sequential.Viridis
+        color_discrete_sequence=px.colors.sequential.Inferno_r
     )
 
     fig.update_layout(
