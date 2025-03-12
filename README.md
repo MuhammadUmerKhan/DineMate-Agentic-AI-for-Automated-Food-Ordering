@@ -66,7 +66,7 @@ A **powerful data-driven dashboard** that provides insights into restaurant oper
 
 ### 🔹 **Frontend & UI**  
 - 🌐 **Streamlit** – **Interactive UI** for chatbot and order management.  
-- 📊 **Pandas** – **Displays data** in a structured format (for menu, orders, etc.).  
+- 📊 **Plotly & Pandas** – **Data visualization & business insights.**  
 
 ---
 
