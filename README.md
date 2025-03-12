@@ -34,6 +34,21 @@ It is built using **Large Language Models (LLMs)**, **LangChain**, **LangGraph**
 - 🛡️ **Update menu prices** directly from the dashboard.  
 - ➕ **Add new food items** to the restaurant menu.  
 - 🗑️ **Remove existing items** from the menu.  
+- 📊 **View business insights with a powerful analytics dashboard.**  
+
+---
+
+## 📊 **Business Analytics Dashboard for Admins!**  
+
+### **📌 What’s Inside?**  
+A **powerful data-driven dashboard** that provides insights into restaurant operations, helping **owners & managers make informed decisions**.  
+
+🔹 **📆 Revenue Trends:** View **monthly & yearly earnings** with **interactive graphs**.  
+🔹 **🍽️ Most Ordered Items:** Find out which **menu items are top sellers**.  
+🔹 **⏳ Peak Ordering Hours:** Optimize staffing by knowing **when orders peak**.  
+🔹 **💰 Customer Spending Patterns:** Identify high-value customers & spending trends.  
+
+**📈 Data-Driven Insights = More Profit & Better Operations! 🚀**  
 
 ---
 
@@ -99,7 +114,7 @@ DineMate-Food-Ordering-Chatbot/
 | **Customer**        | 🏠 Home, 🍔 Chatbot, 📦 Track Order   | Order, Modify, Cancel, Track Orders |
 | **Kitchen Staff**   | 🏠 Home, 👨‍🍳 Kitchen Orders         | View & Update Order Status |
 | **Customer Support** | 🏠 Home, 📦 Order Management       | Modify & Cancel Orders |
-| **Admin**           | 🏠 Home, 🛡️ Update Prices, ➕ Add Items | Update Prices, Add/Remove Items |
+| **Admin**           | 🏠 Home, 🛡️ Update Prices, ➕ Add Items, 📊 Business Dashboard | Update Prices, View Analytics |
 
 ---
 
