@@ -43,7 +43,7 @@ def create_yearly_revenue_chart(df):
         title="📆 Yearly Revenue Breakdown",
         labels={"total_price": "Total Revenue ($)", "year": "Year"},
         color="total_price",
-        color_continuous_scale=px.colors.sequential.Viridis_r
+        color_continuous_scale=px.colors.sequential.Viridis
     )
 
     fig.update_layout(
