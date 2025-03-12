@@ -11,3 +11,5 @@ streamlit-autorefresh
 typing-extensions
 mysql-connector-python
 logging
+plotly
+nbformat
