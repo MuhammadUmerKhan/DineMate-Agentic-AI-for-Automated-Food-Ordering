@@ -177,8 +177,8 @@ class OrderHandler:
             order_status = order_details["status"]
             order_time_str = order_details["time"]  # Stored as TEXT in SQLite
 
-            # ✅ Convert stored time (string) to datetime object (SQLite stores as "HH:MM:SS")
-            order_time = datetime.datetime.strptime(order_time_str, "%H:%M:%S")
+            # ✅ Corrected: Extract only time
+            order_time = datetime.datetime.strptime(order_time_str, "%I:%M:%S %p").time()
 
             # ✅ Check time limit (Allow modification within 10 minutes)
             current_time = datetime.datetime.now()
@@ -209,6 +209,7 @@ class OrderHandler:
 
         except Exception as e:
             return f"⚠ Error modifying order: {e}"
+
 
 # ✅ Example Usage
 # if __name__ == "__main__":

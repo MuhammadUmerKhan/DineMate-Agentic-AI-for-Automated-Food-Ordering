@@ -4146,3 +4146,86 @@ Bot: An error occurred while processing your request. Please try again.
 2025-03-12 23:35:34,950 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
 2025-03-12 23:35:42,992 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
 2025-03-12 23:35:44,063 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-12 23:55:18,250 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-12 23:55:18,618 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-12 23:55:18,624 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:00:59,469 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:00:59,833 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:00:59,839 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:01:44,961 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:01:45,334 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:01:45,342 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:03:52,670 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:03:53,041 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:03:53,047 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:06:16,904 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:06:17,273 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:06:17,278 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:06:54,829 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:06:55,295 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:06:55,301 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:10:36,549 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:10:36,917 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:10:36,918 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:13:28,184 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:13:28,576 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:13:28,577 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:19:10,278 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:19:10,684 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:19:10,685 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:19:13,125 - INFO - 🔍 Fetching order with ID: 132
+2025-03-13 00:20:58,175 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:20:58,518 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:20:58,523 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:21:01,842 - INFO - 🔍 Fetching order with ID: 132
+2025-03-13 00:23:34,227 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:23:34,612 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:23:34,614 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:23:37,191 - INFO - 🔍 Fetching order with ID: 132
+2025-03-13 00:24:08,133 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:24:08,510 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:24:08,511 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:24:08,537 - INFO - 🔍 Fetching order with ID: 132
+2025-03-13 00:26:07,960 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:26:08,320 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:26:08,323 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:26:09,298 - INFO - 🔍 Fetching order with ID: 132
+2025-03-13 00:27:00,508 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:27:00,907 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:27:00,909 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:27:01,545 - INFO - 🔍 Fetching order with ID: 132
+2025-03-13 00:27:38,026 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:27:38,438 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:27:38,443 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:28:55,088 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:28:55,463 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:28:55,468 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:28:55,490 - INFO - 🔍 Fetching order with ID: 132
+2025-03-13 00:29:12,878 - INFO - 🔍 Fetching order with ID: 132
+2025-03-13 00:33:57,812 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:33:58,183 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:33:58,190 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:34:55,167 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:34:55,572 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:34:55,577 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:35:10,959 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:35:11,387 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:35:11,393 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:37:33,891 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:37:34,240 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:37:34,245 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:38:09,098 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:38:09,475 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:38:09,481 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:40:30,619 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:40:30,984 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:40:30,991 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:40:32,958 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:41:02,122 - INFO - 🔍 Fetching order with ID: 132
+2025-03-13 00:44:55,051 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:45:30,344 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:45:42,308 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:45:43,977 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:45:45,382 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:48:32,108 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-13 00:49:34,851 - INFO - ✅ Connected to the SQLite database successfully.

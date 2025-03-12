@@ -207,6 +207,32 @@ class Database:
     def close_connection(self):
         """✅ Close the database connection."""
         self.connection.close()
+        
+    def get_order_by_id(self, order_id):
+        """✅ Retrieve order details by ID."""
+        try:
+            conn = self.connection
+            cursor = conn.cursor()
+            
+            # ✅ Debug: Print query execution log
+            logging.info(f"🔍 Fetching order with ID: {order_id}")
+
+            cursor.execute("SELECT * FROM orders WHERE id = ?", (order_id,))
+            order = cursor.fetchone()
+
+            if not order:
+                logging.warning(f"⚠ No order found in database with ID {order_id}.")
+                return None
+            
+            # ✅ Get column names dynamically
+            column_names = [desc[0] for desc in cursor.description]
+            order_dict = dict(zip(column_names, order))
+            
+            return order_dict
+
+        except sqlite3.Error as e:
+            logging.error(f"⚠ Error fetching order by ID: {e}")
+            return None
 
 # ✅ Example Usage
 if __name__ == "__main__":
