@@ -196,6 +196,9 @@ streamlit run main.py
 - **Self-Ordering Kiosks** 📟 – Reduce manual workload.  
 
 ---
+## 📽️ Live Demo:
+- [Click Here](https://dine-mate-food-delivery-chatbot.streamlit.app/?embed_options=dark_theme)
+---
 
 ## 🤝 **Contributions**  
 Contributions are **welcome**! Feel free to **fork this project**, submit **pull requests**, or **suggest improvements**.  
