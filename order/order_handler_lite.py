@@ -1,7 +1,7 @@
 import json
 import logging
 import datetime
-from database.SQLLITE_db import Database  # ✅ SQLite Database Connection
+from database.SQLLITE_db import Database
 
 # ✅ Configure logging
 logging.basicConfig(filename="foodbot.log", level=logging.INFO, 
