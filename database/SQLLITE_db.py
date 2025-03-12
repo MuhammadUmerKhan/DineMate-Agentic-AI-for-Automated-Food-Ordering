@@ -4,6 +4,7 @@ import datetime
 import json
 import bcrypt
 from config import *
+import pandas as pd
 
 # ✅ Configure logging
 logging.basicConfig(filename="foodbot.log", level=logging.INFO, 
@@ -194,6 +195,15 @@ class Database:
         self.cursor.execute(query, (username, email))
         existing_user = self.cursor.fetchone()
         return existing_user  # Returns user if found, else None
+    def fetch_order_data(self):
+        """Fetch order data from the database and return it as a DataFrame."""
+        try:
+            query = "SELECT * FROM orders WHERE status = ?;"
+            df = pd.read_sql(query, self.connection, params=("Delivered",))  # ✅ Correct parameter passing
+            return df
+        except sqlite3.Error as e:
+            logging.error(f"⚠ Error fetching order data: {e}")
+            return pd.DataFrame()  # Return empty DataFrame on failure
     def close_connection(self):
         """✅ Close the database connection."""
         self.connection.close()

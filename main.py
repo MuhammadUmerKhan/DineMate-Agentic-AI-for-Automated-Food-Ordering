@@ -9,6 +9,7 @@ from app.SqlLite_Pages import order_management  # Import Order Management page
 from app.SqlLite_Pages import home  # Import Home page
 from app.SqlLite_Pages import add_remove_items  # Import Add/Remove Items Page
 from app.SqlLite_Pages import track_order  # Import Order Tracking Page
+from app.SqlLite_Pages import analysis # Import Analysis Page
 import time
 
 # ✅ Set up Streamlit UI
@@ -34,7 +35,7 @@ st.sidebar.markdown(
 
 # ✅ Define Role-Based Page Access (Each role gets only their assigned pages)
 ROLE_PAGES = {
-    "admin": ["🏠 Home", "🛡️ Update Prices", "👨‍🍳 Kitchen Orders", "➕ Add/Remove Items"],  
+    "admin": ["🏠 Home", "🛡️ Update Prices", "👨‍🍳 Kitchen Orders", "➕ Add/Remove Items", "📶 Analysis"],  
     "kitchen_staff": ["🏠 Home", "👨‍🍳 Kitchen Orders"],  
     "customer_support": ["🏠 Home", "📦 Order Management"],  
     "customer": ["🏠 Home", "🍔 DineMate Chatbot", "📦 Track Order"]  
@@ -99,7 +100,8 @@ elif page == "➕ Add/Remove Items":
 
 elif page == "📦 Track Order":
     track_order.show_order_tracking()
-  
+elif page == "📶 Analysis":
+    analysis.show_analysis_page()
 # ✅ **Logout Button in Sidebar**
 st.sidebar.divider()
 if st.sidebar.button("🚪 Logout", use_container_width=True):
