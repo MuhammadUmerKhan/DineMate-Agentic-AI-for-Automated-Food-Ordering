@@ -8,7 +8,7 @@ def get_connection():
     """🔌 Establish connection to the SQLite database."""
     return sqlite3.connect(DB_PATH)
 
-# ✅ Function to check if item exists
+# ✅ Function to check if an item exists
 def check_item_exists(item_name):
     """🔍 Check if an item already exists in the menu."""
     try:
@@ -94,57 +94,55 @@ def get_menu():
 def show_add_remove_items_page():
     """🍽️ Admin Panel - Add or Remove Menu Items"""
     st.markdown("<h1 style='text-align: center; color: #FFA500;'>🔑 Admin Panel</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center;'>📝 Add or Remove Food Items</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center;'>📝 Manage Menu Items</h3>", unsafe_allow_html=True)
+    st.divider()
 
     # ✅ Admin Access Check
     if st.session_state["role"] != "admin":
         st.warning("⚠ Access Denied! Only **Admins** can modify menu items.", icon="🚫")
         return
 
-    # ✅ Layout: Two Sections (Add & Remove)
-    tab1, tab2 = st.tabs(["➕ **Add Item**", "🗑️ **Remove Item**"])
-
-    # ✅ ➕ Add New Item Section
-    with tab1:
-        st.markdown("### 🍔 **Add a New Menu Item**")
-        item_name = st.text_input("🔤 Enter Item Name", key="add_item_name", help="Example: Cheeseburger, French Fries")
-        price = st.number_input("💰 Enter Price ($)", min_value=0.01, step=0.01, format="%.2f", key="add_item_price")
-
-        # ✅ Button in Center
-        col1, col2, col3 = st.columns([1, 2, 1])
-        with col2:
-            if st.button("✅ Add Item", use_container_width=True):
-                if item_name and price:
-                    add_new_item(item_name.strip().capitalize(), price)
-                    time.sleep(1.2)  # ⏳ Delay for smooth UI transition
-                    st.rerun()
-                else:
-                    st.warning("⚠ Please enter both **item name** and **price**.", icon="⚠")
-
-    # ✅ 🗑️ Remove Item Section
-    with tab2:
-        st.markdown("### 🗑️ **Remove an Existing Item**")
-        menu_items = get_menu()
-        
-        if not menu_items:
-            st.info("ℹ No menu items available to remove.")
-        else:
-            item_list = [item["name"] for item in menu_items]
-            selected_item = st.selectbox("📌 Select an item to remove", item_list, key="remove_item_select")
-
-            # ✅ Button in Center
-            col1, col2, col3 = st.columns([1, 2, 1])
-            with col2:
-                if st.button("🗑️ Remove Item", use_container_width=True):
-                    remove_item(selected_item)
-                    time.sleep(1.2)  # ⏳ Delay for smooth UI transition
-                    st.rerun()
-
-    st.divider()
-
     # ✅ 📜 Display Current Menu
     st.markdown("### 📜 **Current Menu**")
+    menu_items = get_menu()
+
     if not menu_items:
         st.info("ℹ No menu items found.")
     else:
         st.dataframe(menu_items, use_container_width=True, hide_index=True)
+
+    st.divider()
+
+    # ✅ ➕ Add New Item Section
+    st.markdown("### ➕ **Add a New Menu Item**")
+    col1, col2 = st.columns([2, 1], gap="medium")
+
+    with col1:
+        item_name = st.text_input("🔤 Enter Item Name", key="add_item_name", help="Example: Cheeseburger, French Fries")
+
+    with col2:
+        price = st.number_input("💰 Enter Price ($)", min_value=0.01, step=0.01, format="%.2f", key="add_item_price")
+
+    if st.button("✅ Add Item", use_container_width=True):
+        if item_name and price:
+            add_new_item(item_name.strip().capitalize(), price)
+            time.sleep(1.2)  # ⏳ Delay for smooth UI transition
+            st.rerun()
+        else:
+            st.warning("⚠ Please enter both **item name** and **price**.", icon="⚠")
+
+    st.divider()
+
+    # ✅ 🗑️ Remove Item Section
+    st.markdown("### 🗑️ **Remove an Existing Item**")
+
+    if not menu_items:
+        st.info("ℹ No menu items available to remove.")
+    else:
+        item_list = [item["name"] for item in menu_items]
+        selected_item = st.selectbox("📌 Select an item to remove", item_list, key="remove_item_select")
+
+        if st.button("🗑️ Remove Item", use_container_width=True):
+            remove_item(selected_item)
+            time.sleep(1.2)  # ⏳ Delay for smooth UI transition
+            st.rerun()
