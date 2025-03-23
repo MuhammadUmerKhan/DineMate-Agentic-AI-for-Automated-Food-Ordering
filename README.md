@@ -1,4 +1,4 @@
-# 🍽️ **DineMate - AI Food Ordering Chatbot**  
+# 🍽️ **DineMate: AI-Powered Conversational Agent for Smart Food Ordering**  
 
 ## 📌 **Overview**  
 **DineMate** is an **AI-driven, agent-based food ordering system** that streamlines the **ordering, tracking, and management** process for customers, kitchen staff, and restaurant admins. It integrates an **intelligent chatbot**, a **kitchen dashboard**, and an **admin panel** for seamless restaurant operations.  
