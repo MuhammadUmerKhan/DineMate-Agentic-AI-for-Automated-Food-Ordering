@@ -24,6 +24,7 @@ def home():
         - 🚫 **Smart order cancellations (within 10 min)**
         - 📦 **Real-time order tracking**
         - 📊 **Business analytics dashboard**
+        - 🗣️ **Voice DineMate – Voice-enabled ordering system**
         """)
     
     # 🆕 **New Functionalities**
@@ -35,14 +36,30 @@ def home():
         - 💰 **Dynamic Price Management** – Admins can **adjust menu prices dynamically**.  
         - 🔄 **Customer Support Panel** – Staff can now **cancel or modify orders**.  
         - 👨‍🍳 **Kitchen Dashboard** – Kitchen staff get **a dedicated panel** to manage orders.  
-        - 📊 **Business Analytics** – Monitor revenue, peak order times & demand trends.
+        - 📊 **Business Analytics** – Monitor revenue, peak order times & demand trends.  
+        - 🗣️ **Voice DineMate** – **Order food using voice commands!**
+        """)
+    
+    # 🎤 **Voice DineMate - AI Voice Ordering System**
+    with st.expander("🎤 **Introducing Voice DineMate!**", expanded=True):
+        st.markdown("""
+        🚀 **Now, order your favorite food with just your voice!**  
+        **Voice DineMate** uses advanced **Speech-to-Text (STT) and Text-to-Speech (TTS)** technology to let customers 
+        interact with the chatbot hands-free. 🎙️
+        
+        **How It Works?**
+        
+        1️⃣ **Enable voice mode** in the chatbot panel.  
+        2️⃣ **Speak naturally** – Example: *"I want a chicken burger with fries."*  
+        3️⃣ **The AI processes your voice command** and places the order.  
+        4️⃣ **Get real-time voice responses** with order confirmation and tracking.  
         """)
     
     # 🏗️ **User Roles & Access**
     with st.expander("🏗️ **User Roles & Permissions**", expanded=True):
         role_data = {
             "👤 Customers": [
-                "✅ Order food using chatbot",
+                "✅ Order food using chatbot or voice commands",
                 "✅ Modify/cancel orders (within time limits)",
                 "✅ Track orders in real time"
             ],
@@ -85,7 +102,8 @@ def home():
             "🧠 AI-Powered Chatbot": "Uses **Qwen-2.5-32B**, an advanced LLM for food ordering.",
             "🛠️ Backend Technologies": "Built with **LangChain & LangGraph** for structured chatbot interactions.",
             "📊 Database Management": "Stores order details securely in **MySQL**.",
-            "🌐 Web UI": "Interactive UI powered by **Streamlit**."
+            "🌐 Web UI": "Interactive UI powered by **Streamlit**.",
+            "🎤 Voice Processing": "Uses **Whisper AI** for **Speech-to-Text (STT)** & **TTS APIs** for responses."
         }
 
         for tech, desc in tech_data.items():
