@@ -9,6 +9,7 @@ langchain_groq
 langgraph
 langchain
 bcrypt
+streamlit-autorefresh
 numpy==1.23.5 
 scipy==1.10.1 
 torch==2.0.1 
