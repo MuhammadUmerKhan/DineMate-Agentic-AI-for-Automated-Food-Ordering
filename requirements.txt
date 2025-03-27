@@ -9,6 +9,8 @@ langchain_groq
 langgraph
 langchain
 bcrypt
+plotly
+nbformat
 streamlit-autorefresh
 numpy==1.23.5 
 scipy==1.10.1 
