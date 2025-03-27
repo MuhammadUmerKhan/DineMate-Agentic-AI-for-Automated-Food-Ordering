@@ -30,3 +30,14 @@
 2025-03-08 19:54:31,574 - INFO - ✅ Connected to the SQLite database successfully.
 2025-03-08 20:03:39,597 - INFO - ✅ Connected to the SQLite database successfully.
 2025-03-08 20:03:50,894 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-27 15:33:41,916 - ERROR - ⚠ Database connection failed: unable to open database file
+2025-03-27 15:34:25,274 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-27 15:34:37,384 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-27 15:34:45,932 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-27 15:36:27,914 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-27 15:36:57,519 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-27 15:39:11,462 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-27 15:39:22,321 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-27 15:41:16,394 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-27 15:44:14,510 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-27 15:44:45,154 - INFO - ✅ Connected to the SQLite database successfully.
