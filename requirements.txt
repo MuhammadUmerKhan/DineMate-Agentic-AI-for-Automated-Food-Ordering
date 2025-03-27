@@ -1,5 +1,5 @@
 streamlit 
-whisper 
+openai-whisper
 sounddevice 
 numpy 
 wave 
