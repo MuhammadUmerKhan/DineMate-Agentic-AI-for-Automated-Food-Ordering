@@ -7,6 +7,7 @@ python-dotenv
 TTS 
 langchain_groq
 langgraph
+langgraph
 numpy==1.23.5 
 scipy==1.10.1 
 torch==2.0.1 
