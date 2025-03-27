@@ -1,6 +1,7 @@
 streamlit 
 openai-whisper
-sounddevice 
+pydub
+ffmpeg 
 numpy 
 wave 
 python-dotenv 
