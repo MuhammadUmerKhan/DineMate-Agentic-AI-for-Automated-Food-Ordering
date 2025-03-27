@@ -19,6 +19,7 @@ It is built using **Large Language Models (LLMs)**, **LangChain**, **LangGraph**
 - 🚫 **Cancel an order** within **10 minutes** of placement.  
 - 📦 **Track your order status** in real time.  
 - 💳 **Get the total bill calculation** instantly before checkout.  
+- 🎤 **Voice-Based Ordering** – Place orders using voice commands.  
 
 ### ✅ **For Kitchen Staff:**  
 - 🔥 **View only confirmed (non-cancelable) orders** (orders placed **10+ minutes ago**).  
@@ -59,6 +60,7 @@ A **powerful data-driven dashboard** that provides insights into restaurant oper
 - 🔗 **LangChain** – Connects LLM with **external tools like MySQL**.  
 - 📡 **LangGraph** – Handles **conversation flow, decision-making, and tool execution**.  
 - 🐍 **Python** – Main programming language for the chatbot logic.  
+- 🎤 **Speech-to-Text (STT) & Text-to-Speech (TTS)** – Enables **voice-based food ordering**.  
 
 ### 🔹 **Database Management**  
 - 🛢️ **MySQL/SQLLITE3** – Stores **menu items, orders, users, and status updates**.  
@@ -83,6 +85,7 @@ DineMate-Food-Ordering-Chatbot/
 │   ├── update_prices.py      # 💰 Admin: Update Item Prices
 │   ├── kitchen.py            # 👨‍🍳 Kitchen Staff Order Dashboard
 │   ├── register.py           # 📝 User Registration Page - Allows new customers to sign up.
+│   ├── voice_chat.py              # 🎤 Voice-Based Ordering (STT & TTS)
 │── bot/
 │   ├── agent.py              # 🤖 AI Chatbot logic using LangGraph
 │── database/
@@ -145,6 +148,17 @@ DineMate-Food-Ordering-Chatbot/
 2. Manage restaurant **menu & pricing**:
    - **"🛡️ Update Prices"** – Modify existing prices.  
    - **"➕ Add/Remove Items"** – Add or remove menu items.  
+
+---
+
+## 🛠️ **How to Use Voice-Based Ordering?**  
+
+1. Click on the **Microphone Button** in the chatbot interface.  
+2. Speak your order naturally, e.g., *"I want a cheeseburger and a Coke."*  
+3. The chatbot converts your speech to text and processes the order.  
+4. The bot responds with **voice feedback** confirming your order.  
+
+This feature enhances **accessibility and user experience** for hands-free ordering!
 
 ---
 
