@@ -1,10 +1,9 @@
 import streamlit as st
 import whisper
-import sounddevice as sd
-import numpy as np
 import wave
-import os
-import textwrap
+import os, time
+import numpy as np
+import pyaudio
 from dotenv import load_dotenv
 from TTS.api import TTS
 from bot.agent import stream_graph_updates
@@ -24,27 +23,62 @@ tts_model = TTS("tts_models/en/ljspeech/tacotron2-DDC", gpu=False)
 wav_files = os.path.abspath(os.path.join(os.path.dirname(__file__), "wav_files"))
 os.makedirs(wav_files, exist_ok=True)
 
-# 🎤 Function to Record Audio
-def record_audio(filename=f"{wav_files}/user_order.wav", samplerate=44100, duration=5):
-    """Records audio using the microphone and saves it as a WAV file."""
+# Audio recording settings
+CHUNK = 1024  # Buffer size
+FORMAT = pyaudio.paInt16  # 16-bit audio format
+CHANNELS = 1  # Mono recording
+RATE = 44100  # Sample rate
+SILENCE_THRESHOLD = 500  # Adjust based on background noise
+SILENCE_FRAMES = int(RATE / CHUNK * 2)  # Number of silent frames (~2 sec)
+
+def record_audio(filename=f"{wav_files}/user_order.wav"):
+    """Records audio until silence is detected and saves it as a WAV file."""
     st.write("🎤 **Recording... Speak now!**")
 
+    audio = pyaudio.PyAudio()
+    stream = audio.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
+
+    frames = []
+    silent_chunks = 0  # Count consecutive silent frames
+
     try:
-        audio_data = sd.rec(int(samplerate * duration), samplerate=samplerate, channels=1, dtype=np.int16)
-        sd.wait()  # Wait for recording to complete
+        while True:
+            data = stream.read(CHUNK, exception_on_overflow=False)
+            frames.append(data)
 
-        # Save recorded audio
-        with wave.open(filename, "wb") as wf:
-            wf.setnchannels(1)
-            wf.setsampwidth(2)
-            wf.setframerate(samplerate)
-            wf.writeframes(audio_data.tobytes())
+            # Convert to numpy array to check volume level
+            audio_np = np.frombuffer(data, dtype=np.int16)
+            volume = np.abs(audio_np).mean()  # Compute average volume
 
-        # st.success("✅ Recording saved successfully!")
-        return filename
+            # Check for silence
+            if volume < SILENCE_THRESHOLD:
+                silent_chunks += 1
+            else:
+                silent_chunks = 0  # Reset silence counter if voice detected
+
+            # Stop if we detect silence for enough consecutive frames
+            if silent_chunks > SILENCE_FRAMES:
+                st.write("🛑 **Silence detected. Stopping recording...**")
+                break
+
     except Exception as e:
         st.error(f"❌ Recording Error: {e}")
         return None
+
+    finally:
+        stream.stop_stream()
+        stream.close()
+        audio.terminate()
+
+    # Save recorded audio
+    with wave.open(filename, "wb") as wf:
+        wf.setnchannels(CHANNELS)
+        wf.setsampwidth(audio.get_sample_size(FORMAT))
+        wf.setframerate(RATE)
+        wf.writeframes(b''.join(frames))
+
+    # st.success("✅ Recording saved successfully!")
+    return filename
 
 # 📝 Function to Transcribe Audio
 def transcribe_audio(filename=f"{wav_files}/user_order.wav"):
