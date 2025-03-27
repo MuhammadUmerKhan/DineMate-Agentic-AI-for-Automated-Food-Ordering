@@ -1,11 +1,9 @@
-streamlit 
+streamlit
 openai-whisper
-pydub
-ffmpeg 
-numpy 
-wave 
-python-dotenv 
-TTS 
+numpy
+wave
+python-dotenv
+TTS
 langchain_groq
 langgraph
 langchain
@@ -13,7 +11,10 @@ bcrypt
 plotly
 nbformat
 streamlit-autorefresh
-numpy==1.23.5 
-scipy==1.10.1 
-torch==2.0.1 
-sounddevice==0.4.6 
+numpy==1.23.5
+scipy==1.10.1
+torch==2.0.1
+
+# Replace sounddevice with pydub
+pydub
+ffmpeg
