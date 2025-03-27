@@ -1,9 +1,7 @@
 import streamlit as st
+import speech_recognition as sr
 import whisper
-import wave
-import os, time
-import numpy as np
-import pyaudio
+import os
 from dotenv import load_dotenv
 from TTS.api import TTS
 from bot.agent import stream_graph_updates
@@ -23,70 +21,45 @@ tts_model = TTS("tts_models/en/ljspeech/tacotron2-DDC", gpu=False)
 wav_files = os.path.abspath(os.path.join(os.path.dirname(__file__), "wav_files"))
 os.makedirs(wav_files, exist_ok=True)
 
-# Audio recording settings
-CHUNK = 1024  # Buffer size
-FORMAT = pyaudio.paInt16  # 16-bit audio format
-CHANNELS = 1  # Mono recording
-RATE = 44100  # Sample rate
-SILENCE_THRESHOLD = 500  # Adjust based on background noise
-SILENCE_FRAMES = int(RATE / CHUNK * 2)  # Number of silent frames (~2 sec)
-
 def record_audio(filename=f"{wav_files}/user_order.wav"):
     """Records audio until silence is detected and saves it as a WAV file."""
-    st.write("🎤 **Recording... Speak now!**")
+    recognizer = sr.Recognizer()
+    with sr.Microphone() as source:
+        st.write("🎤 **Listening... Speak now!**")
+        recognizer.adjust_for_ambient_noise(source)  # Adapt to background noise
+        audio_data = []
+        
+        try:
+            while True:
+                audio = recognizer.listen(source, phrase_time_limit=5)  # Capture speech chunks
+                audio_data.append(audio.get_wav_data())  
 
-    audio = pyaudio.PyAudio()
-    stream = audio.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
+                # Convert to text to check for silence
+                try:
+                    text = stt_model.transcribe(audio.get_wav_data()).get("text", "")
+                    if not text.strip():  # Silence detected
+                        st.write("🛑 **Silence detected. Stopping recording...**")
+                        break
+                except Exception:
+                    pass  # Ignore errors from transcribing small silent clips
 
-    frames = []
-    silent_chunks = 0  # Count consecutive silent frames
+        except Exception as e:
+            st.error(f"❌ Recording Error: {e}")
+            return None
 
-    try:
-        while True:
-            data = stream.read(CHUNK, exception_on_overflow=False)
-            frames.append(data)
+        # Save recorded audio
+        with open(filename, "wb") as f:
+            for chunk in audio_data:
+                f.write(chunk)
+        
+        st.write("✅ **Recording saved!**")
+        return filename
 
-            # Convert to numpy array to check volume level
-            audio_np = np.frombuffer(data, dtype=np.int16)
-            volume = np.abs(audio_np).mean()  # Compute average volume
-
-            # Check for silence
-            if volume < SILENCE_THRESHOLD:
-                silent_chunks += 1
-            else:
-                silent_chunks = 0  # Reset silence counter if voice detected
-
-            # Stop if we detect silence for enough consecutive frames
-            if silent_chunks > SILENCE_FRAMES:
-                st.write("🛑 **Silence detected. Stopping recording...**")
-                break
-
-    except Exception as e:
-        st.error(f"❌ Recording Error: {e}")
-        return None
-
-    finally:
-        stream.stop_stream()
-        stream.close()
-        audio.terminate()
-
-    # Save recorded audio
-    with wave.open(filename, "wb") as wf:
-        wf.setnchannels(CHANNELS)
-        wf.setsampwidth(audio.get_sample_size(FORMAT))
-        wf.setframerate(RATE)
-        wf.writeframes(b''.join(frames))
-
-    # st.success("✅ Recording saved successfully!")
-    return filename
-
-# 📝 Function to Transcribe Audio
-def transcribe_audio(filename=f"{wav_files}/user_order.wav"):
+def transcribe_audio(filename):
     """Transcribes recorded audio using Whisper."""
-    if filename is None or not os.path.exists(filename):
+    if not filename or not os.path.exists(filename):
         st.error("⚠️ No valid audio file found. Please record again.")
         return ""
-
     try:
         result = stt_model.transcribe(filename)
         return result.get("text", "")
@@ -94,22 +67,18 @@ def transcribe_audio(filename=f"{wav_files}/user_order.wav"):
         st.error(f"❌ Transcription Error: {e}")
         return ""
 
-# 🤖 Function to Get LLM Response
 def get_llm_response(user_text):
     """Gets response from the chatbot."""
     return stream_graph_updates(user_text)
 
-# 🔊 Function for Text-to-Speech (Fixed Kernel Size Error)
 def text_to_speech(response_text, max_words=50):
-    """Converts text to speech and plays the response in smaller chunks if needed."""
+    """Converts text to speech and plays the response."""
     if not response_text.strip():
         st.error("⚠️ No response text provided for TTS.")
         return None
-
-    # Split long text into chunks of `max_words` words
+    
     words = response_text.split()
     text_chunks = [' '.join(words[i:i+max_words]) for i in range(0, len(words), max_words)]
-
     output_files = []
     
     try:
@@ -117,16 +86,27 @@ def text_to_speech(response_text, max_words=50):
             output_file = os.path.join(wav_files, f"order_response_{idx}.wav")
             tts_model.tts_to_file(text=chunk, file_path=output_file)
             output_files.append(output_file)
-
-        # Play each chunk sequentially
+        
         for file in output_files:
             audio = AudioSegment.from_wav(file)
             play(audio)
-
         return output_files
     except Exception as e:
         st.error(f"❌ TTS Error: {e}")
         return None
+
+def ai_voice_assistance():
+    """Runs the AI voice assistant pipeline."""
+    audio_file = record_audio()
+    if audio_file:
+        user_text = transcribe_audio(audio_file)
+        if user_text:
+            st.write(f"📝 **You said:** {user_text}")
+            bot_response = get_llm_response(user_text)
+            st.write(f"🤖 **Bot says:** {bot_response}")
+            text_to_speech(bot_response)
+    else:
+        st.write("🔁 Please try recording again.")
 
 def ai_voice_assistance():
     return record_audio, transcribe_audio, get_llm_response, text_to_speech
