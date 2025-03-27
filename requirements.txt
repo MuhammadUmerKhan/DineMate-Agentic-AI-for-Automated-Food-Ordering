@@ -16,5 +16,4 @@ scipy==1.10.1
 torch==2.0.1
 textwrap3
 pydub
-ffmpeg
 pyaudio
