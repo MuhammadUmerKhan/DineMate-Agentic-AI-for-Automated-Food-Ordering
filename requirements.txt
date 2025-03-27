@@ -16,7 +16,6 @@ mysql-connector-python==9.2.0
 # Audio Processing
 pyaudio==0.2.14
 sounddevice
-tts
 gTTS
 pyttsx3
 openai-whisper
