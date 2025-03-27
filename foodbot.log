@@ -4596,3 +4596,8 @@ Bot: An error occurred while processing your request. Please try again.
 2025-03-27 18:20:13,022 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
 2025-03-27 18:20:37,463 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
 2025-03-27 18:20:38,426 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 18:21:24,664 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 18:21:25,628 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 18:23:23,585 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-27 18:23:24,349 - INFO - ✅ Connected to the SQLite database successfully.
+2025-03-27 18:23:24,351 - INFO - ✅ Connected to the SQLite database successfully.
