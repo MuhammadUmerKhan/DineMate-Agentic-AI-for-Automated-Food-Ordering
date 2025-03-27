@@ -19,4 +19,5 @@ tts
 gTTS
 pyttsx3
 openai-whisper
+PyAudio
 sounddevice
