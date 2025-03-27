@@ -11,6 +11,7 @@ logging.basicConfig(filename="foodbot.log", level=logging.INFO,
                     format="%(asctime)s - %(levelname)s - %(message)s")
 
 class Database:
+    # DB_PATH = "../sqllite3_db/foodbot.db"
     def __init__(self, db_path=DB_PATH):
         """✅ Initialize and connect to the SQLite database."""
         try:
@@ -109,6 +110,7 @@ class Database:
         except sqlite3.Error as e:
             return f"⚠ Error fetching estimated delivery time: {e}"
 
+
     def cancel_order_after_confirmation(self, order_id):
         """✅ Cancels the order if it's within 10 minutes of placement."""
         try:
@@ -123,12 +125,19 @@ class Database:
             if order_status in ["Canceled", "Completed"]:
                 return f"⚠ Order {order_id} is already **{order_status}** and cannot be canceled."
 
-            order_time = datetime.datetime.strptime(result["time"], "%I:%M:%S %p")
-            time_diff = (datetime.datetime.now() - order_time).total_seconds() / 60  # ✅ Minutes
+            # ✅ Ensure correct date handling
+            today_date = datetime.datetime.today().date()  # Get today's date
+            order_time = datetime.datetime.strptime(result["time"], "%I:%M:%S %p").time()  # Convert string to time
+            order_datetime = datetime.datetime.combine(today_date, order_time)  # Attach today's date
+
+            # ✅ Calculate correct time difference
+            now = datetime.datetime.now()  # Current time
+            time_diff = (now - order_datetime).total_seconds() / 60  # Convert to minutes
 
             if time_diff > 10:
                 return "⚠ **Your order cannot be canceled now. It has been more than 10 minutes.**"
 
+            # ✅ Update order status to 'Canceled'
             update_query = "UPDATE orders SET status = ? WHERE id = ?;"
             self.cursor.execute(update_query, ("Canceled", order_id))
             self.connection.commit()
@@ -137,6 +146,7 @@ class Database:
 
         except sqlite3.Error as e:
             return f"⚠ Error canceling order: {e}"
+
     
     def modify_order_after_confirmation(self, order_id, updated_items_json, new_total_price):
         """✅ Replace the existing order with new items and updated price."""
@@ -237,6 +247,7 @@ class Database:
 # ✅ Example Usage
 if __name__ == "__main__":
     db = Database()
+    print(db.cancel_order_after_confirmation(137))
     # print(db.load_menu())  # Fetch menu
     # print(db.get_max_id())
     # print(db.add_user("admin", "admin123", "admin"))
