@@ -17,3 +17,4 @@ torch==2.0.1
 textwrap3
 pydub
 ffmpeg
+pyaudio
