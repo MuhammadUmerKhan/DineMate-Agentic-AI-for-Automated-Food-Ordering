@@ -19,3 +19,4 @@ tts
 gTTS
 pyttsx3
 openai-whisper
+sounddevice
