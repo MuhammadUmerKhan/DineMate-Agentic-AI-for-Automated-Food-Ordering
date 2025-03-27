@@ -14,8 +14,7 @@ logger = get_logger("LangChain-Chatbot")
 grok_api_key = os.getenv("GROK_API_KEY") # Langchain Grok API key (Generate from: https://console.groq.com/)
 
 # Check if API key is available
-api_token = grok_api_key
-if not api_token:
+if not grok_api_key:
     st.error("❌ Missing API Token!")
     st.stop()  # Stop execution if API token is missing
 
