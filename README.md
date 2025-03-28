@@ -58,17 +58,20 @@ A **powerful data-driven dashboard** that provides insights into restaurant oper
 ### 🔹 **Backend & AI**  
 - 🧠 **Qwen-2.5-32B** – A **powerful LLM** that understands **food-related queries**.  
 - 🔗 **LangChain** – Connects LLM with **external tools like MySQL**.  
-- 📡 **LangGraph** – Handles **conversation flow, decision-making, and tool execution**.  
+- 🔄 **LangGraph** – Handles **conversation flow, decision-making, and tool execution**.  
 - 🐍 **Python** – Main programming language for the chatbot logic.  
-- 🎤 **Speech-to-Text (STT) & Text-to-Speech (TTS)** – Enables **voice-based food ordering**.  
+- 🎤 **Whisper ASR** – Converts **spoken orders into text** (Speech-to-Text).  
+- 🗣️ **Torch TTS** – Converts **text responses into natural speech** (Text-to-Speech).  
+- 🎙️ **Sounddevice & Pydub** – Enables **microphone recording & audio processing**.  
 
 ### 🔹 **Database Management**  
-- 🛢️ **MySQL/SQLLITE3** – Stores **menu items, orders, users, and status updates**.  
+- 🛢️ **MySQL/SQLite3** – Stores **menu items, orders, users, and status updates**.  
 - 🔑 **Secure authentication** with **hashed passwords**.  
 
 ### 🔹 **Frontend & UI**  
 - 🌐 **Streamlit** – **Interactive UI** for chatbot and order management.  
-- 📊 **Plotly & Pandas** – **Data visualization & business insights.**  
+- 📊 **Plotly & Pandas** – **Data visualization & business insights**.  
+- 🎨 **Custom CSS & HTML** – Enhances **chatbot appearance and styling**.  
 
 ---
 
@@ -231,8 +234,6 @@ After setting up the virtual environment:
 4. The bot responds with **voice feedback** confirming your order.  
 
 This feature enhances **accessibility and user experience** for hands-free ordering!  
-
----
 
 💡 **Now you can run DineMate Voice Ordering on your local machine!** 🚀🎙️
 
