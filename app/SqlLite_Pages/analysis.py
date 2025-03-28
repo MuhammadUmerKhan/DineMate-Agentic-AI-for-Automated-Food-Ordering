@@ -39,7 +39,7 @@ def show_analysis_page():
     st.divider()
     
     # 📌 **Most Demanded Products**
-    with st.expander("🍽️ Most Popular Food Items", expanded=False):
+    with st.expander("🍽️ Most Popular Food Items", expanded=True):
         st.markdown("### 📊 Top Ordered Products")
         product_counts = extract_product_counts(preprocessed_data)
         fig_countplot = create_product_countplot(product_counts)
@@ -51,7 +51,7 @@ def show_analysis_page():
     st.divider()
     
     # ⏳ **Peak Order Hours**
-    with st.expander("⏳ Peak Customer Ordering Hours", expanded=False):
+    with st.expander("⏳ Peak Customer Ordering Hours", expanded=True):
         st.markdown("### 🕒 When Do Customers Order the Most?")
         hourly_demand = extract_hourly_demand(preprocessed_data)
         fig_hourly = create_hourly_demand_chart(hourly_demand)
@@ -60,7 +60,7 @@ def show_analysis_page():
     st.divider()
     
     # 💰 **Customer Spending Trends**
-    with st.expander("💰 Customer Spending Patterns", expanded=False):
+    with st.expander("💰 Customer Spending Patterns", expanded=True):
         st.markdown("### 🛒 How Much Are Customers Spending?")
         fig_histogram = create_spending_distribution_chart(preprocessed_data)
         fig_boxplot = create_spending_boxplot_chart(preprocessed_data)
