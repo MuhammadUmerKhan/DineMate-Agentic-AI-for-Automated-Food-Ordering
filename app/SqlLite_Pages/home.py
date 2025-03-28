@@ -5,7 +5,7 @@ def home():
     
     # 🎉 Title and Introduction
     st.markdown("""
-        <h1 style='text-align: center; color: #FFA500;'>🍽️ Welcome to DineMate</h1>
+        <h1 style='text-align: center; color: #C70039;'>🍽️ Welcome to DineMate</h1>
         <h3 style='text-align: center;'>🚀 AI-Powered Smart Food Ordering & Business Analytics</h3>
     """, unsafe_allow_html=True)
     st.divider()
