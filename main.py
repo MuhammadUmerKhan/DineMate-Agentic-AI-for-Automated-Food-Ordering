@@ -136,7 +136,7 @@ elif page == "🎙️ Voice Chat with DineMate":
     # voice_order()
     
     # 📌 Highlight Deployment Issues
-    st.markdown("<h1 style='text-align: center;'>🚨 Deployment Not Done Due to Library Version Issues</h1>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; color: #ef0606;'>🚨 Deployment Not Done Due to Library Version Issues</h2>", unsafe_allow_html=True)
     st.markdown("""
 
     This project **cannot be deployed** on Streamlit Cloud due to the following reasons:
