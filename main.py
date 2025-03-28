@@ -58,7 +58,7 @@ if page == "🏠 Home":
     home.home()
 
 elif page == "🍔 DineMate Chatbot":
-    st.markdown("<h1 style='text-align: center;'>🤖 DineMate Chatbot</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #FFA500;'>🤖 DineMate Chatbot</h1>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center;'>🍽️ Your AI-Powered Food Ordering Assistant</p>", unsafe_allow_html=True)
     st.divider()
 
@@ -88,7 +88,7 @@ elif page == "🍔 DineMate Chatbot":
     chatbot_main()  # ✅ Run chatbot
 
 elif page == "🎙️ Voice Chat with DineMate":
-    st.markdown("<h1 style='text-align: center;'>🎙️ Voice Chat with DineMate</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #01877e'>🎙️ Voice Chat with DineMate</h1>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center;'>🗣️ Your AI-Powered Voice Ordering Assistant</p>", unsafe_allow_html=True)
     
     # @utils.enable_chat_history
