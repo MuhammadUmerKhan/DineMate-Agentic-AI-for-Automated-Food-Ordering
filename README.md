@@ -151,14 +151,90 @@ DineMate-Food-Ordering-Chatbot/
 
 ---
 
-## 🛠️ **How to Use Voice-Based Ordering?**  
+## 🎙️ **DineMate - AI Voice Ordering Chatbot**  
+
+## 🚨 **Why Deployment is Not Possible?**  
+
+DineMate's **voice-based ordering** feature requires several **hardware-dependent** and **version-specific** libraries that **cannot run** on **Streamlit Cloud**:  
+
+### 🔥 **Key Issues**:  
+1. **Streamlit Version Conflict** - `st.chat_message` is unavailable in older Streamlit versions.  
+2. **Microphone Access (`sounddevice`)** - Cloud environments do not support direct microphone input.  
+3. **Speech-to-Text (`whisper`)** - Requires `FFmpeg`, which is **not pre-installed** on Streamlit Cloud.  
+4. **Text-to-Speech (`Torch TTS`)** - Needs **GPU acceleration**, unavailable on Streamlit Cloud.  
+5. **Dependency Issues** - Libraries like `pydub`, `numpy`, and `wave` have **strict version requirements**.  
+
+Thus, **DineMate Voice Ordering must be run locally**! 🚀  
+
+---
+
+## 🛠️ **1. Setting Up a Virtual Environment (Python 3.10)**  
+
+### 🔹 **Step 1: Install Python 3.10 (if not installed)**  
+Check if Python 3.10 is installed:  
+```bash
+python3 --version
+```
+If not installed, download from: [Python 3.10 Download](https://www.python.org/downloads/release/python-3100/)  
+
+### 🔹 **Step 2: Create a Virtual Environment**  
+Run the following commands:  
+```bash
+# Create virtual environment
+python3 -m venv dinemate_env  
+
+# Activate the virtual environment  
+# Windows  
+dinemate_env\Scripts\activate  
+
+# macOS/Linux  
+source dinemate_env/bin/activate  
+```
+
+### 🔹 **Step 3: Install Dependencies**  
+Ensure you have **pip** updated, then install the required packages:  
+```bash
+pip install --upgrade pip  
+
+# Install required libraries  
+pip install -r requirements.txt  
+```
+If `requirements.txt` is missing, install manually:  
+```bash
+pip install streamlit==1.22.0  
+pip install sounddevice numpy wave whisper pydub torch TTS  
+pip install openai langchain ffmpeg-python  
+```
+
+---
+
+## 🚀 **2. How to Run the DineMate Voice Ordering Chatbot Locally?**  
+After setting up the virtual environment:  
+
+1. Navigate to the project folder:  
+   ```bash
+   cd dinemate-ai
+   ```
+2. Run the Streamlit app:  
+   ```bash
+   streamlit run app.py
+   ```
+3. Open the **local browser link** provided by Streamlit.  
+
+---
+
+## 🎙️ **3. How to Use Voice-Based Ordering?**  
 
 1. Click on the **Microphone Button** in the chatbot interface.  
 2. Speak your order naturally, e.g., *"I want a cheeseburger and a Coke."*  
-3. The chatbot converts your speech to text and processes the order.  
+3. The chatbot converts your **speech to text** and processes the order.  
 4. The bot responds with **voice feedback** confirming your order.  
 
-This feature enhances **accessibility and user experience** for hands-free ordering!
+This feature enhances **accessibility and user experience** for hands-free ordering!  
+
+---
+
+💡 **Now you can run DineMate Voice Ordering on your local machine!** 🚀🎙️
 
 ---
 
