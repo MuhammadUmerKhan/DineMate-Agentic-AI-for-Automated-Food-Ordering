@@ -1,9 +1,6 @@
-streamlit>=1.30.0
 openai-whisper
 numpy
-wave
 python-dotenv
-TTS
 langchain_groq
 langgraph
 langchain
@@ -11,11 +8,3 @@ bcrypt
 plotly
 nbformat
 streamlit-autorefresh
-numpy==1.23.5
-scipy==1.10.1
-torch==2.0.1
-textwrap3
-pydub
-speechrecognition
-pydub
-ffmpeg
