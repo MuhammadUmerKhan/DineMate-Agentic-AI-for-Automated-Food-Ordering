@@ -169,8 +169,21 @@ graph_builder.add_edge(START, "chatbot")
 graph = graph_builder.compile()
 
 def stream_graph_updates(user_input: str) -> str:
-    """Streams chatbot responses and returns the final response."""
-    messages = [{"role": "system", "content": "Always respond in English. Do not use any other language."}]
+    """Streams chatbot responses and returns a professional, well-formatted response for a restaurant chatbot."""
+    
+    messages = [
+        {"role": "system", "content": (
+            "You are DineMate, a professional AI-powered restaurant assistant. "
+            "Always respond in a friendly, clear, and professional tone. "
+            "Format responses properly, ensuring readability and a great user experience. "
+            "Use polite language and helpful suggestions. "
+            "Enhance responses with **appropriate emojis** to create an engaging and delightful conversation. "
+            "For example: 🍽️ for food, ✅ for confirmations, 🔥 for special offers, 🎉 for greetings, and ❓ for inquiries. "
+            "Maintain a warm and welcoming style in every response. "
+            "Always respond in English."
+        )}
+    ]
+    
     messages.append({"role": "user", "content": user_input})
 
     final_response = ""  # Initialize empty response string
