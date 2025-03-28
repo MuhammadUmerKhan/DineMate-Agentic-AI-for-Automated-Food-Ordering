@@ -1,4 +1,3 @@
-openai-whisper
 numpy
 python-dotenv
 langchain_groq
