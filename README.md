@@ -288,7 +288,7 @@ streamlit run main.py
 
 ---
 ## 📽️ Live Demo:
-- [Click Here](https://dine-mate-food-delivery-ai-agent-chatbot.streamlit.app/?embed_options=dark_theme)
+- [Click Here](https://dinemate-ai-powered-conversational-ai-agent-for-food-ordering.streamlit.app/?embed_options=dark_theme)
 ---
 
 ## 🤝 **Contributions**  
