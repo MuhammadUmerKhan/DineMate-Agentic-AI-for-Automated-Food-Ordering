@@ -1,7 +1,6 @@
 import os
 import json
 from dotenv import load_dotenv
-from langchain_groq import ChatGroq
 from typing import Annotated
 from typing_extensions import TypedDict
 from langgraph.graph import StateGraph, START, END
