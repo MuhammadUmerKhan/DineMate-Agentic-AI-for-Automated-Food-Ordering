@@ -74,7 +74,7 @@ def configure_llm():
     llm = ChatGroq(
     temperature=0.3,
     groq_api_key=grok_api_key,
-    model_name="qwen-2.5-32b",
+    model_name="qwen-qwq-32b",
     # system_message="You are an AI assistant. Respond directly and concisely. Do not explain your reasoning unless explicitly asked."
 )
 
