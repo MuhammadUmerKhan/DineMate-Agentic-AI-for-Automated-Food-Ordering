@@ -56,7 +56,7 @@ A **powerful data-driven dashboard** that provides insights into restaurant oper
 ## 🏗️ **Technologies Used**  
 
 ### 🔹 **Backend & AI**  
-- 🧠 **Qwen-2.5-32B** – A **powerful LLM** that understands **food-related queries**.  
+- 🧠 **Qwen** – A **powerful LLM** that understands **food-related queries**.  
 - 🔗 **LangChain** – Connects LLM with **external tools like MySQL**.  
 - 🔄 **LangGraph** – Handles **conversation flow, decision-making, and tool execution**.  
 - 🐍 **Python** – Main programming language for the chatbot logic.  
