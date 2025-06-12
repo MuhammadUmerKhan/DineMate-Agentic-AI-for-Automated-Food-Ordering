@@ -277,9 +277,51 @@ pip install -r requirements.txt
 ```bash
 streamlit run main.py
 ```
-
 ---
 
+## 🐳 **Dockerization & Deployment**
+
+You can easily run this project using Docker and share or deploy it from Docker Hub.
+
+### ✅ **Build the Docker Image**
+
+Make sure your `Dockerfile` is correctly set up. Then run:
+
+```bash
+docker build -t muhammadumerkhan/dinemate-agentic-foodbot .
+```
+
+### 🚀 **Run the Docker Container**
+
+```bash
+docker run -p 8501:8501 muhammadumerkhan/dinemate-agentic-foodbot
+```
+
+> This will launch the Streamlit/ FastAPI interface on `http://localhost:8501` depending on your app entrypoint.
+
+### 📤 **Push to Docker Hub**
+
+First, log in to Docker:
+
+```bash
+docker login
+```
+
+Then push your image:
+
+```bash
+docker push muhammadumerkhan/dinemate-agentic-foodbot
+```
+
+### 📥 **Pull & Run from Docker Hub**
+
+Anyone can pull and run the app using:
+
+```bash
+docker pull muhammadumerkhan/dinemate-agentic-foodbot
+docker run -p 8501:8501 muhammadumerkhan/dinemate-agentic-foodbot
+```
+---
 ## 📌 **Where Can This Be Used?**  
 - **Restaurants & Cafés** 🏪 – AI-powered food ordering.  
 - **Online Food Delivery Apps** 🚀 – Seamless customer experience.  
