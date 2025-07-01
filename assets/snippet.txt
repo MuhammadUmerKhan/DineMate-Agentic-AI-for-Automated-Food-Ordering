@@ -1,0 +1,11 @@
+DineMate: Agentic AI for Automated Food Ordering
+• Challenge: Manual food ordering lacked automation, voice support, and real-time data visibility for restaurant
+operations.
+• Action:
+    • Developed a voice-enabled food ordering chatbot using Qwen, Whisper ASR, Torch TTS, LangChain, and MySQL.
+    • Designed a Streamlit UI with role-based dashboards (Admin, Kitchen, Customer) for full operational visibility.
+    • Implemented multi-agent automation for menu fetch, order tracking, smart cancellations, and billing.
+    • Added analytics dashboards for demand forecasting, sales trends, and menu optimization.
+• Result:
+    • Streamlined ordering, improved accessibility, and empowered owners with real-time, actionable insights.
+    • Dramatically reduced errors and improved customer experience through full AI automation.
