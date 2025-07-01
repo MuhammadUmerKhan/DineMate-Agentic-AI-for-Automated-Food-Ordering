@@ -8,4 +8,4 @@ operations.
     • Added analytics dashboards for demand forecasting, sales trends, and menu optimization.
 • Result:
     • Streamlined ordering, improved accessibility, and empowered owners with real-time, actionable insights.
-    • Dramatically reduced errors and improved customer experience through full AI automation.
+    • Dramatically reduced errors and improved customer experience through full AI automation. [Live Demo](https://dinemate-ai-powered-conversational-ai-agent-for-food-ordering.streamlit.app/)
