@@ -1,4 +1,4 @@
-DineMate: Agentic AI for Automated Food Ordering
+DineMate: Agentic AI for Automated Food Ordering                                                               Personal Project | 2025
 • Challenge: Manual food ordering lacked automation, voice support, and real-time data visibility for restaurant
 operations.
 • Action:
