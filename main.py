@@ -1,16 +1,16 @@
 import streamlit as st  # Streamlit for UI
-import utils  # Utility functions for chatbot and session handling
-from streaming import StreamHandler  # Handles real-time streaming responses
-from bot.agent import stream_graph_updates  # Function to process chatbot responses
-from app.SqlLite_Pages import kitchen  # Import Kitchen page
-from app.SqlLite_Pages import update_prices  # Import Admin page for updating item prices
-from app.SqlLite_Pages import login  # Import authentication system
-from app.SqlLite_Pages import order_management  # Import Order Management page
-from app.SqlLite_Pages import home  # Import Home page
-from app.SqlLite_Pages import add_remove_items  # Import Add/Remove Items Page
-from app.SqlLite_Pages import track_order  # Import Order Tracking Page
-from app.SqlLite_Pages import analysis  # Import Analysis Page
-# from app.SqlLite_Pages import voice_chat  # Import Voice Chat with DineMate
+import scripts.utils as utils  # Utility functions for chatbot and session handling
+from scripts.streaming import StreamHandler  # Handles real-time streaming responses
+from scripts.streaming import stream_graph_updates  # Function to process chatbot responses
+from app import kitchen  # Import Kitchen page
+from app import update_prices  # Import Admin page for updating item prices
+from app import login  # Import authentication system
+from app import order_management  # Import Order Management page
+from app import home  # Import Home page
+from app import add_remove_items  # Import Add/Remove Items Page
+from app import track_order  # Import Order Tracking Page
+from app import analysis  # Import Analysis Page
+# from app import voice_chat  # Import Voice Chat with DineMate
 import time
 
 # ✅ Set up Streamlit UI
@@ -39,7 +39,7 @@ ROLE_PAGES = {
     "admin": ["🏠 Home", "🛡️ Update Prices", "👨‍🍳 Kitchen Orders", "➕ Add/Remove Items", "📶 Analysis"],  
     "kitchen_staff": ["🏠 Home", "👨‍🍳 Kitchen Orders"],  
     "customer_support": ["🏠 Home", "📦 Order Management"],  
-    "customer": ["🏠 Home", "🍔 DineMate Chatbot", "🎙️ Voice Chat with DineMate", "📦 Track Order"]  
+    "customer": ["🏠 Home", "🍔 DineMate Chatbot", "🎙️ Voice Chat", "📦 Track Order"]  
 }
 
 # ✅ Get allowed pages for the logged-in role
@@ -75,7 +75,7 @@ elif page == "🍔 DineMate Chatbot":
                 st_sb = StreamHandler(st.empty())
 
                 try:
-                    response = stream_graph_updates(user_query)
+                    response = stream_graph_updates(user_query=user_query, thread_id=1)
                     st.write(response)
                     st.session_state.messages.append({"role": "assistant", "content": response})
                     utils.print_qa(chatbot_main, user_query, response)
@@ -87,7 +87,7 @@ elif page == "🍔 DineMate Chatbot":
 
     chatbot_main()  # ✅ Run chatbot
 
-elif page == "🎙️ Voice Chat with DineMate":
+elif page == "🎙️ Voice Chat":
     st.markdown("<h1 style='text-align: center; color: #01877e'>🎙️ Voice Chat with DineMate</h1>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center;'>🗣️ Your AI-Powered Voice Ordering Assistant</p>", unsafe_allow_html=True)
     
