@@ -1,0 +1,119 @@
+-- ✅ Create the menu table to store food items and their prices
+-- CREATE TABLE menu (
+--     id INTEGER PRIMARY KEY AUTOINCREMENT,  -- Unique identifier for each menu item
+--     name TEXT UNIQUE NOT NULL,             -- Item name (must be unique)
+--     price REAL NOT NULL                    -- Price of the item (decimal values)
+-- );
+
+-- -- ✅ Insert menu items into the menu table
+-- INSERT INTO menu (name, price) VALUES
+-- ('Cheese Burger', 5.99),
+-- ('Chicken Burger', 6.99),
+-- ('Veggie Burger', 5.49),
+-- ('Pepperoni Pizza', 12.99),
+-- ('Margherita Pizza', 11.49),
+-- ('BBQ Chicken Pizza', 13.99),
+-- ('Grilled Chicken Sandwich', 7.99),
+-- ('Club Sandwich', 6.99),
+-- ('Spaghetti Carbonara', 9.99),
+-- ('Fettuccine Alfredo', 10.49),
+-- ('Tandoori Chicken', 11.99),
+-- ('Butter Chicken', 12.49),
+-- ('Beef Steak', 15.99),
+-- ('Chicken Biryani', 8.99),
+-- ('Mutton Biryani', 10.99),
+-- ('Prawn Curry', 13.49),
+-- ('Fish and Chips', 9.49),
+-- ('French Fries', 3.99),
+-- ('Garlic Bread', 4.49),
+-- ('Chocolate Brownie', 5.49),
+-- ('Vanilla Ice Cream', 3.99),
+-- ('Strawberry Shake', 4.99),
+-- ('Mango Smoothie', 5.49),
+-- ('Coca-Cola', 2.49),
+-- ('Pepsi', 2.49),
+-- ('Fresh Orange Juice', 4.99);
+
+-- --------------------------------------------------------
+
+-- ✅ Create the orders table to store customer orders
+-- DROP TABLE orders;
+-- CREATE TABLE orders (
+--     id INTEGER PRIMARY KEY AUTOINCREMENT,   -- Unique order ID
+--     items TEXT NOT NULL,                    -- Ordered items in JSON format (e.g., {"burger": 2})
+--     total_price REAL NOT NULL,               -- Total price
+--     status TEXT CHECK(status IN ('Pending', 'In Process', 'Completed', 'Canceled', 'Preparing', 'Ready', 'Delivered')) DEFAULT 'Pending',  -- Status with default
+--     date TEXT DEFAULT (DATE('now')),         -- Order placement date
+--     time TEXT DEFAULT (TIME('now'))          -- Order placement time
+-- );
+-- ✅ Insert sample orders
+-- INSERT INTO orders (items, total_price, status) VALUES
+-- ('{"Cheese Burger": 2, "French Fries": 1, "Coca-Cola": 1}', 17.46, 'Pending'),
+-- ('{"Pepperoni Pizza": 1, "Garlic Bread": 1, "Pepsi": 1}', 19.97, 'In Process'),
+-- ('{"Chicken Biryani": 2, "Mango Smoothie": 1}', 23.47, 'Completed'),
+-- ('{"Club Sandwich": 1, "Strawberry Shake": 1}', 11.98, 'Pending'),
+-- ('{"Beef Steak": 1, "Fresh Orange Juice": 1}', 20.98, 'In Process');
+-- INSERT INTO orders (items, total_price, status, date, time) VALUES
+-- ('{"cheese burger": 2, "french fries": 1, "coca-cola": 1}', 17.46, 'Delivered', '2023-01-05', '12:15:30 PM'),
+-- ('{"pepperoni pizza": 1, "garlic bread": 1, "pepsi": 1}', 19.97, 'Completed', '2023-02-12', '02:20:10 PM'),
+-- ('{"chicken biryani": 2, "mango smoothie": 1}', 23.47, 'Delivered', '2023-03-20', '06:45:00 PM'),
+-- ('{"club sandwich": 1, "strawberry shake": 1}', 11.98, 'Pending', '2023-04-25', '10:05:40 AM'),
+-- ('{"beef steak": 1, "fresh orange juice": 1}', 20.98, 'Completed', '2023-05-30', '07:55:20 PM'),
+-- ('{"margherita pizza": 1, "coca-cola": 2}', 15.99, 'Delivered', '2023-06-15', '08:30:00 PM'),
+-- ('{"chicken wings": 1, "garlic bread": 1}', 9.99, 'Completed', '2023-07-18', '10:10:15 PM'),
+-- ('{"spaghetti carbonara": 1, "lemonade": 1}', 14.75, 'Delivered', '2023-08-10', '03:35:50 PM'),
+-- ('{"fish and chips": 1, "sprite": 1}', 18.25, 'Delivered', '2023-09-22', '05:40:30 PM'),
+-- ('{"chocolate brownie": 1, "latte": 1}', 9.50, 'Completed', '2023-10-05', '09:25:45 AM'),
+-- ('{"grilled chicken sandwich": 2, "vanilla ice cream": 1}', 18.47, 'Pending', '2023-11-14', '12:30:55 PM'),
+-- ('{"tandoori chicken": 1, "french fries": 1}', 15.99, 'Completed', '2023-12-20', '07:20:10 PM'),
+-- ('{"butter chicken": 1, "fresh orange juice": 1}', 17.49, 'In Process', '2024-01-11', '06:00:00 PM'),
+-- ('{"bbq chicken pizza": 1, "garlic bread": 2}', 20.99, 'Pending', '2024-02-08', '01:50:30 PM'),
+-- ('{"mutton biryani": 2, "coca-cola": 1}', 24.99, 'Delivered', '2024-03-15', '07:45:10 PM'),
+-- ('{"chicken burger": 2, "french fries": 2}', 19.98, 'Completed', '2024-04-05', '11:05:20 AM'),
+-- ('{"pepperoni pizza": 1, "mango smoothie": 1}', 18.99, 'Pending', '2024-05-22', '03:10:00 PM'),
+-- ('{"fish and chips": 1, "pepsi": 1}', 12.99, 'Completed', '2024-06-30', '02:30:45 PM'),
+-- ('{"chocolate brownie": 2, "vanilla ice cream": 1}', 14.99, 'Delivered', '2024-07-08', '04:25:15 PM'),
+-- ('{"prawn curry": 1, "club sandwich": 1}', 20.49, 'Pending', '2024-08-17', '08:50:00 PM'),
+-- ('{"spaghetti carbonara": 1, "butter chicken": 1}', 21.99, 'Completed', '2024-09-09', '06:15:25 PM'),
+-- ('{"fettuccine alfredo": 1, "mango smoothie": 2}', 19.99, 'In Process', '2024-10-14', '12:40:55 PM'),
+-- ('{"beef steak": 1, "garlic bread": 1}', 22.99, 'Completed', '2024-11-29', '07:10:30 PM'),
+-- ('{"club sandwich": 3, "coca-cola": 1}', 21.49, 'Delivered', '2024-12-01', '01:55:40 PM'),
+-- ('{"bbq chicken pizza": 2, "chocolate brownie": 1}', 31.99, 'Pending', '2023-01-12', '09:45:10 AM'),
+-- ('{"margherita pizza": 2, "fresh orange juice": 2}', 24.99, 'Completed', '2023-02-07', '06:00:30 PM'),
+-- ('{"cheese burger": 1, "vanilla ice cream": 1}', 9.98, 'In Process', '2023-03-25', '03:50:20 PM'),
+-- ('{"mutton biryani": 1, "coca-cola": 2}', 16.99, 'Delivered', '2023-04-18', '02:05:55 PM'),
+-- ('{"butter chicken": 2, "mango smoothie": 1}', 27.99, 'Completed', '2023-05-11', '07:20:30 PM'),
+-- ('{"chicken wings": 3, "garlic bread": 2}', 18.99, 'Pending', '2023-06-23', '09:30:10 PM'),
+-- ('{"fettuccine alfredo": 1, "fresh orange juice": 1}', 15.99, 'Completed', '2023-07-15', '12:45:50 PM'),
+-- ('{"tandoori chicken": 2, "pepsi": 1}', 23.99, 'Delivered', '2023-08-29', '07:10:30 PM'),
+-- ('{"grilled chicken sandwich": 1, "strawberry shake": 1}', 12.99, 'Pending', '2023-09-06', '05:50:25 PM'),
+-- ('{"fish and chips": 1, "garlic bread": 1}', 13.99, 'Completed', '2023-10-12', '02:30:00 PM'),
+-- ('{"bbq chicken pizza": 1, "club sandwich": 1}', 22.49, 'Delivered', '2023-11-25', '06:55:15 PM'),
+-- ('{"cheese burger": 2, "chocolate brownie": 2}', 18.99, 'In Process', '2023-12-02', '03:40:50 PM'),
+-- ('{"pepperoni pizza": 2, "coca-cola": 2}', 29.99, 'Completed', '2024-01-30', '07:25:20 PM'),
+-- ('{"chicken biryani": 1, "mango smoothie": 1}', 13.99, 'Pending', '2024-02-11', '04:15:35 PM'),
+-- ('{"margherita pizza": 1, "fresh orange juice": 1}', 16.49, 'Completed', '2024-03-22', '01:55:00 PM'),
+-- ('{"pasta alfredo": 1, "club sandwich": 1}', 17.99, 'Delivered', '2024-04-15', '07:10:45 PM'),
+-- ('{"fettuccine alfredo": 2, "strawberry shake": 1}', 26.99, 'Pending', '2024-05-09', '11:50:20 AM'),
+-- ('{"beef steak": 1, "chocolate brownie": 1}', 20.99, 'Completed', '2024-06-17', '06:30:00 PM'),
+-- ('{"prawn curry": 1, "coca-cola": 1}', 14.99, 'Delivered', '2024-07-23', '08:45:35 PM');
+
+-- ✅ Create staff table
+-- CREATE TABLE staff (
+--     id INTEGER PRIMARY KEY AUTOINCREMENT,
+--     username TEXT UNIQUE NOT NULL,
+--     password_hash TEXT NOT NULL,
+--     role TEXT CHECK(role IN ('admin', 'kitchen_staff', 'customer_support')) NOT NULL,
+--     is_staff BOOLEAN DEFAULT TRUE
+-- );
+
+-- ✅ Create customers table
+-- CREATE TABLE customers (
+--     id INTEGER PRIMARY KEY AUTOINCREMENT,
+--     username TEXT UNIQUE NOT NULL,
+--     password_hash TEXT NOT NULL,
+--     email TEXT UNIQUE,
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
+-- SELECT * FROM staff;
+-- SELECT * FROM customers;
