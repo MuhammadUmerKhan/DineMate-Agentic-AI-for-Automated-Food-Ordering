@@ -1,7 +1,6 @@
 import streamlit as st  # Streamlit for UI
 import scripts.utils as utils  # Utility functions for chatbot and session handling
-from scripts.streaming import StreamHandler  # Handles real-time streaming responses
-from scripts.streaming import stream_graph_updates  # Function to process chatbot responses
+from scripts.streaming import StreamHandler, stream_graph_updates  # Handles real-time streaming responses
 from app import kitchen  # Import Kitchen page
 from app import update_prices  # Import Admin page for updating item prices
 from app import login  # Import authentication system
@@ -75,7 +74,7 @@ elif page == "🍔 DineMate Chatbot":
                 st_sb = StreamHandler(st.empty())
 
                 try:
-                    response = stream_graph_updates(user_query=user_query, thread_id=1)
+                    response = stream_graph_updates(user_query)
                     st.write(response)
                     st.session_state.messages.append({"role": "assistant", "content": response})
                     utils.print_qa(chatbot_main, user_query, response)

@@ -1,22 +1,22 @@
 """
 # DineMate Tools
 
-This module defines the tools for the DineMate foodbot, including fetching the menu and
-saving orders to the database. Tools are implemented using LangChain's tool decorator.
+This module defines tools for the DineMate foodbot, including fetching the menu and
+saving orders to the database.
 
 ## Dependencies
 - `json`: For JSON handling.
 - `langchain_core.tools`: For tool decorator.
-- `langchain_core.messages`: For HumanMessage.
-- `utils`: Custom module for LLM configuration.
-- `SQLLITE_db`: Custom module for database operations.
+- `db`: Custom module for database operations.
+- `logger`: Custom module for logging.
 """
 
 import json
 from langchain_core.tools import tool
-from langchain_core.messages import HumanMessage
-from scripts.utils import configure_llm
 from scripts.db import Database
+from scripts.logger import get_logger
+
+logger = get_logger(__name__)
 
 @tool
 def get_menu() -> str:
@@ -24,69 +24,171 @@ def get_menu() -> str:
     db = Database()
     try:
         menu = db.load_menu()
-        return json.dumps(menu) if menu else "⚠️ Sorry, the menu is currently unavailable."
+        if menu:
+            logger.info("Menu fetched successfully")
+            return json.dumps(menu)
+        logger.warning("No menu items found")
+        return "Sorry, the menu is currently unavailable."
     finally:
         db.close_connection()
 
 @tool
 def save_order(order_details: str) -> dict:
-    """Extract items and price using LLM and save the order to the database."""
-    order_details = order_details.strip()
-    llm = configure_llm(model_name="meta-llama/llama-4-scout-17b-16e-instruct")
-
+    """Save the confirmed order to the database.
+    :param order_details: JSON string with items and total price, e.g., {'items': {'pizza': 2, 'cola': 1}, 'total_price': 25.0}
+    :return: Dictionary with status, message, and order details
+    """
+    logger.info(f"Received order_details: {order_details}")
     try:
-        response = llm.invoke([
-            HumanMessage(content=f"""
-                You are a helpful food-ordering assistant 🍽️
-                Task:
-                - Extract items and price from the text.
-                - Return only valid JSON: {{"items": {{"burger": 2}}, "total_price": 300.0}}
-                - If nothing is ordered, return: {{"items": {{}}, "total_price": 0.0}}
-                Text:
-                {order_details}
-            """)
-        ])
-
-        # Extract JSON from response
-        content = response.content.strip()
-        json_start = content.find("{")
-        json_end = content.rfind("}") + 1
-        extracted_json = content[json_start:json_end]
-        order_data = json.loads(extracted_json)
-
+        order_data = json.loads(order_details)
         items = order_data.get("items", {})
-        total_price = order_data.get("total_price", 0.0)
+        logger.info(f"Items found: {items}")
+        total_price = float(order_data.get("total_price", 0.0))
 
         if not items:
+            logger.warning("No items found in order")
             return {
                 "status": "empty",
-                "message": "⚠️ No items found in the order.",
+                "message": "No items found in the order.",
                 "items": {},
                 "total_price": 0.0
             }
 
         db = Database()
         try:
-            order_id = db.store_order(items, total_price)
+            order_id = db.store_order_db(items, total_price)
             if order_id:
+                logger.info(f"Order saved with ID: {order_id}")
                 return {
                     "status": "success",
-                    "message": f"✅ Order confirmed with ID {order_id}. Estimated delivery in 40 minutes.",
+                    "message": f"Order confirmed with ID {order_id}. Estimated delivery in 40 minutes.",
                     "order_id": order_id,
                     "items": items,
                     "total_price": total_price
                 }
-            else:
-                return {
-                    "status": "error",
-                    "message": "⚠️ Failed to save order.",
-                    "items": items,
-                    "total_price": total_price
-                }
+            logger.error("Failed to save order to database")
+            return {
+                "status": "error",
+                "message": "Failed to save order.",
+                "items": items,
+                "total_price": total_price
+            }
         finally:
             db.close_connection()
-
     except json.JSONDecodeError:
-        return {"status": "error", "message": "⚠️ Failed to parse order. Please try again."}
-    except Exception as e:
-        return {"status": "error", "message": f"⚠️ An error occurred: {str(e)}"}
+        logger.error("Invalid JSON in order_details")
+        return {"status": "error", "message": "Failed to parse order. Please provide valid JSON."}
+
+@tool
+def check_order_status(order_id: str) -> str:
+    """Fetch the order status and estimated delivery time.
+    :param order_id: The ID of the order to check (e.g., '162' or 162).
+    :return: Status and, if applicable, estimated delivery time or error message.
+    """
+    logger.info(f"Received order_id: {order_id} (type: {type(order_id)})")
+    try:
+        order_id_int = int(order_id)
+        if order_id_int <= 0:
+            logger.error(f"Invalid order_id: {order_id_int}")
+            return "Invalid order ID. Please provide a positive integer."
+    except (ValueError, TypeError) as e:
+        logger.error(f"Invalid order_id format: {order_id}, error: {e}")
+        return "Invalid order ID. Please provide a valid number."
+
+    db = Database()
+    try:
+        result = db.check_order_status_db(order_id_int)
+        logger.info(f"Order {order_id_int} status retrieved: {result}")
+        return result
+    finally:
+        db.close_connection()
+
+@tool
+def cancel_order(order_id: str) -> str:
+    """Cancel an order if within 10 minutes of placement.
+    :param order_id: The ID of the order to cancel (e.g., '162' or 162).
+    :return: Confirmation or error message.
+    """
+    logger.info(f"Received order_id: {order_id} (type: {type(order_id)})")
+    try:
+        order_id_int = int(order_id)
+        if order_id_int <= 0:
+            logger.error(f"Invalid order_id: {order_id_int}")
+            return "Invalid order ID. Please provide a positive integer."
+    except (ValueError, TypeError) as e:
+        logger.error(f"Invalid order_id format: {order_id}, error: {e}")
+        return "Invalid order ID. Please provide a valid number."
+
+    db = Database()
+    try:
+        result = db.cancel_order_after_confirmation(order_id_int)
+        logger.info(f"Order {order_id_int} cancellation result: {result}")
+        return result
+    finally:
+        db.close_connection()
+
+@tool
+def modify_order(order_details: str) -> dict:
+    """Modify an existing order within 10 minutes of placement.
+    :param order_details: JSON string with order_id, items, and total price, e.g., {"order_id": 162, "items": {"pizza": 2, "cola": 1}, "total_price": 25.0}
+    :return: Dictionary with status, message, and order details
+    """
+    logger.info(f"Received order_details: {order_details}")
+    try:
+        order_data = json.loads(order_details)
+        order_id = order_data.get("order_id")
+        items = order_data.get("items", {})
+        total_price = float(order_data.get("total_price", 0.0))
+
+        if not order_id or not isinstance(order_id, (str, int)) or int(order_id) <= 0:
+            logger.error(f"Invalid order_id: {order_id}")
+            return {"status": "error", "message": "Invalid order ID. Please provide a positive number."}
+        if not items:
+            logger.warning("No items found in order")
+            return {"status": "empty", "message": "No items found in the updated order.", "items": {}, "total_price": 0.0}
+
+        order_id_int = int(order_id)
+        items_json = json.dumps(items)
+
+        db = Database()
+        try:
+            result = db.modify_order_after_confirmation(order_id_int, items_json, total_price)
+            logger.info(f"Order {order_id_int} modification result: {result}")
+            return {
+                "status": "success" if "successfully updated" in result else "error",
+                "message": result,
+                "order_id": order_id_int,
+                "items": items,
+                "total_price": total_price
+            }
+        finally:
+            db.close_connection()
+    except json.JSONDecodeError:
+        logger.error("Invalid JSON in order_details")
+        return {"status": "error", "message": "Failed to parse order details. Please provide valid JSON."}
+    except ValueError as e:
+        logger.error(f"Invalid total_price format: {e}")
+        return {"status": "error", "message": "Invalid total price. Please provide a valid number."}
+
+@tool
+def get_order_details(order_id: str) -> dict:
+    """Retrieve order details and modification eligibility.
+    :param order_id: JSON string with order_id, e.g., {"order_id": 162}
+    :return: Dictionary with order details, status, and eligibility message.
+    """
+    logger.info(f"Received order_id: {order_id} (type: {type(order_id)}")
+    try:
+        order_id_int = int(order_id)
+        if order_id_int <= 0:
+            logger.error(f"Invalid order_id: {order_id_int}")
+            return "Invalid order ID. Please provide a positive integer."
+        db = Database()
+        try:
+            result = db.get_order_by_id(order_id_int)
+            logger.info(f"Order {order_id_int} details retrieved: {result['message']}")
+            return result
+        finally:
+            db.close_connection()
+    except json.JSONDecodeError:
+        logger.error("Invalid JSON in order_details")
+        return {"status": "error", "message": "Failed to parse order details. Please provide valid JSON."}

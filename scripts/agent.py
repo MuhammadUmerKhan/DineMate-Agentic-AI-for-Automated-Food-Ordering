@@ -1,62 +1,60 @@
 """
 # DineMate Chatbot Node
 
-This module implements the chatbot node for the DineMate foodbot. It processes user input,
-manages orders, and interacts with the LLM to generate responses.
+This module implements the chatbot node for the DineMate foodbot.
 
 ## Dependencies
 - `json`: For JSON handling.
-- `textwrap`: For formatting system prompts.
-- `langchain_core.messages`: For HumanMessage.
-- `utils`: Custom module for LLM configuration.
-- `tools`: Custom module for get_menu and save_order tools.
-- `state`: Custom module for state definition.
+- `textwrap`: For formatting prompts.
+- `utils`: For LLM configuration.
+- `tools`: For get_menu, save_order, and check_status tools.
+- `state`: For state definition.
+- `logger`: For logging.
 """
 
 import json, textwrap
 from scripts.utils import configure_llm
-from scripts.tools import get_menu, save_order
+from scripts.tools import get_menu, save_order, check_order_status, cancel_order, modify_order, get_order_details
 from scripts.state import State
+from scripts.logger import get_logger
+
+logger = get_logger(__name__)
 
 def chatbot(state: State) -> State:
-    """Process user input, manage orders, and interact with the LLM."""
+    """Process user input and interact with the LLM."""
     messages = state["messages"]
-    order_str = state.get("order", "")
     menu = state.get("menu", {})
 
-    # Cache menu if not already loaded
     if not menu:
         menu = json.loads(get_menu.invoke({}))
         state["menu"] = menu
+        logger.info("Cached menu in state")
 
-    system_prompt = textwrap.dedent(f"""
-        You are DineMate, a polite and helpful AI-powered restaurant assistant 🤖🍽️.
-
-        🧠 Your role is to assist users with food orders clearly, kindly, and professionally.
-        🎯 Responsibilities:
-        - Extract food items and quantities from user input (e.g., "2 burgers and 1 coke").
-        - Use polite language and enhance responses with emojis (e.g., 🍽️ for food, ✅ for confirmations, 📜 for menu).
-        - Validate items against this menu: {menu}
-        - Build and update the current order (add, remove, modify items).
-        - Calculate the total price with breakdown (e.g., quantity × unit price = item total).
-        - Save confirmed orders by calling 'save_order'.
-        - Show menu when asked by calling 'get_menu'.
-        - For order tracking requests, inform the user to navigate to the "Track Order" section.
-        - Orders can be modified or canceled within 10 minutes.
-
-        📢 Always explain how the total price is calculated in simple terms 💰.
-        💬 Respond with kindness and clarity, and end with a polite question like:
-        "Would you like to add anything else?" 😊
-
-        ⚠️ If input is unclear, say:
-        "I’m not sure how to proceed — could you please clarify? 🤔"
-
-        🧾 Current Order: {order_str}
-    """)
+    system_prompt = textwrap.dedent("""
+        You are DineMate, a restaurant assistant 🤖🍽️. 
+        Respond politely, clearly, and simply using emojis (🍽️ for food, ✅ for confirmations, 📜 for menu). 
+        Explain tool outputs clearly to ensure user understanding. Only act on explicit user requests; do not take unsolicited actions.
+        
+        Responsibilities:
+        - Validate order items (e.g., "2 burgers, 1 coke") against menu: {menu}.
+        - Calculate and show total price (quantity × unit_price).
+        - Call tools based on user requests and return results directly:
+          - 'get_menu': Show menu.
+          - 'save_order': Use JSON (e.g., {{"items": {{"burger": 2, "coke": 1}}, "total_price": 15.0}}).
+          - 'modify_order': Use JSON (e.g., {{"order_id": 162, "items": {{"pizza": 2, "cola": 1}}, "total_price": 25.0}}).
+          - 'check_order_status': Use order_id (e.g., '162').
+          - 'get_order_details': Use order_id (e.g., '162').
+          - 'cancel_order': Use order_id (e.g., '162').
+        - End non-tool responses with “Anything else I can help with?” 😊.
+    """).format(menu=menu)
 
     llm = configure_llm(model_name="qwen/qwen3-32b")
-    llm_with_tools = llm.bind_tools([get_menu, save_order])
+    llm_with_tools = llm.bind_tools([get_menu, save_order, check_order_status, cancel_order, modify_order, get_order_details])
     messages = [{"role": "system", "content": system_prompt}] + messages
     response = llm_with_tools.invoke(messages)
-
+    
+    logger.info(f"LLM response: {response.content}")
+    if response.tool_calls:
+        logger.info(f"Tool calls: {response.tool_calls}")
+    
     return {"messages": [response], "menu": menu}
