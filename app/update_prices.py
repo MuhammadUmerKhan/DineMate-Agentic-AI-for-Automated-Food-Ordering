@@ -1,96 +1,107 @@
+"""
+# DineMate Price Management 💰
+
+This module allows admins to update menu item prices.
+
+Dependencies:
+- streamlit: For UI rendering 📺.
+- pandas: For data display 📊.
+- db: For database operations 🗄️.
+- logger: For structured logging 📜.
+"""
+
 import streamlit as st
-import sqlite3
-import pandas as pd  # ✅ Import Pandas for DataFrame
-import time
-from scripts.config import *
+import pandas as pd, time
+from scripts.db import Database
+from scripts.logger import get_logger
+from typing import List, Dict
 
-def get_connection():
-    """🔌 Establish connection to the SQLite database."""
-    return sqlite3.connect(DB_PATH)
+logger = get_logger(__name__)
 
-def get_menu_items():
-    """✅ Fetch all menu items with their current prices."""
+def get_menu_items() -> List[Dict]:
+    """📜 Fetch all menu items with prices.
+
+    Returns:
+        List[Dict]: List of menu items with name and price.
+    """
     try:
-        conn = get_connection()
-        cursor = conn.cursor()
-
-        query = "SELECT name, price FROM menu"
-        cursor.execute(query)
-        items = cursor.fetchall()
-
-        conn.close()
-        
-        return [{"name": row[0], "price": row[1]} for row in items]
-    
+        db = Database()
+        db.cursor.execute("SELECT name, price FROM menu")
+        items = [{"name": row["name"], "price": float(row["price"])} for row in db.cursor.fetchall()]
+        logger.info({"count": len(items), "message": "Fetched menu items"})
+        return items
     except Exception as e:
+        logger.error({"error": str(e), "message": "Failed to fetch menu items"})
         st.error(f"⚠ Database error: {e}")
         return []
+    finally:
+        db.close_connection()
 
-def update_item_price(item_name, new_price):
-    """✅ Update the price of a selected item."""
+def update_item_price(item_name: str, new_price: float) -> None:
+    """✅ Update the price of a menu item.
+
+    Args:
+        item_name (str): Name of the item.
+        new_price (float): New price.
+    """
+    logger.info({"item_name": item_name, "new_price": new_price, "message": "Updating item price"})
+    if new_price <= 0:
+        st.warning("⚠ Price must be positive.")
+        logger.warning({"item_name": item_name, "new_price": new_price, "message": "Invalid price"})
+        return
+
     try:
-        conn = get_connection()
-        cursor = conn.cursor()
-
-        query = "UPDATE menu SET price = ? WHERE name = ?"
-        cursor.execute(query, (new_price, item_name))
-        conn.commit()
-        conn.close()
-
-        st.success(f"✅ Price for **{item_name}** updated to **${new_price:.2f}**! 🎉")
-
+        db = Database()
+        db.cursor.execute("UPDATE menu SET price = ? WHERE name = ?", (new_price, item_name))
+        db.connection.commit()
+        st.success(f"✅ Price for {item_name} updated to ${new_price:.2f}! 🎉")
+        logger.info({"item_name": item_name, "new_price": new_price, "message": "Price updated"})
     except Exception as e:
+        logger.error({"error": str(e), "item_name": item_name, "new_price": new_price})
         st.error(f"⚠ Error updating price: {e}")
+    finally:
+        db.close_connection()
 
-# ✅ Streamlit UI for Authorized Users
-def show_price_update_page():
-    """✅ Page for updating item prices."""
-    st.markdown("<h1 style='text-align: center; color: #007BFF;'>🔑 Admin Panel - Update Item Prices</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center;'>📋 View & Modify Menu Prices</h3>", unsafe_allow_html=True)
-    st.divider()
+def show_price_update_page() -> None:
+    """💰 Admin panel for updating menu prices."""
+    
+    st.markdown(
+        "<div class='header'><h1>🛡️ Update Prices</h1><p style='color: #E8ECEF;'>💰 Admin panel for menu price updates</p></div>",
+        unsafe_allow_html=True
+    )
+    
+    if st.session_state.get("role") != "admin":
+        st.warning("⚠ Only admins can update prices.", icon="🚫")
+        logger.warning({"role": st.session_state.get("role"), "message": "Access denied"})
+        return
 
-    menu_items = get_menu_items()
+    with st.spinner("⏳ Loading menu..."):
+        menu_items = get_menu_items()
 
     if not menu_items:
         st.info("✅ No menu items found.")
     else:
-        # ✅ Display menu items in a DataFrame
-        st.write("### 📜 **Current Menu & Prices**")
-        
-        # ✅ Convert to DataFrame and format prices
-        df_menu = pd.DataFrame(menu_items)
-        df_menu["price"] = df_menu["price"].astype(float)  # ✅ Convert Decimal to float for display
-        df_menu.rename(columns={"name": "🍲 Item Name", "price": "💰 Price ($)"}, inplace=True)
+        st.write("### 📜 Current Menu & Prices")
+        df_menu = pd.DataFrame(menu_items).rename(columns={"name": "🍲 Item Name", "price": "💰 Price ($)"})
+        st.dataframe(df_menu, use_container_width=True)
 
-        st.dataframe(df_menu, use_container_width=True, width=500)
+    st.divider()
+    st.write("### ✏️ Modify Item Price")
+    col1, col2 = st.columns([2, 2])
+    with col1:
+        item_dict = {item["name"]: item["price"] for item in menu_items}
+        selected_item = st.selectbox("📌 Select Item", list(item_dict.keys()))
+        current_price = item_dict.get(selected_item, 0.0)
+    with col2:
+        new_price = st.number_input("💵 New Price ($)", min_value=0.01, value=current_price, step=0.01, format="%.2f")
 
-        st.markdown("---")
-
-        # ✅ Layout for Updating Price
-        st.write("### ✏ **Modify Item Price**")
-        col1, col2 = st.columns([2, 2])
-
-        with col1:
-            # ✅ Select an item to update
-            item_dict = {item["name"]: float(item["price"]) for item in menu_items}  # ✅ Convert Decimal to float
-            selected_item = st.selectbox("📌 Select Item:", list(item_dict.keys()))
-            current_price = item_dict[selected_item]
-        
-        with col2:
-            # ✅ Input new price
-            new_price = st.number_input("💵 Enter New Price ($)", min_value=0.01, value=current_price, step=0.01, format="%.2f")
-
-        st.markdown("---")
-
-        # ✅ Update Price Button
-        col1, col2 = st.columns(2)
-        with col1:
-            if st.button("✔ Update Price", use_container_width=True):
-                st.info("⏳ Updating price... Please wait.")
-                time.sleep(1.5)  # ⏳ Simulate processing delay
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button("✔ Update Price", use_container_width=True):
+            with st.spinner("⏳ Updating price..."):
                 update_item_price(selected_item, new_price)
-                st.rerun()  # Refresh the page after update
-
-        with col2:
-            if st.button("🔄 Reset Selection", use_container_width=True):
-                st.rerun()  # 🔄 Reset selections & refresh page
+                time.sleep(0.5)
+                st.rerun()
+    with col2:
+        if st.button("🔄 Reset", use_container_width=True):
+            st.rerun()

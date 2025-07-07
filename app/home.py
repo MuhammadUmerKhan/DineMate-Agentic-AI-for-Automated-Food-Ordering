@@ -1,141 +1,131 @@
-import streamlit as st  # Streamlit for UI
+"""
+# DineMate Home Page 🏠
 
-def home():
-    """🏠 Displays the Home page with user roles, features, and how-to guide."""
-    
-    # 🎉 Title and Introduction
-    st.markdown("""
-        <h1 style='text-align: center; color: #C70039;'>🍽️ Welcome to DineMate</h1>
-        <h3 style='text-align: center;'>🚀 AI-Powered Smart Food Ordering & Business Analytics</h3>
-    """, unsafe_allow_html=True)
+This module displays the DineMate home page, showcasing the AI-powered food ordering system's features.
+
+Dependencies:
+- streamlit: For UI rendering 📺.
+- logger: For structured logging 📜.
+"""
+
+import streamlit as st, os
+from scripts.logger import get_logger
+
+logger = get_logger(__name__)
+
+# ✅ Load centralized CSS
+try:
+    with open("./static/styles.css", "r", encoding="utf-8") as f:
+        css = f.read()
+    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
+except FileNotFoundError:
+    logger.error({"message": "styles.css not found"})
+    st.error("⚠ CSS file not found. Please ensure static/styles.css exists.")
+
+def home() -> None:
+    """🏠 Display the DineMate home page."""
+    logger.info({"message": "Rendering home page"})
+    st.markdown(
+        "<div class='header'><h1>🍽️ Welcome to DineMate</h1><p style='color: #E8ECEF;'>🚀 AI-Powered Food Ordering System</p></div>",
+        unsafe_allow_html=True
+    )
     st.divider()
 
-    # 📌 **Project Overview**
-    with st.expander("📌 **About DineMate**", expanded=True):
+    with st.expander("📌 About DineMate", expanded=True):
         st.markdown("""
-        **DineMate** is an **AI-driven food ordering system** that automates restaurant operations. 
-        It provides a conversational **AI chatbot** for seamless order placement, real-time tracking, 
-        and intelligent recommendations. 🚀
-        
-        **Key Features:**
-        - 🛒 **Browse menu & dynamic pricing**
-        - 🍔 **Order via natural conversation**
-        - 🔄 **Modify or replace items**
-        - 🚫 **Smart order cancellations (within 10 min)**
-        - 📦 **Real-time order tracking**
-        - 📊 **Business analytics dashboard**
-        - 🗣️ **Voice DineMate – Voice-enabled ordering system**
+        **DineMate** is an AI-driven platform that streamlines restaurant operations and enhances customer experience. 
+        Powered by advanced AI, it offers seamless ordering, real-time tracking, and insightful analytics for restaurants. 
+        Key highlights:
+        - 🤖 **AI Chatbot**: Order food using natural language.
+        - 🎤 **Voice Ordering**: Speak your order effortlessly.
+        - 📊 **Analytics Dashboard**: Track revenue, demand, and order trends.
+        - 📦 **Order Management**: Modify or cancel orders within 10 minutes.
+        - 🗄️ **Optimized Database**: Fast, reliable data storage and retrieval.
         """)
-    
-    # 🆕 **New Functionalities**
-    with st.expander("🛠️ **Key Features?**", expanded=True):
+
+    with st.expander("🛠️ Core Features", expanded=True):
         st.markdown("""
-        🚀 **Recent Enhancements:**
-        - 📦 **Live Order Tracking** – Customers can now track their orders in real time!  
-        - 🛒 **Add/Remove Menu Items** – Admins can **add new dishes** or **remove outdated items**.  
-        - 💰 **Dynamic Price Management** – Admins can **adjust menu prices dynamically**.  
-        - 🔄 **Customer Support Panel** – Staff can now **cancel or modify orders**.  
-        - 👨‍🍳 **Kitchen Dashboard** – Kitchen staff get **a dedicated panel** to manage orders.  
-        - 📊 **Business Analytics** – Monitor revenue, peak order times & demand trends.  
-        - 🗣️ **Voice DineMate** – **Order food using voice commands!**
+        - 🍔 **Smart Ordering**: Place orders via chatbot or voice commands.
+        - 📦 **Real-Time Tracking**: Monitor order status (Pending, Preparing, Delivered, etc.).
+        - 🔄 **Flexible Modifications**: Update or cancel orders within 10 minutes.
+        - 🛒 **Dynamic Menu**: Admins can update items and prices easily.
+        - 📊 **Business Insights**: Analyze revenue, popular items, peak hours, and cancellations.
+        - 👨‍🍳 **Kitchen Efficiency**: Staff can update order statuses in real time.
+        - 🎤 **Voice Interaction**: Use natural speech for ordering and tracking.
         """)
-    
-    # 🎤 **Voice DineMate - AI Voice Ordering System**
-    with st.expander("🎤 **Introducing Voice DineMate!**", expanded=True):
+
+    with st.expander("🗄️ Database & Performance", expanded=True):
         st.markdown("""
-        🚀 **Now, order your favorite food with just your voice!**  
-        **Voice DineMate** uses advanced **Speech-to-Text (STT) and Text-to-Speech (TTS)** technology to let customers 
-        interact with the chatbot hands-free. 🎙️
-        
-        **How It Works?**
-        
-        1️⃣ **Enable voice mode** in the chatbot panel.  
-        2️⃣ **Speak naturally** – Example: *"I want a chicken burger with fries."*  
-        3️⃣ **The AI processes your voice command** and places the order.  
-        4️⃣ **Get real-time voice responses** with order confirmation and tracking.  
+        - 🗄️ **SQLite Database**: Stores 150+ orders with diverse statuses (Pending, Delivered, Canceled, etc.).
+        - 📅 **Rich Data**: Orders span 2023–2025 with varied timestamps for robust analysis.
+        - ⚡ **Optimized Queries**: Indexes on status and date for fast filtering and sorting.
+        - 📦 **Batch Processing**: Efficient data population with batch inserts.
+        - 📜 **Structured Logging**: Tracks all operations for debugging and monitoring.
         """)
-    
-    # 🏗️ **User Roles & Access**
-    with st.expander("🏗️ **User Roles & Permissions**", expanded=True):
+
+    with st.expander("📊 Analytics Dashboard", expanded=True):
+        st.markdown("""
+        - 💰 **Revenue Trends**: Visualize monthly and yearly revenue.
+        - 📋 **Order Status**: Pie charts for status distribution (e.g., Delivered, Canceled).
+        - 🍽️ **Popular Items**: Bar and pie charts for top-ordered items and revenue.
+        - ⏳ **Peak Hours**: Hourly demand analysis for staffing optimization.
+        - 🛒 **Spending Patterns**: Histograms and boxplots for customer spending.
+        - 🔍 **Filters**: Analyze by status (All, Pending, etc.) or year (2023–2025).
+        - 🏆 **Actionable Insights**: Optimize menu, staffing, and promotions.
+        """)
+
+    with st.expander("🏗️ User Roles", expanded=True):
         role_data = {
             "👤 Customers": [
-                "✅ Order food using chatbot or voice commands",
-                "✅ Modify/cancel orders (within time limits)",
-                "✅ Track orders in real time"
+                "🍔 Order via chatbot or voice",
+                "🔄 Modify/cancel orders within 10 minutes",
+                "📦 Track order status"
             ],
             "👨‍🍳 Kitchen Staff": [
-                "✅ View only non-cancelable orders (10+ minutes old)",
-                "✅ Update order status"
+                "📦 View and update order statuses",
+                "🔄 Manage non-cancelable orders"
             ],
-            "📦 Customer Support": [
-                "✅ Modify existing orders",
-                "✅ Cancel orders on behalf of customers"
+            "📞 Customer Support": [
+                "🔄 Modify or cancel orders",
+                "📞 Assist customers"
             ],
             "🛡️ Admin": [
-                "✅ Add/remove menu items",
-                "✅ Change food item prices",
-                "✅ Manage system functionalities"
+                "🛒 Manage menu items",
+                "💰 Update pricing",
+                "📊 Access full analytics"
             ]
         }
-
         for role, permissions in role_data.items():
             st.markdown(f"<h3 style='color: #DC3545;'>{role}</h3>", unsafe_allow_html=True)
             for perm in permissions:
                 st.markdown(f"✔ {perm}")
-    
-    # 🚀 **How to Use?**
-    with st.expander("🚀 **How to Use DineMate?**", expanded=True):
-        st.markdown("""
-        **Ordering is easy! Just follow these steps:**  
-        1️⃣ **Go to the chatbot page** (Sidebar → "🍔 DineMate Chatbot")  
-        2️⃣ **Start a conversation** – Chat naturally, like:  
-        - 📝 *"I want 2 cheeseburgers and 1 Pepsi."*  
-        - 🔄 *"Replace my Pepsi with a Mango Smoothie."*  
-        - 📦 *"Track my order with ID 33."*  
-        3️⃣ **DineMate processes your request**, calculates the total price, and confirms your order.  
-        4️⃣ **Track your order** and receive updates on estimated delivery time.  
-        """)
-    
-    # 🏗️ **Technologies Used**
-    with st.expander("🏗️ **Technologies Used**", expanded=True):
-        tech_data = {
-            "🧠 AI-Powered Chatbot": "Uses **Qwen-2.5-32B**, an advanced LLM for food ordering.",
-            "🛠️ Backend Technologies": "Built with **LangChain & LangGraph** for structured chatbot interactions.",
-            "📊 Database Management": "Stores order details securely in **MySQL**.",
-            "🌐 Web UI": "Interactive UI powered by **Streamlit**.",
-            "🎤 Voice Processing": "Uses **Whisper AI** for **Speech-to-Text (STT)** & **TTS APIs** for responses."
-        }
 
+    with st.expander("🚀 Getting Started", expanded=True):
+        st.markdown("""
+        1. 🍔 **Order**: Use the chatbot ("Order 2 burgers") or voice commands.
+        2. 🔄 **Manage**: Modify or cancel orders within 10 minutes via the support panel.
+        3. 📦 **Track**: Check real-time status by order ID.
+        4. 📊 **Analyze**: Explore the analytics dashboard for business insights.
+        """)
+
+    with st.expander("🛠️ Technologies", expanded=True):
+        tech_data = {
+            "🧠 AI Chatbot": "Qwen-2.5-32B LLM for natural language ordering",
+            "🎤 Voice Processing": "Whisper AI for speech-to-text and text-to-speech",
+            "🛠️ Backend": "LangChain & LangGraph for workflow orchestration",
+            "🗄️ Database": "SQLite with optimized schema and indexes",
+            "📺 Interface": "Streamlit for responsive, interactive UI",
+            "📜 Logging": "Structured logging for monitoring and debugging"
+        }
         for tech, desc in tech_data.items():
             st.markdown(f"<h3 style='color: #6C757D;'>{tech}</h3>", unsafe_allow_html=True)
             st.markdown(f"✔ {desc}")
-    
-    # 🔍 **What Happens Behind the Scenes?**
-    with st.expander("🔍 **How DineMate Works?**", expanded=True):
-        st.markdown("""
-        1️⃣ **User Request Processing:**  
-        - Extracts **items & quantities** from chat input.  
-        - Checks **menu availability** using **MySQL database**.  
 
-        2️⃣ **Order Processing:**  
-        - Stores **orders in memory** until confirmed.  
-        - Calculates **total price dynamically**.  
-
-        3️⃣ **Order Tracking & Status Updates:**  
-        - Fetches **real-time order status** from the database.  
-        - Displays estimated delivery time dynamically.  
-        """)
-    
-    # 🔗 **Project Repository**
-    
     st.markdown("""
-    <h2 style='color: #343A40;'>🔗 View Source Code</h2>
-    <p>
-        <a href='https://github.com/MuhammadUmerKhan/DineMate-Food-Ordering-Chatbot' 
-           target='_blank' style='text-decoration: none; color: #007BFF; font-weight: bold;'>
-            🌍 GitHub Repository </a> - Built with ❤️ by Muhammad Umer Khan
-    </p>
+    <h2 style='color: #343A40;'>🔗 Source Code</h2>
+    <p><a href='https://github.com/MuhammadUmerKhan/DineMate-Food-Ordering-Chatbot' target='_blank' style='text-decoration: none; color: #007BFF;'>🌍 GitHub</a> - Built by Muhammad Umer Khan</p>
     """, unsafe_allow_html=True)
-
-    st.markdown("---")
-    st.markdown("<p style='text-align: center;'>© 2025 <b>DineMate AI</b> | Powered by ❤️</p>", unsafe_allow_html=True)
+    st.markdown(
+        "<p style='text-align: center;'>© 2025 <b>DineMate AI</b> | Powered by ❤️</p>",
+        unsafe_allow_html=True
+    )

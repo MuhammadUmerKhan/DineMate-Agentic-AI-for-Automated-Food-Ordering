@@ -1,148 +1,161 @@
+"""
+# DineMate Menu Management 🍽️
+
+This module allows admins to add or remove menu items.
+
+Dependencies:
+- streamlit: For UI rendering 📺.
+- db: For database operations 🗄️.
+- logger: For structured logging 📜.
+"""
+
 import streamlit as st
-import sqlite3
-import time  # ⏳ Import time module for delay
-from scripts.config import *
+import pandas as pd
+from scripts.db import Database
+from scripts.logger import get_logger
+from scripts.config import STATIC
+from typing import List, Dict, Optional
+import time
 
-# ✅ Function to establish a database connection
-def get_connection():
-    """🔌 Establish connection to the SQLite database."""
-    return sqlite3.connect(DB_PATH)
+logger = get_logger(__name__)
 
-# ✅ Function to check if an item exists
-def check_item_exists(item_name):
-    """🔍 Check if an item already exists in the menu."""
+# ✅ Load centralized CSS
+try:
+    with open(STATIC, "r", encoding="utf-8") as f:
+        css = f.read()
+    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
+except FileNotFoundError:
+    logger.error({"message": "styles.css not found"})
+    st.error("⚠ CSS file not found. Please ensure static/styles.css exists.")
+
+def check_item_exists(item_name: str) -> bool:
     try:
-        conn = get_connection()
-        cursor = conn.cursor()
-
-        query = "SELECT * FROM menu WHERE name = ?"
-        cursor.execute(query, (item_name,))
-        item = cursor.fetchone()
-
-        conn.close()
-        return item is not None  # ✅ Return True if item exists, False otherwise
-
+        db = Database()
+        db.cursor.execute("SELECT 1 FROM menu WHERE name = ?", (item_name,))
+        exists = db.cursor.fetchone() is not None
+        logger.info({"item_name": item_name, "exists": exists, "message": "Checked item existence"})
+        return exists
     except Exception as e:
+        logger.error({"error": str(e), "item_name": item_name})
         st.error(f"⚠ Database error: {e}")
-        return True  # Assume item exists if an error occurs
+        return True
+    finally:
+        db.close_connection()
 
-# ✅ Function to add a new item
-def add_new_item(item_name, price):
-    """✅ Insert a new item into the menu if it doesn't exist."""
+def add_new_item(item_name: str, price: float) -> bool:
+    logger.info({"item_name": item_name, "price": price, "message": "Adding new item"})
     if check_item_exists(item_name):
-        st.warning(f"⚠ The item **{item_name}** already exists in the menu.", icon="⚠")
+        st.warning(f"⚠ Item {item_name} already exists.", icon="⚠")
+        logger.warning({"item_name": item_name, "message": "Item already exists"})
+        return False
+    if not item_name or price <= 0:
+        st.warning("⚠ Invalid item name or price.", icon="⚠")
+        logger.warning({"item_name": item_name, "price": price, "message": "Invalid input"})
         return False
 
     try:
-        conn = get_connection()
-        cursor = conn.cursor()
-
-        query = "INSERT INTO menu (name, price) VALUES (?, ?)"
-        cursor.execute(query, (item_name, price))
-        conn.commit()
-        conn.close()
-
-        st.success(f"✅ **{item_name}** has been added to the menu at **${price:.2f}**! 🎉", icon="🍔")
+        db = Database()
+        db.cursor.execute("INSERT INTO menu (name, price) VALUES (?, ?)", (item_name, price))
+        db.connection.commit()
+        st.success(f"✅ {item_name} added at ${price:.2f}! 🎉")
+        logger.info({"item_name": item_name, "price": price, "message": "Item added"})
         return True
-
     except Exception as e:
+        logger.error({"error": str(e), "item_name": item_name, "price": price})
         st.error(f"⚠ Error adding item: {e}")
         return False
+    finally:
+        db.close_connection()
 
-# ✅ Function to remove an item
-def remove_item(item_name):
-    """🗑️ Remove an item from the menu."""
+def remove_item(item_name: str) -> bool:
+    logger.info({"item_name": item_name, "message": "Removing item"})
     if not check_item_exists(item_name):
-        st.warning(f"⚠ The item **{item_name}** does not exist in the menu.", icon="⚠")
+        st.warning(f"⚠ Item {item_name} does not exist.", icon="⚠")
+        logger.warning({"item_name": item_name, "message": "Item does not exist"})
         return False
 
     try:
-        conn = get_connection()
-        cursor = conn.cursor()
-
-        query = "DELETE FROM menu WHERE name = ?"
-        cursor.execute(query, (item_name,))
-        conn.commit()
-        conn.close()
-
-        st.success(f"🗑️ **{item_name}** has been successfully removed from the menu.", icon="✅")
+        db = Database()
+        db.cursor.execute("DELETE FROM menu WHERE name = ?", (item_name,))
+        db.connection.commit()
+        st.success(f"🗑️ {item_name} removed successfully! ✅")
+        logger.info({"item_name": item_name, "message": "Item removed"})
         return True
-
     except Exception as e:
+        logger.error({"error": str(e), "item_name": item_name})
         st.error(f"⚠ Error removing item: {e}")
         return False
+    finally:
+        db.close_connection()
 
-# ✅ Function to fetch the menu
-def get_menu():
-    """📜 Fetch and display all menu items."""
+def get_menu() -> List[Dict]:
     try:
-        conn = get_connection()
-        cursor = conn.cursor()
-
-        query = "SELECT name, price FROM menu ORDER BY name ASC"
-        cursor.execute(query)
-        items = [{"name": row[0], "price": row[1]} for row in cursor.fetchall()]
-
-        conn.close()
+        db = Database()
+        db.cursor.execute("SELECT name, price FROM menu ORDER BY name")
+        items = [{"name": row["name"], "price": float(row["price"])} for row in db.cursor.fetchall()]
+        logger.info({"count": len(items), "message": "Fetched menu items"})
         return items
-
     except Exception as e:
+        logger.error({"error": str(e), "message": "Failed to fetch menu"})
         st.error(f"⚠ Database error: {e}")
         return []
+    finally:
+        db.close_connection()
 
-# ✅ Streamlit UI for Adding/Removing Items
-def show_add_remove_items_page():
-    """🍽️ Admin Panel - Add or Remove Menu Items"""
-    st.markdown("<h1 style='text-align: center; color: #FFA500;'>🔑 Admin Panel</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center;'>📝 Manage Menu Items</h3>", unsafe_allow_html=True)
-    st.divider()
-
-    # ✅ Admin Access Check
-    if st.session_state["role"] != "admin":
-        st.warning("⚠ Access Denied! Only **Admins** can modify menu items.", icon="🚫")
+def show_add_remove_items_page() -> None:
+    if st.session_state.get("role") != "admin":
+        st.markdown(
+            "<div class='warning-container'><h3 style='color: #EF0606;'>⚠ Access Denied</h3><p>Only admins can modify menu items.</p></div>",
+            unsafe_allow_html=True
+        )
+        logger.warning({"role": st.session_state.get("role"), "message": "Access denied"})
         return
 
-    # ✅ 📜 Display Current Menu
-    st.markdown("### 📜 **Current Menu**")
-    menu_items = get_menu()
+    st.markdown(
+        "<div class='header'><h1>➕ Add/Remove Items</h1><p style='color: #E8ECEF;'>🍽️ Manage menu items</p></div>",
+        unsafe_allow_html=True
+    )
+    st.divider()
 
+    # 📜 Current Menu
+    with st.spinner("⏳ Loading menu..."):
+        menu_items = get_menu()
     if not menu_items:
         st.info("ℹ No menu items found.")
     else:
-        st.dataframe(menu_items, use_container_width=True, hide_index=True)
+        st.markdown("### 📜 Current Menu")
+        st.dataframe(
+            pd.DataFrame(menu_items).rename(columns={"name": "🍲 Item Name", "price": "💰 Price ($)"}),
+            use_container_width=True, hide_index=True
+        )
 
     st.divider()
 
-    # ✅ ➕ Add New Item Section
-    st.markdown("### ➕ **Add a New Menu Item**")
+    # ➕ Add Item
+    st.markdown("### ➕ Add New Menu Item")
     col1, col2 = st.columns([2, 1], gap="medium")
-
     with col1:
-        item_name = st.text_input("🔤 Enter Item Name", key="add_item_name", help="Example: Cheeseburger, French Fries")
-
+        item_name = st.text_input("🔤 Item Name", key="add_item_name", help="e.g., Cheeseburger", placeholder="Enter item name")
     with col2:
-        price = st.number_input("💰 Enter Price ($)", min_value=0.01, step=0.01, format="%.2f", key="add_item_price")
+        price = st.number_input("💰 Price ($)", min_value=0.01, step=0.01, format="%.2f", key="add_item_price")
 
     if st.button("✅ Add Item", use_container_width=True):
-        if item_name and price:
+        with st.spinner("⏳ Adding item..."):
             add_new_item(item_name.strip().capitalize(), price)
-            time.sleep(1.2)  # ⏳ Delay for smooth UI transition
+            time.sleep(0.5)
             st.rerun()
-        else:
-            st.warning("⚠ Please enter both **item name** and **price**.", icon="⚠")
 
     st.divider()
 
-    # ✅ 🗑️ Remove Item Section
-    st.markdown("### 🗑️ **Remove an Existing Item**")
-
+    # 🗑️ Remove Item
+    st.markdown("### 🗑️ Remove Menu Item")
     if not menu_items:
-        st.info("ℹ No menu items available to remove.")
+        st.info("ℹ No items to remove.")
     else:
         item_list = [item["name"] for item in menu_items]
-        selected_item = st.selectbox("📌 Select an item to remove", item_list, key="remove_item_select")
-
+        selected_item = st.selectbox("📌 Select Item to Remove", item_list, key="remove_item_select", help="Choose an item to remove")
         if st.button("🗑️ Remove Item", use_container_width=True):
-            remove_item(selected_item)
-            time.sleep(1.2)  # ⏳ Delay for smooth UI transition
-            st.rerun()
+            with st.spinner("⏳ Removing item..."):
+                remove_item(selected_item)
+                time.sleep(0.5)
+                st.rerun()
