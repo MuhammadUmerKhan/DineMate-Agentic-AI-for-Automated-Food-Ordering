@@ -72,7 +72,7 @@ ROLE_PAGES = {
     ],
     "customer": [
         {"label": "🏠 Home", "tooltip": "View DineMate overview"},
-        {"label": "🍔 DineMate Chatbot", "tooltip": "Order with AI chatbot"},
+        {"label": "🍔 DineMate AI", "tooltip": "Order with AI chatbot"},
         {"label": "🎙️ Voice Chat", "tooltip": "Order with voice"},
         {"label": "📦 Track Order", "tooltip": "Check order status"}
     ]
@@ -105,9 +105,9 @@ for label in available_pages:
 if page == "🏠 Home":
     home.home()
 
-elif page == "🍔 DineMate Chatbot":
+elif page == "🍔 DineMate AI":
     st.markdown(
-        "<div class='header'><h1>🤖 DineMate Chatbot</h1><p style='color: #E8ECEF;'>🍔 Order food with our intelligent AI agent</p></div>",
+        "<div class='header'><h1>🤖 DineMate AI Chatbot</h1><p style='color: #E8ECEF;'>🍔 Order food with our intelligent AI agent</p></div>",
         unsafe_allow_html=True
     )
     st.divider()
