@@ -199,10 +199,22 @@ streamlit run main.py
 ---
 
 ## 🐳 **Dockerization & Deployment**
-- **Build**: `docker build -t muhammadumerkhan/dinemate-agentic-foodbot .`
-- **Run**: `docker run -p 8501:8501 muhammadumerkhan/dinemate-agentic-foodbot`
-- **Push**: `docker push muhammadumerkhan/dinemate-agentic-foodbot`
-- **Pull**: `docker pull muhammadumerkhan/dinemate-agentic-foodbot`
+- **Build**:
+  ```bash
+  docker build -t muhammadumerkhan/dinemate-agentic-foodbot .
+  ```
+- **Run**:
+  ```bash
+  docker run -p 8501:8501 muhammadumerkhan/dinemate-agentic-foodbot
+  ```
+- **Push**:
+  ```bash
+  docker push muhammadumerkhan/dinemate-agentic-foodbot
+  ```
+- **Pull**:
+  ```bash
+  docker pull muhammadumerkhan/dinemate-agentic-foodbot
+  ```
 
 ---
 
