@@ -2,7 +2,7 @@ import logging, os
 
 # Configure logging
 logging.basicConfig(
-    filename="./logs/foodbot.log",  # Ensure the logs directory exists
+    filename=os.path.join("logs", "foodbot.log"),  # Ensure the logs directory exists
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
 )
