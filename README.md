@@ -169,7 +169,7 @@ Voice ordering requires hardware-dependent libraries (e.g., `sounddevice`, `whis
 
 ### 1️⃣ **Clone the Repository**
 ```bash
-git clone https://github.com/MuhammadUmerKhan/DineMate-Food-Ordering-Chatbot.git
+git clone https://github.com/MuhammadUmerKhan/DineMate-Agentic-AI-for-Automated-Food-Ordering.git
 cd DineMate-Food-Ordering-Chatbot
 ```
 
