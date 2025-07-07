@@ -18,7 +18,7 @@ load_dotenv()
 logger = get_logger(__name__)
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-DB_PATH = os.path.join("database", "foodbot.db")
+DB_PATH = os.path.join("database", "dinemate.db")
 STATIC = os.path.join("static", "styles.css")
 
 def get_db_connection():
