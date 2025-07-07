@@ -1,17 +1,31 @@
-FoodBot/
-│── config.py               # ✅ Stores API keys, DB credentials, constants
-│── main.py                 # ✅ Runs the chatbot (entry point)
-│── utils.py                
-│── Home.py                
-│── main.py                
-│── streaming.py                
-│── bot/
-│   ├── agent.py             # ✅ Core chatbot logic (LLM, LangGraph)
+DineMate-Food-Ordering-Chatbot/
+│── app/
+│   ├── home.py            # 🏠 Home page with feature overview
+│   ├── login.py           # 🔐 User login and authentication
+│   ├── register.py        # 📝 User registration
+│   ├── track_order.py     # 📦 Order tracking for customers
+│   ├── order_management.py # 📋 Order management for support staff
+│   ├── add_remove_items.py # ➕ Add/remove menu items for admins
+│   ├── update_prices.py   # 💰 Price updates for admins
+│   ├── kitchen.py         # 👨‍🍳 Kitchen order dashboard
+│   ├── analysis.py        # 📊 Analytics dashboard
+│   ├── preprocesser.py    # 🛠️ Data preprocessing for analytics
+│   ├── visualizers.py     # 📈 Plotly chart generation
 │── database/
-│   ├── db.py                # ✅ Handles database operations
-│   ├── foodbot_schema.sql   # ✅ Your SQL file (schema, sample data)
-│── order/
-│   ├── order_handler.py    # ✅ Handles order processing logic
-│── tools/
-│   ├── agent_tools.py      # ✅ Handles agent processing logic
-│── README.md               # ✅ Project documentation
+│   ├── dinemate.db        # 🗄️ SQLite database file
+│── scripts/
+│   ├── db.py              # 🗄️ Database connection and queries
+│   ├── db_handler.py      # 🛒 Order processing logic
+│   ├── graph.py           # 📊 Workflow orchestration with LangGraph
+│   ├── logger.py          # 📜 Structured logging
+│   ├── agent.py           # 🤖 AI agent for chatbot and orders
+│   ├── init.py            # 📦 Package initialization
+│   ├── state.py           # 🗂️ Session and state management
+│   ├── streaming.py       # 🌐 Real-time chatbot streaming
+│   ├── tool.py            # 🧰 Utility tools for agents
+│   ├── utils.py           # 🧰 Miscellaneous utilities
+│── static/
+│   ├── styles.css         # 🎨 Centralized dark theme CSS
+│── main.py                # 🚀 Main Streamlit app entry point
+│── requirements.txt       # 📋 Dependency list
+│── README.md              # 📖 Project documentation
