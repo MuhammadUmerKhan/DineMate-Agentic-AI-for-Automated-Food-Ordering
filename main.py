@@ -1,19 +1,36 @@
-import streamlit as st  # Streamlit for UI
-import scripts.utils as utils  # Utility functions for chatbot and session handling
-from scripts.streaming import StreamHandler, stream_graph_updates  # Handles real-time streaming responses
-from app import kitchen  # Import Kitchen page
-from app import update_prices  # Import Admin page for updating item prices
-from app import login  # Import authentication system
-from app import order_management  # Import Order Management page
-from app import home  # Import Home page
-from app import add_remove_items  # Import Add/Remove Items Page
-from app import track_order  # Import Order Tracking Page
-from app import analysis  # Import Analysis Page
-# from app import voice_chat  # Import Voice Chat with DineMate
-import time
+"""
+# DineMate Main Application 🍽️
 
-# ✅ Set up Streamlit UI
+This module sets up the Streamlit UI for the DineMate food ordering chatbot with an enhanced dark theme.
+
+Dependencies:
+- streamlit: For UI rendering 📺.
+- scripts.utils: For chatbot and session handling 🛠️.
+- scripts.streaming: For real-time streaming responses 🌐.
+- app modules: For specific pages (home, kitchen, analysis, etc.) 📄.
+- time: For UI delays ⏳.
+"""
+
+import streamlit as st, time
+import scripts.utils as utils
+from scripts.config import STATIC
+from scripts.streaming import StreamHandler, stream_graph_updates
+from app import kitchen, update_prices, login, order_management, home, add_remove_items, track_order, analysis
+from scripts.logger import get_logger
+
+logger = get_logger(__name__)
+
+# ✅ Set up Streamlit UI with dark theme
 st.set_page_config(page_title="DineMate - Food Ordering Bot", page_icon="🍽️", layout="wide")
+
+# ✅ Load centralized CSS
+try:
+    with open(STATIC, "r", encoding="utf-8") as f:
+        css = f.read()
+    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
+except FileNotFoundError:
+    logger.error({"message": "styles.css not found"})
+    st.error("⚠ CSS file not found. Please ensure static/styles.css exists.")
 
 # ✅ Initialize session state for authentication
 if "authenticated" not in st.session_state:
@@ -24,156 +41,142 @@ if "authenticated" not in st.session_state:
 # ✅ Show login/register page if not authenticated
 if not st.session_state["authenticated"]:
     login.login()
-    st.stop()  # 🚫 Prevent unauthorized users from proceeding
+    st.stop()
 
-# 🎨 **Stylish Sidebar - Navigation with Emojis**
-st.sidebar.markdown("<h2 style='text-align: center;'>📌 Navigation</h2>", unsafe_allow_html=True)
+# 🎨 Sidebar with enhanced navigation
 st.sidebar.markdown(
-    f"<h3>👋 Welcome, <span style='color: #FFA500;'>{st.session_state['username'].title()}</span>!</h3>",
+    "<div class='header'><h2 style='color: #E8ECEF;'>🍽️ DineMate</h2><p style='color: #FFA500;'>Order Smarter with AI</p></div>",
+    unsafe_allow_html=True
+)
+st.sidebar.markdown(
+    f"<h3 style='text-align: center;'>👋 <span style='color: #FFA500;'>{st.session_state['username'].title()}</span> ({st.session_state['role'].title()})</h3>",
     unsafe_allow_html=True
 )
 
-# ✅ Define Role-Based Page Access (Each role gets only their assigned pages)
+# ✅ Define Role-Based Page Access
 ROLE_PAGES = {
-    "admin": ["🏠 Home", "🛡️ Update Prices", "👨‍🍳 Kitchen Orders", "➕ Add/Remove Items", "📶 Analysis"],  
-    "kitchen_staff": ["🏠 Home", "👨‍🍳 Kitchen Orders"],  
-    "customer_support": ["🏠 Home", "📦 Order Management"],  
-    "customer": ["🏠 Home", "🍔 DineMate Chatbot", "🎙️ Voice Chat", "📦 Track Order"]  
+    "admin": [
+        {"label": "🏠 Home", "tooltip": "View DineMate overview"},
+        {"label": "🛡️ Update Prices", "tooltip": "Manage menu prices"},
+        {"label": "👨‍🍳 Kitchen Orders", "tooltip": "Handle kitchen tasks"},
+        {"label": "➕ Add/Remove Items", "tooltip": "Update menu items"},
+        {"label": "📶 Analysis", "tooltip": "Explore business insights"}
+    ],
+    "kitchen_staff": [
+        {"label": "🏠 Home", "tooltip": "View DineMate overview"},
+        {"label": "👨‍🍳 Kitchen Orders", "tooltip": "Handle kitchen tasks"}
+    ],
+    "customer_support": [
+        {"label": "🏠 Home", "tooltip": "View DineMate overview"},
+        {"label": "📦 Order Management", "tooltip": "Manage customer orders"}
+    ],
+    "customer": [
+        {"label": "🏠 Home", "tooltip": "View DineMate overview"},
+        {"label": "🍔 DineMate Chatbot", "tooltip": "Order with AI chatbot"},
+        {"label": "🎙️ Voice Chat", "tooltip": "Order with voice"},
+        {"label": "📦 Track Order", "tooltip": "Check order status"}
+    ]
 }
 
 # ✅ Get allowed pages for the logged-in role
-available_pages = ROLE_PAGES.get(st.session_state["role"], [])
+available_pages = [page["label"] for page in ROLE_PAGES.get(st.session_state["role"], [])]
+tooltips = {page["label"]: page["tooltip"] for page in ROLE_PAGES.get(st.session_state["role"], [])}
 
-# 🚨 **If No Assigned Pages, Show Warning**
+# 🚨 If no assigned pages, show warning
 if not available_pages:
-    st.sidebar.warning("⚠ You do not have access to any pages.")
+    st.markdown(
+        "<div class='warning-container'><h3 style='color: #EF0606;'>⚠ No Access</h3><p>You do not have access to any pages.</p></div>",
+        unsafe_allow_html=True
+    )
     st.stop()
 
-# ✅ Sidebar Navigation Menu
-page = st.sidebar.radio("📌 **Select a Page:**", available_pages)
+# ✅ Sidebar Navigation Menu with tooltips
+page = st.sidebar.radio(
+    "� Ascending",
+    available_pages,
+    format_func=lambda x: x,
+    label_visibility="collapsed"
+)
+for label in available_pages:
+    st.markdown(f"<style>.stRadio label[data-label='{label}']::after {{ content: '{tooltips[label]}'; }}</style>", unsafe_allow_html=True)
 
-# 🎯 **Load Selected Page**
+# 🎯 Load Selected Page
 if page == "🏠 Home":
     home.home()
 
 elif page == "🍔 DineMate Chatbot":
-    st.markdown("<h1 style='text-align: center; color: #FFA500;'>🤖 DineMate Chatbot</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center;'>🍽️ Your AI-Powered Food Ordering Assistant</p>", unsafe_allow_html=True)
+    st.markdown(
+        "<div class='header'><h1>🤖 DineMate Chatbot</h1><p style='color: #E8ECEF;'>🍔 Order food with our intelligent AI agent</p></div>",
+        unsafe_allow_html=True
+    )
     st.divider()
 
-    # ✅ Enable Chat History
     @utils.enable_chat_history
     def chatbot_main():
-        """Main function to handle chatbot interactions."""
-        user_query = st.chat_input(placeholder="💬 Type your food order or ask a question...")
+        user_query = st.chat_input(placeholder="💬 Type your order (e.g., '2 burgers and a coke')...")
 
         if user_query:
-            utils.display_msg(user_query, "user")
+            with st.chat_message("user", avatar="👤"):
+                st.markdown(f"**You**: {user_query}")
+                logger.info({"user": st.session_state["username"], "query": user_query, "message": "User submitted chatbot query"})
 
-            with st.chat_message("assistant"):
+            with st.chat_message("assistant", avatar="🍔"):
                 st_sb = StreamHandler(st.empty())
-
                 try:
-                    response = stream_graph_updates(user_query)
-                    st.write(response)
-                    st.session_state.messages.append({"role": "assistant", "content": response})
-                    utils.print_qa(chatbot_main, user_query, response)
-
+                    with st.spinner("🍴 Processing your order..."):
+                        response = stream_graph_updates(user_query)
+                        st.markdown(response)
+                        st.session_state.messages.append({"role": "assistant", "content": response})
+                        utils.print_qa(chatbot_main, user_query, response)
+                        logger.info({"user": st.session_state["username"], "response": response, "message": "Chatbot response generated"})
                 except Exception as e:
                     error_msg = f"⚠ Error processing request: {str(e)}"
-                    st.write(error_msg)
+                    st.markdown(error_msg)
                     st.session_state.messages.append({"role": "assistant", "content": error_msg})
+                    logger.error({"user": st.session_state["username"], "error": str(e), "message": "Chatbot error"})
 
-    chatbot_main()  # ✅ Run chatbot
+    chatbot_main()
 
 elif page == "🎙️ Voice Chat":
-    st.markdown("<h1 style='text-align: center; color: #01877e'>🎙️ Voice Chat with DineMate</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center;'>🗣️ Your AI-Powered Voice Ordering Assistant</p>", unsafe_allow_html=True)
-    
-    # @utils.enable_chat_history
-    # def voice_order():
-    #     if "recording" not in st.session_state:
-    #         st.session_state["recording"] = False
+    st.markdown(
+        "<div class='header'><h1>🎙️ Voice Chat with DineMate</h1><p style='color: #E8ECEF;'>🗣️ Speak to our AI to order food</p></div>",
+        unsafe_allow_html=True
+    )
+    st.divider()
 
-    #     # Start Conversation Button
-    #     if st.button("🎤 Start AI Conversation"):
-    #         st.session_state["recording"] = True
-
-    #     # Stop Conversation Button
-    #     if st.button("⛔ Stop Conversation"):
-    #         st.session_state["recording"] = False
-
-    #     # 🔄 Continuous AI Chat Loop
-    #     while st.session_state["recording"]:
-    #         audio_file = voice_chat.record_audio()
-    #         user_query = voice_chat.transcribe_audio(audio_file)
-
-    #         if user_query:
-    #             utils.display_msg(user_query, "user")
-    #             with st.chat_message("assistant"):
-    #                 st_sb = StreamHandler(st.empty())
-
-    #                 try:
-    #                     response = voice_chat.get_llm_response(user_query)
-    #                     st.write(response)
-    #                     st.session_state.messages.append({"role": "assistant", "content": response})
-    #                     utils.print_qa(voice_order, user_query, response)
-    #                     # Convert AI response to speech and play it
-    #                     response_audio = voice_chat.text_to_speech(response)
-    #                     # st.audio(response_audio, format="audio/wav")
-    #                 except Exception as e:
-    #                     error_msg = f"⚠ Error processing request: {str(e)}"
-    #                     st.write(error_msg)
-    #                     st.session_state.messages.append({"role": "assistant", "content": error_msg})
-            
-    #         # ✅ Add a small delay to prevent system overload
-    #         time.sleep(1)
-
-    #         # 🔴 Stop loop if user presses "Stop Conversation"
-    #         if not st.session_state["recording"]:
-    #             break
-    # voice_order()
-    
-    # 📌 Highlight Deployment Issues
-    st.markdown("<h2 style='text-align: center; color: #ef0606;'>🚨 Deployment Not Done Due to Library Version Issues</h2>", unsafe_allow_html=True)
+    st.markdown(
+        "<div class='warning-container'><h3 style='color: #EF0606;'>🚨 Voice Chat Not Available</h3><p>Voice chat is disabled due to deployment issues with Streamlit Cloud.</p></div>",
+        unsafe_allow_html=True
+    )
     st.markdown("""
+    ### Why It's Not Working:
+    - `streamlit.chat_message` requires Streamlit 1.25.0+, not supported on older cloud versions.
+    - `sounddevice` lacks microphone access in cloud environments.
+    - `whisper` (STT) requires FFmpeg, which may fail on cloud platforms.
+    - `TTS` (Text-to-Speech) depends on `torch`, unavailable on Streamlit Cloud.
 
-    This project **cannot be deployed** on Streamlit Cloud due to the following reasons:
-
-    - `streamlit.chat_message` **requires Streamlit 1.25.0+**, but deployment supports older versions.
-    - `sounddevice` may not work properly in cloud environments due to microphone access restrictions.
-    - `whisper` (OpenAI's STT model) requires **FFmpeg** and might fail on certain cloud platforms.
-    - `TTS` (Torch-based Text-to-Speech) has dependencies on `torch` and GPU acceleration, which is **not available on Streamlit Cloud**.
-
-    ### ✅ Solution: Run Locally
-    Follow the instructions below to set up and run the app on your local machine.
-    """)
-    # 📌 Instructions to Use Locally
-    st.markdown("""
-    ### 🚀 How to Run Locally:
-    1️⃣ **Install Python 3.10** if not installed.
-    2️⃣ **Create a Virtual Environment:**
-    ```bash
-    python -m venv dinemate_env
-    ```
-    3️⃣ **Activate the Virtual Environment:**
-    - **Windows:** `dinemate_env\Scripts\activate`
-    - **macOS/Linux:** `source dinemate_env/bin/activate`
-    4️⃣ **Install Required Libraries:**
-    ```bash
-    pip install --upgrade pip
-    pip install streamlit==1.25.0 torch==2.0.0 torchaudio==2.0.0 TTS whisper pydub sounddevice numpy python-dotenv coqui-ai-tts
-    ```
-    5️⃣ **Run Streamlit App:**
-    ```bash
-    streamlit run app.py
-    ```
-    6️⃣ **Use the AI Voice Ordering System!** 🎙️ <br>
-    7️⃣ **Deactivate Environment When Done:** `deactivate`
+    ### 🚀 Run Locally to Enable Voice Chat:
+    1. Install **Python 3.10**.
+    2. Create a virtual environment:
+       ```bash
+       python -m venv dinemate_env
+       ```
+    3. Activate the environment:
+       - **Windows**: `dinemate_env\\Scripts\\activate`
+       - **macOS/Linux**: `source dinemate_env/bin/activate`
+    4. Install dependencies:
+       ```bash
+       pip install --upgrade pip
+       pip install streamlit==1.25.0 torch==2.0.0 torchaudio==2.0.0 TTS whisper pydub sounddevice numpy python-dotenv
+       ```
+    5. Run the app:
+       ```bash
+       streamlit run app.py
+       ```
+    6. Use voice ordering with your microphone! 🎙️
+    7. Deactivate: `deactivate`
     """, unsafe_allow_html=True)
 
-    
-    
 elif page == "👨‍🍳 Kitchen Orders":
     kitchen.show_kitchen_orders()
 
@@ -182,7 +185,7 @@ elif page == "🛡️ Update Prices":
 
 elif page == "📦 Order Management":
     order_management.show_order_management()
-    
+
 elif page == "➕ Add/Remove Items":
     add_remove_items.show_add_remove_items_page()
 
@@ -192,9 +195,10 @@ elif page == "📦 Track Order":
 elif page == "📶 Analysis":
     analysis.show_analysis_page()
 
-# ✅ **Logout Button in Sidebar**
+# ✅ Logout Button in Sidebar
 st.sidebar.divider()
 if st.sidebar.button("🚪 Logout", use_container_width=True):
-    st.success("🚪 Logging out... Redirecting to Login Page")
-    time.sleep(1.2)  # ⏳ Delay for a smooth transition
+    st.success("🚪 Logging out...")
+    logger.info({"user": st.session_state["username"], "message": "User logged out"})
+    time.sleep(1.2)
     login.logout()
