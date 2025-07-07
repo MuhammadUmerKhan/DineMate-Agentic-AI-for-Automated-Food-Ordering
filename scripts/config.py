@@ -19,6 +19,7 @@ logger = get_logger(__name__)
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 DB_PATH = os.path.join("database", "foodbot.db")
+STATIC = os.path.join("static", "styles.css")
 
 def get_db_connection():
     """Create and return a database connection to SQLite."""
