@@ -95,7 +95,8 @@ page = st.sidebar.radio(
     "� Ascending",
     available_pages,
     format_func=lambda x: x,
-    label_visibility="collapsed"
+    label_visibility="collapsed",
+    width="stretch"
 )
 for label in available_pages:
     st.markdown(f"<style>.stRadio label[data-label='{label}']::after {{ content: '{tooltips[label]}'; }}</style>", unsafe_allow_html=True)
