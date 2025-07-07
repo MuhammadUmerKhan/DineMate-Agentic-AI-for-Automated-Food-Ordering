@@ -8,3 +8,4 @@ plotly
 nbformat
 streamlit-autorefresh
 streamlit
+Faker
