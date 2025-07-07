@@ -20,6 +20,16 @@
     text-align: center;
 }
 
+/* Increase sidebar width */
+.stSidebar .sidebar-content {
+    width: 500px !important; /* Increased from default ~300px to 400px */
+}
+
+/* Ensure main content adjusts to wider sidebar */
+.main .block-container {
+    margin-left: 450px !important; /* Slightly more than sidebar width to avoid overlap */
+}
+
 /* Sidebar radio buttons */
 .stRadio > div {
     background-color: #3A4042;
