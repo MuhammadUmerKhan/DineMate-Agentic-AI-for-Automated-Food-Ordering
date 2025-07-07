@@ -1,0 +1,226 @@
+/* DineMate Dark Theme CSS 🍽️ */
+
+/* General app styling */
+.stApp {
+    background: linear-gradient(rgba(24, 26, 32, 0.9), rgba(24, 26, 32, 0.9)), url('https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-attachment: fixed;
+    color: #E8ECEF;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Sidebar */
+.stSidebar {
+    background: linear-gradient(#2A2F31, #1C2526);
+    border-right: 2px solid #C70039;
+    padding: 10px;
+}
+.stSidebar h2, .stSidebar h3 {
+    color: #E8ECEF;
+    text-align: center;
+}
+
+/* Sidebar radio buttons */
+.stRadio > div {
+    background-color: #3A4042;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px 0;
+}
+.stRadio label {
+    color: #E8ECEF !important;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+.stRadio label:hover {
+    background: #C70039;
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+/* Tooltips for navigation */
+.stRadio label::after {
+    content: attr(data-tooltip);
+    visibility: hidden;
+    background-color: #FFA500;
+    color: #1C2526;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 110%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.stRadio label:hover::after {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Buttons (unchanged) */
+.stButton > button {
+    background: linear-gradient(45deg, #C70039, #FFA500);
+    color: #E8ECEF;
+    border-radius: 10px;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+.stButton > button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Chat messages */
+.stChatMessage {
+    border-radius: 12px;
+    margin: 10px 0;
+    padding: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease-in;
+}
+.stChatMessage[data-testid="stChatMessage-user"] {
+    background: #3A4042;
+    color: #E8ECEF;
+}
+.stChatMessage[data-testid="stChatMessage-assistant"] {
+    background: linear-gradient(45deg, #C70039, #FFA500);
+    color: #E8ECEF;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(#2A2F31, #1C2526);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+    border: 2px solid #C70039;
+    animation: fadeIn 1s ease-in;
+}
+.header h1 {
+    background: linear-gradient(45deg, #FFA500, #FFD700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Warning container */
+.warning-container {
+    background: #3A4042;
+    border: 2px solid #EF0606;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Text inputs, number inputs, selectboxes, and text areas */
+.stTextInput > div > input,
+.stNumberInput > div > input,
+.stSelectbox > div > select,
+.stTextArea > div > textarea {
+    background: #3A4042;
+    color: #E8ECEF;
+    border: 2px solid #C70039;
+    border-radius: 8px;
+    padding: 8px;
+    transition: border-color 0.3s ease;
+}
+.stTextInput > div > input:focus,
+.stNumberInput > div > input:focus,
+.stSelectbox > div > select:focus,
+.stTextArea > div > textarea:focus {
+    border-color: #FFA500;
+    box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+}
+
+/* Tables (st.dataframe, st.table) */
+.stDataFrame, .stTable {
+    background: #2A2F31;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #C70039;
+}
+.stDataFrame table, .stTable table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.stDataFrame th, .stTable th {
+    background: linear-gradient(#3A4042, #2A2F31);
+    color: #E8ECEF;
+    font-weight: bold;
+    padding: 12px;
+    border-bottom: 2px solid #C70039;
+}
+.stDataFrame td, .stTable td {
+    color: #E8ECEF;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.stDataFrame tr:hover, .stTable tr:hover {
+    background: #C70039;
+    cursor: pointer;
+}
+
+/* Metrics */
+.stMetric {
+    background: #3A4042;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #C70039;
+}
+.stMetric .metric-label {
+    color: #E8ECEF;
+    font-weight: bold;
+}
+.stMetric .metric-value {
+    color: #FFA500;
+    font-size: 1.5em;
+}
+
+/* Expanders */
+.stExpander {
+    background: #3A4042;
+    border-radius: 10px;
+    border: 1px solid #C70039;
+}
+.stExpander summary {
+    color: #E8ECEF;
+    font-weight: bold;
+}
+.stExpander summary:hover {
+    background: #C70039;
+}
+
+/* Spinner */
+.stSpinner > div > span {
+    color: #FFA500;
+}
+
+/* Plotly charts */
+.plotly-graph-div {
+    background: #1F2937;
+    border-radius: 10px;
+    border: 1px solid #C70039;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+.mic-button:hover {
+    animation: pulse 1s infinite;
+}
