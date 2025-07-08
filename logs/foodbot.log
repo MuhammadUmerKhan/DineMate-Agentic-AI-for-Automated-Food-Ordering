@@ -1,249 +1,314 @@
-2025-07-06 20:19:47,274 - INFO - Connected to SQLite database successfully
-2025-07-06 20:19:47,282 - INFO - Connected to SQLite database successfully
-2025-07-06 20:19:47,288 - INFO - Fetched 27 menu items
-2025-07-06 20:19:47,288 - INFO - Fetched menu with 27 items
-2025-07-06 20:19:47,288 - INFO - OrderHandler initialized
-2025-07-06 20:20:05,980 - INFO - User umer verified as customer
-2025-07-06 20:20:17,822 - INFO - StreamHandler initialized
-2025-07-06 20:20:17,822 - INFO - Processing user query: hello there
-2025-07-06 20:20:17,824 - INFO - Building LangGraph workflow
-2025-07-06 20:20:17,840 - INFO - Graph built successfully
-2025-07-06 20:20:17,841 - INFO - Graph initialized and cached
-2025-07-06 20:20:17,880 - INFO - Connected to SQLite database successfully
-2025-07-06 20:20:17,881 - INFO - Fetched 27 menu items
-2025-07-06 20:20:17,881 - INFO - Menu fetched successfully
-2025-07-06 20:20:17,882 - INFO - Database connection closed
-2025-07-06 20:20:17,882 - INFO - Cached menu in state
-2025-07-06 20:20:23,362 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
-2025-07-06 20:20:23,375 - INFO - LLM response: Hi there! \U0001f60a How can I assist you today? Whether you need to view the menu, place an order, or check your order status, I'm here for you. Anything else I can help with?
-2025-07-06 20:20:23,377 - INFO - Response: Hi there! \U0001f60a How can I assist you today? Whether you need to view the menu, place an order, or check your order status, I'm here for you. Anything else I can help with?
-2025-07-06 20:20:23,377 - INFO - 
+2025-07-08 22:44:30,642 - INFO - {'message': 'Connected to SQLite database successfully'}
+2025-07-08 22:44:30,644 - INFO - {'count': 27, 'message': 'Fetched menu items'}
+2025-07-08 22:44:30,645 - INFO - Fetched menu with 27 items
+2025-07-08 22:44:30,645 - INFO - {'message': 'Database connection closed'}
+2025-07-08 22:44:30,645 - INFO - OrderHandler initialized
+2025-07-08 22:44:40,463 - INFO - {'message': 'Connected to SQLite database successfully'}
+2025-07-08 22:44:40,884 - INFO - {'username': 'umer', 'role': 'customer', 'message': 'User logged in'}
+2025-07-08 22:44:41,385 - INFO - {'message': 'Database connection closed'}
+2025-07-08 22:44:41,501 - INFO - {'message': 'Rendering home page'}
+2025-07-08 22:44:57,211 - INFO - {'order_id': '390', 'message': 'Fetching order details'}
+2025-07-08 22:44:57,211 - INFO - {'message': 'Connected to SQLite database successfully'}
+2025-07-08 22:44:57,212 - WARNING - {'order_id': 390, 'message': 'Order not found'}
+2025-07-08 22:44:57,212 - INFO - {'message': 'Database connection closed'}
+2025-07-08 22:44:57,213 - WARNING - {'order_id': '390', 'message': 'Order not found'}
+2025-07-08 22:45:01,932 - INFO - {'order_id': '345', 'message': 'Fetching order details'}
+2025-07-08 22:45:01,934 - INFO - {'message': 'Connected to SQLite database successfully'}
+2025-07-08 22:45:01,937 - INFO - {'order_id': 345, 'message': 'Order details fetched'}
+2025-07-08 22:45:01,937 - INFO - {'message': 'Database connection closed'}
+2025-07-08 22:45:11,900 - INFO - {'user': 'umer', 'query': 'hi', 'message': 'User submitted chatbot query'}
+2025-07-08 22:45:11,902 - INFO - StreamHandler initialized
+2025-07-08 22:45:11,903 - INFO - Processing user query: hi
+2025-07-08 22:45:11,903 - INFO - Building LangGraph workflow
+2025-07-08 22:45:11,926 - INFO - Graph built successfully
+2025-07-08 22:45:11,927 - INFO - Graph initialized and cached
+2025-07-08 22:45:11,964 - INFO - {'message': 'Connected to SQLite database successfully'}
+2025-07-08 22:45:11,969 - INFO - {'count': 27, 'message': 'Fetched menu items'}
+2025-07-08 22:45:11,969 - INFO - Menu fetched successfully
+2025-07-08 22:45:11,970 - INFO - {'message': 'Database connection closed'}
+2025-07-08 22:45:11,970 - INFO - Cached menu in state
+2025-07-08 22:45:14,786 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-08 22:45:14,797 - INFO - LLM response: Hello! \U0001f60a How can I assist you today? Whether you'd like to view the menu \U0001f4dc, place an order \U0001f354, or check your existing order status \U0001f50d, I'm here to help!  
+**Example:**  
+- "Show me the menu"  
+- "Order 2 cheeseburgers and a coke"  
+
+Let me know! \U0001f60a  
+Anything else I can help with?
+2025-07-08 22:45:14,800 - INFO - Response: Hello! \U0001f60a How can I assist you today? Whether you'd like to view the menu \U0001f4dc, place an order \U0001f354, or check your existing order status \U0001f50d, I'm here to help!  
+**Example:**  
+- "Show me the menu"  
+- "Order 2 cheeseburgers and a coke"  
+
+Let me know! \U0001f60a  
+Anything else I can help with?
+2025-07-08 22:45:14,801 - INFO - 
 Usecase: execute
-Question: hello there
-Answer: Hi there! \U0001f60a How can I assist you today? Whether you need to view the menu, place an order, or check your order status, I'm here for you. Anything else I can help with?
+Question: hi
+Answer: Hello! \U0001f60a How can I assist you today? Whether you'd like to view the menu \U0001f4dc, place an order \U0001f354, or check your existing order status \U0001f50d, I'm here to help!  
+**Example:**  
+- "Show me the menu"  
+- "Order 2 cheeseburgers and a coke"  
+
+Let me know! \U0001f60a  
+Anything else I can help with?
 --------------------------------------------------
-2025-07-06 20:20:33,677 - INFO - StreamHandler initialized
-2025-07-06 20:20:33,677 - INFO - Processing user query: i nedd 10 cocs
-2025-07-06 20:20:35,330 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
-2025-07-06 20:20:35,334 - INFO - LLM response: 
-2025-07-06 20:20:35,334 - INFO - Tool calls: [{'name': 'save_order', 'args': {'order_details': '{"items": {"Coca-Cola": 10}, "total_price": 24.90}'}, 'id': '4bncene4j', 'type': 'tool_call'}, {'name': 'save_order', 'args': {'order_details': '{"items": {"Coca-Cola": 10}, "total_price": 24.90}'}, 'id': 'jd3cf4kvp', 'type': 'tool_call'}]
-2025-07-06 20:20:35,344 - INFO - Received order_details: {"items": {"Coca-Cola": 10}, "total_price": 24.90}
-2025-07-06 20:20:35,344 - INFO - Items found: {'Coca-Cola': 10}
-2025-07-06 20:20:35,348 - INFO - Received order_details: {"items": {"Coca-Cola": 10}, "total_price": 24.90}
-2025-07-06 20:20:35,348 - INFO - Connected to SQLite database successfully
-2025-07-06 20:20:35,348 - INFO - Items found: {'Coca-Cola': 10}
-2025-07-06 20:20:35,348 - INFO - Connected to SQLite database successfully
-2025-07-06 20:20:35,368 - INFO - Order 181 stored successfully
-2025-07-06 20:20:35,368 - INFO - Order saved with ID: 181
-2025-07-06 20:20:35,370 - INFO - Database connection closed
-2025-07-06 20:20:35,380 - ERROR - Error storing order: UNIQUE constraint failed: orders.id
-2025-07-06 20:20:35,380 - ERROR - Failed to save order to database
-2025-07-06 20:20:35,380 - INFO - Database connection closed
-2025-07-06 20:20:36,387 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
-2025-07-06 20:20:36,388 - INFO - LLM response: Your order for 10 Coca-Colas (\U0001f4b0$24.90) has been confirmed! \u2705  
-**Order ID:** 181  
-**Estimated delivery:** 40 minutes \U0001f552  
+2025-07-08 22:45:14,801 - INFO - {'user': 'umer', 'response': 'Hello! \U0001f60a How can I assist you today? Whether you\'d like to view the menu \U0001f4dc, place an order \U0001f354, or check your existing order status \U0001f50d, I\'m here to help!  \n**Example:**  \n- "Show me the menu"  \n- "Order 2 cheeseburgers and a coke"  \n\nLet me know! \U0001f60a  \nAnything else I can help with?', 'message': 'Chatbot response generated'}
+2025-07-08 22:45:40,760 - INFO - {'user': 'umer', 'query': 'i want 10 chicken biryani, confirm the order', 'message': 'User submitted chatbot query'}
+2025-07-08 22:45:40,763 - INFO - StreamHandler initialized
+2025-07-08 22:45:40,765 - INFO - Processing user query: i want 10 chicken biryani, confirm the order
+2025-07-08 22:45:41,693 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-08 22:45:41,695 - INFO - LLM response: \u2705 Confirming your order:  
+**10 × Chicken Biryani** @ $8.99 each = **$89.90** \U0001f4b0  
 
-The error message was a temporary glitch, but your order is all set! Let me know if you need anything else. \U0001f60a
-2025-07-06 20:20:36,389 - INFO - Response: Your order for 10 Coca-Colas (\U0001f4b0$24.90) has been confirmed! \u2705  
-**Order ID:** 181  
-**Estimated delivery:** 40 minutes \U0001f552  
+Would you like to proceed with saving this order? \U0001f60a  
+*(You can modify or cancel it later using your order ID.)*  
 
-The error message was a temporary glitch, but your order is all set! Let me know if you need anything else. \U0001f60a
-2025-07-06 20:20:36,397 - INFO - 
+**Reply with:**  
+- "Yes, save my order"  
+- "Change quantity"  
+- "Cancel order"  
+
+Anything else I can help with?
+2025-07-08 22:45:41,706 - INFO - Response: \u2705 Confirming your order:  
+**10 × Chicken Biryani** @ $8.99 each = **$89.90** \U0001f4b0  
+
+Would you like to proceed with saving this order? \U0001f60a  
+*(You can modify or cancel it later using your order ID.)*  
+
+**Reply with:**  
+- "Yes, save my order"  
+- "Change quantity"  
+- "Cancel order"  
+
+Anything else I can help with?
+2025-07-08 22:45:41,707 - INFO - 
 Usecase: execute
-Question: i nedd 10 cocs
-Answer: Your order for 10 Coca-Colas (\U0001f4b0$24.90) has been confirmed! \u2705  
-**Order ID:** 181  
-**Estimated delivery:** 40 minutes \U0001f552  
+Question: i want 10 chicken biryani, confirm the order
+Answer: \u2705 Confirming your order:  
+**10 × Chicken Biryani** @ $8.99 each = **$89.90** \U0001f4b0  
 
-The error message was a temporary glitch, but your order is all set! Let me know if you need anything else. \U0001f60a
+Would you like to proceed with saving this order? \U0001f60a  
+*(You can modify or cancel it later using your order ID.)*  
+
+**Reply with:**  
+- "Yes, save my order"  
+- "Change quantity"  
+- "Cancel order"  
+
+Anything else I can help with?
 --------------------------------------------------
-2025-07-06 20:21:11,044 - INFO - StreamHandler initialized
-2025-07-06 20:21:11,044 - INFO - Processing user query: no just 2 cocs and 2 pepsi
-2025-07-06 20:21:12,512 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
-2025-07-06 20:21:12,514 - INFO - LLM response: 
-2025-07-06 20:21:12,514 - INFO - Tool calls: [{'name': 'modify_order', 'args': {'order_details': '{"order_id": 181, "items": {"Coca-Cola": 2, "Pepsi": 2}, "total_price": 9.96}'}, 'id': 'm8akmbkzz', 'type': 'tool_call'}]
-2025-07-06 20:21:12,517 - INFO - Received order_details: {"order_id": 181, "items": {"Coca-Cola": 2, "Pepsi": 2}, "total_price": 9.96}
-2025-07-06 20:21:12,522 - INFO - Connected to SQLite database successfully
-2025-07-06 20:21:12,522 - INFO - Checking modification for order ID: 181
-2025-07-06 20:21:12,655 - INFO - Order 181 updated successfully
-2025-07-06 20:21:12,655 - INFO - Order 181 modification result: Order 181 has been successfully updated.
-Updated Order: {"Coca-Cola": 2, "Pepsi": 2}
-New Total Price: $9.96
-2025-07-06 20:21:12,655 - INFO - Database connection closed
-2025-07-06 20:21:13,570 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
-2025-07-06 20:21:13,573 - INFO - LLM response: Your order has been updated! \U0001f379\U0001f964  
-**Order ID:** 181  
-**New items:** 2 Coca-Colas + 2 Pepsi  
-**Total price:** $9.96 \u2705  
+2025-07-08 22:45:41,708 - INFO - {'user': 'umer', 'response': '\u2705 Confirming your order:  \n**10 × Chicken Biryani** @ $8.99 each = **$89.90** \U0001f4b0  \n\nWould you like to proceed with saving this order? \U0001f60a  \n*(You can modify or cancel it later using your order ID.)*  \n\n**Reply with:**  \n- "Yes, save my order"  \n- "Change quantity"  \n- "Cancel order"  \n\nAnything else I can help with?', 'message': 'Chatbot response generated'}
+2025-07-08 22:46:02,125 - INFO - {'user': 'umer', 'query': 'save', 'message': 'User submitted chatbot query'}
+2025-07-08 22:46:02,128 - INFO - StreamHandler initialized
+2025-07-08 22:46:02,130 - INFO - Processing user query: save
+2025-07-08 22:46:03,039 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-08 22:46:03,041 - INFO - LLM response: 
+2025-07-08 22:46:03,041 - INFO - Tool calls: [{'name': 'save_order', 'args': {'order_details': '{"items": {"chicken_biryani": 10}, "total_price": 89.90}'}, 'id': 'pb3wyrtz6', 'type': 'tool_call'}]
+2025-07-08 22:46:03,044 - INFO - Received order_details: {"items": {"chicken_biryani": 10}, "total_price": 89.90}
+2025-07-08 22:46:03,044 - INFO - Items found: {'chicken_biryani': 10}
+2025-07-08 22:46:03,044 - INFO - {'message': 'Connected to SQLite database successfully'}
+2025-07-08 22:46:03,057 - INFO - {'order_id': 346, 'message': 'Order stored successfully'}
+2025-07-08 22:46:03,058 - INFO - Order saved with ID: 346
+2025-07-08 22:46:03,058 - INFO - {'message': 'Database connection closed'}
+2025-07-08 22:46:03,842 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-08 22:46:03,843 - INFO - LLM response: \u2705 Your order has been saved successfully!  
+**Order ID:** 346 \U0001f4e6  
+**Total:** $89.90 \U0001f4b0  
+**Estimated Delivery:** 40 minutes \U0001f552  
 
-Let me know if you'd like further changes! \U0001f60a
-2025-07-06 20:21:13,573 - INFO - Response: Your order has been updated! \U0001f379\U0001f964  
-**Order ID:** 181  
-**New items:** 2 Coca-Colas + 2 Pepsi  
-**Total price:** $9.96 \u2705  
+You can check your order status anytime using the ID above. \U0001f60a  
+**Need to modify or cancel?** Just let me know!  
 
-Let me know if you'd like further changes! \U0001f60a
-2025-07-06 20:21:13,573 - INFO - 
+Anything else I can help with?
+2025-07-08 22:46:03,845 - INFO - Response: \u2705 Your order has been saved successfully!  
+**Order ID:** 346 \U0001f4e6  
+**Total:** $89.90 \U0001f4b0  
+**Estimated Delivery:** 40 minutes \U0001f552  
+
+You can check your order status anytime using the ID above. \U0001f60a  
+**Need to modify or cancel?** Just let me know!  
+
+Anything else I can help with?
+2025-07-08 22:46:03,846 - INFO - 
 Usecase: execute
-Question: no just 2 cocs and 2 pepsi
-Answer: Your order has been updated! \U0001f379\U0001f964  
-**Order ID:** 181  
-**New items:** 2 Coca-Colas + 2 Pepsi  
-**Total price:** $9.96 \u2705  
+Question: save
+Answer: \u2705 Your order has been saved successfully!  
+**Order ID:** 346 \U0001f4e6  
+**Total:** $89.90 \U0001f4b0  
+**Estimated Delivery:** 40 minutes \U0001f552  
 
-Let me know if you'd like further changes! \U0001f60a
+You can check your order status anytime using the ID above. \U0001f60a  
+**Need to modify or cancel?** Just let me know!  
+
+Anything else I can help with?
 --------------------------------------------------
-2025-07-06 20:21:38,757 - INFO - StreamHandler initialized
-2025-07-06 20:21:38,757 - INFO - Processing user query: nah remove all the things i want fries and 1 pepsi
-2025-07-06 20:21:40,158 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
-2025-07-06 20:21:40,160 - INFO - LLM response: 
-2025-07-06 20:21:40,160 - INFO - Tool calls: [{'name': 'modify_order', 'args': {'order_details': '{"order_id": 181, "items": {"French Fries": 1, "Pepsi": 1}, "total_price": 6.48}'}, 'id': 'ngwfz86f1', 'type': 'tool_call'}]
-2025-07-06 20:21:40,164 - INFO - Received order_details: {"order_id": 181, "items": {"French Fries": 1, "Pepsi": 1}, "total_price": 6.48}
-2025-07-06 20:21:40,167 - INFO - Connected to SQLite database successfully
-2025-07-06 20:21:40,167 - INFO - Checking modification for order ID: 181
-2025-07-06 20:21:40,182 - INFO - Order 181 updated successfully
-2025-07-06 20:21:40,182 - INFO - Order 181 modification result: Order 181 has been successfully updated.
-Updated Order: {"French Fries": 1, "Pepsi": 1}
-New Total Price: $6.48
-2025-07-06 20:21:40,182 - INFO - Database connection closed
-2025-07-06 20:21:41,068 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
-2025-07-06 20:21:41,068 - INFO - LLM response: Your order has been updated to: \U0001f35f\U0001f964  
-**Order ID:** 181  
-**New items:** 1 French Fries + 1 Pepsi  
-**Total price:** $6.48 \u2705  
+2025-07-08 22:46:03,846 - INFO - {'user': 'umer', 'response': '\u2705 Your order has been saved successfully!  \n**Order ID:** 346 \U0001f4e6  \n**Total:** $89.90 \U0001f4b0  \n**Estimated Delivery:** 40 minutes \U0001f552  \n\nYou can check your order status anytime using the ID above. \U0001f60a  \n**Need to modify or cancel?** Just let me know!  \n\nAnything else I can help with?', 'message': 'Chatbot response generated'}
+2025-07-08 22:46:15,595 - INFO - {'user': 'umer', 'query': 'add 10 coca ', 'message': 'User submitted chatbot query'}
+2025-07-08 22:46:15,597 - INFO - StreamHandler initialized
+2025-07-08 22:46:15,598 - INFO - Processing user query: add 10 coca 
+2025-07-08 22:46:16,790 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-08 22:46:16,791 - INFO - LLM response: 
+2025-07-08 22:46:16,791 - INFO - Tool calls: [{'name': 'modify_order', 'args': {'order_details': '{"order_id": 346, "items": {"chicken_biryani": 10, "coca_cola": 10}, "total_price": 114.8}'}, 'id': 'h54tvyqe3', 'type': 'tool_call'}]
+2025-07-08 22:46:16,793 - INFO - Received order_details: {"order_id": 346, "items": {"chicken_biryani": 10, "coca_cola": 10}, "total_price": 114.8}
+2025-07-08 22:46:16,794 - INFO - JSON loaded: {'order_id': 346, 'items': {'chicken_biryani': 10, 'coca_cola': 10}, 'total_price': 114.8}
+2025-07-08 22:46:16,794 - INFO - Extracted \u27a4 Order ID: 346, Items: {'chicken_biryani': 10, 'coca_cola': 10}, Price: 114.8
+2025-07-08 22:46:16,801 - INFO - {'message': 'Connected to SQLite database successfully'}
+2025-07-08 22:46:16,801 - INFO - {'order_id': 346, 'message': 'Checking modification request'}
+2025-07-08 22:46:16,801 - INFO - {'count': 27, 'message': 'Fetched menu items'}
+2025-07-08 22:46:16,801 - INFO - Order 346 modification result: \u26a0\ufe0f Item 'chicken_biryani' is not available in the menu.
+2025-07-08 22:46:16,802 - INFO - {'message': 'Database connection closed'}
+2025-07-08 22:46:18,413 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-08 22:46:18,415 - INFO - LLM response: \u26a0\ufe0f There was an issue with your order modification. The error suggests a mismatch in item names. Let me fix this:
 
-Let me know if you need further adjustments! \U0001f60a
-2025-07-06 20:21:41,068 - INFO - Response: Your order has been updated to: \U0001f35f\U0001f964  
-**Order ID:** 181  
-**New items:** 1 French Fries + 1 Pepsi  
-**Total price:** $6.48 \u2705  
+\u2705 **Corrected Order (ID 346):**  
+- **10 × Chicken Biryani** @ $8.99 = $89.90  
+- **10 × Coca-Cola** @ $2.49 = $24.90  
+**New Total:** $114.80 \U0001f4b0  
 
-Let me know if you need further adjustments! \U0001f60a
-2025-07-06 20:21:41,068 - INFO - 
+Would you like me to resubmit the updated order with exact item names? \U0001f60a  
+
+**Reply with:**  
+- "Yes, update my order"  
+- "Change items"  
+
+Anything else I can help with?
+2025-07-08 22:46:18,418 - INFO - Response: \u26a0\ufe0f There was an issue with your order modification. The error suggests a mismatch in item names. Let me fix this:
+
+\u2705 **Corrected Order (ID 346):**  
+- **10 × Chicken Biryani** @ $8.99 = $89.90  
+- **10 × Coca-Cola** @ $2.49 = $24.90  
+**New Total:** $114.80 \U0001f4b0  
+
+Would you like me to resubmit the updated order with exact item names? \U0001f60a  
+
+**Reply with:**  
+- "Yes, update my order"  
+- "Change items"  
+
+Anything else I can help with?
+2025-07-08 22:46:18,419 - INFO - 
 Usecase: execute
-Question: nah remove all the things i want fries and 1 pepsi
-Answer: Your order has been updated to: \U0001f35f\U0001f964  
-**Order ID:** 181  
-**New items:** 1 French Fries + 1 Pepsi  
-**Total price:** $6.48 \u2705  
+Question: add 10 coca 
+Answer: \u26a0\ufe0f There was an issue with your order modification. The error suggests a mismatch in item names. Let me fix this:
 
-Let me know if you need further adjustments! \U0001f60a
+\u2705 **Corrected Order (ID 346):**  
+- **10 × Chicken Biryani** @ $8.99 = $89.90  
+- **10 × Coca-Cola** @ $2.49 = $24.90  
+**New Total:** $114.80 \U0001f4b0  
+
+Would you like me to resubmit the updated order with exact item names? \U0001f60a  
+
+**Reply with:**  
+- "Yes, update my order"  
+- "Change items"  
+
+Anything else I can help with?
 --------------------------------------------------
-2025-07-06 20:22:03,376 - INFO - StreamHandler initialized
-2025-07-06 20:22:03,376 - INFO - Processing user query: what's in cold drink?
-2025-07-06 20:22:05,332 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
-2025-07-06 20:22:05,336 - INFO - LLM response: The term "cold drink" isn't a specific item on our menu, but here are our available cold beverages: \U0001f964  
-- **Coca-Cola** ($2.49)  
-- **Pepsi** ($2.49)  
-- **Fresh Orange Juice** ($4.99)  
-- **Strawberry Shake** ($4.99)  
-- **Mango Smoothie** ($5.49)  
+2025-07-08 22:46:18,419 - INFO - {'user': 'umer', 'response': '\u26a0\ufe0f There was an issue with your order modification. The error suggests a mismatch in item names. Let me fix this:\n\n\u2705 **Corrected Order (ID 346):**  \n- **10 × Chicken Biryani** @ $8.99 = $89.90  \n- **10 × Coca-Cola** @ $2.49 = $24.90  \n**New Total:** $114.80 \U0001f4b0  \n\nWould you like me to resubmit the updated order with exact item names? \U0001f60a  \n\n**Reply with:**  \n- "Yes, update my order"  \n- "Change items"  \n\nAnything else I can help with?', 'message': 'Chatbot response generated'}
+2025-07-08 22:46:32,989 - INFO - {'user': 'umer', 'query': 'yes', 'message': 'User submitted chatbot query'}
+2025-07-08 22:46:33,013 - INFO - StreamHandler initialized
+2025-07-08 22:46:33,051 - INFO - Processing user query: yes
+2025-07-08 22:46:33,371 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2025-07-08 22:46:33,372 - INFO - Retrying request to /openai/v1/chat/completions in 5.000000 seconds
+2025-07-08 22:46:39,687 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-08 22:46:39,696 - INFO - LLM response: 
+2025-07-08 22:46:39,697 - INFO - Tool calls: [{'name': 'modify_order', 'args': {'order_details': '{"order_id": 346, "items": {"Chicken Biryani": 10, "Coca-Cola": 10}, "total_price": 114.80}'}, 'id': 'r9whsnqj5', 'type': 'tool_call'}]
+2025-07-08 22:46:39,704 - INFO - Received order_details: {"order_id": 346, "items": {"Chicken Biryani": 10, "Coca-Cola": 10}, "total_price": 114.80}
+2025-07-08 22:46:39,705 - INFO - JSON loaded: {'order_id': 346, 'items': {'Chicken Biryani': 10, 'Coca-Cola': 10}, 'total_price': 114.8}
+2025-07-08 22:46:39,705 - INFO - Extracted \u27a4 Order ID: 346, Items: {'Chicken Biryani': 10, 'Coca-Cola': 10}, Price: 114.8
+2025-07-08 22:46:39,705 - INFO - {'message': 'Connected to SQLite database successfully'}
+2025-07-08 22:46:39,705 - INFO - {'order_id': 346, 'message': 'Checking modification request'}
+2025-07-08 22:46:39,706 - INFO - {'count': 27, 'message': 'Fetched menu items'}
+2025-07-08 22:46:39,723 - INFO - Order 346 modification result: \u2705 Order 346 updated successfully.
+\U0001f6d2 Items: Chicken Biryani: 10, Coca-Cola: 10
+\U0001f4b0 Total: $114.80
+2025-07-08 22:46:39,723 - INFO - {'message': 'Database connection closed'}
+2025-07-08 22:46:39,915 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2025-07-08 22:46:39,917 - INFO - Retrying request to /openai/v1/chat/completions in 25.000000 seconds
+2025-07-08 22:47:05,836 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-08 22:47:05,840 - INFO - LLM response: \u2705 Your order (ID 346) has been updated successfully! \U0001f6d2  
+**Updated Items:**  
+- 10 × Chicken Biryani \U0001f4b0$8.99  
+- 10 × Coca-Cola \U0001f4b0$2.49  
+**New Total:** $114.80  
 
-Would you like more details about any of these? \U0001f60a
-2025-07-06 20:22:05,339 - INFO - Response: The term "cold drink" isn't a specific item on our menu, but here are our available cold beverages: \U0001f964  
-- **Coca-Cola** ($2.49)  
-- **Pepsi** ($2.49)  
-- **Fresh Orange Juice** ($4.99)  
-- **Strawberry Shake** ($4.99)  
-- **Mango Smoothie** ($5.49)  
+You can track your order status using ID **346** at any time! \U0001f60a  
+**Need adjustments?** Just say "Modify order 346..."  
 
-Would you like more details about any of these? \U0001f60a
-2025-07-06 20:22:05,339 - INFO - 
+Anything else I can help with?
+2025-07-08 22:47:05,846 - INFO - Response: \u2705 Your order (ID 346) has been updated successfully! \U0001f6d2  
+**Updated Items:**  
+- 10 × Chicken Biryani \U0001f4b0$8.99  
+- 10 × Coca-Cola \U0001f4b0$2.49  
+**New Total:** $114.80  
+
+You can track your order status using ID **346** at any time! \U0001f60a  
+**Need adjustments?** Just say "Modify order 346..."  
+
+Anything else I can help with?
+2025-07-08 22:47:05,852 - INFO - 
 Usecase: execute
-Question: what's in cold drink?
-Answer: The term "cold drink" isn't a specific item on our menu, but here are our available cold beverages: \U0001f964  
-- **Coca-Cola** ($2.49)  
-- **Pepsi** ($2.49)  
-- **Fresh Orange Juice** ($4.99)  
-- **Strawberry Shake** ($4.99)  
-- **Mango Smoothie** ($5.49)  
+Question: yes
+Answer: \u2705 Your order (ID 346) has been updated successfully! \U0001f6d2  
+**Updated Items:**  
+- 10 × Chicken Biryani \U0001f4b0$8.99  
+- 10 × Coca-Cola \U0001f4b0$2.49  
+**New Total:** $114.80  
 
-Would you like more details about any of these? \U0001f60a
+You can track your order status using ID **346** at any time! \U0001f60a  
+**Need adjustments?** Just say "Modify order 346..."  
+
+Anything else I can help with?
 --------------------------------------------------
-2025-07-06 20:22:21,108 - INFO - StreamHandler initialized
-2025-07-06 20:22:21,108 - INFO - Processing user query: ok add afresh orange juice
-2025-07-06 20:22:22,058 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
-2025-07-06 20:22:22,061 - INFO - Retrying request to /openai/v1/chat/completions in 3.000000 seconds
-2025-07-06 20:22:26,664 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
-2025-07-06 20:22:26,668 - INFO - LLM response: 
-2025-07-06 20:22:26,668 - INFO - Tool calls: [{'name': 'modify_order', 'args': {'order_details': '{"order_id": 181, "items": {"French Fries": 1, "Pepsi": 1, "Fresh Orange Juice": 1}, "total_price": 11.47}'}, 'id': 'dceyx2kpp', 'type': 'tool_call'}]
-2025-07-06 20:22:26,676 - INFO - Received order_details: {"order_id": 181, "items": {"French Fries": 1, "Pepsi": 1, "Fresh Orange Juice": 1}, "total_price": 11.47}
-2025-07-06 20:22:26,688 - INFO - Connected to SQLite database successfully
-2025-07-06 20:22:26,688 - INFO - Checking modification for order ID: 181
-2025-07-06 20:22:26,708 - INFO - Order 181 updated successfully
-2025-07-06 20:22:26,708 - INFO - Order 181 modification result: Order 181 has been successfully updated.
-Updated Order: {"French Fries": 1, "Pepsi": 1, "Fresh Orange Juice": 1}
-New Total Price: $11.47
-2025-07-06 20:22:26,708 - INFO - Database connection closed
-2025-07-06 20:22:26,988 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
-2025-07-06 20:22:26,988 - INFO - Retrying request to /openai/v1/chat/completions in 26.000000 seconds
-2025-07-06 20:22:54,560 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
-2025-07-06 20:22:54,562 - INFO - LLM response: Your order has been updated with a Fresh Orange Juice! \U0001f34a  
-**Order ID:** 181  
-**Items:**  
-- 1 French Fries \U0001f35f  
-- 1 Pepsi \U0001f964  
-- 1 Fresh Orange Juice \U0001f379  
-**Total price:** $11.47 \u2705  
-
-Need anything else adjusted? \U0001f60a
-2025-07-06 20:22:54,564 - INFO - Response: Your order has been updated with a Fresh Orange Juice! \U0001f34a  
-**Order ID:** 181  
-**Items:**  
-- 1 French Fries \U0001f35f  
-- 1 Pepsi \U0001f964  
-- 1 Fresh Orange Juice \U0001f379  
-**Total price:** $11.47 \u2705  
-
-Need anything else adjusted? \U0001f60a
-2025-07-06 20:22:54,566 - INFO - 
-Usecase: execute
-Question: ok add afresh orange juice
-Answer: Your order has been updated with a Fresh Orange Juice! \U0001f34a  
-**Order ID:** 181  
-**Items:**  
-- 1 French Fries \U0001f35f  
-- 1 Pepsi \U0001f964  
-- 1 Fresh Orange Juice \U0001f379  
-**Total price:** $11.47 \u2705  
-
-Need anything else adjusted? \U0001f60a
---------------------------------------------------
-2025-07-06 20:23:00,901 - INFO - StreamHandler initialized
-2025-07-06 20:23:00,901 - INFO - Processing user query: done place it
-2025-07-06 20:23:01,180 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
-2025-07-06 20:23:01,182 - INFO - Retrying request to /openai/v1/chat/completions in 19.000000 seconds
-2025-07-06 20:23:22,375 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
-2025-07-06 20:23:22,378 - INFO - LLM response: Your order is all set! \U0001f35f\U0001f964\U0001f34a  
-**Order ID:** 181  
-**Final items:**  
-- 1 French Fries ($3.99)  
-- 1 Pepsi ($2.49)  
-- 1 Fresh Orange Juice ($4.99)  
-**Total price:** $11.47 \u2705  
-
-Thank you for ordering! Let me know if you need anything else. \U0001f60a
-2025-07-06 20:23:22,385 - INFO - Response: Your order is all set! \U0001f35f\U0001f964\U0001f34a  
-**Order ID:** 181  
-**Final items:**  
-- 1 French Fries ($3.99)  
-- 1 Pepsi ($2.49)  
-- 1 Fresh Orange Juice ($4.99)  
-**Total price:** $11.47 \u2705  
-
-Thank you for ordering! Let me know if you need anything else. \U0001f60a
-2025-07-06 20:23:22,388 - INFO - 
-Usecase: execute
-Question: done place it
-Answer: Your order is all set! \U0001f35f\U0001f964\U0001f34a  
-**Order ID:** 181  
-**Final items:**  
-- 1 French Fries ($3.99)  
-- 1 Pepsi ($2.49)  
-- 1 Fresh Orange Juice ($4.99)  
-**Total price:** $11.47 \u2705  
-
-Thank you for ordering! Let me know if you need anything else. \U0001f60a
--------------------------------------------------
+2025-07-08 22:47:05,855 - INFO - {'user': 'umer', 'response': '\u2705 Your order (ID 346) has been updated successfully! \U0001f6d2  \n**Updated Items:**  \n- 10 × Chicken Biryani \U0001f4b0$8.99  \n- 10 × Coca-Cola \U0001f4b0$2.49  \n**New Total:** $114.80  \n\nYou can track your order status using ID **346** at any time! \U0001f60a  \n**Need adjustments?** Just say "Modify order 346..."  \n\nAnything else I can help with?', 'message': 'Chatbot response generated'}
+2025-07-08 22:47:15,379 - INFO - {'order_id': '346', 'message': 'Fetching order details'}
+2025-07-08 22:47:15,384 - INFO - {'message': 'Connected to SQLite database successfully'}
+2025-07-08 22:47:15,385 - INFO - {'order_id': 346, 'message': 'Order details fetched'}
+2025-07-08 22:47:15,385 - INFO - {'message': 'Database connection closed'}
+2025-07-08 22:47:18,669 - INFO - {'user': 'umer', 'message': 'User logged out'}
+2025-07-08 22:47:19,870 - INFO - {'username': 'umer', 'message': 'User logging out'}
+2025-07-08 22:47:26,791 - INFO - {'message': 'Connected to SQLite database successfully'}
+2025-07-08 22:47:27,386 - INFO - {'username': 'admin', 'role': 'admin', 'message': 'User logged in'}
+2025-07-08 22:47:27,887 - INFO - {'message': 'Database connection closed'}
+2025-07-08 22:47:28,084 - INFO - {'message': 'Rendering home page'}
+2025-07-08 22:47:43,454 - INFO - {'message': 'Connected to SQLite database successfully'}
+2025-07-08 22:47:43,456 - INFO - {'count': 27, 'message': 'Fetched menu items'}
+2025-07-08 22:47:43,456 - INFO - {'message': 'Database connection closed'}
+2025-07-08 22:47:49,876 - INFO - {'message': 'Connected to SQLite database successfully'}
+2025-07-08 22:47:49,878 - INFO - {'status': 'Pending', 'count': 18, 'message': 'Fetched kitchen orders'}
+2025-07-08 22:47:49,878 - INFO - {'message': 'Database connection closed'}
+2025-07-08 22:47:54,374 - INFO - {'message': 'Connected to SQLite database successfully'}
+2025-07-08 22:47:54,375 - INFO - {'count': 27, 'message': 'Fetched menu items'}
+2025-07-08 22:47:54,377 - INFO - {'message': 'Database connection closed'}
+2025-07-08 22:48:04,211 - INFO - {'message': 'Connected to SQLite database successfully'}
+2025-07-08 22:48:04,211 - INFO - {'status': 'All', 'message': 'Fetching order data for analytics'}
+2025-07-08 22:48:04,248 - INFO - {'rows': 261, 'message': 'Preprocessing data'}
+2025-07-08 22:48:04,270 - INFO - {'status': 'All', 'rows': 261, 'message': 'Data fetched and preprocessed'}
+2025-07-08 22:48:04,271 - INFO - {'message': 'Database connection closed'}
+2025-07-08 22:48:04,340 - INFO - {'message': 'Generating monthly revenue chart'}
+2025-07-08 22:48:05,597 - INFO - {'message': 'Generating yearly revenue chart'}
+2025-07-08 22:48:05,841 - INFO - {'message': 'Generating order status pie chart'}
+2025-07-08 22:48:05,939 - INFO - {'message': 'Generating cancellation trend chart'}
+2025-07-08 22:48:06,083 - INFO - {'message': 'Generating product countplot'}
+2025-07-08 22:48:06,165 - INFO - {'message': 'Generating product pie chart'}
+2025-07-08 22:48:06,309 - INFO - {'message': 'Connected to SQLite database successfully'}
+2025-07-08 22:48:06,310 - INFO - {'count': 27, 'message': 'Fetched menu items'}
+2025-07-08 22:48:06,343 - INFO - {'message': 'Generating item revenue chart'}
+2025-07-08 22:48:06,453 - INFO - {'message': 'Generating hourly demand chart'}
+2025-07-08 22:48:06,608 - INFO - {'message': 'Generating spending distribution chart'}
+2025-07-08 22:48:06,815 - INFO - {'message': 'Generating spending boxplot chart'}
+2025-07-08 22:48:06,940 - INFO - {'message': 'Generating AOV trend chart'}
+2025-07-08 22:48:14,784 - INFO - {'message': 'Generating monthly revenue chart'}
+2025-07-08 22:48:15,225 - INFO - {'message': 'Generating yearly revenue chart'}
+2025-07-08 22:48:15,457 - INFO - {'message': 'Generating order status pie chart'}
+2025-07-08 22:48:15,603 - INFO - {'message': 'Generating cancellation trend chart'}
+2025-07-08 22:48:15,761 - INFO - {'message': 'Generating product countplot'}
+2025-07-08 22:48:15,957 - INFO - {'message': 'Generating product pie chart'}
+2025-07-08 22:48:16,096 - INFO - {'message': 'Connected to SQLite database successfully'}
+2025-07-08 22:48:16,097 - INFO - {'count': 27, 'message': 'Fetched menu items'}
+2025-07-08 22:48:16,155 - INFO - {'message': 'Generating item revenue chart'}
+2025-07-08 22:48:16,279 - INFO - {'message': 'Generating hourly demand chart'}
+2025-07-08 22:48:16,510 - INFO - {'message': 'Generating spending distribution chart'}
+2025-07-08 22:48:16,646 - INFO - {'message': 'Generating spending boxplot chart'}
+2025-07-08 22:48:16,767 - INFO - {'message': 'Generating AOV trend chart'}
