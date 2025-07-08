@@ -13,7 +13,7 @@ Dependencies:
 
 import streamlit as st, time
 import scripts.utils as utils
-from scripts.config import STATIC
+from scripts.config import STATIC_CSS_PATH
 from scripts.streaming import StreamHandler, stream_graph_updates
 from app import kitchen, update_prices, login, order_management, home, add_remove_items, track_order, analysis
 from scripts.logger import get_logger
@@ -25,7 +25,7 @@ st.set_page_config(page_title="DineMate - Food Ordering Bot", page_icon="🍽️
 
 # ✅ Load centralized CSS
 try:
-    with open(STATIC, "r", encoding="utf-8") as f:
+    with open(STATIC_CSS_PATH, "r", encoding="utf-8") as f:
         css = f.read()
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 except FileNotFoundError:

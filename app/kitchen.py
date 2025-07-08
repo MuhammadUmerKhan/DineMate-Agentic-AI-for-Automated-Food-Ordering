@@ -15,7 +15,7 @@ import pandas as pd
 from datetime import datetime
 from scripts.db import Database
 from scripts.logger import get_logger
-from scripts.config import STATIC
+from scripts.config import STATIC_CSS_PATH
 from typing import List, Dict
 from streamlit_autorefresh import st_autorefresh
 
@@ -23,7 +23,7 @@ logger = get_logger(__name__)
 
 # ✅ Load centralized CSS
 try:
-    with open(STATIC, "r", encoding="utf-8") as f:
+    with open(STATIC_CSS_PATH, "r", encoding="utf-8") as f:
         css = f.read()
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 except FileNotFoundError:

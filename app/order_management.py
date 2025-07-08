@@ -19,14 +19,14 @@ from typing import Dict, List, Optional
 from scripts.db_handler import OrderHandler
 from scripts.db import Database
 from scripts.logger import get_logger
-from scripts.config import STATIC
+from scripts.config import STATIC_CSS_PATH
 
 logger = get_logger(__name__)
 order_handler = OrderHandler()
 
 # ✅ Load centralized CSS
 try:
-    with open(STATIC, "r", encoding="utf-8") as f:
+    with open(STATIC_CSS_PATH, "r", encoding="utf-8") as f:
         css = f.read()
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 except FileNotFoundError:

@@ -12,14 +12,14 @@ Dependencies:
 import pandas as pd, json
 from collections import Counter
 from scripts.logger import get_logger
-from scripts.config import STATIC
+from scripts.config import STATIC_CSS_PATH
 import streamlit as st
 
 logger = get_logger(__name__)
 
 # ✅ Load centralized CSS
 try:
-    with open(STATIC, "r", encoding="utf-8") as f:
+    with open(STATIC_CSS_PATH, "r", encoding="utf-8") as f:
         css = f.read()
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 except FileNotFoundError:
