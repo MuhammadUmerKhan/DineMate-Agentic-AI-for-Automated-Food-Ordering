@@ -127,15 +127,15 @@ def cancel_order(order_id: str) -> str:
     finally:
         db.close_connection()
 
-@tool
+# @tool
 def modify_order(order_details: str) -> dict:
-    """Modify an existing order within 10 minutes of placement.
-    :param order_details: JSON string with order_id, items, and total price, e.g., {"order_id": 162, "items": {"pizza": 2, "cola": 1}, "total_price": 25.0}
-    :return: Dictionary with status, message, and order details
-    """
+    """Modify an existing order within 10 minutes of placement."""
     logger.info(f"Received order_details: {order_details}")
+    
     try:
         order_data = json.loads(order_details)
+        logger.info(f"JSON loaded: {order_data}")
+
         order_id = order_data.get("order_id")
         items = order_data.get("items", {})
         total_price = float(order_data.get("total_price", 0.0))
@@ -143,29 +143,33 @@ def modify_order(order_details: str) -> dict:
         if not order_id or not isinstance(order_id, (str, int)) or int(order_id) <= 0:
             logger.error(f"Invalid order_id: {order_id}")
             return {"status": "error", "message": "Invalid order ID. Please provide a positive number."}
+        
         if not items:
             logger.warning("No items found in order")
             return {"status": "empty", "message": "No items found in the updated order.", "items": {}, "total_price": 0.0}
 
-        order_id_int = int(order_id)
-        items_json = json.dumps(items)
+        order_id = int(order_id)
+        logger.info(f"Extracted ➤ Order ID: {order_id}, Items: {items}, Price: {total_price}")
 
         db = Database()
         try:
-            result = db.modify_order_after_confirmation(order_id_int, items_json, total_price)
-            logger.info(f"Order {order_id_int} modification result: {result}")
+            result = db.modify_order_after_confirmation(order_id, json.dumps(items), total_price)
+            logger.info(f"Order {order_id} modification result: {result}")
+            
             return {
                 "status": "success" if "successfully updated" in result else "error",
                 "message": result,
-                "order_id": order_id_int,
+                "order_id": order_id,
                 "items": items,
                 "total_price": total_price
             }
         finally:
             db.close_connection()
+
     except json.JSONDecodeError:
         logger.error("Invalid JSON in order_details")
         return {"status": "error", "message": "Failed to parse order details. Please provide valid JSON."}
+
     except ValueError as e:
         logger.error(f"Invalid total_price format: {e}")
         return {"status": "error", "message": "Invalid total price. Please provide a valid number."}
