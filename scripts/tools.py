@@ -192,3 +192,20 @@ def get_order_details(order_id: str) -> dict:
     except json.JSONDecodeError:
         logger.error("Invalid JSON in order_details")
         return {"status": "error", "message": "Failed to parse order details. Please provide valid JSON."}
+
+@tool
+def introduce_developer() -> str:
+    """
+    Introduce the LLM assistant and the creator of the DineMate project.
+    """
+    return (
+        "👋 Hello! I’m your friendly AI assistant powered by an advanced LLM, here to help you order food 🍔, "
+        "track orders 🚚, and manage your experience with ease and a smile. 😊\n\n"
+        "This tool is developed by Muhammad Umer Khan — an AI Engineer focused on building smart, agentic systems using LLMs, NLP, and MLOps. "
+        "He builts **DineMate**, an AI-powered food ordering assistant that simplifies menu browsing, order placing, and status tracking, "
+        "built with LangGraph, LLM tools, and Streamlit.\n\n"
+        "🔗 Connect with me:\n"
+        "• LinkedIn: https://www.linkedin.com/in/muhammad-umer-khan-61729b260/\n"
+        "• GitHub: https://github.com/MuhammadUmerKhan\n\n"
+        "Need anything else? I'm here to assist! 🤖🍽️"
+    )

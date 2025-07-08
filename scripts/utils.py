@@ -2,6 +2,7 @@
 import os  # Used for environment variable access
 import streamlit as st  # Streamlit for building UI
 from scripts.logger import get_logger  # Streamlit's built-in logger
+from scripts.config import GROQ_API_KEY  # Langchain Grok API key (Generate from: https://console.groq.com/)
 from langchain_groq import ChatGroq  # Groq API for LLMPI
 from dotenv import load_dotenv
 load_dotenv()  # ✅ Load environment variables from .env
@@ -10,11 +11,8 @@ load_dotenv()  # ✅ Load environment variables from .env
 # Initialize logger for tracking interactions and errors
 logger = get_logger(__name__)
 
-# ✅ API Key Handling (For Local & Deployed Environments)
-grok_api_key = os.getenv("GROQ_API_KEY") # Langchain Grok API key (Generate from: https://console.groq.com/)
-
 # Check if API key is available
-if not grok_api_key:
+if not GROQ_API_KEY:
     st.error("❌ Missing API Token!")
     st.stop()  # Stop execution if API token is missing
 
@@ -63,7 +61,7 @@ def display_msg(msg, author):
     st.chat_message(author).write(msg)  # Display message in Streamlit UI
 
 @st.cache_resource
-def configure_llm(model_name):
+def configure_llm(DEFAULT_MODEL_NAME):
     """
     Configure LLM to run on Hugging Face Inference API (Cloud-Based).
     
@@ -73,8 +71,8 @@ def configure_llm(model_name):
     # ✅ Use Hugging Face Inference API for cloud execution
     llm = ChatGroq(
     temperature=0.3,
-    groq_api_key=grok_api_key,
-    model_name=model_name,
+    groq_api_key=GROQ_API_KEY,
+    model_name=DEFAULT_MODEL_NAME,
     # system_message="You are an AI assistant. Respond directly and concisely. Do not explain your reasoning unless explicitly asked."
 )
 
