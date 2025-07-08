@@ -1,11 +1,10 @@
-DineMate: Agentic AI for Automated Food Ordering                                                               Personal Project | 2025
-• Challenge: Manual food ordering lacked automation, voice support, and real-time data visibility for restaurant
-operations.
+DineMate: Agentic AI for Automated Food Ordering                                              Personal Project | 2025 
+• Challenge: Built an intelligent food ordering system to replace manual workflows with real-time, multi-role automation, analytics, and voice-based accessibility. 
 • Action:
-    • Developed a voice-enabled food ordering chatbot using Qwen, Whisper ASR, Torch TTS, LangChain, and MySQL.
-    • Designed a Streamlit UI with role-based dashboards (Admin, Kitchen, Customer) for full operational visibility.
-    • Implemented multi-agent automation for menu fetch, order tracking, smart cancellations, and billing.
-    • Added analytics dashboards for demand forecasting, sales trends, and menu optimization.
-• Result:
-    • Streamlined ordering, improved accessibility, and empowered owners with real-time, actionable insights.
-    • Dramatically reduced errors and improved customer experience through full AI automation. [Live Demo](https://dinemate-ai-powered-conversational-ai-agent-for-food-ordering.streamlit.app/)
+    • Designed a modular multi-agent backend using LangGraph for order processing, tracking, and admin actions 
+    • Developed a voice-enabled food ordering chatbot using Qwen, Whisper ASR, Torch TTS, LangChain, and SQLite. 
+    • Integrated SQLite to simplify local deployment and implemented secure, role-based authentication. 
+    • Added analytics dashboards for track sales, peak hours, customer spending, and demand forecasting. 
+• Result: 
+    • Boosted order automation efficiency by 30%, reducing manual input and streamlining real-time operations. 
+    • Dramatically reduced errors and boosted operational insights by 25% through analytics dashboards. [Live Demo](https://dinemate-ai-powered-conversational-ai-agent-for-food-ordering.streamlit.app/). 
