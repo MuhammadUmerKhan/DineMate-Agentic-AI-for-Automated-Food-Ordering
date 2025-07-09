@@ -41,6 +41,7 @@ def login() -> None:
         - 👨‍🍳 **Kitchen Staff**: `kitchen` / `kitchen123`
         - 📞 **Customer Support**: `support` / `support123`
         - 👤 **Customer**: `customer` / `customer123`
+        - ❗ **Troubleshooting**: If you face issues signing up, use `umer` / `umer123` to sign in.
         """)
 
     # 📜 Instructions
