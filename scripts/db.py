@@ -314,6 +314,13 @@ class Database:
             logger.error({"error": str(e), "message": "Error verifying user"})
             return None
 
+    def check_existing_user(self, username, email):
+        """✅ Check if the username OR email already exists in the database."""
+        query = "SELECT * FROM customers WHERE username = ? OR email = ?"
+        self.cursor.execute(query, (username, email))
+        existing_user = self.cursor.fetchone()
+        return existing_user  # Returns user if found, else None
+
     def close_connection(self):
         """🔒 Close SQLite connection."""
         try:
