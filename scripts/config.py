@@ -29,7 +29,13 @@ DB_PATH = os.path.join("database", "dinemate.db")
 STATIC_CSS_PATH = os.path.join("static", "styles.css")
 
 # Model configuration
-DEFAULT_MODEL_NAME = "qwen/qwen3-32b"
+DEFAULT_MODEL_NAME = os.getenv("MODEL_NAME")
+
+# Langchain configuration
+LANGCHAIN_TRACING_V2 = os.getenv("LANGCHAIN_TRACING_V2", "false").lower() == "true"
+LANGCHAIN_ENDPOINT = os.getenv("LANGCHAIN_ENDPOINT")
+LANGCHAIN_API_KEY = os.getenv("LANGCHAIN_API_KEY")
+LANGCHAIN_PROJECT = os.getenv("LANGCHAIN_PROJECT")
 
 def get_db_connection():
     """
@@ -44,8 +50,8 @@ def get_db_connection():
     try:
         conn = sqlite3.connect(DB_PATH)
         conn.row_factory = sqlite3.Row
-        logger.info("✅ Database connection established.")
+        logger.info("✅ Database connected")
         return conn
     except sqlite3.Error as e:
-        logger.error(f"❌ Failed to connect to database: {e}")
+        logger.error({"error": str(e), "message": "❌ Connection failed"})
         raise

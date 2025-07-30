@@ -29,7 +29,7 @@ memory = MemorySaver()
 
 def build_graph():
     """Construct the LangGraph workflow for the chatbot."""
-    logger.info("Building LangGraph workflow")
+    logger.info("📈 Building workflow")
     builder = StateGraph(State)
     builder.add_node("chatbot", chatbot)
     builder.add_node("tools", ToolNode([get_menu, save_order, check_order_status, cancel_order, modify_order, get_order_details, introduce_developer]))
@@ -37,7 +37,7 @@ def build_graph():
     builder.add_conditional_edges("chatbot", tools_condition)
     builder.add_edge("tools", "chatbot")
     graph = builder.compile(checkpointer=memory)
-    logger.info("Graph built successfully")
+    logger.info("✅ Graph built")
     return graph
 
 def save_graph_diagram(graph, output_path: str) -> None:
@@ -47,6 +47,6 @@ def save_graph_diagram(graph, output_path: str) -> None:
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
         with open(output_path, "wb") as f:
             f.write(png_data)
-        logger.info(f"Diagram saved to {output_path}")
+        logger.info("🖼️ Diagram saved")
     except Exception as e:
-        logger.error(f"Failed to save diagram: {e}")
+        logger.error({"error": str(e), "message": "❌ Diagram save failed"})

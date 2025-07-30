@@ -9,7 +9,6 @@ Dependencies:
 - logger: For logging.
 """
 
-import json
 from typing import Dict, Union
 from scripts.db import Database
 from scripts.logger import get_logger
@@ -23,7 +22,7 @@ class OrderHandler:
         self.menu = self.fetch_menu()
         self.order_items: Dict[str, int] = {}
         self.total_price: float = 0.0
-        logger.info("OrderHandler initialized")
+        logger.info("🍽️ OrderHandler initialized")
 
     def fetch_menu(self) -> Dict[str, float]:
         """Fetch and cache menu items.
@@ -34,10 +33,10 @@ class OrderHandler:
         try:
             menu = self.db.load_menu()
             menu_dict = {item["name"].lower(): float(item["price"]) for item in menu} if menu else {}
-            logger.info(f"Fetched menu with {len(menu_dict)} items")
+            logger.info("🍔 Fetched menu")
             return menu_dict
         except Exception as e:
-            logger.error({"error": str(e)})
+            logger.error({"error": str(e), "message": "❌ Menu fetch failed"})
             return {}
         finally:
             self.db.close_connection()
@@ -52,14 +51,13 @@ class OrderHandler:
             str: Confirmation message.
         """
         if not isinstance(items_dict, dict):
-            logger.error({"invalid_input": type(items_dict)})
-            return "Invalid item format."
+            logger.error("❌ Invalid item format")
+            return "Invalid format."
 
         response = []
         unavailable = []
         for item, quantity in items_dict.items():
             if not isinstance(quantity, int) or quantity <= 0:
-                logger.warning({"invalid_quantity": {"item": item, "quantity": quantity}})
                 unavailable.append(item)
                 continue
             item_lower = item.lower()
@@ -71,11 +69,10 @@ class OrderHandler:
                 unavailable.append(item)
 
         if unavailable:
-            available = ", ".join(self.menu.keys())
-            response.append(f"Unavailable items: {', '.join(unavailable)}. Available: {available}.")
+            response.append(f"Unavailable: {', '.join(unavailable)}. Available: {', '.join(self.menu.keys())}.")
 
-        logger.info({"order_items": self.order_items, "total_price": self.total_price})
-        return "\n".join(response) + f"\nOrder: {self.order_items}, Total: ${self.total_price:.2f}"
+        logger.info("🛒 Order updated")
+        return "\n".join(response) + f"\nTotal: ${self.total_price:.2f}"
 
     def get_order(self) -> Union[Dict[str, int], str]:
         """Return current order.
@@ -83,8 +80,8 @@ class OrderHandler:
         Returns:
             Union[Dict[str, int], str]: Order items or message if empty.
         """
-        logger.info({"order_items": self.order_items})
-        return self.order_items if self.order_items else "No items in order."
+        logger.info("📋 Fetching order")
+        return self.order_items if self.order_items else "No items."
 
     def confirm_order(self) -> str:
         """Confirm and store order in database.
@@ -93,18 +90,18 @@ class OrderHandler:
             str: Confirmation message.
         """
         if not self.order_items:
-            logger.warning("Empty order")
+            logger.warning("⚠️ Empty order")
             return "No items to confirm."
 
         try:
             order_id = self.db.store_order_db(self.order_items, self.total_price)
             if not order_id:
-                logger.error("Failed to store order")
-                return "Error storing order."
+                logger.error("❌ Order store failed")
+                return "Error storing."
             self.order_items = {}
             self.total_price = 0.0
-            logger.info({"order_id": order_id, "status": "confirmed"})
-            return f"Order confirmed! ID: {order_id}, Delivery in 40 minutes."
+            logger.info("✅ Order confirmed")
+            return f"Order {order_id} confirmed. Delivery in 40 min."
         finally:
             self.db.close_connection()
 
@@ -119,12 +116,12 @@ class OrderHandler:
         """
         item_lower = item_name.lower()
         if item_lower not in self.order_items:
-            logger.warning({"item": item_lower, "status": "not_in_order"})
-            return f"{item_name} not in order."
+            logger.warning("⚠️ Item not in order")
+            return f"{item_name} not found."
         quantity = self.order_items.pop(item_lower)
         self.total_price -= self.menu.get(item_lower, 0) * quantity
-        logger.info({"order_items": self.order_items, "total_price": self.total_price})
-        return f"Removed {item_name}. Order: {self.order_items}, Total: ${self.total_price:.2f}"
+        logger.info("🗑️ Item removed")
+        return f"Removed {item_name}. Total: ${self.total_price:.2f}"
 
     def update_item(self, order_dict: Dict[str, int]) -> str:
         """Update item quantities.
@@ -136,13 +133,12 @@ class OrderHandler:
             str: Confirmation message.
         """
         if not isinstance(order_dict, dict):
-            logger.error({"invalid_input": type(order_dict)})
-            return "Invalid item format."
+            logger.error("❌ Invalid format")
+            return "Invalid format."
 
         unavailable = []
         for item, quantity in order_dict.items():
             if not isinstance(quantity, int) or quantity < 0:
-                logger.warning({"invalid_quantity": {"item": item, "quantity": quantity}})
                 unavailable.append(item)
                 continue
             item_lower = item.lower()
@@ -159,11 +155,11 @@ class OrderHandler:
                 unavailable.append(item)
 
         if unavailable:
-            logger.warning({"unavailable_items": unavailable})
-            return f"Not in order: {', '.join(unavailable)}. Add them first."
-        
-        logger.info({"order_items": self.order_items, "total_price": self.total_price})
-        return f"Order updated: {self.order_items}, Total: ${self.total_price:.2f}"
+            logger.warning("⚠️ Items not in order")
+            return f"Not in order: {', '.join(unavailable)}."
+
+        logger.info("🔄 Order updated")
+        return f"Updated: {self.order_items}, Total: ${self.total_price:.2f}"
 
     def replace_item(self, old_item: str, new_item: str) -> str:
         """Replace an item in the order.
@@ -178,16 +174,16 @@ class OrderHandler:
         old_item_lower = old_item.lower()
         new_item_lower = new_item.lower()
         if old_item_lower not in self.order_items:
-            logger.warning({"item": old_item_lower, "status": "not_in_order"})
-            return f"{old_item} not in order."
+            logger.warning("⚠️ Item not in order")
+            return f"{old_item} not found."
         if new_item_lower not in self.menu:
-            logger.warning({"item": new_item_lower, "status": "not_in_menu"})
-            return f"{new_item} not in menu."
+            logger.warning("⚠️ Item not in menu")
+            return f"{new_item} not available."
 
         quantity = self.order_items.pop(old_item_lower)
         old_price = self.menu.get(old_item_lower, 0) * quantity
         new_price = self.menu.get(new_item_lower, 0) * quantity
         self.total_price = self.total_price - old_price + new_price
         self.order_items[new_item_lower] = quantity
-        logger.info({"order_items": self.order_items, "total_price": self.total_price})
-        return f"Replaced {old_item} with {new_item}. Order: {self.order_items}, Total: ${self.total_price:.2f}"
+        logger.info("🔄 Item replaced")
+        return f"Replaced {old_item} with {new_item}. Total: ${self.total_price:.2f}"

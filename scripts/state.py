@@ -22,4 +22,4 @@ class State(TypedDict):
     menu: dict
 
     def __init__(self):
-        logger.info("State initialized")
+        logger.info("🍽️ State initialized")

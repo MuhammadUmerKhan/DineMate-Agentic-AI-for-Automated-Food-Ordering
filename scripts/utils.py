@@ -1,53 +1,50 @@
 # Import required libraries
-import os  # Used for environment variable access
-import streamlit as st  # Streamlit for building UI
-from scripts.logger import get_logger  # Streamlit's built-in logger
-from scripts.config import GROQ_API_KEY  # Langchain Grok API key (Generate from: https://console.groq.com/)
-from langchain_groq import ChatGroq  # Groq API for LLMPI
+
 from dotenv import load_dotenv
-load_dotenv()  # ✅ Load environment variables from .env
+from langsmith import traceable
+import streamlit as st
+from scripts.logger import get_logger
+from scripts.config import GROQ_API_KEY, LANGCHAIN_PROJECT, DEFAULT_MODEL_NAME
+from langchain_groq import ChatGroq
 
+load_dotenv()
 
-# Initialize logger for tracking interactions and errors
+# Initialize logger
 logger = get_logger(__name__)
 
 # Check if API key is available
 if not GROQ_API_KEY:
     st.error("❌ Missing API Token!")
-    st.stop()  # Stop execution if API token is missing
+    st.stop()
 
-# ✅ Decorator to enable chat history
+# Decorator to enable chat history
 def enable_chat_history(func):
     """
     Decorator to handle chat history and UI interactions.
     Ensures chat messages persist across interactions.
     """
-    current_page = func.__qualname__  # Get function name to track current chatbot session
+    current_page = func.__qualname__
 
-    # Clear session state if model/chatbot is switched
     if "current_page" not in st.session_state:
-        st.session_state["current_page"] = current_page  # Store the current chatbot session
+        st.session_state["current_page"] = current_page
     if st.session_state["current_page"] != current_page:
         try:
-            st.cache_resource.clear()  # Clear cached resources
+            st.cache_resource.clear()
             del st.session_state["current_page"]
             del st.session_state["messages"]
         except Exception:
-            pass  # Ignore errors if session state keys do not exist
+            pass
 
-    # Initialize chat history if not already present
     if "messages" not in st.session_state:
-        st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
+        st.session_state["messages"] = [{"role": "assistant", "content": "How can I help?"}]
 
-    # Display chat history in the UI
     for msg in st.session_state["messages"]:
         st.chat_message(msg["role"]).write(msg["content"])
 
     def execute(*args, **kwargs):
-        func(*args, **kwargs)  # Execute the decorated function
+        func(*args, **kwargs)
 
     return execute
-
 
 def display_msg(msg, author):
     """
@@ -57,26 +54,26 @@ def display_msg(msg, author):
         msg (str): The message content to display.
         author (str): The author of the message ("user" or "assistant").
     """
-    st.session_state.messages.append({"role": author, "content": msg})  # Store message in session
-    st.chat_message(author).write(msg)  # Display message in Streamlit UI
+    st.session_state.messages.append({"role": author, "content": msg})
+    st.chat_message(author).write(msg)
 
 @st.cache_resource
-def configure_llm(DEFAULT_MODEL_NAME):
+@traceable(run_type="llm", project_name=LANGCHAIN_PROJECT)
+def configure_llm(DEFAULT_MODEL_NAME=DEFAULT_MODEL_NAME):
     """
     Configure LLM to run on Hugging Face Inference API (Cloud-Based).
     
     Returns:
         llm (LangChain LLM object): Configured model instance.
     """
-    # ✅ Use Hugging Face Inference API for cloud execution
     llm = ChatGroq(
-    temperature=0.3,
-    groq_api_key=GROQ_API_KEY,
-    model_name=DEFAULT_MODEL_NAME,
-    # system_message="You are an AI assistant. Respond directly and concisely. Do not explain your reasoning unless explicitly asked."
-)
-
-    return llm  # Return configured LLM
+        temperature=0.3,
+        groq_api_key=GROQ_API_KEY,
+        model_name=DEFAULT_MODEL_NAME,
+        max_tokens=100  # Limit response length
+    )
+    logger.info("🤖 LLM configured")
+    return llm
 
 def print_qa(cls, question, answer):
     """
@@ -87,12 +84,12 @@ def print_qa(cls, question, answer):
         question (str): User question.
         answer (str): Model response.
     """
-    log_str = f"\nUsecase: {cls.__name__}\nQuestion: {question}\nAnswer: {answer}\n" + "-" * 50
-    logger.info(log_str)  # Log the interaction using Streamlit's logger
+    log_str = f"\nUsecase: {cls.__name__}\nQ: {question}\nA: {answer}\n" + "-" * 50
+    logger.info("💬 Q&A logged")
 
 def sync_st_session():
     """
     Ensures Streamlit session state values are properly synchronized.
     """
     for k, v in st.session_state.items():
-        st.session_state[k] = v  # Sync all session state values
+        st.session_state[k] = v

@@ -14,23 +14,22 @@ Dependencies:
 """
 
 import sqlite3, datetime, json, bcrypt, pandas as pd
-from typing import Dict, Optional, List
+from typing import Dict, Optional
 from scripts.logger import get_logger
 from scripts.config import DB_PATH
 
 logger = get_logger(__name__)
 
-
 class Database:
-    def __init__(self, db_path: str = DB_PATH):
+    def __init__(self, db_path: str=DB_PATH):
         """🗄️ Initialize and connect to SQLite database."""
         try:
             self.connection = sqlite3.connect(db_path, check_same_thread=False)
             self.connection.row_factory = sqlite3.Row
             self.cursor = self.connection.cursor()
-            logger.info({"message": "Connected to SQLite database successfully"})
+            logger.info("✅ Connected to SQLite database")
         except sqlite3.Error as e:
-            logger.error({"error": str(e), "message": "Database connection failed"})
+            logger.error({"error": str(e), "message": "❌ Database connection failed"})
             raise
 
     def fetch_order_data(self, status: Optional[str] = "Delivered") -> pd.DataFrame:
@@ -42,7 +41,7 @@ class Database:
         Returns:
             pd.DataFrame: Resulting DataFrame or empty if error.
         """
-        logger.info({"status": status, "message": "Fetching order data for analytics"})
+        logger.info("📊 Fetching order data for analytics")
         query = "SELECT id, items, total_price, status, date, time FROM orders"
         try:
             if status and status != "All":
@@ -50,22 +49,22 @@ class Database:
                 return pd.read_sql_query(query, self.connection, params=(status,))
             return pd.read_sql_query(query, self.connection)
         except Exception as e:
-            logger.error({"error": str(e), "message": "Error fetching order data"})
+            logger.error({"error": str(e), "message": "❌ Error fetching order data"})
             return pd.DataFrame()
 
-    def load_menu(self) -> Optional[List[Dict]]:
-        """🍽️ Load menu items.
+    def load_menu(self) -> Optional[Dict[str, float]]:
+        """🍽️ Load menu items as a compact dictionary.
 
         Returns:
-            Optional[List[Dict]]: List of menu items or None if error.
+            Optional[Dict[str, float]]: Dictionary of item names to prices or None if error.
         """
         try:
-            self.cursor.execute("SELECT * FROM menu")
-            menu = [dict(row) for row in self.cursor.fetchall()]
-            logger.info({"count": len(menu), "message": "Fetched menu items"})
-            return menu or None
+            self.cursor.execute("SELECT name, price FROM menu")
+            menu = {row["name"]: float(row["price"]) for row in self.cursor.fetchall()}
+            logger.info("🍔 Fetched menu items")
+            return menu if menu else None
         except sqlite3.Error as e:
-            logger.error({"error": str(e), "message": "Error fetching menu"})
+            logger.error({"error": str(e), "message": "❌ Error fetching menu"})
             return None
 
     def get_max_id(self) -> int:
@@ -79,7 +78,7 @@ class Database:
             result = self.cursor.fetchone()
             return (result[0] or 0) + 1
         except sqlite3.Error as e:
-            logger.error({"error": str(e), "message": "Error fetching max ID"})
+            logger.error({"error": str(e), "message": "❌ Error fetching max ID"})
             return 1
 
     def store_order_db(self, order_dict: Dict[str, int], price: float, status: str = "Pending") -> Optional[int]:
@@ -104,10 +103,10 @@ class Database:
                 (order_id, json.dumps(order_dict), price, status, now.strftime("%Y-%m-%d"), now.strftime("%I:%M:%S %p"))
             )
             self.connection.commit()
-            logger.info({"order_id": order_id, "message": "Order stored successfully"})
+            logger.info("✅ Order stored")
             return order_id
         except sqlite3.Error as e:
-            logger.error({"error": str(e), "message": "Error storing order"})
+            logger.error({"error": str(e), "message": "❌ Error storing order"})
             return None
 
     def check_order_status_db(self, order_id: int) -> str:
@@ -119,7 +118,7 @@ class Database:
         Returns:
             str: Status message.
         """
-        logger.info({"order_id": order_id, "message": "Checking order status"})
+        logger.info("📦 Checking order status")
         try:
             self.cursor.execute("SELECT status, time, date FROM orders WHERE id = ?", (order_id,))
             row = self.cursor.fetchone()
@@ -128,7 +127,7 @@ class Database:
 
             status = row["status"]
             if status in {"Canceled", "Delivered"}:
-                return f"Order {order_id} is already {status.lower()}."
+                return f"Order {order_id} is {status.lower()}."
 
             order_time = datetime.datetime.strptime(f"{row['date']} {row['time']}", "%Y-%m-%d %I:%M:%S %p")
             estimated_time = order_time + datetime.timedelta(minutes=40)
@@ -136,11 +135,11 @@ class Database:
 
             if now > estimated_time:
                 delay = int((now - estimated_time).total_seconds() / 60)
-                return f"Order Status: {status}\nEstimated Delivery Time: {estimated_time.strftime('%I:%M %p')} (delayed by ~{delay} minutes)"
-            return f"Order Status: {status}\nEstimated Delivery Time: {estimated_time.strftime('%I:%M %p')}"
+                return f"Status: {status}, Delivery: {estimated_time.strftime('%I:%M %p')} (delayed ~{delay} min)"
+            return f"Status: {status}, Delivery: {estimated_time.strftime('%I:%M %p')}"
         except Exception as e:
-            logger.error({"error": str(e), "order_id": order_id, "message": "Error fetching order status"})
-            return f"Error fetching order status: {e}"
+            logger.error({"error": str(e), "message": "❌ Error fetching status"})
+            return f"Error: {e}"
 
     def cancel_order_after_confirmation(self, order_id: int) -> str:
         """❌ Cancel an order if within 10 minutes.
@@ -151,7 +150,7 @@ class Database:
         Returns:
             str: Result message.
         """
-        logger.info({"order_id": order_id, "message": "Checking cancellation"})
+        logger.info("🚫 Checking cancellation")
         try:
             self.cursor.execute("SELECT status, date, time FROM orders WHERE id = ?", (order_id,))
             row = self.cursor.fetchone()
@@ -159,18 +158,18 @@ class Database:
                 return f"No order found with ID {order_id}"
 
             if row["status"] in {"Canceled", "Completed", "Delivered"}:
-                return f"Order {order_id} is already {row['status'].lower()} and cannot be canceled."
+                return f"Order {order_id} is {row['status'].lower()}."
 
             order_time = datetime.datetime.strptime(f"{row['date']} {row['time']}", "%Y-%m-%d %I:%M:%S %p")
             if (datetime.datetime.now() - order_time).total_seconds() > 600:
-                return "Cannot cancel order: past 10-minute window."
+                return "Cannot cancel: past 10-min window."
 
             self.cursor.execute("UPDATE orders SET status = ? WHERE id = ?", ("Canceled", order_id))
             self.connection.commit()
-            return f"Order {order_id} canceled successfully."
+            return f"Order {order_id} canceled."
         except Exception as e:
-            logger.error({"error": str(e), "order_id": order_id, "message": "Error canceling order"})
-            return f"Error canceling order: {e}"
+            logger.error({"error": str(e), "message": "❌ Error canceling"})
+            return f"Error: {e}"
 
     def modify_order_after_confirmation(self, order_id: int, updated_items: str, new_total_price: float) -> str:
         """✏️ Modify order if within 10 minutes.
@@ -183,17 +182,17 @@ class Database:
         Returns:
             str: Status message.
         """
-        logger.info({"order_id": order_id, "message": "Checking modification request"})
+        logger.info("✍️ Checking modification")
         try:
             items = json.loads(updated_items)
             if not items:
-                return "⚠️ No items provided in the updated order."
+                return "⚠️ No items provided."
 
             menu = self.load_menu() or []
             valid_items = {item["name"].lower() for item in menu}
             for item in items:
                 if item.lower() not in valid_items:
-                    return f"⚠️ Item '{item}' is not available in the menu."
+                    return f"⚠️ '{item}' not in menu."
 
             self.cursor.execute("SELECT status, date, time FROM orders WHERE id = ?", (order_id,))
             row = self.cursor.fetchone()
@@ -201,11 +200,11 @@ class Database:
                 return f"⚠️ No order found with ID {order_id}."
 
             if row["status"] not in {"Pending", "Preparing"}:
-                return f"⚠️ Order {order_id} is already {row['status'].lower()} and cannot be modified."
+                return f"⚠️ Order {order_id} is {row['status'].lower()}."
 
             order_time = datetime.datetime.strptime(f"{row['date']} {row['time']}", "%Y-%m-%d %I:%M:%S %p")
             if (datetime.datetime.now() - order_time).total_seconds() > 600:
-                return "⚠️ Cannot modify order: more than 10 minutes have passed since placement."
+                return "⚠️ Cannot modify: past 10-min window."
 
             self.cursor.execute(
                 "UPDATE orders SET items = ?, total_price = ? WHERE id = ?",
@@ -214,14 +213,10 @@ class Database:
             self.connection.commit()
 
             summary = ", ".join(f"{item}: {qty}" for item, qty in items.items())
-            return (
-                f"✅ Order {order_id} updated successfully.\n"
-                f"🛒 Items: {summary}\n"
-                f"💰 Total: ${new_total_price:.2f}"
-            )
+            return f"✅ Order {order_id} updated. Items: {summary}, Total: ${new_total_price:.2f}"
         except (sqlite3.Error, ValueError, TypeError) as e:
-            logger.error({"order_id": order_id, "error": str(e), "message": "Failed to update order"})
-            return f"⚠️ Error updating order: {str(e)}"
+            logger.error({"error": str(e), "message": "❌ Failed to update"})
+            return f"⚠️ Error: {str(e)}"
 
     def get_order_by_id(self, order_id: int) -> Dict[str, any]:
         """🔍 Get full order details.
@@ -232,7 +227,7 @@ class Database:
         Returns:
             Dict[str, any]: Order dict with message.
         """
-        logger.info({"order_id": order_id, "message": "Fetching order details"})
+        logger.info("🔎 Fetching order details")
         try:
             self.cursor.execute("SELECT * FROM orders WHERE id = ?", (order_id,))
             row = self.cursor.fetchone()
@@ -246,15 +241,15 @@ class Database:
             if order["status"] == "Pending":
                 placed = datetime.datetime.strptime(f"{order['date']} {order['time']}", "%Y-%m-%d %I:%M:%S %p")
                 minutes = (datetime.datetime.now() - placed).total_seconds() / 60
-                msg += f"\nYou have {int(10 - minutes)} minute{'s' if int(minutes) != 9 else ''} to modify or cancel." if minutes <= 10 else "\nCannot modify or cancel: past 10-minute window."
+                msg += f"\n{int(10 - minutes)} min to modify" if minutes <= 10 else "\nCannot modify: past 10-min window."
             else:
-                msg += f"\nCannot modify or cancel: order is {order['status'].lower()}."
+                msg += f"\nCannot modify: order is {order['status'].lower()}."
 
             order.update({"items": items, "message": msg})
             return order
         except Exception as e:
-            logger.error({"error": str(e), "message": "Error fetching order"})
-            return {"status": "error", "message": f"Error fetching order: {e}"}
+            logger.error({"error": str(e), "message": "❌ Error fetching order"})
+            return {"status": "error", "message": f"Error: {e}"}
 
     def add_user(self, username: str, password: str, email: str, role: str = "customer") -> str:
         """👤 Add new user.
@@ -270,7 +265,7 @@ class Database:
         """
         try:
             if not (username.isalnum() and "@" in email and "." in email):
-                return "Invalid username or email format."
+                return "Invalid username or email."
 
             password_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 
@@ -280,10 +275,10 @@ class Database:
                 self.cursor.execute("INSERT INTO customers (username, password_hash, email) VALUES (?, ?, ?)", (username, password_hash, email))
 
             self.connection.commit()
-            return f"User {username} added successfully."
+            return f"User {username} added."
         except sqlite3.Error as e:
-            logger.error({"error": str(e), "message": "Error adding user"})
-            return f"Error adding user: {e}"
+            logger.error({"error": str(e), "message": "❌ Error adding user"})
+            return f"Error: {e}"
 
     def verify_user(self, username: str, password: str) -> Optional[str]:
         """🔐 Verify credentials and get role.
@@ -311,20 +306,19 @@ class Database:
 
             return None
         except sqlite3.Error as e:
-            logger.error({"error": str(e), "message": "Error verifying user"})
+            logger.error({"error": str(e), "message": "❌ Error verifying user"})
             return None
 
     def check_existing_user(self, username, email):
         """✅ Check if the username OR email already exists in the database."""
         query = "SELECT * FROM customers WHERE username = ? OR email = ?"
         self.cursor.execute(query, (username, email))
-        existing_user = self.cursor.fetchone()
-        return existing_user  # Returns user if found, else None
+        return self.cursor.fetchone()
 
     def close_connection(self):
         """🔒 Close SQLite connection."""
         try:
             self.connection.close()
-            logger.info({"message": "Database connection closed"})
+            logger.info("🔐 Database connection closed")
         except sqlite3.Error as e:
-            logger.error({"error": str(e), "message": "Error closing connection"})
+            logger.error({"error": str(e), "message": "❌ Error closing connection"})
