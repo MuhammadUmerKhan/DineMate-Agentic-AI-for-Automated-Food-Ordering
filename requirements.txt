@@ -1,8 +1,9 @@
 numpy
 python-dotenv
 langchain_groq
-langgraph
 langchain
+langgraph
+langsmith
 bcrypt
 plotly
 nbformat
