@@ -1,7 +1,7 @@
 # Import required libraries
 
 from dotenv import load_dotenv
-from langsmith import traceable
+# from langsmith import traceable
 import streamlit as st
 from scripts.logger import get_logger
 from scripts.config import GROQ_API_KEY, LANGCHAIN_PROJECT, DEFAULT_MODEL_NAME
@@ -58,7 +58,7 @@ def display_msg(msg, author):
     st.chat_message(author).write(msg)
 
 @st.cache_resource
-@traceable(run_type="llm", project_name=LANGCHAIN_PROJECT)
+# @traceable(run_type="llm", project_name=LANGCHAIN_PROJECT)
 def configure_llm(DEFAULT_MODEL_NAME=DEFAULT_MODEL_NAME):
     """
     Configure LLM to run on Hugging Face Inference API (Cloud-Based).
@@ -67,10 +67,9 @@ def configure_llm(DEFAULT_MODEL_NAME=DEFAULT_MODEL_NAME):
         llm (LangChain LLM object): Configured model instance.
     """
     llm = ChatGroq(
-        temperature=0.3,
+        temperature=0.5,
         groq_api_key=GROQ_API_KEY,
         model_name=DEFAULT_MODEL_NAME,
-        max_tokens=100  # Limit response length
     )
     logger.info("🤖 LLM configured")
     return llm
