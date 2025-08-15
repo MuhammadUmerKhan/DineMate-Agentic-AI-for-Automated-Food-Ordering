@@ -27,5 +27,6 @@ DineMate-Food-Ordering-Chatbot/
 │── static/
 │   ├── styles.css         # 🎨 Centralized dark theme CSS
 │── main.py                # 🚀 Main Streamlit app entry point
+|── .env.example           # 🔑 Example environment variables
 │── requirements.txt       # 📋 Dependency list
 │── README.md              # 📖 Project documentation
