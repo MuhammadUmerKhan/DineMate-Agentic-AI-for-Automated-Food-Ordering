@@ -46,15 +46,17 @@ def enable_chat_history(func):
         if menu:
             formatted_menu = "\n".join(f"- {item}: ${price:.2f}" for item, price in menu.items())
             # Updated: Append prompt to encourage ordering
-            menu_message = f"Here's our menu 🍽️ for your reference:\n{formatted_menu}\n Would you like to order anything? 😊"
+            menu_message = f"Here's our menu 🍽️ for your reference:\n{formatted_menu}\n"
+            
         else:
-            menu_message = "Sorry, the menu is unavailable at the moment. ⚠️\n Would you like to try again later? 😊"
+            menu_message = "Sorry, the menu is unavailable at the moment. ⚠️"
+    
         db.close_connection()  # Close the DB connection after fetching
         
         # Set initial messages to include greeting + menu with order prompt
         st.session_state["messages"] = [
             {"role": "assistant", "content": initial_greeting},
-            {"role": "assistant", "content": menu_message}
+            {"role": "assistant", "content": menu_message},
         ]
 
     for msg in st.session_state["messages"]:
