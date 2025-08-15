@@ -51,7 +51,7 @@ A **data-driven dashboard** empowering admins with actionable insights to optimi
 ## 🏗️ **Technologies Used**
 
 ### 🔹 **Backend & AI**
-- 🧠 **Qwen-2.5-32B**: Powerful LLM for understanding food-related queries.
+- 🧠 **openai/gpt-oss-120b**: Powerful LLM for understanding food-related queries.
 - 🔗 **LangChain**: Connects LLM with tools and database queries.
 - 🔄 **LangGraph**: Manages conversation flow and multi-agent workflows.
 - 🐍 **Python**: Core language for chatbot and backend logic.
@@ -102,6 +102,7 @@ DineMate-Food-Ordering-Chatbot/
 │── static/
 │   ├── styles.css         # 🎨 Centralized dark theme CSS
 │── main.py                # 🚀 Main Streamlit app entry point
+│── .env.example           # 🔑 Example environment variables
 │── requirements.txt       # 📋 Dependency list
 │── README.md              # 📖 Project documentation
 ```

@@ -50,7 +50,7 @@ The `scripts` folder includes reusable Python files providing backend logic, dat
 - **🤖 `agent.py`**
   - **Purpose**: Orchestrates the AI agent for natural language processing and ordering.
   - **Key Features**:
-    - 🧠 Utilizes Qwen-2.5-32B LLM for chatbot interactions.
+    - 🧠 Utilizes openai/gpt-oss-120b LLM for chatbot interactions.
     - 🍔 Interprets user queries (e.g., "Order 2 pizzas") into actionable commands.
     - 🎤 Supports voice input processing via Whisper AI integration.
     - 🔄 Manages agent state and responses in real time.
@@ -79,7 +79,7 @@ The `scripts` folder includes reusable Python files providing backend logic, dat
 - **🌐 `streaming.py`**
   - **Purpose**: Handles real-time streaming of chatbot responses.
   - **Key Features**:
-    - 🌐 Streams updates from the AI chatbot (e.g., Qwen-2.5-32B).
+    - 🌐 Streams updates from the AI chatbot (e.g., openai/gpt-oss-120b).
     - ⏳ Implements asynchronous updates with a StreamHandler.
     - 🍔 Processes natural language orders in real time.
     - 📜 Logs streaming events and errors.
