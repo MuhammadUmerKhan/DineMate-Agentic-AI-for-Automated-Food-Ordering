@@ -76,27 +76,11 @@ def display_msg(msg, author):
     st.session_state.messages.append({"role": author, "content": msg})
     st.chat_message(author).write(msg)
 
-# @st.cache_resource
-# # @traceable(run_type="llm", project_name=LANGCHAIN_PROJECT)
-# def configure_llm(DEFAULT_MODEL_NAME=DEFAULT_MODEL_NAME):
-#     """
-#     Configure LLM to run on Hugging Face Inference API (Cloud-Based).
-    
-#     Returns:
-#         llm (LangChain LLM object): Configured model instance.
-#     """
-#     llm = ChatGroq(
-#         temperature=0.5,
-#         groq_api_key=GROQ_API_KEY,
-#         model_name=DEFAULT_MODEL_NAME,
-#     )
-#     logger.info("🤖 LLM configured")
-#     return llm
-
 # Singleton LLM instance
 _llm_instance = None
 
 @st.cache_resource
+# @traceable(run_type="llm", project_name=LANGCHAIN_PROJECT)
 def configure_llm():
     """Configures and caches a singleton LLM (ChatGroq) instance."""
     global _llm_instance
