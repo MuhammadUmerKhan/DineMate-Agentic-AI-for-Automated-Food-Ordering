@@ -19,16 +19,43 @@ from scripts.logger import get_logger
 logger = get_logger(__name__)
 
 @tool
-def get_menu() -> str:
-    """Fetch the restaurant menu from the database as a compact JSON string."""
+def get_full_menu() -> str:
+    """Fetch the full restaurant menu as a compact JSON string. Use ONLY when the user explicitly asks to see the entire menu."""
     db = Database()
     try:
         menu = db.load_menu()
         if menu:
-            logger.info("🍔 Menu fetched")
+            logger.info("🍔 Full menu fetched")
             return json.dumps(menu, separators=(",", ":"))
         logger.warning("⚠️ No menu items found")
         return "Menu unavailable."
+    finally:
+        db.close_connection()
+
+@tool
+def get_prices_for_items(items: list) -> str:
+    """Fetch prices for a specific list of items as a compact JSON dict (e.g., {'burger': 10.0, 'coke': 2.0}). 
+    Returns null for any invalid items. Use this for validating items and calculating prices during orders.
+    
+    :param items: List of item names (e.g., ['burger', 'coke']).
+    """
+    db = Database()
+    try:
+        full_menu = db.load_menu()
+        if not full_menu:
+            return json.dumps({})
+        
+        prices = {}
+        for item in set(items):  # Dedup for efficiency
+            lower_item = item.lower()
+            matching_key = next((k for k in full_menu if k.lower() == lower_item), None)
+            if matching_key:
+                prices[matching_key] = full_menu[matching_key]
+            else:
+                prices[item] = None
+        
+        logger.info(f"💰 Prices fetched for {len(items)} items")
+        return json.dumps(prices, separators=(",", ":"))
     finally:
         db.close_connection()
 
