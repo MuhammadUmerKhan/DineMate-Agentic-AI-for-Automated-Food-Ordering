@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 # from langsmith import traceable
 import streamlit as st
 from scripts.logger import get_logger
-from scripts.config import GROQ_API_KEY, LANGCHAIN_PROJECT, DEFAULT_MODEL_NAME
+from scripts.config import GROQ_API_KEY, LANGCHAIN_PROJECT, DEFAULT_MODEL_NAME, TEMPERATURE
 from langchain_groq import ChatGroq
 from scripts.db import Database  # New import to fetch the menu from the database
 
@@ -37,20 +37,21 @@ def enable_chat_history(func):
             pass
 
     if "messages" not in st.session_state:
-        # Updated: Polite initial greeting with emojis
+        # Polite initial greeting with emojis
         initial_greeting = "Welcome to DineMate! 🍽️ How can I assist you today? 😊"
         
-        # New: Fetch and format the menu automatically using the database function
+        # Fetch and format the menu automatically using the database function
         db = Database()
         menu = db.load_menu()
         if menu:
             formatted_menu = "\n".join(f"- {item}: ${price:.2f}" for item, price in menu.items())
-            menu_message = f"Here's our menu 🍽️ for your reference:\n{formatted_menu}"
+            # Updated: Append prompt to encourage ordering
+            menu_message = f"Here's our menu 🍽️ for your reference:\n{formatted_menu}\n Would you like to order anything? 😊"
         else:
-            menu_message = "Sorry, the menu is unavailable at the moment. ⚠️"
+            menu_message = "Sorry, the menu is unavailable at the moment. ⚠️\n Would you like to try again later? 😊"
         db.close_connection()  # Close the DB connection after fetching
         
-        # Updated: Set initial messages to include greeting + menu
+        # Set initial messages to include greeting + menu with order prompt
         st.session_state["messages"] = [
             {"role": "assistant", "content": initial_greeting},
             {"role": "assistant", "content": menu_message}
@@ -75,22 +76,38 @@ def display_msg(msg, author):
     st.session_state.messages.append({"role": author, "content": msg})
     st.chat_message(author).write(msg)
 
-@st.cache_resource
-# @traceable(run_type="llm", project_name=LANGCHAIN_PROJECT)
-def configure_llm(DEFAULT_MODEL_NAME=DEFAULT_MODEL_NAME):
-    """
-    Configure LLM to run on Hugging Face Inference API (Cloud-Based).
+# @st.cache_resource
+# # @traceable(run_type="llm", project_name=LANGCHAIN_PROJECT)
+# def configure_llm(DEFAULT_MODEL_NAME=DEFAULT_MODEL_NAME):
+#     """
+#     Configure LLM to run on Hugging Face Inference API (Cloud-Based).
     
-    Returns:
-        llm (LangChain LLM object): Configured model instance.
-    """
-    llm = ChatGroq(
-        temperature=0.5,
-        groq_api_key=GROQ_API_KEY,
-        model_name=DEFAULT_MODEL_NAME,
-    )
-    logger.info("🤖 LLM configured")
-    return llm
+#     Returns:
+#         llm (LangChain LLM object): Configured model instance.
+#     """
+#     llm = ChatGroq(
+#         temperature=0.5,
+#         groq_api_key=GROQ_API_KEY,
+#         model_name=DEFAULT_MODEL_NAME,
+#     )
+#     logger.info("🤖 LLM configured")
+#     return llm
+
+# Singleton LLM instance
+_llm_instance = None
+
+@st.cache_resource
+def configure_llm():
+    """Configures and caches a singleton LLM (ChatGroq) instance."""
+    global _llm_instance
+    if _llm_instance is None:
+        logger.info("🤖 LLM configured")
+        _llm_instance = ChatGroq(
+            model_name=DEFAULT_MODEL_NAME,
+            temperature=TEMPERATURE,
+            groq_api_key=GROQ_API_KEY
+        )
+    return _llm_instance
 
 def print_qa(cls, question, answer):
     """

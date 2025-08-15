@@ -24,6 +24,9 @@ logger = get_logger(__name__)
 # Environment variables
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
+# Temperature for LLM responses
+TEMPERATURE = os.getenv("TEMPERATURE", 0.5)
+
 # Static paths
 DB_PATH = os.path.join("database", "dinemate.db")
 STATIC_CSS_PATH = os.path.join("static", "styles.css")
