@@ -40,23 +40,25 @@ def enable_chat_history(func):
         # Polite initial greeting with emojis
         initial_greeting = "Welcome to DineMate! 🍽️ How can I assist you today? 😊"
         
-        # Fetch and format the menu automatically using the database function
+        # Fetch menu from database
         db = Database()
         menu = db.load_menu()
+        
         if menu:
-            formatted_menu = "\n".join(f"- {item}: ${price:.2f}" for item, price in menu.items())
-            # Updated: Append prompt to encourage ordering
-            menu_message = f"Here's our menu 🍽️ for your reference:\n{formatted_menu}\n"
-            
+            # Create a markdown table for the menu
+            menu_table = "| Item 🛒 | Price 💲|\n|------|-------|\n"
+            menu_table += "\n".join(f"| {item} | {price:.2f} $ |" for item, price in menu.items())
+            menu_message = f"Here's our menu 🍽️:\n{menu_table}\n"
         else:
             menu_message = "Sorry, the menu is unavailable at the moment. ⚠️"
-    
+        
         db.close_connection()  # Close the DB connection after fetching
         
-        # Set initial messages to include greeting + menu with order prompt
+        # Set initial messages to include greeting + menu table with order prompt
         st.session_state["messages"] = [
             {"role": "assistant", "content": initial_greeting},
             {"role": "assistant", "content": menu_message},
+            {"role": "assistant", "content": "What would you like to order? 🍔"}
         ]
 
     for msg in st.session_state["messages"]:
