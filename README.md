@@ -178,9 +178,9 @@ cd DineMate-Food-Ordering-Chatbot
 - Install Python 3.10: [Download](https://www.python.org/downloads/release/python-3100/).
 - Create and activate:
   ```bash
-  python3 -m venv dinemate_env
-  # Windows: dinemate_env\Scripts\activate
-  # macOS/Linux: source dinemate_env/bin/activate
+  python3 -m venv .venv
+  # Windows: .venv\Scripts\activate
+  # macOS/Linux: source .venv/bin/activate
   ```
 - Install dependencies:
   ```bash
