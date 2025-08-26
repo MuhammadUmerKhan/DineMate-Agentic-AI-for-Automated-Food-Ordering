@@ -250,7 +250,7 @@ streamlit run main.py
 ---
 
 ## 🤝 **Contributions**
-Contributions are welcome! Fork, submit pull requests, or suggest improvements at [GitHub Repository](https://github.com/MuhammadUmerKhan/DineMate-Food-Ordering-Chatbot).
+Contributions are welcome! Fork, submit pull requests, or suggest improvements.
 
 ---
 
