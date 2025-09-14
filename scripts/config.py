@@ -31,6 +31,13 @@ TEMPERATURE = os.getenv("TEMPERATURE", 0.5)
 DB_PATH = os.path.join("database", "dinemate.db")
 STATIC_CSS_PATH = os.path.join("static", "styles.css")
 
+# langsmith configuration
+LANGCHAIN_PROJECT = os.getenv("LANGCHAIN_PROJECT", "DineMate")
+LANGCHAIN_TRACING_V2 = os.getenv("LANGCHAIN_TRACING_V2", "true")
+LANGCHAIN_API_KEY = os.getenv("LANGCHAIN_API_KEY")
+LANGCHAIN_ENDPOINT = os.getenv("LANGCHAIN_ENDPOINT", "https://api.smith.langchain.com")
+LANGCHAIN_API_KEY = os.getenv("LANGCHAIN_API_KEY")
+
 # Model configuration
 DEFAULT_MODEL_NAME = os.getenv("MODEL_NAME", 'openai/gpt-oss-120b')
 
