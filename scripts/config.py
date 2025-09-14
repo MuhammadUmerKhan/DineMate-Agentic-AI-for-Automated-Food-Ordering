@@ -32,13 +32,7 @@ DB_PATH = os.path.join("database", "dinemate.db")
 STATIC_CSS_PATH = os.path.join("static", "styles.css")
 
 # Model configuration
-DEFAULT_MODEL_NAME = os.getenv("MODEL_NAME")
-
-# Langchain configuration
-LANGCHAIN_TRACING_V2 = os.getenv("LANGCHAIN_TRACING_V2", "false").lower() == "true"
-LANGCHAIN_ENDPOINT = os.getenv("LANGCHAIN_ENDPOINT")
-LANGCHAIN_API_KEY = os.getenv("LANGCHAIN_API_KEY")
-LANGCHAIN_PROJECT = os.getenv("LANGCHAIN_PROJECT")
+DEFAULT_MODEL_NAME = os.getenv("MODEL_NAME", 'openai/gpt-oss-120b')
 
 def get_db_connection():
     """

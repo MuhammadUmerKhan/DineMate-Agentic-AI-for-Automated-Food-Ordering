@@ -39,7 +39,7 @@ def stream_graph_updates(user_query: str) -> str:
         st.session_state["graph"] = graph
         logger.info("Graph initialized and cached")
 
-    config = {'configurable': {'thread_id': '1'}}
+    config = {'configurable': {'thread_id': 'thread_1'}}
     state = graph.invoke({"messages": [{"role": "user", "content": user_query}]}, config=config)
     response = state["messages"][-1].content
     logger.info(f"Response: {response}")

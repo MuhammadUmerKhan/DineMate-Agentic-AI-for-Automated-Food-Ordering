@@ -16,13 +16,12 @@ import json, textwrap
 from langsmith import traceable
 from scripts.tools import get_full_menu, get_prices_for_items, save_order, check_order_status, cancel_order, modify_order, get_order_details, introduce_developer
 from scripts.state import State
-from scripts.config import LANGCHAIN_PROJECT
 from scripts.logger import get_logger
 from scripts.utils import configure_llm
 
 logger = get_logger(__name__)
 
-@traceable(run_type="chain", project_name=LANGCHAIN_PROJECT)
+@traceable(run_type="chain", name="DineMate_ChatFlow")
 def chatbot(state: State) -> State:
     """Process user input and interact with the LLM."""
     messages = state["messages"]
