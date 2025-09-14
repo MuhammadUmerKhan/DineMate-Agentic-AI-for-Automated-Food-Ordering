@@ -1,0 +1,20 @@
+[project]
+name = "dinemate-agentic-ai-for-automated-food-ordering"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "bcrypt>=4.3.0",
+    "faker>=37.6.0",
+    "langchain>=0.3.27",
+    "langchain-groq>=0.3.8",
+    "langgraph>=0.6.7",
+    "langsmith>=0.4.27",
+    "nbformat>=5.10.4",
+    "numpy>=2.3.3",
+    "plotly>=6.3.0",
+    "python-dotenv>=1.1.1",
+    "streamlit>=1.49.1",
+    "streamlit-autorefresh>=1.0.1",
+]
