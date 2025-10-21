@@ -14,7 +14,7 @@ Dependencies:
 import streamlit as st, time
 import scripts.utils as utils
 from scripts.config import STATIC_CSS_PATH
-from scripts.streaming import StreamHandler, stream_graph_updates
+from scripts.streaming import StreamHandler, graph_updates
 from app import kitchen, update_prices, login, order_management, home, add_remove_items, track_order, analysis
 from scripts.logger import get_logger
 
@@ -125,7 +125,7 @@ elif page == "🍔 DineMate AI":
                 st_sb = StreamHandler(st.empty())
                 try:
                     with st.spinner("🍴 Processing your order..."):
-                        response = stream_graph_updates(user_query)
+                        response = graph_updates(user_query)
                         st.markdown(response)
                         st.session_state.messages.append({"role": "assistant", "content": response})
                         utils.print_qa(chatbot_main, user_query, response)

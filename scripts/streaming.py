@@ -30,7 +30,7 @@ class StreamHandler(BaseCallbackHandler):
         self.container.markdown(self.text)
         logger.debug(f"Received token: {token}")
 
-def stream_graph_updates(user_query: str) -> str:
+def graph_updates(user_query: str) -> str:
     """Process a user query using the LangGraph workflow and stream the response."""
     logger.info(f"Processing user query: {user_query}")
     graph = st.session_state.get("graph")
