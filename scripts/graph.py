@@ -36,9 +36,13 @@ def build_graph():
     builder.add_edge(START, "chatbot")
     builder.add_conditional_edges("chatbot", tools_condition)
     builder.add_edge("tools", "chatbot")
-    graph = builder.compile(checkpointer=memory)
-    logger.info("✅ Graph built")
-    return graph
+    try:
+        graph = builder.compile(checkpointer=memory)
+        logger.info("✅ Graph built successfully")
+        return graph
+    except Exception as e:
+        logger.error(f"❌ Failed to build graph: {str(e)}")
+        raise
 
 def save_graph_diagram(graph, output_path: str) -> None:
     """Save the LangGraph workflow diagram as a PNG file."""

@@ -83,7 +83,7 @@ def display_msg(msg, author):
 # Singleton LLM instance
 _llm_instance = None
 
-@st.cache_resource
+@st.cache_resource(show_spinner=False)
 # @traceable(run_type="llm", project_name=LANGCHAIN_PROJECT)
 def configure_llm():
     """Configures and caches a singleton LLM (ChatGroq) instance."""

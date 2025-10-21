@@ -11,10 +11,10 @@ Dependencies:
 - time: For UI delays ⏳.
 """
 
-import streamlit as st, time
+import streamlit as st, time, traceback
 import scripts.utils as utils
 from scripts.config import STATIC_CSS_PATH
-from scripts.streaming import StreamHandler, graph_updates
+from scripts.streaming import StreamHandler, stream_graph_updates
 from app import kitchen, update_prices, login, order_management, home, add_remove_items, track_order, analysis
 from scripts.logger import get_logger
 
@@ -114,6 +114,7 @@ elif page == "🍔 DineMate AI":
 
     @utils.enable_chat_history
     def chatbot_main():
+        utils.sync_st_session()
         user_query = st.chat_input(placeholder="💬 Type your order (e.g., '2 burgers and a coke')...")
 
         if user_query:
@@ -122,20 +123,23 @@ elif page == "🍔 DineMate AI":
                 logger.info({"user": st.session_state["username"], "query": user_query, "message": "User submitted chatbot query"})
 
             with st.chat_message("assistant", avatar="🍔"):
-                st_sb = StreamHandler(st.empty())
                 try:
                     with st.spinner("🍴 Processing your order..."):
-                        response = graph_updates(user_query)
-                        st.markdown(response)
+                        response = st.write_stream(stream_graph_updates(user_query))
                         st.session_state.messages.append({"role": "assistant", "content": response})
                         utils.print_qa(chatbot_main, user_query, response)
                         logger.info({"user": st.session_state["username"], "response": response, "message": "Chatbot response generated"})
                 except Exception as e:
-                    error_msg = f"⚠ Error processing request: {str(e)}"
+                    error_msg = f"⚠ Error processing request: {str(e)} (Type: {type(e).__name__})"
                     st.markdown(error_msg)
                     st.session_state.messages.append({"role": "assistant", "content": error_msg})
-                    logger.error({"user": st.session_state["username"], "error": str(e), "message": "Chatbot error"})
-
+                    logger.error({
+                        "user": st.session_state["username"],
+                        "error": str(e),
+                        "error_type": type(e).__name__,
+                        "traceback": traceback.format_exc(),
+                        "message": "Chatbot error"
+                    })
     chatbot_main()
 
 elif page == "🎙️ Voice Chat":
