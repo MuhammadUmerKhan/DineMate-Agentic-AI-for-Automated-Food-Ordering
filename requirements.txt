@@ -10,3 +10,4 @@ nbformat
 streamlit-autorefresh
 streamlit
 Faker
+pillow
