@@ -30,9 +30,15 @@ memory = MemorySaver()
 def build_graph():
     """Construct the LangGraph workflow for the chatbot."""
     logger.info("📈 Building workflow")
+
+    # graph
     builder = StateGraph(State)
+    
+    # add nodes
     builder.add_node("chatbot", chatbot)
     builder.add_node("tools", ToolNode([get_full_menu, get_prices_for_items, save_order, check_order_status, cancel_order, modify_order, get_order_details, introduce_developer]))
+
+    # add edges
     builder.add_edge(START, "chatbot")
     builder.add_conditional_edges("chatbot", tools_condition)
     builder.add_edge("tools", "chatbot")
