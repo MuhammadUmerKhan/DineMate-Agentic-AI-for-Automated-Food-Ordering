@@ -13,35 +13,31 @@ saving orders to the database.
 
 import json
 from langchain_core.tools import tool
-from scripts.db import Database
+from scripts.db import AsyncDatabase
 from scripts.logger import get_logger
 
 logger = get_logger(__name__)
 
 @tool
-def get_full_menu() -> str:
+async def get_full_menu() -> str:
     """Fetch the full restaurant menu as a compact JSON string. Use ONLY when the user explicitly asks to see the entire menu."""
-    db = Database()
-    try:
-        menu = db.load_menu()
+    async with AsyncDatabase() as db:
+        menu = await db.load_menu()
         if menu:
             logger.info("🍔 Full menu fetched")
             return json.dumps(menu, separators=(",", ":"))
         logger.warning("⚠️ No menu items found")
         return "Menu unavailable."
-    finally:
-        db.close_connection()
 
 @tool
-def get_prices_for_items(items: list) -> str:
+async def get_prices_for_items(items: list) -> str:
     """Fetch prices for a specific list of items as a compact JSON dict (e.g., {'burger': 10.0, 'coke': 2.0}). 
     Returns null for any invalid items. Use this for validating items and calculating prices during orders.
     
     :param items: List of item names (e.g., ['burger', 'coke']).
     """
-    db = Database()
-    try:
-        full_menu = db.load_menu()
+    async with AsyncDatabase() as db:
+        full_menu = await db.load_menu()
         if not full_menu:
             return json.dumps({})
         
@@ -56,11 +52,9 @@ def get_prices_for_items(items: list) -> str:
         
         logger.info(f"💰 Prices fetched for {len(items)} items")
         return json.dumps(prices, separators=(",", ":"))
-    finally:
-        db.close_connection()
 
 @tool
-def save_order(order_details: str) -> dict:
+async def save_order(order_details: str) -> dict:
     """Save the confirmed order to the database.
     :param order_details: JSON string with items and total price, e.g., {'items': {'pizza': 2, 'cola': 1}, 'total_price': 25.0}
     :return: Dictionary with status, message, and order details
@@ -76,22 +70,19 @@ def save_order(order_details: str) -> dict:
             logger.warning("⚠️ No items in order")
             return {"status": "empty", "message": "No items.", "items": {}, "total_price": 0.0}
 
-        db = Database()
-        try:
-            order_id = db.store_order_db(items, total_price)
+        async with AsyncDatabase() as db:
+            order_id = await db.store_order_db(items, total_price)
             if order_id:
                 logger.info("✅ Order saved")
                 return {"status": "success", "message": f"Order {order_id} confirmed. Delivery in 40 min.", "order_id": order_id, "items": items, "total_price": total_price}
             logger.error("❌ Failed to save order")
             return {"status": "error", "message": "Save failed.", "items": items, "total_price": total_price}
-        finally:
-            db.close_connection()
     except json.JSONDecodeError:
         logger.error("❌ Invalid JSON")
         return {"status": "error", "message": "Invalid JSON."}
 
 @tool
-def check_order_status(order_id: str) -> str:
+async def check_order_status(order_id: str) -> str:
     """Fetch the order status and estimated delivery time.
     :param order_id: The ID of the order to check (e.g., '162' or 162).
     :return: Status and, if applicable, estimated delivery time or error message.
@@ -106,16 +97,13 @@ def check_order_status(order_id: str) -> str:
         logger.error("❌ Invalid ID format")
         return "Invalid number."
 
-    db = Database()
-    try:
-        result = db.check_order_status_db(order_id_int)
+    async with AsyncDatabase() as db:
+        result = await db.check_order_status_db(order_id_int)
         logger.info("✅ Status retrieved")
         return result
-    finally:
-        db.close_connection()
 
 @tool
-def cancel_order(order_id: str) -> str:
+async def cancel_order(order_id: str) -> str:
     """Cancel an order if within 10 minutes of placement.
     :param order_id: The ID of the order to cancel (e.g., '162' or 162).
     :return: Confirmation or error message.
@@ -130,16 +118,13 @@ def cancel_order(order_id: str) -> str:
         logger.error("❌ Invalid ID format")
         return "Invalid number."
 
-    db = Database()
-    try:
-        result = db.cancel_order_after_confirmation(order_id_int)
+    async with AsyncDatabase() as db:
+        result = await db.cancel_order_after_confirmation(order_id_int)
         logger.info("✅ Cancellation result")
         return result
-    finally:
-        db.close_connection()
 
 @tool
-def modify_order(order_details: str) -> dict:
+async def modify_order(order_details: str) -> dict:
     """Modify an existing order within 10 minutes of placement."""
     logger.info("✍️ Modifying order")
     try:
@@ -161,9 +146,8 @@ def modify_order(order_details: str) -> dict:
         order_id = int(order_id)
         logger.info("🔧 Order data extracted")
 
-        db = Database()
-        try:
-            result = db.modify_order_after_confirmation(order_id, json.dumps(items), total_price)
+        async with AsyncDatabase() as db:
+            result = await db.modify_order_after_confirmation(order_id, json.dumps(items), total_price)
             logger.info("✅ Modification result")
             return {
                 "status": "success" if "successfully updated" in result else "error",
@@ -172,8 +156,6 @@ def modify_order(order_details: str) -> dict:
                 "items": items,
                 "total_price": total_price
             }
-        finally:
-            db.close_connection()
 
     except json.JSONDecodeError:
         logger.error("❌ Invalid JSON")
@@ -184,7 +166,7 @@ def modify_order(order_details: str) -> dict:
         return {"status": "error", "message": "Invalid price."}
 
 @tool
-def get_order_details(order_id: str) -> dict:
+async def get_order_details(order_id: str) -> dict:
     """Retrieve order details and modification eligibility.
     :param order_id: JSON string with order_id, e.g., {"order_id": 162}
     :return: Dictionary with order details, status, and eligibility message.
@@ -195,13 +177,10 @@ def get_order_details(order_id: str) -> dict:
         if order_id_int <= 0:
             logger.error("❌ Invalid order ID")
             return "Invalid ID."
-        db = Database()
-        try:
-            result = db.get_order_by_id(order_id_int)
+        async with AsyncDatabase() as db:
+            result = await db.get_order_by_id(order_id_int)
             logger.info("✅ Details retrieved")
             return result
-        finally:
-            db.close_connection()
     except json.JSONDecodeError:
         logger.error("❌ Invalid JSON")
         return {"status": "error", "message": "Invalid JSON."}

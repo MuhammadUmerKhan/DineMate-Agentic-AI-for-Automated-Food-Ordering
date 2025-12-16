@@ -31,23 +31,8 @@ class StreamHandler(BaseCallbackHandler):
         self.container.markdown(self.text)
         logger.debug(f"Received token: {token}")
 
-def graph_updates(user_query: str) -> str:
-    """Process a user query using the LangGraph workflow and return the final response."""
-    logger.info(f"Processing query: {user_query}")
-    graph = st.session_state.get("graph")
-    if not graph:
-        graph = build_graph()
-        st.session_state["graph"] = graph
-        logger.info("Graph initialized and cached")
-
-    config = {'configurable': {'thread_id': 'thread_1'}}
-    state = graph.invoke({"messages": [{"role": "user", "content": user_query}]}, config=config)
-    response = state["messages"][-1].content
-    logger.info("Response generated")
-    return response
-
-def stream_graph_updates(user_query: str):
-    """Streams AI chatbot responses for a user query using LangGraph."""
+async def stream_graph_updates(user_query: str):
+    """Streams AI chatbot responses for a user query using LangGraph (Async)."""
     
     logger.info(f"Streaming query: {user_query}")
     graph = st.session_state.get("graph")
@@ -68,7 +53,7 @@ def stream_graph_updates(user_query: str):
 
     config = {'configurable': {'thread_id': 'thread_1'}}
     try:
-        for message_chunk, _ in graph.stream(
+        async for message_chunk, _ in graph.astream(
             {"messages": [{"role": "user", "content": user_query}]}, 
             config=config, 
             stream_mode="messages"

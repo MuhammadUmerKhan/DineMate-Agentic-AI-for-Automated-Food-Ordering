@@ -29,4 +29,140 @@
 2025-10-21 19:37:33,025 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
 2025-10-21 19:37:33,313 - INFO - LLM response: Hi there! How can I assist you today? 😊  
 
-Anything else I can help with?
+Anything else I can help with?2025-12-16 22:30:02,864 - INFO - ✅ Connected to SQLite database
+2025-12-16 22:30:02,865 - INFO - 🍔 Fetched menu items
+2025-12-16 22:30:02,865 - ERROR - {'error': "string indices must be integers, not 'str'", 'message': '❌ Menu fetch failed'}
+2025-12-16 22:30:02,865 - INFO - 🔐 Database connection closed
+2025-12-16 22:30:02,865 - INFO - 🍽️ OrderHandler initialized
+2025-12-16 22:30:55,899 - INFO - ✅ Connected to SQLite database
+2025-12-16 22:30:56,248 - INFO - {'username': 'umer', 'role': 'customer', 'message': 'User logged in'}
+2025-12-16 22:30:56,749 - INFO - 🔐 Database connection closed
+2025-12-16 22:30:56,823 - INFO - {'message': 'Rendering home page'}
+2025-12-16 22:37:59,145 - INFO - ✅ Connected to SQLite database
+2025-12-16 22:37:59,145 - INFO - 🍔 Fetched menu items
+2025-12-16 22:37:59,145 - ERROR - {'error': "string indices must be integers, not 'str'", 'message': '❌ Menu fetch failed'}
+2025-12-16 22:37:59,146 - INFO - 🔐 Database connection closed
+2025-12-16 22:37:59,146 - INFO - 🍽️ OrderHandler initialized
+2025-12-16 22:38:09,304 - INFO - ✅ Connected to SQLite database
+2025-12-16 22:38:09,646 - INFO - {'username': 'umer', 'role': 'customer', 'message': 'User logged in'}
+2025-12-16 22:38:10,148 - INFO - 🔐 Database connection closed
+2025-12-16 22:38:10,223 - INFO - {'message': 'Rendering home page'}
+2025-12-16 22:38:13,364 - INFO - ✅ Connected to SQLite database
+2025-12-16 22:38:13,365 - INFO - 🍔 Fetched menu items
+2025-12-16 22:38:13,365 - INFO - 🔐 Database connection closed
+2025-12-16 22:38:16,485 - INFO - {'user': 'umer', 'query': 'hello', 'message': 'User submitted chatbot query'}
+2025-12-16 22:38:16,490 - INFO - Streaming query: hello
+2025-12-16 22:38:16,491 - INFO - Graph not found, building new graph
+2025-12-16 22:38:16,493 - INFO - 📈 Building workflow
+2025-12-16 22:38:16,504 - INFO - ✅ Graph built successfully
+2025-12-16 22:38:16,504 - INFO - Graph initialized
+2025-12-16 22:38:16,575 - INFO - 🤖 LLM configured
+2025-12-16 22:38:18,549 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-16 22:38:18,703 - INFO - LLM response: Hello! 👋 How can I assist you today? 😊  
+Anything else I can help with? 😊
+2025-12-16 22:38:18,710 - INFO - 💬 Q&A logged
+2025-12-16 22:38:18,711 - INFO - {'user': 'umer', 'response': 'Hello! 👋 How can I assist you today? 😊  \nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2025-12-16 22:38:29,389 - INFO - {'user': 'umer', 'query': 'i want a zinger burger', 'message': 'User submitted chatbot query'}
+2025-12-16 22:38:29,392 - INFO - Streaming query: i want a zinger burger
+2025-12-16 22:38:29,439 - INFO - Retrying request to /openai/v1/chat/completions in 0.378712 seconds
+2025-12-16 22:38:30,529 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-16 22:38:30,658 - INFO - LLM response: 
+2025-12-16 22:38:30,658 - INFO - Tool calls: [{'name': 'get_prices_for_items', 'args': {'items': ['zinger burger']}, 'id': 'fc_cfbe5118-ed48-482d-8bc1-3f866e893cd9', 'type': 'tool_call'}]
+2025-12-16 22:38:30,674 - INFO - ✅ Connected to SQLite database (Async)
+2025-12-16 22:38:30,677 - INFO - 🍔 Fetched menu items (Async)
+2025-12-16 22:38:30,678 - INFO - 💰 Prices fetched for 1 items
+2025-12-16 22:38:30,680 - INFO - 🔐 Database connection closed (Async)
+2025-12-16 22:38:31,015 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-16 22:38:31,388 - INFO - LLM response: Sure! Here’s a quick summary of your order:
+
+| Item          | Qty | Unit Price | Subtotal |
+|---------------|-----|------------|----------|
+| Zinger burger | 1   | $2.99      | $2.99    |
+**Total: $2.99**
+
+Would you like to place this order? ✅  
+
+Anything else I can help with? 😊
+2025-12-16 22:38:31,396 - INFO - 💬 Q&A logged
+2025-12-16 22:38:31,397 - INFO - {'user': 'umer', 'response': 'Sure! Here’s a quick summary of your order:\n\n| Item          | Qty | Unit Price | Subtotal |\n|---------------|-----|------------|----------|\n| Zinger burger | 1   | $2.99      | $2.99    |\n**Total: $2.99**\n\nWould you like to place this order? ✅  \n\nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2025-12-16 22:38:46,050 - INFO - {'user': 'umer', 'query': 'add a pepsi and coca too', 'message': 'User submitted chatbot query'}
+2025-12-16 22:38:46,053 - INFO - Streaming query: add a pepsi and coca too
+2025-12-16 22:38:46,096 - INFO - Retrying request to /openai/v1/chat/completions in 0.455607 seconds
+2025-12-16 22:38:47,194 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-16 22:38:47,431 - INFO - LLM response: 
+2025-12-16 22:38:47,431 - INFO - Tool calls: [{'name': 'get_prices_for_items', 'args': {'items': ['Pepsi', 'Coca']}, 'id': 'fc_4cc9c37b-ab1b-4bdc-8cf2-851ee3af9935', 'type': 'tool_call'}]
+2025-12-16 22:38:47,438 - INFO - ✅ Connected to SQLite database (Async)
+2025-12-16 22:38:47,438 - INFO - 🍔 Fetched menu items (Async)
+2025-12-16 22:38:47,439 - INFO - 💰 Prices fetched for 2 items
+2025-12-16 22:38:47,440 - INFO - 🔐 Database connection closed (Async)
+2025-12-16 22:38:47,756 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-16 22:38:48,366 - INFO - LLM response: Got it! Here’s the updated order:
+
+| Item          | Qty | Unit Price | Subtotal |
+|---------------|-----|------------|----------|
+| Zinger burger | 1   | $2.99      | $2.99    |
+| Pepsi         | 1   | $2.49      | $2.49    |
+**Total: $5.48**
+
+⚠️ Unfortunately, “Coca” isn’t available on our menu ❌. You can check the menu above for other drink options.
+
+Would you like to place the order for the Zinger burger and Pepsi as shown? ✅  
+
+Anything else I can help with? 😊
+2025-12-16 22:38:48,374 - INFO - 💬 Q&A logged
+2025-12-16 22:38:48,375 - INFO - {'user': 'umer', 'response': 'Got it! Here’s the updated order:\n\n| Item          | Qty | Unit Price | Subtotal |\n|---------------|-----|------------|----------|\n| Zinger burger | 1   | $2.99      | $2.99    |\n| Pepsi         | 1   | $2.49      | $2.49    |\n**Total: $5.48**\n\n⚠️ Unfortunately, “Coca” isn’t available on our menu ❌. You can check the menu above for other drink options.\n\nWould you like to place the order for the Zinger burger and Pepsi as shown? ✅  \n\nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2025-12-16 22:38:58,619 - INFO - {'user': 'umer', 'query': 'i mean coca cola', 'message': 'User submitted chatbot query'}
+2025-12-16 22:38:58,621 - INFO - Streaming query: i mean coca cola
+2025-12-16 22:38:58,673 - INFO - Retrying request to /openai/v1/chat/completions in 0.470826 seconds
+2025-12-16 22:38:59,916 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-16 22:39:00,102 - INFO - LLM response: 
+2025-12-16 22:39:00,103 - INFO - Tool calls: [{'name': 'get_prices_for_items', 'args': {'items': ['Coca Cola']}, 'id': 'fc_79ea2f36-7e55-4255-bd40-0f7af8dc4a32', 'type': 'tool_call'}]
+2025-12-16 22:39:00,112 - INFO - ✅ Connected to SQLite database (Async)
+2025-12-16 22:39:00,112 - INFO - 🍔 Fetched menu items (Async)
+2025-12-16 22:39:00,113 - INFO - 💰 Prices fetched for 1 items
+2025-12-16 22:39:00,114 - INFO - 🔐 Database connection closed (Async)
+2025-12-16 22:39:00,530 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-16 22:39:00,961 - INFO - LLM response: Sure! Here’s the current order summary:
+
+| Item          | Qty | Unit Price | Subtotal |
+|---------------|-----|------------|----------|
+| Zinger burger | 1   | $2.99      | $2.99    |
+| Pepsi         | 1   | $2.49      | $2.49    |
+**Total: $5.48**
+
+⚠️ “Coca Cola” isn’t on our menu right now ❌. Please check the menu above for other drink options.
+
+Would you like to place the order for the Zinger burger and Pepsi as shown? ✅  
+
+Anything else I can help with? 😊
+2025-12-16 22:39:00,967 - INFO - 💬 Q&A logged
+2025-12-16 22:39:00,967 - INFO - {'user': 'umer', 'response': 'Sure! Here’s the current order summary:\n\n| Item          | Qty | Unit Price | Subtotal |\n|---------------|-----|------------|----------|\n| Zinger burger | 1   | $2.99      | $2.99    |\n| Pepsi         | 1   | $2.49      | $2.49    |\n**Total: $5.48**\n\n⚠️ “Coca Cola” isn’t on our menu right now ❌. Please check the menu above for other drink options.\n\nWould you like to place the order for the Zinger burger and Pepsi as shown? ✅  \n\nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2025-12-16 22:39:31,022 - INFO - {'user': 'umer', 'query': 'yes', 'message': 'User submitted chatbot query'}
+2025-12-16 22:39:31,024 - INFO - Streaming query: yes
+2025-12-16 22:39:31,083 - INFO - Retrying request to /openai/v1/chat/completions in 0.416964 seconds
+2025-12-16 22:39:32,153 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-16 22:39:32,467 - INFO - LLM response: 
+2025-12-16 22:39:32,468 - INFO - Tool calls: [{'name': 'save_order', 'args': {'order_details': '{"items": {"Zinger burger": 1, "Pepsi": 1}, "total_price": 5.48}'}, 'id': 'fc_526e9d16-ae73-4282-a71f-fbb9ae71e0c2', 'type': 'tool_call'}]
+2025-12-16 22:39:32,474 - INFO - 💾 Received order
+2025-12-16 22:39:32,474 - INFO - 🍽️ Items found
+2025-12-16 22:39:32,475 - INFO - ✅ Connected to SQLite database (Async)
+2025-12-16 22:39:32,488 - INFO - ✅ Order stored (Async)
+2025-12-16 22:39:32,488 - INFO - ✅ Order saved
+2025-12-16 22:39:32,489 - INFO - 🔐 Database connection closed (Async)
+2025-12-16 22:39:32,812 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-16 22:39:33,505 - INFO - LLM response: ✅ Your order is confirmed!  
+
+**Order #359**  
+- Zinger burger ×1 – $2.99  
+- Pepsi ×1 – $2.49  
+
+**Total:** $5.48  
+Delivery in about **40 minutes**.
+
+Anything else I can help with? 😊
+2025-12-16 22:39:33,513 - INFO - 💬 Q&A logged
+2025-12-16 22:39:33,514 - INFO - {'user': 'umer', 'response': '✅ Your order is confirmed!  \n\n**Order #359**  \n- Zinger burger ×1 – $2.99  \n- Pepsi ×1 – $2.49  \n\n**Total:** $5.48  \nDelivery in about **40\u202fminutes**.\n\nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2025-12-16 22:39:40,748 - INFO - {'order_id': '359', 'message': 'Fetching order details'}
+2025-12-16 22:39:40,749 - INFO - ✅ Connected to SQLite database
+2025-12-16 22:39:40,751 - INFO - {'order_id': 359, 'message': 'Order details fetched'}
+2025-12-16 22:39:40,753 - INFO - 🔐 Database connection closed

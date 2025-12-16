@@ -13,7 +13,7 @@ Dependencies:
 - config (DB_PATH)
 """
 
-import sqlite3, datetime, json, bcrypt, pandas as pd
+import sqlite3, datetime, json, bcrypt, pandas as pd, aiosqlite
 from typing import Dict, Optional
 from scripts.logger import get_logger
 from scripts.config import DB_PATH
@@ -322,3 +322,175 @@ class Database:
             logger.info("🔐 Database connection closed")
         except sqlite3.Error as e:
             logger.error({"error": str(e), "message": "❌ Error closing connection"})
+
+class AsyncDatabase:
+    def __init__(self, db_path: str = DB_PATH):
+        """🗄️ Initialize AsyncDatabase."""
+        self.db_path = db_path
+
+    async def __aenter__(self):
+        self.connection = await aiosqlite.connect(self.db_path)
+        self.connection.row_factory = aiosqlite.Row
+        self.cursor = await self.connection.cursor()
+        logger.info("✅ Connected to SQLite database (Async)")
+        return self
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        if self.cursor:
+            await self.cursor.close()
+        if self.connection:
+            await self.connection.close()
+        logger.info("🔐 Database connection closed (Async)")
+
+    async def load_menu(self) -> Optional[Dict[str, float]]:
+        """🍽️ Load menu items as a compact dictionary (Async)."""
+        try:
+            await self.cursor.execute("SELECT name, price FROM menu")
+            rows = await self.cursor.fetchall()
+            menu = {row["name"]: float(row["price"]) for row in rows}
+            logger.info("🍔 Fetched menu items (Async)")
+            return menu if menu else None
+        except Exception as e:
+            logger.error({"error": str(e), "message": "❌ Error fetching menu (Async)"})
+            return None
+
+    async def get_max_id(self) -> int:
+        """🔢 Get next available order ID (Async)."""
+        try:
+            await self.cursor.execute("SELECT MAX(id) FROM orders")
+            result = await self.cursor.fetchone()
+            return (result[0] or 0) + 1
+        except Exception as e:
+            logger.error({"error": str(e), "message": "❌ Error fetching max ID (Async)"})
+            return 1
+
+    async def store_order_db(self, order_dict: Dict[str, int], price: float, status: str = "Pending") -> Optional[int]:
+        """📝 Store a new order (Async)."""
+        try:
+            now = datetime.datetime.now()
+            order_id = await self.get_max_id()
+            await self.cursor.execute(
+                """
+                INSERT INTO orders (id, items, total_price, status, date, time)
+                VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (order_id, json.dumps(order_dict), price, status, now.strftime("%Y-%m-%d"), now.strftime("%I:%M:%S %p"))
+            )
+            await self.connection.commit()
+            logger.info("✅ Order stored (Async)")
+            return order_id
+        except Exception as e:
+            logger.error({"error": str(e), "message": "❌ Error storing order (Async)"})
+            return None
+
+    async def check_order_status_db(self, order_id: int) -> str:
+        """🔍 Check order status (Async)."""
+        logger.info("📦 Checking order status (Async)")
+        try:
+            await self.cursor.execute("SELECT status, time, date FROM orders WHERE id = ?", (order_id,))
+            row = await self.cursor.fetchone()
+            if not row:
+                return f"No order found with ID {order_id}"
+
+            status = row["status"]
+            if status in {"Canceled", "Delivered"}:
+                return f"Order {order_id} is {status.lower()}."
+
+            order_time = datetime.datetime.strptime(f"{row['date']} {row['time']}", "%Y-%m-%d %I:%M:%S %p")
+            estimated_time = order_time + datetime.timedelta(minutes=40)
+            now = datetime.datetime.now()
+
+            if now > estimated_time:
+                delay = int((now - estimated_time).total_seconds() / 60)
+                return f"Status: {status}, Delivery: {estimated_time.strftime('%I:%M %p')} (delayed ~{delay} min)"
+            return f"Status: {status}, Delivery: {estimated_time.strftime('%I:%M %p')}"
+        except Exception as e:
+            logger.error({"error": str(e), "message": "❌ Error fetching status (Async)"})
+            return f"Error: {e}"
+
+    async def cancel_order_after_confirmation(self, order_id: int) -> str:
+        """❌ Cancel an order if within 10 minutes (Async)."""
+        logger.info("🚫 Checking cancellation (Async)")
+        try:
+            await self.cursor.execute("SELECT status, date, time FROM orders WHERE id = ?", (order_id,))
+            row = await self.cursor.fetchone()
+            if not row:
+                return f"No order found with ID {order_id}"
+
+            if row["status"] in {"Canceled", "Completed", "Delivered"}:
+                return f"Order {order_id} is {row['status'].lower()}."
+
+            order_time = datetime.datetime.strptime(f"{row['date']} {row['time']}", "%Y-%m-%d %I:%M:%S %p")
+            if (datetime.datetime.now() - order_time).total_seconds() > 600:
+                return "Cannot cancel: past 10-min window."
+
+            await self.cursor.execute("UPDATE orders SET status = ? WHERE id = ?", ("Canceled", order_id))
+            await self.connection.commit()
+            return f"Order {order_id} canceled."
+        except Exception as e:
+            logger.error({"error": str(e), "message": "❌ Error canceling (Async)"})
+            return f"Error: {e}"
+
+    async def modify_order_after_confirmation(self, order_id: int, updated_items: str, new_total_price: float) -> str:
+        """✏️ Modify order if within 10 minutes (Async)."""
+        logger.info("✍️ Checking modification (Async)")
+        try:
+            items = json.loads(updated_items)
+            if not items:
+                return "⚠️ No items provided."
+
+            menu = await self.load_menu() or []
+            valid_items = {item.lower() for item in menu} # Fix: menu items are keys in dict returned by load_menu
+            for item in items:
+                if item.lower() not in valid_items:
+                    return f"⚠️ '{item}' not in menu."
+
+            await self.cursor.execute("SELECT status, date, time FROM orders WHERE id = ?", (order_id,))
+            row = await self.cursor.fetchone()
+            if not row:
+                return f"⚠️ No order found with ID {order_id}."
+
+            if row["status"] not in {"Pending", "Preparing"}:
+                return f"⚠️ Order {order_id} is {row['status'].lower()}."
+
+            order_time = datetime.datetime.strptime(f"{row['date']} {row['time']}", "%Y-%m-%d %I:%M:%S %p")
+            if (datetime.datetime.now() - order_time).total_seconds() > 600:
+                return "⚠️ Cannot modify: past 10-min window."
+
+            await self.cursor.execute(
+                "UPDATE orders SET items = ?, total_price = ? WHERE id = ?",
+                (json.dumps(items), new_total_price, order_id)
+            )
+            await self.connection.commit()
+
+            summary = ", ".join(f"{item}: {qty}" for item, qty in items.items())
+            return f"✅ Order {order_id} updated. Items: {summary}, Total: ${new_total_price:.2f}"
+        except Exception as e:
+            logger.error({"error": str(e), "message": "❌ Failed to update (Async)"})
+            return f"⚠️ Error: {str(e)}"
+
+    async def get_order_by_id(self, order_id: int) -> Dict[str, any]:
+        """🔍 Get full order details (Async)."""
+        logger.info("🔎 Fetching order details (Async)")
+        try:
+            await self.cursor.execute("SELECT * FROM orders WHERE id = ?", (order_id,))
+            row = await self.cursor.fetchone()
+            if not row:
+                return {"status": "error", "message": f"No order found with ID {order_id}"}
+
+            order = dict(row)
+            items = json.loads(order["items"])
+            msg = f"Order {order_id}: {', '.join(f'{k}: {v}' for k,v in items.items())}, Total: ${order['total_price']:.2f}, Status: {order['status']}"
+
+            if order["status"] == "Pending":
+                placed = datetime.datetime.strptime(f"{order['date']} {order['time']}", "%Y-%m-%d %I:%M:%S %p")
+                minutes = (datetime.datetime.now() - placed).total_seconds() / 60
+                msg += f"\\n{int(10 - minutes)} min to modify" if minutes <= 10 else "\\nCannot modify: past 10-min window."
+            else:
+                msg += f"\\nCannot modify: order is {order['status'].lower()}."
+
+            order.update({"items": items, "message": msg})
+            return order
+        except Exception as e:
+            logger.error({"error": str(e), "message": "❌ Error fetching order (Async)"})
+            return {"status": "error", "message": f"Error: {e}"}

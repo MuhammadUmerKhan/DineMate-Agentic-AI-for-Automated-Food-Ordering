@@ -23,8 +23,8 @@ from scripts.utils import configure_llm
 logger = get_logger(__name__)
 
 @traceable(run_type="chain", name="DineMate_ChatFlow", project_name=LANGCHAIN_PROJECT)
-def chatbot(state: State) -> State:
-    """Process user input and interact with the LLM."""
+async def chatbot(state: State) -> State:
+    """Process user input and interact with the LLM (Async)."""
     messages = state["messages"]
     current_menu = state.get("menu", {})  # Check if menu is already cached
 
@@ -83,7 +83,7 @@ def chatbot(state: State) -> State:
     if current_menu:
         messages.append({"role": "assistant", "content": f"Cached menu available: {json.dumps(current_menu, separators=(',', ':'))}"})
     
-    response = llm_with_tools.invoke(messages)
+    response = await llm_with_tools.ainvoke(messages)
     
     logger.info(f"LLM response: {response.content}")
     
@@ -93,7 +93,7 @@ def chatbot(state: State) -> State:
         logger.info(f"Tool calls: {response.tool_calls}")
         for tool_call in response.tool_calls:
             if tool_call["name"] == "get_full_menu":
-                menu_json = get_full_menu.invoke({})
+                menu_json = await get_full_menu.ainvoke({})
                 try:
                     new_menu = json.loads(menu_json)
                     logger.info("Cached new menu in state")
