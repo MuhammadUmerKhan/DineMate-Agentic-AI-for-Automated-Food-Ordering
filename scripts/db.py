@@ -15,8 +15,8 @@ Dependencies:
 
 import sqlite3, datetime, json, bcrypt, pandas as pd, aiosqlite
 from typing import Dict, Optional
-from scripts.logger import get_logger
-from scripts.config import DB_PATH
+from logger import get_logger
+from config import DB_PATH
 
 logger = get_logger(__name__)
 

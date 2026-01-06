@@ -18,10 +18,14 @@ import os
 from langgraph.graph import StateGraph, START
 from langgraph.prebuilt import ToolNode, tools_condition
 from langgraph.checkpoint.memory import MemorySaver
-from scripts.state import State
-from scripts.agent import chatbot
-from scripts.tools import get_full_menu, get_prices_for_items, save_order, check_order_status, cancel_order, modify_order, get_order_details, introduce_developer
-from scripts.logger import get_logger
+from state import State
+from agent import chatbot
+from tools import (
+    get_full_menu, get_prices_for_items, save_order, 
+    check_order_status, cancel_order, modify_order, 
+    get_order_details, introduce_developer
+    )
+from logger import get_logger
 
 logger = get_logger(__name__)
 

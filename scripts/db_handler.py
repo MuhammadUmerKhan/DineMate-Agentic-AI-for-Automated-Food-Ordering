@@ -10,8 +10,8 @@ Dependencies:
 """
 
 from typing import Dict, Union
-from scripts.db import Database
-from scripts.logger import get_logger
+from db import Database
+from logger import get_logger
 
 logger = get_logger(__name__)
 

@@ -166,3 +166,9 @@ Anything else I can help with? 😊
 2025-12-16 22:39:40,749 - INFO - ✅ Connected to SQLite database
 2025-12-16 22:39:40,751 - INFO - {'order_id': 359, 'message': 'Order details fetched'}
 2025-12-16 22:39:40,753 - INFO - 🔐 Database connection closed
+2026-01-07 00:04:03,996 - INFO - 📈 Building workflow
+2026-01-07 00:04:04,060 - INFO - ✅ Graph built successfully
+2026-01-07 00:04:11,254 - INFO - ✅ Connected to SQLite database (Async)
+2026-01-07 00:04:11,255 - INFO - 🍔 Fetched menu items (Async)
+2026-01-07 00:04:11,256 - INFO - 🍔 Full menu fetched
+2026-01-07 00:04:11,257 - INFO - 🔐 Database connection closed (Async)

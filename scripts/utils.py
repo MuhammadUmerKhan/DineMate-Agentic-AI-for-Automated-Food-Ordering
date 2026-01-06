@@ -3,10 +3,10 @@
 from dotenv import load_dotenv
 # from langsmith import traceable
 import streamlit as st
-from scripts.logger import get_logger
-from scripts.config import GROQ_API_KEY, DEFAULT_MODEL_NAME, TEMPERATURE
+from logger import get_logger
+from config import GROQ_API_KEY, DEFAULT_MODEL_NAME, TEMPERATURE
 from langchain_groq import ChatGroq
-from scripts.db import Database  # New import to fetch the menu from the database
+from db import Database
 
 load_dotenv()
 

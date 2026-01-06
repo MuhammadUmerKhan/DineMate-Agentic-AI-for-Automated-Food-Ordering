@@ -13,7 +13,7 @@ This module defines the state structure for the DineMate foodbot.
 from typing import Annotated
 from typing_extensions import TypedDict
 from langgraph.graph.message import add_messages
-from scripts.logger import get_logger
+from logger import get_logger
 
 logger = get_logger(__name__)
 

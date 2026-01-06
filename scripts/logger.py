@@ -1,8 +1,9 @@
+from pathlib import Path
 import logging
 import os
 
 # Ensure the logs directory exists
-os.makedirs("logs", exist_ok=True)
+os.makedirs(Path(__file__).parent.parent / "logs", exist_ok=True)
 
 # Configure logging with UTF-8 encoding
 logging.basicConfig(
@@ -10,7 +11,7 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
         logging.FileHandler(
-            filename=os.path.join("logs", "foodbot.log"),
+            filename=Path(__file__).parent.parent / "logs" / "foodbot.log", # os.path.join("logs", "foodbot.log")
             encoding="utf-8"  # Explicitly set UTF-8 encoding
         ),
         # logging.StreamHandler()  # Optional: Add console output for debugging

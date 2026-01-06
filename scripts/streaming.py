@@ -13,8 +13,8 @@ This module handles streaming updates for the DineMate foodbot UI using Streamli
 import streamlit as st, traceback
 from langchain_core.callbacks import BaseCallbackHandler
 from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
-from scripts.graph import build_graph
-from scripts.logger import get_logger
+from graph import build_graph
+from logger import get_logger
 
 logger = get_logger(__name__)
 
