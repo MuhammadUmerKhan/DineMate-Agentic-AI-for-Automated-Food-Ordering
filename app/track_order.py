@@ -57,7 +57,7 @@ def show_order_tracking() -> None:
             unsafe_allow_html=True
         )
     order_id = st.text_input("🔢 Order ID", placeholder="e.g., 12345").strip()
-    if st.button("🚀 Track Order", use_container_width=True):
+    if st.button("🚀 Track Order", width="stretch"):
         with st.spinner("⏳ Fetching order details..."):
             if not order_id.isdigit():
                 st.warning("⚠ Please enter a valid numeric Order ID.")

@@ -126,7 +126,7 @@ def show_add_remove_items_page() -> None:
         st.markdown("### 📜 Current Menu")
         st.dataframe(
             pd.DataFrame(menu_items).rename(columns={"name": "🍲 Item Name", "price": "💰 Price ($)"}),
-            use_container_width=True, hide_index=True
+            width="stretch", hide_index=True
         )
 
     st.divider()
@@ -139,7 +139,7 @@ def show_add_remove_items_page() -> None:
     with col2:
         price = st.number_input("💰 Price ($)", min_value=0.01, step=0.01, format="%.2f", key="add_item_price")
 
-    if st.button("✅ Add Item", use_container_width=True):
+    if st.button("✅ Add Item", width="stretch"):
         with st.spinner("⏳ Adding item..."):
             add_new_item(item_name.strip().capitalize(), price)
             time.sleep(0.5)
@@ -154,7 +154,7 @@ def show_add_remove_items_page() -> None:
     else:
         item_list = [item["name"] for item in menu_items]
         selected_item = st.selectbox("📌 Select Item to Remove", item_list, key="remove_item_select", help="Choose an item to remove")
-        if st.button("🗑️ Remove Item", use_container_width=True):
+        if st.button("🗑️ Remove Item", width="stretch"):
             with st.spinner("⏳ Removing item..."):
                 remove_item(selected_item)
                 time.sleep(0.5)

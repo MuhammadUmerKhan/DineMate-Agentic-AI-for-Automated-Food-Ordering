@@ -83,7 +83,7 @@ def show_price_update_page() -> None:
     else:
         st.write("### 📜 Current Menu & Prices")
         df_menu = pd.DataFrame(menu_items).rename(columns={"name": "🍲 Item Name", "price": "💰 Price ($)"})
-        st.dataframe(df_menu, use_container_width=True)
+        st.dataframe(df_menu, width="stretch")
 
     st.divider()
     st.write("### ✏️ Modify Item Price")
@@ -97,11 +97,11 @@ def show_price_update_page() -> None:
 
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("✔ Update Price", use_container_width=True):
+        if st.button("✔ Update Price", width="stretch"):
             with st.spinner("⏳ Updating price..."):
                 update_item_price(selected_item, new_price)
                 time.sleep(0.5)
                 st.rerun()
     with col2:
-        if st.button("🔄 Reset", use_container_width=True):
+        if st.button("🔄 Reset", width="stretch"):
             st.rerun()

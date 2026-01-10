@@ -128,12 +128,12 @@ def show_analysis_page() -> None:
                 monthly_revenue = preprocessed_data.groupby(['year', 'month'])['total_price'].sum().reset_index()
                 monthly_revenue['date'] = pd.to_datetime(monthly_revenue[['year', 'month']].assign(day=1))
                 fig_monthly = create_monthly_revenue_chart(monthly_revenue)
-                st.plotly_chart(fig_monthly, use_container_width=True)
+                st.plotly_chart(fig_monthly, width="stretch")
         with col2:
             with st.spinner("📈 Generating yearly revenue chart..."):
                 yearly_revenue = preprocessed_data.groupby("year")["total_price"].sum().reset_index()
                 fig_yearly = create_yearly_revenue_chart(yearly_revenue)
-                st.plotly_chart(fig_yearly, use_container_width=True)
+                st.plotly_chart(fig_yearly, width="stretch")
 
     st.divider()
 
@@ -145,7 +145,7 @@ def show_analysis_page() -> None:
                 status_counts = preprocessed_data["status"].value_counts().reset_index()
                 status_counts.columns = ["status", "count"]
                 fig_status = create_status_pie_chart(status_counts)
-                st.plotly_chart(fig_status, use_container_width=True)
+                st.plotly_chart(fig_status, width="stretch")
 
             st.markdown("### ❌ Cancellations Over Time")
             with st.spinner("📈 Generating cancellation trend chart..."):
@@ -154,7 +154,7 @@ def show_analysis_page() -> None:
                 cancellation_trends['date'] = pd.to_datetime(cancellation_trends[['year', 'month']].assign(day=1))
                 cancellation_trends = cancellation_trends.rename(columns={"id": "count"})
                 fig_cancellations = create_cancellation_trend_chart(cancellation_trends)
-                st.plotly_chart(fig_cancellations, use_container_width=True)
+                st.plotly_chart(fig_cancellations, width="stretch")
 
     st.divider()
 
@@ -168,16 +168,16 @@ def show_analysis_page() -> None:
                 product_counts.columns = ["Product", "Total Orders"]
                 product_counts = product_counts.sort_values(by="Total Orders", ascending=False)
                 fig_countplot = create_product_countplot(product_counts)
-                st.plotly_chart(fig_countplot, use_container_width=True)
+                st.plotly_chart(fig_countplot, width="stretch")
         with col2:
             with st.spinner("📈 Generating product pie chart..."):
                 fig_pie_chart = create_product_pie_chart(product_counts)
-                st.plotly_chart(fig_pie_chart, use_container_width=True)
+                st.plotly_chart(fig_pie_chart, width="stretch")
 
         st.markdown("### 💰 Revenue by Menu Item")
         with st.spinner("📈 Generating item revenue chart..."):
             menu = Database().load_menu()
-            menu_dict = {item["name"].lower(): float(item["price"]) for item in menu} if menu else {}
+            menu_dict = {name.lower(): float(price) for name, price in menu.items()} if menu else {}
             item_revenue = preprocessed_data['items'].apply(lambda x: pd.Series(json.loads(x.replace("'", "\"")))).sum().reset_index()
             item_revenue.columns = ["Product", "Quantity"]
             item_revenue["Total Revenue"] = item_revenue.apply(
@@ -185,7 +185,7 @@ def show_analysis_page() -> None:
             )
             item_revenue = item_revenue.sort_values(by="Total Revenue", ascending=False)
             fig_item_revenue = create_item_revenue_chart(item_revenue)
-            st.plotly_chart(fig_item_revenue, use_container_width=True)
+            st.plotly_chart(fig_item_revenue, width="stretch")
 
     st.divider()
 
@@ -199,7 +199,7 @@ def show_analysis_page() -> None:
             hourly_demand = hourly_demand.groupby("hour")["id"].count().reset_index()
             hourly_demand.columns = ["Hour", "Total Orders"]
             fig_hourly = create_hourly_demand_chart(hourly_demand)
-            st.plotly_chart(fig_hourly, use_container_width=True)
+            st.plotly_chart(fig_hourly, width="stretch")
 
     st.divider()
 
@@ -210,11 +210,11 @@ def show_analysis_page() -> None:
         with col1:
             with st.spinner("📈 Generating spending histogram..."):
                 fig_histogram = create_spending_distribution_chart(preprocessed_data)
-                st.plotly_chart(fig_histogram, use_container_width=True)
+                st.plotly_chart(fig_histogram, width="stretch")
         with col2:
             with st.spinner("📈 Generating spending boxplot..."):
                 fig_boxplot = create_spending_boxplot_chart(preprocessed_data)
-                st.plotly_chart(fig_boxplot, use_container_width=True)
+                st.plotly_chart(fig_boxplot, width="stretch")
 
         st.markdown("### 💵 Average Order Value Trends")
         with st.spinner("📈 Generating AOV trend chart..."):
@@ -222,7 +222,7 @@ def show_analysis_page() -> None:
             aov_data['date'] = pd.to_datetime(aov_data[['year', 'month']].assign(day=1))
             aov_data = aov_data.rename(columns={"total_price": "avg_order_value"})
             fig_aov = create_aov_trend_chart(aov_data)
-            st.plotly_chart(fig_aov, use_container_width=True)
+            st.plotly_chart(fig_aov, width="stretch")
 
     st.divider()
     st.markdown(

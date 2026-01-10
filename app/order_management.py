@@ -44,7 +44,7 @@ def get_all_orders() -> List[Dict]:
         db.cursor.execute(query)
         orders = [
             {"id": row["id"], "items": row["items"], "total_price": row["total_price"],
-             "status": row["status"], "time": row["time"], "date": row["date"]}
+                "status": row["status"], "time": row["time"], "date": row["date"]}
             for row in db.cursor.fetchall()
         ]
         logger.info({"message": "Fetched orders", "count": len(orders)})
@@ -225,8 +225,8 @@ def show_order_management() -> None:
     st.markdown("### 📝 Orders Overview")
     df = pd.DataFrame(orders)
     df.rename(columns={"id": "📦 Order ID", "items": "🍲 Items", "total_price": "💰 Total ($)",
-                       "status": "🟢 Status", "time": "🕒 Time", "date": "🗓️ Date"}, inplace=True)
-    st.dataframe(df, use_container_width=True, hide_index=True)
+                        "status": "🟢 Status", "time": "🕒 Time", "date": "🗓️ Date"}, inplace=True)
+    st.dataframe(df, width="stretch", hide_index=True)
 
     st.divider()
     st.markdown("### 🔍 Select Order to Modify")
@@ -235,7 +235,7 @@ def show_order_management() -> None:
     st.divider()
     st.markdown("### ✏️ Modify Order Items")
     new_items = st.text_area("📝 Items (e.g., '2 burgers, 3 cokes')", height=68, key="modify_items", placeholder="Enter items and quantities")
-    if st.button("✔ Update Items", use_container_width=True):
+    if st.button("✔ Update Items", width="stretch"):
         with st.spinner("⏳ Updating order..."):
             extracted_items = extract_items_quantity(new_items)
             if extracted_items:
@@ -258,7 +258,7 @@ def show_order_management() -> None:
         "🚚 Delivered": "Delivered"
     }
     new_display_status = st.selectbox("🔄 New Status", list(status_mapping.keys()), key="update_status", help="Select new status")
-    if st.button("✅ Update Status", use_container_width=True):
+    if st.button("✅ Update Status", width="stretch"):
         with st.spinner("⏳ Updating status..."):
             update_order_status(selected_order, status_mapping[new_display_status])
             time.sleep(0.5)
@@ -267,7 +267,7 @@ def show_order_management() -> None:
     st.divider()
     st.markdown("### ➕ Add New Order")
     new_order_items = st.text_input("📝 New Order (e.g., '2 burgers, 3 cokes')", placeholder="Enter new order")
-    if st.button("➕ Add Order", use_container_width=True):
+    if st.button("➕ Add Order", width="stretch"):
         with st.spinner("⏳ Adding order..."):
             add_new_order(new_order_items)
             time.sleep(0.5)

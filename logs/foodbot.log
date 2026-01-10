@@ -166,3 +166,404 @@ Anything else I can help with? 😊
 2025-12-16 22:39:40,749 - INFO - ✅ Connected to SQLite database
 2025-12-16 22:39:40,751 - INFO - {'order_id': 359, 'message': 'Order details fetched'}
 2025-12-16 22:39:40,753 - INFO - 🔐 Database connection closed
+2026-01-10 12:11:30,631 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:11:30,633 - INFO - 🍔 Fetched menu items
+2026-01-10 12:11:30,633 - ERROR - {'error': "string indices must be integers, not 'str'", 'message': '❌ Menu fetch failed'}
+2026-01-10 12:11:30,634 - INFO - 🔐 Database connection closed
+2026-01-10 12:11:30,634 - INFO - 🍽️ OrderHandler initialized
+2026-01-10 12:11:53,190 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:11:53,559 - INFO - {'username': 'umer', 'role': 'customer', 'message': 'User logged in'}
+2026-01-10 12:11:54,060 - INFO - 🔐 Database connection closed
+2026-01-10 12:11:54,133 - INFO - {'message': 'Rendering home page'}
+2026-01-10 12:11:57,075 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:11:57,077 - INFO - 🍔 Fetched menu items
+2026-01-10 12:11:57,077 - INFO - 🔐 Database connection closed
+2026-01-10 12:11:59,199 - INFO - {'user': 'umer', 'query': 'vgegwerf\\', 'message': 'User submitted chatbot query'}
+2026-01-10 12:11:59,203 - INFO - Streaming query: vgegwerf\
+2026-01-10 12:11:59,204 - INFO - Graph not found, building new graph
+2026-01-10 12:11:59,205 - INFO - 📈 Building workflow
+2026-01-10 12:11:59,227 - INFO - ✅ Graph built successfully
+2026-01-10 12:11:59,227 - INFO - Graph initialized
+2026-01-10 12:11:59,280 - INFO - 🤖 LLM configured
+2026-01-10 12:11:59,650 - INFO - Retrying request to /openai/v1/chat/completions in 0.397977 seconds
+2026-01-10 12:12:00,051 - INFO - Retrying request to /openai/v1/chat/completions in 0.999895 seconds
+2026-01-10 12:12:01,082 - ERROR - {'error': 'Connection error.', 'error_type': 'APIConnectionError', 'traceback': 'Traceback (most recent call last):\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions\n    yield\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 394, in handle_async_request\n    resp = await self._pool.handle_async_request(req)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request\n    raise exc from None\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request\n    response = await connection.handle_async_request(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 101, in handle_async_request\n    raise exc\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 78, in handle_async_request\n    stream = await self._connect(request)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 124, in _connect\n    stream = await self._network_backend.connect_tcp(**kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpcore/_backends/auto.py", line 31, in connect_tcp\n    return await self._backend.connect_tcp(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 113, in connect_tcp\n    with map_exceptions(exc_map):\n  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__\n    self.gen.throw(value)\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions\n    raise to_exc(exc) from exc\nhttpcore.ConnectError: [Errno -3] Temporary failure in name resolution\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/groq/_base_client.py", line 1512, in request\n    response = await self._client.send(\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1629, in send\n    response = await self._send_handling_auth(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1657, in _send_handling_auth\n    response = await self._send_handling_redirects(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects\n    response = await self._send_single_request(request)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1730, in _send_single_request\n    response = await transport.handle_async_request(request)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 393, in handle_async_request\n    with map_httpcore_exceptions():\n  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__\n    self.gen.throw(value)\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions\n    raise mapped_exc(message) from exc\nhttpx.ConnectError: [Errno -3] Temporary failure in name resolution\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/scripts/streaming.py", line 56, in stream_graph_updates\n    async for message_chunk, _ in graph.astream(\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langgraph/pregel/main.py", line 2939, in astream\n    async for _ in runner.atick(\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langgraph/pregel/_runner.py", line 401, in atick\n    _panic_or_proceed(\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langgraph/pregel/_runner.py", line 511, in _panic_or_proceed\n    raise exc\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langgraph/pregel/_retry.py", line 137, in arun_with_retry\n    return await task.proc.ainvoke(task.input, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langgraph/_internal/_runnable.py", line 706, in ainvoke\n    input = await asyncio.create_task(\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langgraph/_internal/_runnable.py", line 474, in ainvoke\n    ret = await self.afunc(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/scripts/agent.py", line 86, in chatbot\n    response = await llm_with_tools.ainvoke(messages)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langchain_core/runnables/base.py", line 5723, in ainvoke\n    return await self.bound.ainvoke(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 417, in ainvoke\n    llm_result = await self.agenerate_prompt(\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 1034, in agenerate_prompt\n    return await self.agenerate(\n           ^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 992, in agenerate\n    raise exceptions[0]\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 1151, in _agenerate_with_cache\n    async for chunk in self._astream(messages, stop=stop, **kwargs):\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langchain_groq/chat_models.py", line 615, in _astream\n    async for chunk in await self.async_client.create(\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/groq/resources/chat/completions.py", line 913, in create\n    return await self._post(\n           ^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/groq/_base_client.py", line 1762, in post\n    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/groq/_base_client.py", line 1544, in request\n    raise APIConnectionError(request=request) from err\ngroq.APIConnectionError: Connection error.\nDuring task with name \'chatbot\' and id \'d551d708-48ae-9768-a47c-f662a148d13e\'\n', 'message': 'Error during graph streaming'}
+2026-01-10 12:12:01,091 - ERROR - {'user': 'umer', 'error': 'Connection error.', 'error_type': 'APIConnectionError', 'traceback': 'Traceback (most recent call last):\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions\n    yield\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 394, in handle_async_request\n    resp = await self._pool.handle_async_request(req)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request\n    raise exc from None\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request\n    response = await connection.handle_async_request(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 101, in handle_async_request\n    raise exc\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 78, in handle_async_request\n    stream = await self._connect(request)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 124, in _connect\n    stream = await self._network_backend.connect_tcp(**kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpcore/_backends/auto.py", line 31, in connect_tcp\n    return await self._backend.connect_tcp(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 113, in connect_tcp\n    with map_exceptions(exc_map):\n  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__\n    self.gen.throw(value)\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions\n    raise to_exc(exc) from exc\nhttpcore.ConnectError: [Errno -3] Temporary failure in name resolution\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/groq/_base_client.py", line 1512, in request\n    response = await self._client.send(\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1629, in send\n    response = await self._send_handling_auth(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1657, in _send_handling_auth\n    response = await self._send_handling_redirects(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects\n    response = await self._send_single_request(request)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1730, in _send_single_request\n    response = await transport.handle_async_request(request)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 393, in handle_async_request\n    with map_httpcore_exceptions():\n  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__\n    self.gen.throw(value)\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions\n    raise mapped_exc(message) from exc\nhttpx.ConnectError: [Errno -3] Temporary failure in name resolution\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/main.py", line 128, in chatbot_main\n    response = st.write_stream(stream_graph_updates(user_query))\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/streamlit/runtime/metrics_util.py", line 443, in wrapped_func\n    result = non_optional_func(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/streamlit/elements/write.py", line 190, in write_stream\n    for chunk in stream:  # type: ignore\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/streamlit/type_util.py", line 458, in async_generator_to_sync\n    yield loop.run_until_complete(async_gen.__anext__())\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/scripts/streaming.py", line 56, in stream_graph_updates\n    async for message_chunk, _ in graph.astream(\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langgraph/pregel/main.py", line 2939, in astream\n    async for _ in runner.atick(\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langgraph/pregel/_runner.py", line 401, in atick\n    _panic_or_proceed(\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langgraph/pregel/_runner.py", line 511, in _panic_or_proceed\n    raise exc\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langgraph/pregel/_retry.py", line 137, in arun_with_retry\n    return await task.proc.ainvoke(task.input, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langgraph/_internal/_runnable.py", line 706, in ainvoke\n    input = await asyncio.create_task(\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langgraph/_internal/_runnable.py", line 474, in ainvoke\n    ret = await self.afunc(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/scripts/agent.py", line 86, in chatbot\n    response = await llm_with_tools.ainvoke(messages)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langchain_core/runnables/base.py", line 5723, in ainvoke\n    return await self.bound.ainvoke(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 417, in ainvoke\n    llm_result = await self.agenerate_prompt(\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 1034, in agenerate_prompt\n    return await self.agenerate(\n           ^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 992, in agenerate\n    raise exceptions[0]\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langchain_core/language_models/chat_models.py", line 1151, in _agenerate_with_cache\n    async for chunk in self._astream(messages, stop=stop, **kwargs):\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/langchain_groq/chat_models.py", line 615, in _astream\n    async for chunk in await self.async_client.create(\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/groq/resources/chat/completions.py", line 913, in create\n    return await self._post(\n           ^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/groq/_base_client.py", line 1762, in post\n    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/home/muhammadumerkhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/.venv/lib/python3.12/site-packages/groq/_base_client.py", line 1544, in request\n    raise APIConnectionError(request=request) from err\ngroq.APIConnectionError: Connection error.\nDuring task with name \'chatbot\' and id \'d551d708-48ae-9768-a47c-f662a148d13e\'\n', 'message': 'Chatbot error'}
+2026-01-10 12:12:02,252 - WARNING - Failed to get info from https://api.smith.langchain.com: LangSmithConnectionError('Connection error caused failure to GET /info in LangSmith API. Please confirm your internet connection. ConnectionError(MaxRetryError(\'HTTPSConnectionPool(host=\\\'api.smith.langchain.com\\\', port=443): Max retries exceeded with url: /info (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x75b353948620>: Failed to resolve \\\'api.smith.langchain.com\\\' ([Errno -3] Temporary failure in name resolution)"))\'))\nContent-Length: None\nAPI Key: lsv2_********************************************74')
+2026-01-10 12:12:14,656 - WARNING - Failed to batch ingest runs: langsmith.utils.LangSmithConnectionError: Connection error caused failure to POST https://api.smith.langchain.com/runs/batch in LangSmith API. Please confirm your internet connection. ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\'api.smith.langchain.com\', port=443): Max retries exceeded with url: /runs/batch (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x75b353b46090>: Failed to resolve \'api.smith.langchain.com\' ([Errno -3] Temporary failure in name resolution)"))'))
+Content-Length: 35060
+API Key: lsv2_********************************************74
+post: trace=363a2bf5-df97-4692-9c67-168eb611c342,id=363a2bf5-df97-4692-9c67-168eb611c342; trace=363a2bf5-df97-4692-9c67-168eb611c342,id=400bb6dd-5c7a-4286-8261-f6ebeb581ffc; trace=363a2bf5-df97-4692-9c67-168eb611c342,id=b741cee5-34ee-4c43-bca7-baf23c11a478; trace=363a2bf5-df97-4692-9c67-168eb611c342,id=4aef618f-f867-40da-8ac0-a455daa65200
+2026-01-10 12:15:16,538 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:15:16,538 - INFO - 🍔 Fetched menu items
+2026-01-10 12:15:16,539 - ERROR - {'error': "string indices must be integers, not 'str'", 'message': '❌ Menu fetch failed'}
+2026-01-10 12:15:16,539 - INFO - 🔐 Database connection closed
+2026-01-10 12:15:16,539 - INFO - 🍽️ OrderHandler initialized
+2026-01-10 12:15:26,764 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:15:27,096 - INFO - {'username': 'umer', 'role': 'customer', 'message': 'User logged in'}
+2026-01-10 12:15:27,597 - INFO - 🔐 Database connection closed
+2026-01-10 12:15:27,672 - INFO - {'message': 'Rendering home page'}
+2026-01-10 12:15:32,705 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:15:32,706 - INFO - 🍔 Fetched menu items
+2026-01-10 12:15:32,706 - INFO - 🔐 Database connection closed
+2026-01-10 12:15:38,256 - INFO - {'user': 'umer', 'query': 'wefwmlefm', 'message': 'User submitted chatbot query'}
+2026-01-10 12:15:38,261 - INFO - Streaming query: wefwmlefm
+2026-01-10 12:15:38,262 - INFO - Graph not found, building new graph
+2026-01-10 12:15:38,262 - INFO - 📈 Building workflow
+2026-01-10 12:15:38,276 - INFO - ✅ Graph built successfully
+2026-01-10 12:15:38,277 - INFO - Graph initialized
+2026-01-10 12:15:38,305 - INFO - 🤖 LLM configured
+2026-01-10 12:15:39,236 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-10 12:15:39,459 - INFO - LLM response: I’m sorry, I didn’t catch that. Could you let me know how I can help you today? 😊
+
+Anything else I can help with? 😊
+2026-01-10 12:15:39,468 - INFO - 💬 Q&A logged
+2026-01-10 12:15:39,468 - INFO - {'user': 'umer', 'response': 'I’m sorry, I didn’t catch that. Could you let me know how I can help you today? 😊\n\nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2026-01-10 12:15:51,502 - INFO - {'order_id': '335', 'message': 'Fetching order details'}
+2026-01-10 12:15:51,503 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:15:51,506 - INFO - {'order_id': 335, 'message': 'Order details fetched'}
+2026-01-10 12:15:51,506 - INFO - 🔐 Database connection closed
+2026-01-10 12:16:02,373 - INFO - {'user': 'umer', 'message': 'User logged out'}
+2026-01-10 12:16:03,574 - INFO - {'username': 'umer', 'message': 'User logging out'}
+2026-01-10 12:16:13,156 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:16:13,492 - INFO - {'username': 'admin', 'role': 'admin', 'message': 'User logged in'}
+2026-01-10 12:16:13,993 - INFO - 🔐 Database connection closed
+2026-01-10 12:16:14,083 - INFO - {'message': 'Rendering home page'}
+2026-01-10 12:16:19,840 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:16:19,844 - INFO - {'count': 27, 'message': 'Fetched menu items'}
+2026-01-10 12:16:19,844 - INFO - 🔐 Database connection closed
+2026-01-10 12:16:36,497 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:16:36,500 - INFO - {'status': 'Pending', 'count': 29, 'message': 'Fetched kitchen orders'}
+2026-01-10 12:16:36,501 - INFO - 🔐 Database connection closed
+2026-01-10 12:16:47,199 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:16:47,200 - INFO - {'status': 'Pending', 'count': 29, 'message': 'Fetched kitchen orders'}
+2026-01-10 12:16:47,202 - INFO - 🔐 Database connection closed
+2026-01-10 12:16:48,769 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:16:48,770 - INFO - {'count': 27, 'message': 'Fetched menu items'}
+2026-01-10 12:16:48,771 - INFO - 🔐 Database connection closed
+2026-01-10 12:17:09,315 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:17:09,315 - INFO - 📊 Fetching order data for analytics
+2026-01-10 12:17:09,352 - INFO - {'rows': 274, 'message': 'Preprocessing data'}
+2026-01-10 12:17:09,370 - INFO - {'status': 'All', 'rows': 274, 'message': 'Data fetched and preprocessed'}
+2026-01-10 12:17:09,371 - INFO - 🔐 Database connection closed
+2026-01-10 12:17:09,461 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-10 12:17:11,377 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-10 12:17:11,496 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-10 12:17:11,566 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-10 12:17:11,659 - INFO - {'message': 'Generating product countplot'}
+2026-01-10 12:17:11,724 - INFO - {'message': 'Generating product pie chart'}
+2026-01-10 12:17:11,776 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:17:11,776 - INFO - 🍔 Fetched menu items
+2026-01-10 12:17:19,927 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-10 12:17:20,101 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-10 12:17:20,187 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-10 12:17:20,269 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-10 12:17:20,407 - INFO - {'message': 'Generating product countplot'}
+2026-01-10 12:17:20,486 - INFO - {'message': 'Generating product pie chart'}
+2026-01-10 12:17:20,550 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:17:20,551 - INFO - 🍔 Fetched menu items
+2026-01-10 12:17:29,936 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-10 12:17:30,045 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-10 12:17:30,167 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-10 12:17:30,245 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-10 12:17:30,413 - INFO - {'message': 'Generating product countplot'}
+2026-01-10 12:17:30,505 - INFO - {'message': 'Generating product pie chart'}
+2026-01-10 12:17:30,567 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:17:30,569 - INFO - 🍔 Fetched menu items
+2026-01-10 12:17:36,808 - INFO - {'message': 'Rendering home page'}
+2026-01-10 12:17:39,034 - INFO - {'message': 'Rendering home page'}
+2026-01-10 12:17:39,058 - INFO - {'user': 'admin', 'message': 'User logged out'}
+2026-01-10 12:17:40,261 - INFO - {'username': 'admin', 'message': 'User logging out'}
+2026-01-10 12:17:56,636 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:17:56,638 - WARNING - {'username': 'kitchen', 'message': 'Login failed'}
+2026-01-10 12:17:56,640 - INFO - 🔐 Database connection closed
+2026-01-10 12:18:08,350 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:18:08,685 - INFO - {'username': 'chef', 'role': 'kitchen_staff', 'message': 'User logged in'}
+2026-01-10 12:18:09,186 - INFO - 🔐 Database connection closed
+2026-01-10 12:18:09,272 - INFO - {'message': 'Rendering home page'}
+2026-01-10 12:18:12,908 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:18:12,909 - INFO - {'status': 'Pending', 'count': 29, 'message': 'Fetched kitchen orders'}
+2026-01-10 12:18:12,909 - INFO - 🔐 Database connection closed
+2026-01-10 12:18:30,592 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:18:30,592 - INFO - {'status': 'Pending', 'count': 29, 'message': 'Fetched kitchen orders'}
+2026-01-10 12:18:30,593 - INFO - 🔐 Database connection closed
+2026-01-10 12:18:30,608 - INFO - {'user': 'chef', 'message': 'User logged out'}
+2026-01-10 12:18:31,808 - INFO - {'username': 'chef', 'message': 'User logging out'}
+2026-01-10 12:18:42,561 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:18:42,902 - INFO - {'username': 'support', 'role': 'customer_support', 'message': 'User logged in'}
+2026-01-10 12:18:43,404 - INFO - 🔐 Database connection closed
+2026-01-10 12:18:43,492 - INFO - {'message': 'Rendering home page'}
+2026-01-10 12:18:47,001 - INFO - {'message': 'Rendering order management UI'}
+2026-01-10 12:18:47,005 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:18:47,009 - INFO - {'message': 'Fetched orders', 'count': 274}
+2026-01-10 12:18:47,011 - INFO - 🔐 Database connection closed
+2026-01-10 12:21:02,863 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:21:02,864 - INFO - 🍔 Fetched menu items
+2026-01-10 12:21:02,864 - ERROR - {'error': "string indices must be integers, not 'str'", 'message': '❌ Menu fetch failed'}
+2026-01-10 12:21:02,864 - INFO - 🔐 Database connection closed
+2026-01-10 12:21:02,864 - INFO - 🍽️ OrderHandler initialized
+2026-01-10 12:21:13,059 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:21:13,388 - INFO - {'username': 'umer', 'role': 'customer', 'message': 'User logged in'}
+2026-01-10 12:21:13,889 - INFO - 🔐 Database connection closed
+2026-01-10 12:21:13,963 - INFO - {'message': 'Rendering home page'}
+2026-01-10 12:21:25,673 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:21:25,675 - INFO - 🍔 Fetched menu items
+2026-01-10 12:21:25,676 - INFO - 🔐 Database connection closed
+2026-01-10 12:21:31,128 - INFO - {'user': 'umer', 'message': 'User logged out'}
+2026-01-10 12:21:32,328 - INFO - {'username': 'umer', 'message': 'User logging out'}
+2026-01-10 12:21:53,053 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:21:53,383 - INFO - {'username': 'admin', 'role': 'admin', 'message': 'User logged in'}
+2026-01-10 12:21:53,884 - INFO - 🔐 Database connection closed
+2026-01-10 12:21:53,957 - INFO - {'message': 'Rendering home page'}
+2026-01-10 12:22:03,507 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:22:03,510 - INFO - {'status': 'Pending', 'count': 29, 'message': 'Fetched kitchen orders'}
+2026-01-10 12:22:03,511 - INFO - 🔐 Database connection closed
+2026-01-10 12:22:04,110 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:22:04,111 - INFO - 📊 Fetching order data for analytics
+2026-01-10 12:22:04,163 - INFO - {'rows': 274, 'message': 'Preprocessing data'}
+2026-01-10 12:22:04,178 - INFO - {'status': 'All', 'rows': 274, 'message': 'Data fetched and preprocessed'}
+2026-01-10 12:22:04,178 - INFO - 🔐 Database connection closed
+2026-01-10 12:22:04,206 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-10 12:22:04,669 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-10 12:22:04,952 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-10 12:22:05,108 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-10 12:22:05,239 - INFO - {'message': 'Generating product countplot'}
+2026-01-10 12:22:05,308 - INFO - {'message': 'Generating product pie chart'}
+2026-01-10 12:22:05,360 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:22:05,361 - INFO - 🍔 Fetched menu items
+2026-01-10 12:22:14,644 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-10 12:22:14,718 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-10 12:22:14,785 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-10 12:22:14,843 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-10 12:22:14,994 - INFO - {'message': 'Generating product countplot'}
+2026-01-10 12:22:15,068 - INFO - {'message': 'Generating product pie chart'}
+2026-01-10 12:22:15,125 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:22:15,127 - INFO - 🍔 Fetched menu items
+2026-01-10 12:22:24,648 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-10 12:22:24,755 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-10 12:22:24,864 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-10 12:22:24,942 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-10 12:22:25,117 - INFO - {'message': 'Generating product countplot'}
+2026-01-10 12:22:25,196 - INFO - {'message': 'Generating product pie chart'}
+2026-01-10 12:22:25,265 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:22:25,267 - INFO - 🍔 Fetched menu items
+2026-01-10 12:22:28,801 - INFO - {'message': 'Rendering home page'}
+2026-01-10 12:22:29,782 - INFO - {'message': 'Rendering home page'}
+2026-01-10 12:22:29,809 - INFO - {'user': 'admin', 'message': 'User logged out'}
+2026-01-10 12:22:31,009 - INFO - {'username': 'admin', 'message': 'User logging out'}
+2026-01-10 12:23:26,376 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:23:26,380 - INFO - 🍔 Fetched menu items
+2026-01-10 12:23:26,381 - ERROR - {'error': "string indices must be integers, not 'str'", 'message': '❌ Menu fetch failed'}
+2026-01-10 12:23:26,385 - INFO - 🔐 Database connection closed
+2026-01-10 12:23:26,385 - INFO - 🍽️ OrderHandler initialized
+2026-01-10 12:26:56,962 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:26:56,963 - INFO - 🍔 Fetched menu items
+2026-01-10 12:26:56,963 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:26:56,964 - INFO - 🍔 Fetched menu items
+2026-01-10 12:26:56,964 - INFO - 🍔 Fetched menu
+2026-01-10 12:26:56,964 - INFO - 🔐 Database connection closed
+2026-01-10 12:26:56,965 - INFO - 🍽️ OrderHandler initialized
+2026-01-10 12:26:56,965 - INFO - 🔐 Database connection closed
+2026-01-10 12:28:05,440 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:28:05,441 - INFO - 🍔 Fetched menu items
+2026-01-10 12:28:05,441 - INFO - 🍔 Fetched menu
+2026-01-10 12:28:05,441 - INFO - 🔐 Database connection closed
+2026-01-10 12:28:05,442 - INFO - 🍽️ OrderHandler initialized
+2026-01-10 12:28:32,653 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:28:32,989 - INFO - {'username': 'umer', 'role': 'customer', 'message': 'User logged in'}
+2026-01-10 12:28:33,491 - INFO - 🔐 Database connection closed
+2026-01-10 12:28:33,561 - INFO - {'message': 'Rendering home page'}
+2026-01-10 12:28:35,104 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:28:35,106 - INFO - 🍔 Fetched menu items
+2026-01-10 12:28:35,106 - INFO - 🔐 Database connection closed
+2026-01-10 12:28:38,273 - INFO - {'user': 'umer', 'query': 'hello', 'message': 'User submitted chatbot query'}
+2026-01-10 12:28:38,278 - INFO - Streaming query: hello
+2026-01-10 12:28:38,278 - INFO - Graph not found, building new graph
+2026-01-10 12:28:38,279 - INFO - 📈 Building workflow
+2026-01-10 12:28:38,290 - INFO - ✅ Graph built successfully
+2026-01-10 12:28:38,291 - INFO - Graph initialized
+2026-01-10 12:28:38,315 - INFO - 🤖 LLM configured
+2026-01-10 12:28:39,069 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-10 12:28:39,404 - INFO - LLM response: Hello! 👋 How can I assist you today? 😊  
+Anything else I can help with? 😊
+2026-01-10 12:28:39,440 - INFO - 💬 Q&A logged
+2026-01-10 12:28:39,441 - INFO - {'user': 'umer', 'response': 'Hello! 👋 How can I assist you today? 😊  \nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2026-01-10 12:28:49,688 - INFO - {'user': 'umer', 'query': 'i want a burger', 'message': 'User submitted chatbot query'}
+2026-01-10 12:28:49,693 - INFO - Streaming query: i want a burger
+2026-01-10 12:28:49,729 - INFO - Retrying request to /openai/v1/chat/completions in 0.397221 seconds
+2026-01-10 12:28:51,390 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-10 12:29:02,671 - INFO - LLM response: 
+2026-01-10 12:29:02,671 - INFO - Tool calls: [{'name': 'get_prices_for_items', 'args': {'items': ['burger']}, 'id': 'fc_6756736b-8924-473e-92e2-a73c0d68a405', 'type': 'tool_call'}]
+2026-01-10 12:29:02,680 - INFO - ✅ Connected to SQLite database (Async)
+2026-01-10 12:29:02,682 - INFO - 🍔 Fetched menu items (Async)
+2026-01-10 12:29:02,682 - INFO - 💰 Prices fetched for 1 items
+2026-01-10 12:29:02,683 - INFO - 🔐 Database connection closed (Async)
+2026-01-10 12:29:03,622 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-10 12:29:03,654 - INFO - LLM response: Sorry, a “burger” isn’t on our menu right now ❌. Please check the available food menu above for other options.  
+
+Anything else I can help with? 😊
+2026-01-10 12:29:03,669 - INFO - 💬 Q&A logged
+2026-01-10 12:29:03,669 - INFO - {'user': 'umer', 'response': 'Sorry, a “burger” isn’t on our menu right now ❌. Please check the available food menu above for other options.  \n\nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2026-01-10 12:29:16,676 - INFO - {'user': 'umer', 'query': 'i want zinger burger', 'message': 'User submitted chatbot query'}
+2026-01-10 12:29:16,678 - INFO - Streaming query: i want zinger burger
+2026-01-10 12:29:16,715 - INFO - Retrying request to /openai/v1/chat/completions in 0.467251 seconds
+2026-01-10 12:29:20,917 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-10 12:29:21,816 - INFO - LLM response: 
+2026-01-10 12:29:21,816 - INFO - Tool calls: [{'name': 'get_prices_for_items', 'args': {'items': ['zinger burger']}, 'id': 'fc_8a9d5d37-ceb6-4608-919b-d901599c57f6', 'type': 'tool_call'}]
+2026-01-10 12:29:21,823 - INFO - ✅ Connected to SQLite database (Async)
+2026-01-10 12:29:21,824 - INFO - 🍔 Fetched menu items (Async)
+2026-01-10 12:29:21,824 - INFO - 💰 Prices fetched for 1 items
+2026-01-10 12:29:21,825 - INFO - 🔐 Database connection closed (Async)
+2026-01-10 12:29:21,967 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-10 12:29:22,381 - INFO - LLM response: Sure! Here’s the order summary:
+
+| Item          | Qty | Unit Price | Subtotal |
+|---------------|-----|------------|----------|
+| Zinger burger | 1   | $2.99      | $2.99    |
+**Total: $2.99**
+
+✅ Does everything look good? Let me know if you’d like to confirm this order or make any changes.  
+
+Anything else I can help with? 😊
+2026-01-10 12:29:22,415 - INFO - 💬 Q&A logged
+2026-01-10 12:29:22,416 - INFO - {'user': 'umer', 'response': 'Sure! Here’s the order summary:\n\n| Item          | Qty | Unit Price | Subtotal |\n|---------------|-----|------------|----------|\n| Zinger burger | 1   | $2.99      | $2.99    |\n**Total: $2.99**\n\n✅ Does everything look good? Let me know if you’d like to confirm this order or make any changes.  \n\nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2026-01-10 12:29:34,662 - INFO - {'user': 'umer', 'query': 'i want pepsi too', 'message': 'User submitted chatbot query'}
+2026-01-10 12:29:34,665 - INFO - Streaming query: i want pepsi too
+2026-01-10 12:29:34,722 - INFO - Retrying request to /openai/v1/chat/completions in 0.397113 seconds
+2026-01-10 12:29:35,487 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-10 12:29:36,086 - INFO - LLM response: 
+2026-01-10 12:29:36,086 - INFO - Tool calls: [{'name': 'get_prices_for_items', 'args': {'items': ['Pepsi']}, 'id': 'fc_97d4878f-5d36-49a8-8c7f-89f530526cee', 'type': 'tool_call'}]
+2026-01-10 12:29:36,095 - INFO - ✅ Connected to SQLite database (Async)
+2026-01-10 12:29:36,096 - INFO - 🍔 Fetched menu items (Async)
+2026-01-10 12:29:36,096 - INFO - 💰 Prices fetched for 1 items
+2026-01-10 12:29:36,097 - INFO - 🔐 Database connection closed (Async)
+2026-01-10 12:29:36,321 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-10 12:29:36,764 - INFO - LLM response: Great! Adding a Pepsi (1) to your order.
+
+| Item          | Qty | Unit Price | Subtotal |
+|---------------|-----|------------|----------|
+| Zinger burger | 1   | $2.99      | $2.99    |
+| Pepsi         | 1   | $2.49      | $2.49    |
+**Total: $5.48**
+
+✅ Does everything look correct? Let me know if you’d like to confirm this order or adjust any quantities.  
+
+Anything else I can help with? 😊
+2026-01-10 12:29:36,772 - INFO - 💬 Q&A logged
+2026-01-10 12:29:36,772 - INFO - {'user': 'umer', 'response': 'Great! Adding a Pepsi (1) to your order.\n\n| Item          | Qty | Unit Price | Subtotal |\n|---------------|-----|------------|----------|\n| Zinger burger | 1   | $2.99      | $2.99    |\n| Pepsi         | 1   | $2.49      | $2.49    |\n**Total: $5.48**\n\n✅ Does everything look correct? Let me know if you’d like to confirm this order or adjust any quantities.  \n\nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2026-01-10 12:29:53,514 - INFO - {'user': 'umer', 'query': 'do you have orange juice??', 'message': 'User submitted chatbot query'}
+2026-01-10 12:29:53,517 - INFO - Streaming query: do you have orange juice??
+2026-01-10 12:29:53,558 - INFO - Retrying request to /openai/v1/chat/completions in 0.434008 seconds
+2026-01-10 12:29:59,003 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-10 12:29:59,125 - INFO - LLM response: 
+2026-01-10 12:29:59,125 - INFO - Tool calls: [{'name': 'get_prices_for_items', 'args': {'items': ['Orange juice']}, 'id': 'fc_1796cfa0-11bc-4459-bb17-a7b15cfec4f7', 'type': 'tool_call'}]
+2026-01-10 12:29:59,140 - INFO - ✅ Connected to SQLite database (Async)
+2026-01-10 12:29:59,141 - INFO - 🍔 Fetched menu items (Async)
+2026-01-10 12:29:59,141 - INFO - 💰 Prices fetched for 1 items
+2026-01-10 12:29:59,143 - INFO - 🔐 Database connection closed (Async)
+2026-01-10 12:29:59,315 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-10 12:29:59,476 - INFO - LLM response: Sorry, “Orange juice” isn’t on our menu ❌. Please check the available food menu above for other drinks you might like.  
+
+Anything else I can help with? 😊
+2026-01-10 12:29:59,484 - INFO - 💬 Q&A logged
+2026-01-10 12:29:59,484 - INFO - {'user': 'umer', 'response': 'Sorry, “Orange juice” isn’t on our menu ❌. Please check the available food menu above for other drinks you might like.  \n\nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2026-01-10 12:30:08,991 - INFO - {'user': 'umer', 'query': 'Fresh Orange Juice', 'message': 'User submitted chatbot query'}
+2026-01-10 12:30:08,994 - INFO - Streaming query: Fresh Orange Juice
+2026-01-10 12:30:09,035 - INFO - Retrying request to /openai/v1/chat/completions in 0.380249 seconds
+2026-01-10 12:30:09,697 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-10 12:30:09,827 - INFO - LLM response: 
+2026-01-10 12:30:09,827 - INFO - Tool calls: [{'name': 'get_prices_for_items', 'args': {'items': ['Fresh Orange Juice']}, 'id': 'fc_474a2a9c-9e1d-432c-9d89-0ee8f5c0c9fd', 'type': 'tool_call'}]
+2026-01-10 12:30:09,833 - INFO - ✅ Connected to SQLite database (Async)
+2026-01-10 12:30:09,834 - INFO - 🍔 Fetched menu items (Async)
+2026-01-10 12:30:09,834 - INFO - 💰 Prices fetched for 1 items
+2026-01-10 12:30:09,835 - INFO - 🔐 Database connection closed (Async)
+2026-01-10 12:30:10,015 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-10 12:30:10,244 - INFO - LLM response: ✅ Good news! Fresh Orange Juice is available for **$4.99**.
+
+Would you like to add it to your order? Just let me know the quantity, or feel free to explore other items.  
+
+Anything else I can help with? 😊
+2026-01-10 12:30:10,262 - INFO - 💬 Q&A logged
+2026-01-10 12:30:10,262 - INFO - {'user': 'umer', 'response': '✅ Good news! Fresh Orange Juice is available for **$4.99**.\n\nWould you like to add it to your order? Just let me know the quantity, or feel free to explore other items.  \n\nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2026-01-10 12:30:14,246 - INFO - {'user': 'umer', 'query': 'add 1', 'message': 'User submitted chatbot query'}
+2026-01-10 12:30:14,249 - INFO - Streaming query: add 1
+2026-01-10 12:30:14,295 - INFO - Retrying request to /openai/v1/chat/completions in 0.490246 seconds
+2026-01-10 12:30:18,378 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-10 12:30:18,523 - INFO - LLM response: Here’s your updated order:
+
+| Item               | Qty | Unit Price | Subtotal |
+|--------------------|-----|------------|----------|
+| Zinger burger      | 1   | $2.99      | $2.99    |
+| Pepsi              | 1   | $2.49      | $2.49    |
+| Fresh Orange Juice | 1   | $4.99      | $4.99    |
+**Total: $10.47**
+
+✅ Does everything look correct? Let me know if you’d like to confirm this order or make any changes.  
+
+Anything else I can help with? 😊
+2026-01-10 12:30:18,569 - INFO - 💬 Q&A logged
+2026-01-10 12:30:18,570 - INFO - {'user': 'umer', 'response': 'Here’s your updated order:\n\n| Item               | Qty | Unit Price | Subtotal |\n|--------------------|-----|------------|----------|\n| Zinger burger      | 1   | $2.99      | $2.99    |\n| Pepsi              | 1   | $2.49      | $2.49    |\n| Fresh Orange Juice | 1   | $4.99      | $4.99    |\n**Total: $10.47**\n\n✅ Does everything look correct? Let me know if you’d like to confirm this order or make any changes.  \n\nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2026-01-10 12:30:28,401 - INFO - {'user': 'umer', 'query': 'confirm it', 'message': 'User submitted chatbot query'}
+2026-01-10 12:30:28,404 - INFO - Streaming query: confirm it
+2026-01-10 12:30:28,458 - INFO - Retrying request to /openai/v1/chat/completions in 0.489336 seconds
+2026-01-10 12:30:29,189 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-10 12:30:29,594 - INFO - LLM response: 
+2026-01-10 12:30:29,595 - INFO - Tool calls: [{'name': 'save_order', 'args': {'order_details': '{"items": {"Zinger burger": 1, "Pepsi": 1, "Fresh Orange Juice": 1}, "total_price": 10.47}'}, 'id': 'fc_7a18dc65-70c5-431e-9114-ef144f9e84dd', 'type': 'tool_call'}]
+2026-01-10 12:30:29,601 - INFO - 💾 Received order
+2026-01-10 12:30:29,601 - INFO - 🍽️ Items found
+2026-01-10 12:30:29,602 - INFO - ✅ Connected to SQLite database (Async)
+2026-01-10 12:30:29,615 - INFO - ✅ Order stored (Async)
+2026-01-10 12:30:29,615 - INFO - ✅ Order saved
+2026-01-10 12:30:29,617 - INFO - 🔐 Database connection closed (Async)
+2026-01-10 12:30:29,765 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-10 12:30:30,004 - INFO - LLM response: ✅ Your order is confirmed!  
+
+**Order #360**  
+- Zinger burger × 1  
+- Pepsi × 1  
+- Fresh Orange Juice × 1  
+
+**Total:** $10.47  
+Estimated delivery: **40 minutes**.
+
+If you need anything else—track the order, modify it, or add more items—just let me know!  
+
+Anything else I can help with? 😊
+2026-01-10 12:30:30,014 - INFO - 💬 Q&A logged
+2026-01-10 12:30:30,015 - INFO - {'user': 'umer', 'response': '✅ Your order is confirmed!  \n\n**Order #360**  \n- Zinger burger\u202f×\u202f1  \n- Pepsi\u202f×\u202f1  \n- Fresh Orange Juice\u202f×\u202f1  \n\n**Total:** $10.47  \nEstimated delivery: **40\u202fminutes**.\n\nIf you need anything else—track the order, modify it, or add more items—just let me know!  \n\nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2026-01-10 12:30:41,771 - INFO - {'order_id': '360', 'message': 'Fetching order details'}
+2026-01-10 12:30:41,772 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:30:41,773 - INFO - {'order_id': 360, 'message': 'Order details fetched'}
+2026-01-10 12:30:41,774 - INFO - 🔐 Database connection closed
+2026-01-10 12:30:44,701 - INFO - {'user': 'umer', 'message': 'User logged out'}
+2026-01-10 12:30:45,902 - INFO - {'username': 'umer', 'message': 'User logging out'}
+2026-01-10 12:30:53,847 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:30:54,177 - INFO - {'username': 'admin', 'role': 'admin', 'message': 'User logged in'}
+2026-01-10 12:30:54,678 - INFO - 🔐 Database connection closed
+2026-01-10 12:30:54,753 - INFO - {'message': 'Rendering home page'}
+2026-01-10 12:30:57,944 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:30:57,944 - INFO - 📊 Fetching order data for analytics
+2026-01-10 12:30:57,964 - INFO - {'rows': 275, 'message': 'Preprocessing data'}
+2026-01-10 12:30:57,978 - INFO - {'status': 'All', 'rows': 275, 'message': 'Data fetched and preprocessed'}
+2026-01-10 12:30:57,979 - INFO - 🔐 Database connection closed
+2026-01-10 12:30:58,007 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-10 12:30:58,581 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-10 12:30:58,696 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-10 12:30:58,789 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-10 12:30:58,974 - INFO - {'message': 'Generating product countplot'}
+2026-01-10 12:30:59,081 - INFO - {'message': 'Generating product pie chart'}
+2026-01-10 12:30:59,139 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:30:59,140 - INFO - 🍔 Fetched menu items
+2026-01-10 12:30:59,182 - INFO - {'message': 'Generating item revenue chart'}
+2026-01-10 12:30:59,326 - INFO - {'message': 'Generating hourly demand chart'}
+2026-01-10 12:30:59,453 - INFO - {'message': 'Generating spending distribution chart'}
+2026-01-10 12:30:59,537 - INFO - {'message': 'Generating spending boxplot chart'}
+2026-01-10 12:30:59,615 - INFO - {'message': 'Generating AOV trend chart'}
+2026-01-10 12:31:08,181 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:31:08,183 - INFO - {'count': 27, 'message': 'Fetched menu items'}
+2026-01-10 12:31:08,184 - INFO - 🔐 Database connection closed
+2026-01-10 12:31:10,144 - INFO - ✅ Connected to SQLite database
+2026-01-10 12:31:10,145 - INFO - {'count': 27, 'message': 'Fetched menu items'}
+2026-01-10 12:31:10,145 - INFO - 🔐 Database connection closed
+2026-01-10 12:31:10,160 - INFO - {'user': 'admin', 'message': 'User logged out'}
+2026-01-10 12:31:11,361 - INFO - {'username': 'admin', 'message': 'User logging out'}

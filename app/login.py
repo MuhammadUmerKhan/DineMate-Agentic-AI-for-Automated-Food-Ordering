@@ -38,7 +38,7 @@ def login() -> None:
     with st.expander("🔑 Demo Login Credentials", expanded=False):
         st.markdown("""
         - 👨‍💼 **Admin**: `admin` / `admin123`
-        - 👨‍🍳 **Kitchen Staff**: `kitchen` / `kitchen123`
+        - 👨‍🍳 **Kitchen Staff**: `chef` / `chef123`
         - 📞 **Customer Support**: `support` / `support123`
         - 👤 **Customer**: `customer` / `customer123`
         - ❗ **Troubleshooting**: If you face issues signing up, use `umer` / `umer123` to sign in.
@@ -73,7 +73,7 @@ def login() -> None:
 
     col1, col2 = st.columns([1, 1], gap="small")
     with col1:
-        if st.button("🚀 Sign In", use_container_width=True):
+        if st.button("🚀 Sign In", width="stretch"):
             with st.spinner("⏳ Logging in..."):
                 db = Database()
                 try:
@@ -93,7 +93,7 @@ def login() -> None:
                     db.close_connection()
 
     with col2:
-        if st.button("📝 Sign Up", use_container_width=True):
+        if st.button("📝 Sign Up", width="stretch"):
             st.session_state["page"] = "signup"
             st.rerun()
 
@@ -117,7 +117,7 @@ def register() -> None:
 
     col1, col2 = st.columns([1, 1], gap="small")
     with col1:
-        if st.button("✅ Register", use_container_width=True):
+        if st.button("✅ Register", width="stretch"):
             with st.spinner("⏳ Registering..."):
                 if not (username and password and email):
                     st.warning("⚠ Please fill all fields.")
@@ -142,7 +142,7 @@ def register() -> None:
                     db.close_connection()
 
     with col2:
-        if st.button("🔄 Go to Login", use_container_width=True):
+        if st.button("🔄 Go to Login", width="stretch"):
             st.session_state["page"] = "login"
             st.rerun()
 

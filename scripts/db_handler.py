@@ -32,7 +32,7 @@ class OrderHandler:
         """
         try:
             menu = self.db.load_menu()
-            menu_dict = {item["name"].lower(): float(item["price"]) for item in menu} if menu else {}
+            menu_dict = {name.lower(): float(price) for name, price in menu.items()} if menu else {}
             logger.info("🍔 Fetched menu")
             return menu_dict
         except Exception as e:
