@@ -10,8 +10,8 @@ Dependencies:
 """
 
 from typing import Dict, Union
-from db import Database
-from logger import get_logger
+from scripts.db import Database
+from scripts.logger import get_logger
 
 logger = get_logger(__name__)
 
@@ -32,7 +32,8 @@ class OrderHandler:
         """
         try:
             menu = self.db.load_menu()
-            menu_dict = {item["name"].lower(): float(item["price"]) for item in menu} if menu else {}
+            # load_menu() returns a dict {name: price}, convert keys to lowercase
+            menu_dict = {name.lower(): float(price) for name, price in menu.items()} if menu else {}
             logger.info("🍔 Fetched menu")
             return menu_dict
         except Exception as e:

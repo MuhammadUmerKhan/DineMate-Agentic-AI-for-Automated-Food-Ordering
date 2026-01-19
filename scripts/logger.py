@@ -1,6 +1,5 @@
 from pathlib import Path
-import logging
-import os
+import logging, os
 
 # Ensure the logs directory exists
 os.makedirs(Path(__file__).parent.parent / "logs", exist_ok=True)

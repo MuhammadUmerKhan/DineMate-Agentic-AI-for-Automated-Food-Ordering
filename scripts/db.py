@@ -15,8 +15,8 @@ Dependencies:
 
 import sqlite3, datetime, json, bcrypt, pandas as pd, aiosqlite
 from typing import Dict, Optional
-from logger import get_logger
-from config import DB_PATH
+from scripts.logger import get_logger
+from scripts.config import DB_PATH
 
 logger = get_logger(__name__)
 
@@ -188,8 +188,8 @@ class Database:
             if not items:
                 return "⚠️ No items provided."
 
-            menu = self.load_menu() or []
-            valid_items = {item["name"].lower() for item in menu}
+            menu = self.load_menu() or {}
+            valid_items = {item.lower() for item in menu.keys()}
             for item in items:
                 if item.lower() not in valid_items:
                     return f"⚠️ '{item}' not in menu."

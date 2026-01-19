@@ -13,7 +13,7 @@ This module defines the state structure for the DineMate foodbot.
 from typing import Annotated
 from typing_extensions import TypedDict
 from langgraph.graph.message import add_messages
-from logger import get_logger
+from scripts.logger import get_logger
 
 logger = get_logger(__name__)
 
@@ -29,7 +29,8 @@ def prune_messages(left: list, right: list) -> list:
     return filtered
 
 class State(TypedDict):
-    messages: Annotated[list, prune_messages]  # Use custom reducer
+    messages: Annotated[list, add_messages]  # Use custom reducer
+    summary: str  # Store summary of conversation
     menu: dict  # Store menu as a dict, not in messages
 
     def __init__(self):

@@ -13,12 +13,12 @@ saving orders to the database.
 
 import json
 from langchain_core.tools import tool
-from db import AsyncDatabase
-from logger import get_logger
+from scripts.db import AsyncDatabase
+from scripts.logger import get_logger
 
 logger = get_logger(__name__)
 
-# @tool
+@tool
 async def get_full_menu() -> dict:
     """Fetch the full restaurant menu as a compact JSON string. Use ONLY when the user explicitly asks to see the entire menu."""
     async with AsyncDatabase() as db:
@@ -29,7 +29,7 @@ async def get_full_menu() -> dict:
         logger.warning("⚠️ No menu items found")
         return "Menu unavailable."
 
-# @tool
+@tool
 async def get_prices_for_items(items: list) -> str:
     """Fetch prices for a specific list of items as a compact JSON dict (e.g., {'burger': 10.0, 'coke': 2.0}). 
     Returns null for any invalid items. Use this for validating items and calculating prices during orders.
@@ -53,7 +53,7 @@ async def get_prices_for_items(items: list) -> str:
         logger.info(f"💰 Prices fetched for {len(items)} items")
         return json.dumps(prices, separators=(",", ":"))
 
-# @tool
+@tool
 async def save_order(order_details: str) -> dict:
     """Save the confirmed order to the database.
     :param order_details: JSON string with items and total price, e.g., {'items': {'pizza': 2, 'cola': 1}, 'total_price': 25.0}
@@ -81,7 +81,7 @@ async def save_order(order_details: str) -> dict:
         logger.error("❌ Invalid JSON")
         return {"status": "error", "message": "Invalid JSON."}
 
-# @tool
+@tool
 async def check_order_status(order_id: str) -> str:
     """Fetch the order status and estimated delivery time.
     :param order_id: The ID of the order to check (e.g., '162' or 162).
@@ -102,7 +102,7 @@ async def check_order_status(order_id: str) -> str:
         logger.info("✅ Status retrieved")
         return result
 
-# @tool
+@tool
 async def cancel_order(order_id: str) -> str:
     """Cancel an order if within 10 minutes of placement.
     :param order_id: The ID of the order to cancel (e.g., '162' or 162).
@@ -123,7 +123,7 @@ async def cancel_order(order_id: str) -> str:
         logger.info("✅ Cancellation result")
         return result
 
-# @tool
+@tool
 async def modify_order(order_details: str) -> dict:
     """Modify an existing order within 10 minutes of placement."""
     logger.info("✍️ Modifying order")
@@ -165,7 +165,7 @@ async def modify_order(order_details: str) -> dict:
         logger.error("❌ Invalid price")
         return {"status": "error", "message": "Invalid price."}
 
-# @tool
+@tool
 async def get_order_details(order_id: str) -> dict:
     """Retrieve order details and modification eligibility.
     :param order_id: JSON string with order_id, e.g., {"order_id": 162}
@@ -185,7 +185,7 @@ async def get_order_details(order_id: str) -> dict:
         logger.error("❌ Invalid JSON")
         return {"status": "error", "message": "Invalid JSON."}
 
-# @tool
+@tool
 def introduce_developer() -> str:
     """
     Introduce the LLM assistant and the creator of the DineMate project.

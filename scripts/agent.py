@@ -14,78 +14,104 @@ This module implements the chatbot node for the DineMate foodbot.
 
 import json, textwrap
 from langsmith import traceable
-from tools import get_full_menu, get_prices_for_items, save_order, check_order_status, cancel_order, modify_order, get_order_details, introduce_developer
-from config import LANGSMITH_PROJECT
-from state import State
-from logger import get_logger
-from utils import configure_llm
+from scripts.state import State
+from scripts.logger import get_logger
+from scripts.utils import configure_llm
+from scripts.config import MODEL_NAME, DEFAULT_MODEL_NAME
+from scripts.prompt import FOODBOT_PROMPT, SUMMARIZE_PROMPT
+from langchain_core.messages import SystemMessage, HumanMessage, RemoveMessage
+from scripts.config import LANGSMITH_PROJECT, SUMMARY_MESSAGE_THRESHOLD, KEEP_LAST_MESSAGES
+from scripts.tools import (get_full_menu, get_prices_for_items, save_order, check_order_status, 
+                    cancel_order, modify_order, get_order_details, introduce_developer)
 
 logger = get_logger(__name__)
 
+# =================================== Summarize conversation  ======================================
+@traceable(run_type="chain", name="DineMate_ChatFlow", project_name=LANGSMITH_PROJECT)
+async def summarize_conversation(state: State):
+    """Summarize the conversation history to save tokens."""
+    existing_summary = state.get("summary", "")
+
+    # We summarize everything except the very last few messages
+    # (we'll keep last 4–6 verbatim anyway)
+    if len(state["messages"]) < SUMMARY_MESSAGE_THRESHOLD:
+        return state  # too short → no need
+
+    # Take all messages except the last 4
+    messages_to_summarize = state["messages"][:-KEEP_LAST_MESSAGES]
+
+    # Build content string from messages
+    content = "\n".join(
+        f"{msg.type.upper()}: {msg.content}"
+        for msg in messages_to_summarize
+        if hasattr(msg, "content") and msg.content.strip()
+    )
+
+    # Fill the prompt with existing_summary and new content
+    filled_system_content = SUMMARIZE_PROMPT.format(
+        existing_summary=existing_summary if existing_summary else "None",
+        conversation=content
+    )
+
+    prompt = [
+        SystemMessage(content=filled_system_content),
+        HumanMessage(content="Produce the updated bullet-point summary now.")
+    ]
+
+    try:
+        llm = configure_llm(MODEL_NAME, force_reload=True)
+        summary_msg = await llm.ainvoke(prompt)
+        new_summary = summary_msg.content.strip()
+
+        # Decide which old messages to remove. Keep last 4 messages + remove older ones
+        messages_to_remove = [
+            RemoveMessage(id=msg.id)
+            for msg in state["messages"][:-KEEP_LAST_MESSAGES]
+        ]
+
+        logger.info(f"✅ Conversation summarized. New summary length: {len(new_summary)} chars")
+
+        return {
+            "summary": new_summary,
+            "messages": messages_to_remove,
+        }
+
+    except Exception as e:
+        logger.error(f"❌ Summarization failed: {e}")
+        return {}   # fail silently — better than crashing
+# ==================================================================================================
+
+
+# ===================================  Dinemate Agent  ==================================================
 @traceable(run_type="chain", name="DineMate_ChatFlow", project_name=LANGSMITH_PROJECT)
 async def chatbot(state: State) -> State:
     """Process user input and interact with the LLM (Async)."""
     messages = state["messages"]
     current_menu = state.get("menu", {})  # Check if menu is already cached
-
-    system_prompt = textwrap.dedent("""
-        You are DineMate, a kind, professional AI restaurant assistant 🤖🍽️. 
-        Always respond in a clear, polite, concise, and user-friendly way with light emojis 
-        (✅=confirm, 📜=menu, 🍔=food, 💰=price, 📦=order, ❌=cancel). 
-        Avoid technical or raw JSON responses—summarize naturally.  
-
-        General Guidelines:
-        - Keep replies short, structured, and easy to scan. 
-        - Use bullet points or tables where clarity improves user experience.
-        - Be proactive: after answering, gently suggest possible next steps.  
-        - Confirm politely before taking actions.  
-        - End with: “Anything else I can help with? 😊”.
-
-        For orders (e.g., "2 burgers, 1 coke"):
-        - Call get_prices_for_items with the list of mentioned items to validate and fetch prices.
-        - If any item has null price, inform the user it's unavailable and suggest they check the displayed menu.
-        - Compute total = qty × unit_price.  
-        - Present an order summary in a clean table format before and after confirmation:  
-            | Item | Qty | Unit Price | Subtotal |
-            |------|-----|------------|----------|
-            | Burger | 2 | $10 | $20 |
-            **Total: $20**
-        - Confirm details in a friendly way ✅ before calling 💾 save_order.
-
-        For "show me the menu":
-        - Since the full menu is already displayed to the user, acknowledge it with: "📜 The full menu is already shown above. Please refer to it!"
-        - Only call 📜get_full_menu if explicitly asked to refresh it and no menu is cached.
-
-        For invalid items (e.g., user requests an item not in the menu):
-        - Politely inform the user the item is unavailable (e.g., "Sorry, 'Zinger Biryani' isn't on our menu ❌") and suggest they check the displayed menu.
-        - Do NOT suggest alternative items unless they are validated by get_prices_for_items from the current menu.
-        - Redirect to the menu with: "Please check our available food menu above."
-
-        Tools: 
-            - 📜 get_full_menu (only if no menu is cached and user asks to refresh),
-            - 💰 get_prices_for_items (for orders/validation, input: list of item names),
-            - 🙋 introduce_developer, 
-            - 💾 save_order (after confirmation, format: {"items": {"burger": 2}, "total_price": 15.0}), 
-            - ✏️ modify_order (format: {"order_id": 162, "items": {"pizza": 2}, "total_price": 25.0}), 
-            - 🔍 check_order_status (with order_id), 
-            - 📦 get_order_details (with order_id), 
-            - ❌ cancel_order (with order_id).
-
-        Always confirm order details and total before saving. 
-    """)
     
-    llm = configure_llm()
-    llm_with_tools = llm.bind_tools([get_full_menu, get_prices_for_items, save_order, check_order_status,
-                                     cancel_order, modify_order, get_order_details, introduce_developer])
-    messages = [{"role": "system", "content": system_prompt}] + messages
+    system_prompt = textwrap.dedent(FOODBOT_PROMPT)
+
+    if state.get("summary"):
+        system_prompt += f"\n\n=== Conversation summary so far ===\n{state['summary']}\n"
+    
+    llm = configure_llm(DEFAULT_MODEL_NAME)
+    llm_with_tools = llm.bind_tools(
+        [get_full_menu, get_prices_for_items, save_order, check_order_status,
+        cancel_order, modify_order, get_order_details, introduce_developer]
+    )
+    
+    messages = [SystemMessage(content=system_prompt)] + messages
     
     # Pass cached menu to LLM if available, to avoid unnecessary tool calls
     if current_menu:
-        messages.append({"role": "assistant", "content": f"Cached menu available: {json.dumps(current_menu, separators=(',', ':'))}"})
+        messages.append({
+            "role": "assistant", 
+            "content": f"Cached menu available: {json.dumps(current_menu, separators=(',', ':'))}"
+            })
     
     response = await llm_with_tools.ainvoke(messages)
     
-    logger.info(f"LLM response: {response.content}")
+    logger.info(f"💬 LLM response: {response.content}")
     
     # Handle tool calls and update state
     new_menu = state.get("menu", {})
@@ -110,3 +136,4 @@ async def chatbot(state: State) -> State:
             response.content = "⚠️ Menu unavailable.\nAnything else I can help with? 😊"
     
     return {"messages": [response], "menu": new_menu}
+# ==================================================================================================

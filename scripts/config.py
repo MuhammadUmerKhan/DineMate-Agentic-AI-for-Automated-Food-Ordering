@@ -13,9 +13,9 @@ Dependencies:
 
 import os, sqlite3
 from dotenv import load_dotenv
-from logger import get_logger
 from pathlib import Path
 from pydantic import SecretStr
+from scripts.logger import get_logger
 
 # Load environment variables
 load_dotenv()
@@ -31,7 +31,7 @@ TEMPERATURE = os.getenv("TEMPERATURE", 0.5)
 
 # Static paths
 DB_PATH = Path(__file__).parent.parent / "database" / "dinemate.db"
-STATIC_CSS_PATH =  Path(__file__) / "static" / "styles.css"
+STATIC_CSS_PATH =  Path(__file__).parent.parent / "static" / "styles.css"
 
 # langsmith configuration
 LANGSMITH_PROJECT = os.getenv("LANGSMITH_PROJECT", "DineMate")
@@ -39,8 +39,13 @@ LANGSMITH_TRACING = os.getenv("LANGSMITH_TRACING", "true")
 LANGSMITH_ENDPOINT = os.getenv("LANGSMITH_ENDPOINT", "https://api.smith.langchain.com")
 LANGSMITH_API_KEY = SecretStr(os.getenv("LANGSMITH_API_KEY") or "")
 
+# Short term memory handling
+SUMMARY_MESSAGE_THRESHOLD = 10     # trigger summary after this many messages
+KEEP_LAST_MESSAGES = 4               # always keep last N messages verbatim
+
 # Model configuration
-DEFAULT_MODEL_NAME = os.getenv("MODEL_NAME", 'openai/gpt-oss-120b')
+DEFAULT_MODEL_NAME = os.getenv("DEFAULT_MODEL_NAME", 'openai/gpt-oss-120b')
+MODEL_NAME = os.getenv("MODEL_NAME", "llama-3.3-70b-versatile")
 
 def get_db_connection():
     """

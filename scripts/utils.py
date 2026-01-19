@@ -1,12 +1,12 @@
 # Import required libraries
 
 from dotenv import load_dotenv
-# from langsmith import traceable
+from langsmith import traceable
 import streamlit as st
-from logger import get_logger
-from config import GROQ_API_KEY, DEFAULT_MODEL_NAME, TEMPERATURE
+from scripts.logger import get_logger
 from langchain_groq import ChatGroq
-from db import Database
+from scripts.db import Database
+from scripts.config import GROQ_API_KEY, TEMPERATURE, LANGSMITH_PROJECT
 
 load_dotenv()
 
@@ -81,20 +81,22 @@ def display_msg(msg, author):
     st.chat_message(author).write(msg)
 
 # Singleton LLM instance
-_llm_instance = None
+_llm_instance, _current_model = None, None
 
 @st.cache_resource(show_spinner=False)
-# @traceable(run_type="llm", project_name=LANGCHAIN_PROJECT)
-def configure_llm():
-    """Configures and caches a singleton LLM (ChatGroq) instance."""
-    global _llm_instance
-    if _llm_instance is None:
-        logger.info("🤖 LLM configured")
+@traceable(run_type="llm", project_name=LANGSMITH_PROJECT)
+def configure_llm(model_name: str, force_reload: bool = False):
+    global _llm_instance, _current_model
+    
+    if force_reload or _llm_instance is None or _current_model != model_name:
+        logger.info(f"🔄 (Re)configuring LLM → {model_name}")
         _llm_instance = ChatGroq(
-            model_name=DEFAULT_MODEL_NAME,
+            model_name=model_name,
             temperature=TEMPERATURE,
-            groq_api_key=GROQ_API_KEY
+            groq_api_key=GROQ_API_KEY.get_secret_value(),
         )
+        _current_model = model_name
+    
     return _llm_instance
 
 def print_qa(cls, question, answer):
