@@ -208,3 +208,545 @@ Anything else I can help you with?
 2026-01-19 11:14:37,749 - INFO - ✅ Connected to SQLite database
 2026-01-19 11:14:37,750 - INFO - {'order_id': 365, 'message': 'Order details fetched'}
 2026-01-19 11:14:37,750 - INFO - 🔐 Database connection closed
+2026-01-19 19:15:44,458 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:15:44,464 - INFO - 🍔 Fetched menu items
+2026-01-19 19:15:44,464 - INFO - 🍔 Fetched menu
+2026-01-19 19:15:44,466 - INFO - 🔐 Database connection closed
+2026-01-19 19:15:44,466 - INFO - 🍽️ OrderHandler initialized
+2026-01-19 19:16:10,603 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:16:10,842 - INFO - {'username': 'umer', 'role': 'customer', 'message': 'User logged in'}
+2026-01-19 19:16:11,343 - INFO - 🔐 Database connection closed
+2026-01-19 19:16:11,418 - INFO - {'message': 'Rendering home page'}
+2026-01-19 19:16:13,614 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:16:13,616 - INFO - 🍔 Fetched menu items
+2026-01-19 19:16:13,616 - INFO - 🔐 Database connection closed
+2026-01-19 19:16:19,151 - INFO - {'user': 'umer', 'query': 'hello', 'message': 'User submitted chatbot query'}
+2026-01-19 19:16:19,155 - INFO - Streaming query: hello
+2026-01-19 19:16:19,155 - INFO - Graph not found, building new graph
+2026-01-19 19:16:19,155 - INFO - 📈 Building workflow
+2026-01-19 19:16:19,198 - INFO - ✅ Graph built successfully
+2026-01-19 19:16:19,199 - INFO - Graph initialized
+2026-01-19 19:16:19,321 - INFO - 🔄 (Re)configuring LLM → openai/gpt-oss-120b
+2026-01-19 19:16:20,089 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-19 19:16:20,524 - INFO - 💬 LLM response: Hello! 👋 How can I assist you today?  
+Anything else I can help with? 😊
+2026-01-19 19:16:20,538 - INFO - 💬 Q&A logged
+2026-01-19 19:16:20,538 - INFO - {'user': 'umer', 'response': 'Hello! 👋 How can I assist you today?  \nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2026-01-19 19:17:01,496 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:17:01,717 - INFO - {'username': 'admin', 'role': 'admin', 'message': 'User logged in'}
+2026-01-19 19:17:02,218 - INFO - 🔐 Database connection closed
+2026-01-19 19:17:02,275 - INFO - {'message': 'Rendering home page'}
+2026-01-19 19:17:06,101 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:17:06,101 - INFO - 📊 Fetching order data for analytics
+2026-01-19 19:17:06,141 - INFO - {'rows': 280, 'message': 'Preprocessing data'}
+2026-01-19 19:17:06,155 - INFO - {'status': 'All', 'rows': 280, 'message': 'Data fetched and preprocessed'}
+2026-01-19 19:17:06,155 - INFO - 🔐 Database connection closed
+2026-01-19 19:17:06,191 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:17:09,399 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:17:09,499 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:17:09,592 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:17:09,660 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:17:09,718 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:17:09,754 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:17:09,754 - INFO - 🍔 Fetched menu items
+2026-01-19 19:17:16,642 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:17:16,694 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:17:16,738 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:17:16,775 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:17:16,841 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:17:16,887 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:17:16,923 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:17:16,924 - INFO - 🍔 Fetched menu items
+2026-01-19 19:17:26,616 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:17:26,666 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:17:26,713 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:17:26,758 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:17:26,831 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:17:26,885 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:17:26,917 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:17:26,918 - INFO - 🍔 Fetched menu items
+2026-01-19 19:17:36,626 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:17:36,694 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:17:36,740 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:17:36,780 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:17:36,850 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:17:36,894 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:17:36,928 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:17:36,929 - INFO - 🍔 Fetched menu items
+2026-01-19 19:17:47,239 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:17:47,296 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:17:47,363 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:17:47,416 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:17:47,479 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:17:47,518 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:17:47,551 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:17:47,553 - INFO - 🍔 Fetched menu items
+2026-01-19 19:17:57,312 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:17:57,359 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:17:57,400 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:17:57,438 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:17:57,500 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:17:57,547 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:17:57,579 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:17:57,579 - INFO - 🍔 Fetched menu items
+2026-01-19 19:18:06,618 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:18:06,618 - INFO - 📊 Fetching order data for analytics
+2026-01-19 19:18:06,625 - INFO - {'rows': 280, 'message': 'Preprocessing data'}
+2026-01-19 19:18:06,627 - INFO - {'status': 'All', 'rows': 280, 'message': 'Data fetched and preprocessed'}
+2026-01-19 19:18:06,628 - INFO - 🔐 Database connection closed
+2026-01-19 19:18:06,643 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:18:06,722 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:18:06,813 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:18:06,868 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:18:06,942 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:18:07,014 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:18:07,062 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:18:07,062 - INFO - 🍔 Fetched menu items
+2026-01-19 19:20:30,895 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:20:30,896 - INFO - 🍔 Fetched menu items
+2026-01-19 19:20:30,896 - INFO - 🍔 Fetched menu
+2026-01-19 19:20:30,896 - INFO - 🔐 Database connection closed
+2026-01-19 19:20:30,896 - INFO - 🍽️ OrderHandler initialized
+2026-01-19 19:20:53,896 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:20:54,120 - INFO - {'username': 'admin', 'role': 'admin', 'message': 'User logged in'}
+2026-01-19 19:20:54,622 - INFO - 🔐 Database connection closed
+2026-01-19 19:20:54,669 - INFO - {'message': 'Rendering home page'}
+2026-01-19 19:20:58,219 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:20:58,219 - INFO - 📊 Fetching order data for analytics
+2026-01-19 19:20:58,228 - INFO - {'rows': 280, 'message': 'Preprocessing data'}
+2026-01-19 19:20:58,234 - INFO - {'status': 'All', 'rows': 280, 'message': 'Data fetched and preprocessed'}
+2026-01-19 19:20:58,236 - INFO - 🔐 Database connection closed
+2026-01-19 19:20:58,248 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:20:58,541 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:20:58,603 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:20:58,660 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:20:58,741 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:20:58,784 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:20:58,815 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:20:58,816 - INFO - 🍔 Fetched menu items
+2026-01-19 19:20:58,835 - INFO - {'message': 'Generating item revenue chart'}
+2026-01-19 19:20:58,896 - INFO - {'message': 'Generating hourly demand chart'}
+2026-01-19 19:20:58,941 - INFO - {'message': 'Generating spending distribution chart'}
+2026-01-19 19:20:58,999 - INFO - {'message': 'Generating spending boxplot chart'}
+2026-01-19 19:20:59,073 - INFO - {'message': 'Generating AOV trend chart'}
+2026-01-19 19:21:09,252 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:21:09,297 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:21:09,342 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:21:09,379 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:21:09,448 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:21:09,505 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:21:09,555 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:21:09,555 - INFO - 🍔 Fetched menu items
+2026-01-19 19:21:09,584 - INFO - {'message': 'Generating item revenue chart'}
+2026-01-19 19:21:09,635 - INFO - {'message': 'Generating hourly demand chart'}
+2026-01-19 19:21:09,671 - INFO - {'message': 'Generating spending distribution chart'}
+2026-01-19 19:21:09,711 - INFO - {'message': 'Generating spending boxplot chart'}
+2026-01-19 19:21:09,746 - INFO - {'message': 'Generating AOV trend chart'}
+2026-01-19 19:21:19,248 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:21:19,293 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:21:19,334 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:21:19,369 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:21:19,429 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:21:19,469 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:21:19,503 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:21:19,505 - INFO - 🍔 Fetched menu items
+2026-01-19 19:21:19,524 - INFO - {'message': 'Generating item revenue chart'}
+2026-01-19 19:21:19,569 - INFO - {'message': 'Generating hourly demand chart'}
+2026-01-19 19:21:19,619 - INFO - {'message': 'Generating spending distribution chart'}
+2026-01-19 19:21:19,661 - INFO - {'message': 'Generating spending boxplot chart'}
+2026-01-19 19:21:19,701 - INFO - {'message': 'Generating AOV trend chart'}
+2026-01-19 19:21:29,255 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:21:29,296 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:21:29,340 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:21:29,371 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:21:29,433 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:21:29,471 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:21:29,502 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:21:29,505 - INFO - 🍔 Fetched menu items
+2026-01-19 19:21:29,521 - INFO - {'message': 'Generating item revenue chart'}
+2026-01-19 19:21:29,567 - INFO - {'message': 'Generating hourly demand chart'}
+2026-01-19 19:21:29,608 - INFO - {'message': 'Generating spending distribution chart'}
+2026-01-19 19:21:29,655 - INFO - {'message': 'Generating spending boxplot chart'}
+2026-01-19 19:21:29,694 - INFO - {'message': 'Generating AOV trend chart'}
+2026-01-19 19:21:39,236 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:21:39,279 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:21:39,321 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:21:39,355 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:21:39,417 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:21:39,460 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:21:39,491 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:21:39,491 - INFO - 🍔 Fetched menu items
+2026-01-19 19:21:39,511 - INFO - {'message': 'Generating item revenue chart'}
+2026-01-19 19:21:39,555 - INFO - {'message': 'Generating hourly demand chart'}
+2026-01-19 19:21:39,598 - INFO - {'message': 'Generating spending distribution chart'}
+2026-01-19 19:21:39,653 - INFO - {'message': 'Generating spending boxplot chart'}
+2026-01-19 19:21:39,684 - INFO - {'message': 'Generating AOV trend chart'}
+2026-01-19 19:21:49,248 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:21:49,291 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:21:49,334 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:21:49,370 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:21:49,434 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:21:49,473 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:21:49,505 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:21:49,506 - INFO - 🍔 Fetched menu items
+2026-01-19 19:21:49,526 - INFO - {'message': 'Generating item revenue chart'}
+2026-01-19 19:21:49,570 - INFO - {'message': 'Generating hourly demand chart'}
+2026-01-19 19:21:49,605 - INFO - {'message': 'Generating spending distribution chart'}
+2026-01-19 19:21:49,661 - INFO - {'message': 'Generating spending boxplot chart'}
+2026-01-19 19:21:49,697 - INFO - {'message': 'Generating AOV trend chart'}
+2026-01-19 19:21:59,240 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:21:59,241 - INFO - 📊 Fetching order data for analytics
+2026-01-19 19:21:59,245 - INFO - {'rows': 280, 'message': 'Preprocessing data'}
+2026-01-19 19:21:59,248 - INFO - {'status': 'All', 'rows': 280, 'message': 'Data fetched and preprocessed'}
+2026-01-19 19:21:59,248 - INFO - 🔐 Database connection closed
+2026-01-19 19:21:59,256 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:21:59,296 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:21:59,344 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:21:59,379 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:21:59,441 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:21:59,485 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:21:59,519 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:21:59,519 - INFO - 🍔 Fetched menu items
+2026-01-19 19:21:59,534 - INFO - {'message': 'Generating item revenue chart'}
+2026-01-19 19:21:59,580 - INFO - {'message': 'Generating hourly demand chart'}
+2026-01-19 19:21:59,621 - INFO - {'message': 'Generating spending distribution chart'}
+2026-01-19 19:21:59,669 - INFO - {'message': 'Generating spending boxplot chart'}
+2026-01-19 19:21:59,711 - INFO - {'message': 'Generating AOV trend chart'}
+2026-01-19 19:22:09,244 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:22:09,284 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:22:09,321 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:22:09,355 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:22:09,411 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:22:09,457 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:22:09,484 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:22:09,490 - INFO - 🍔 Fetched menu items
+2026-01-19 19:22:09,505 - INFO - {'message': 'Generating item revenue chart'}
+2026-01-19 19:22:09,553 - INFO - {'message': 'Generating hourly demand chart'}
+2026-01-19 19:22:09,594 - INFO - {'message': 'Generating spending distribution chart'}
+2026-01-19 19:22:09,629 - INFO - {'message': 'Generating spending boxplot chart'}
+2026-01-19 19:22:09,669 - INFO - {'message': 'Generating AOV trend chart'}
+2026-01-19 19:22:29,261 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:22:29,303 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:22:29,343 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:22:29,384 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:22:29,448 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:22:29,488 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:22:29,519 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:22:29,519 - INFO - 🍔 Fetched menu items
+2026-01-19 19:22:29,538 - INFO - {'message': 'Generating item revenue chart'}
+2026-01-19 19:22:29,580 - INFO - {'message': 'Generating hourly demand chart'}
+2026-01-19 19:22:29,624 - INFO - {'message': 'Generating spending distribution chart'}
+2026-01-19 19:22:29,662 - INFO - {'message': 'Generating spending boxplot chart'}
+2026-01-19 19:22:29,719 - INFO - {'message': 'Generating AOV trend chart'}
+2026-01-19 19:23:29,261 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:23:29,261 - INFO - 📊 Fetching order data for analytics
+2026-01-19 19:23:29,272 - INFO - {'rows': 280, 'message': 'Preprocessing data'}
+2026-01-19 19:23:29,274 - INFO - {'status': 'All', 'rows': 280, 'message': 'Data fetched and preprocessed'}
+2026-01-19 19:23:29,274 - INFO - 🔐 Database connection closed
+2026-01-19 19:23:29,290 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:23:29,347 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:23:29,410 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:23:29,451 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:23:29,535 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:23:29,602 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:23:29,642 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:23:29,642 - INFO - 🍔 Fetched menu items
+2026-01-19 19:23:29,661 - INFO - {'message': 'Generating item revenue chart'}
+2026-01-19 19:23:29,707 - INFO - {'message': 'Generating hourly demand chart'}
+2026-01-19 19:23:29,746 - INFO - {'message': 'Generating spending distribution chart'}
+2026-01-19 19:23:29,784 - INFO - {'message': 'Generating spending boxplot chart'}
+2026-01-19 19:23:29,836 - INFO - {'message': 'Generating AOV trend chart'}
+2026-01-19 19:24:29,269 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:24:29,316 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:24:29,357 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:24:29,394 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:24:29,454 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:24:29,496 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:24:29,525 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:24:29,525 - INFO - 🍔 Fetched menu items
+2026-01-19 19:24:29,546 - INFO - {'message': 'Generating item revenue chart'}
+2026-01-19 19:24:29,590 - INFO - {'message': 'Generating hourly demand chart'}
+2026-01-19 19:24:29,630 - INFO - {'message': 'Generating spending distribution chart'}
+2026-01-19 19:24:29,666 - INFO - {'message': 'Generating spending boxplot chart'}
+2026-01-19 19:24:29,720 - INFO - {'message': 'Generating AOV trend chart'}
+2026-01-19 19:25:29,246 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:25:29,246 - INFO - 📊 Fetching order data for analytics
+2026-01-19 19:25:29,253 - INFO - {'rows': 280, 'message': 'Preprocessing data'}
+2026-01-19 19:25:29,256 - INFO - {'status': 'All', 'rows': 280, 'message': 'Data fetched and preprocessed'}
+2026-01-19 19:25:29,256 - INFO - 🔐 Database connection closed
+2026-01-19 19:25:29,271 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:25:29,319 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:25:29,361 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:25:29,396 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:25:29,458 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:25:29,496 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:25:29,529 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:25:29,529 - INFO - 🍔 Fetched menu items
+2026-01-19 19:25:29,550 - INFO - {'message': 'Generating item revenue chart'}
+2026-01-19 19:25:29,594 - INFO - {'message': 'Generating hourly demand chart'}
+2026-01-19 19:25:29,635 - INFO - {'message': 'Generating spending distribution chart'}
+2026-01-19 19:25:29,677 - INFO - {'message': 'Generating spending boxplot chart'}
+2026-01-19 19:25:29,720 - INFO - {'message': 'Generating AOV trend chart'}
+2026-01-19 19:26:29,261 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:26:29,334 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:26:29,385 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:26:29,432 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:26:29,519 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:26:29,574 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:26:29,615 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:26:29,616 - INFO - 🍔 Fetched menu items
+2026-01-19 19:26:29,634 - INFO - {'message': 'Generating item revenue chart'}
+2026-01-19 19:26:29,681 - INFO - {'message': 'Generating hourly demand chart'}
+2026-01-19 19:26:29,729 - INFO - {'message': 'Generating spending distribution chart'}
+2026-01-19 19:26:29,769 - INFO - {'message': 'Generating spending boxplot chart'}
+2026-01-19 19:26:29,831 - INFO - {'message': 'Generating AOV trend chart'}
+2026-01-19 19:27:29,246 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:27:29,246 - INFO - 📊 Fetching order data for analytics
+2026-01-19 19:27:29,261 - INFO - {'rows': 280, 'message': 'Preprocessing data'}
+2026-01-19 19:27:29,263 - INFO - {'status': 'All', 'rows': 280, 'message': 'Data fetched and preprocessed'}
+2026-01-19 19:27:29,263 - INFO - 🔐 Database connection closed
+2026-01-19 19:27:29,279 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:27:29,340 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:27:29,391 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:27:29,433 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:27:29,514 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:27:29,570 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:27:29,611 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:27:29,611 - INFO - 🍔 Fetched menu items
+2026-01-19 19:27:29,631 - INFO - {'message': 'Generating item revenue chart'}
+2026-01-19 19:27:29,671 - INFO - {'message': 'Generating hourly demand chart'}
+2026-01-19 19:27:29,718 - INFO - {'message': 'Generating spending distribution chart'}
+2026-01-19 19:27:29,755 - INFO - {'message': 'Generating spending boxplot chart'}
+2026-01-19 19:27:29,794 - INFO - {'message': 'Generating AOV trend chart'}
+2026-01-19 19:28:29,262 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:28:29,262 - INFO - 📊 Fetching order data for analytics
+2026-01-19 19:28:29,272 - INFO - {'rows': 280, 'message': 'Preprocessing data'}
+2026-01-19 19:28:29,274 - INFO - {'status': 'All', 'rows': 280, 'message': 'Data fetched and preprocessed'}
+2026-01-19 19:28:29,275 - INFO - 🔐 Database connection closed
+2026-01-19 19:28:29,291 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:28:29,357 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:28:29,414 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:28:29,457 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:28:29,546 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:28:29,614 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:28:29,649 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:28:29,650 - INFO - 🍔 Fetched menu items
+2026-01-19 19:28:29,669 - INFO - {'message': 'Generating item revenue chart'}
+2026-01-19 19:28:29,723 - INFO - {'message': 'Generating hourly demand chart'}
+2026-01-19 19:28:29,771 - INFO - {'message': 'Generating spending distribution chart'}
+2026-01-19 19:28:29,805 - INFO - {'message': 'Generating spending boxplot chart'}
+2026-01-19 19:28:29,864 - INFO - {'message': 'Generating AOV trend chart'}
+2026-01-19 19:29:29,311 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:29:29,311 - INFO - 🍔 Fetched menu items
+2026-01-19 19:29:29,311 - INFO - 🍔 Fetched menu
+2026-01-19 19:29:29,311 - INFO - 🔐 Database connection closed
+2026-01-19 19:29:29,311 - INFO - 🍽️ OrderHandler initialized
+2026-01-19 19:29:29,346 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:29:29,346 - INFO - 📊 Fetching order data for analytics
+2026-01-19 19:29:29,353 - INFO - {'rows': 280, 'message': 'Preprocessing data'}
+2026-01-19 19:29:29,355 - INFO - {'status': 'All', 'rows': 280, 'message': 'Data fetched and preprocessed'}
+2026-01-19 19:29:29,355 - INFO - 🔐 Database connection closed
+2026-01-19 19:29:29,363 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:29:29,408 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:29:29,463 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:29:29,515 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:29:29,648 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:29:29,712 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:29:29,756 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:29:29,757 - INFO - 🍔 Fetched menu items
+2026-01-19 19:29:29,784 - INFO - {'message': 'Generating item revenue chart'}
+2026-01-19 19:29:29,837 - INFO - {'message': 'Generating hourly demand chart'}
+2026-01-19 19:29:29,912 - INFO - {'message': 'Generating spending distribution chart'}
+2026-01-19 19:29:29,988 - INFO - {'message': 'Generating spending boxplot chart'}
+2026-01-19 19:29:30,058 - INFO - {'message': 'Generating AOV trend chart'}
+2026-01-19 19:30:28,588 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:30:28,813 - WARNING - {'username': 'admin', 'message': 'Login failed'}
+2026-01-19 19:30:28,813 - INFO - 🔐 Database connection closed
+2026-01-19 19:30:38,075 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:30:38,187 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:30:38,317 - INFO - 🔐 Database connection closed
+2026-01-19 19:30:38,418 - INFO - {'username': 'admin', 'role': 'admin', 'message': 'User logged in'}
+2026-01-19 19:30:38,919 - INFO - 🔐 Database connection closed
+2026-01-19 19:30:38,974 - INFO - {'message': 'Rendering home page'}
+2026-01-19 19:30:42,469 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:30:42,469 - INFO - 📊 Fetching order data for analytics
+2026-01-19 19:30:42,476 - INFO - {'rows': 280, 'message': 'Preprocessing data'}
+2026-01-19 19:30:42,480 - INFO - {'status': 'All', 'rows': 280, 'message': 'Data fetched and preprocessed'}
+2026-01-19 19:30:42,480 - INFO - 🔐 Database connection closed
+2026-01-19 19:30:42,493 - INFO - {'message': 'Generating monthly revenue chart'}
+2026-01-19 19:30:42,551 - INFO - {'message': 'Generating yearly revenue chart'}
+2026-01-19 19:30:42,616 - INFO - {'message': 'Generating order status pie chart'}
+2026-01-19 19:30:42,677 - INFO - {'message': 'Generating cancellation trend chart'}
+2026-01-19 19:30:42,759 - INFO - {'message': 'Generating product countplot'}
+2026-01-19 19:30:42,812 - INFO - {'message': 'Generating product pie chart'}
+2026-01-19 19:30:42,860 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:30:42,861 - INFO - 🍔 Fetched menu items
+2026-01-19 19:30:42,881 - INFO - {'message': 'Generating item revenue chart'}
+2026-01-19 19:30:42,951 - INFO - {'message': 'Generating hourly demand chart'}
+2026-01-19 19:30:43,019 - INFO - {'message': 'Generating spending distribution chart'}
+2026-01-19 19:30:43,064 - INFO - {'message': 'Generating spending boxplot chart'}
+2026-01-19 19:30:43,129 - INFO - {'message': 'Generating AOV trend chart'}
+2026-01-19 19:31:27,884 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:31:27,884 - INFO - 🍔 Fetched menu items
+2026-01-19 19:31:27,885 - INFO - 🍔 Fetched menu
+2026-01-19 19:31:27,885 - INFO - 🔐 Database connection closed
+2026-01-19 19:31:27,885 - INFO - 🍽️ OrderHandler initialized
+2026-01-19 19:32:06,358 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:32:06,359 - WARNING - {'username': 'customer', 'message': 'Login failed'}
+2026-01-19 19:32:06,360 - INFO - 🔐 Database connection closed
+2026-01-19 19:32:21,421 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:32:21,422 - WARNING - {'username': 'customer', 'message': 'Login failed'}
+2026-01-19 19:32:21,422 - INFO - 🔐 Database connection closed
+2026-01-19 19:33:00,114 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:33:00,115 - INFO - 🍔 Fetched menu items
+2026-01-19 19:33:00,115 - INFO - 🍔 Fetched menu
+2026-01-19 19:33:00,115 - INFO - 🔐 Database connection closed
+2026-01-19 19:33:00,117 - INFO - 🍽️ OrderHandler initialized
+2026-01-19 19:33:15,881 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:33:16,108 - INFO - {'username': 'umer', 'role': 'customer', 'message': 'User logged in'}
+2026-01-19 19:33:16,608 - INFO - 🔐 Database connection closed
+2026-01-19 19:33:16,660 - INFO - {'message': 'Rendering home page'}
+2026-01-19 19:33:21,976 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:33:21,977 - INFO - 🍔 Fetched menu items
+2026-01-19 19:33:21,978 - INFO - 🔐 Database connection closed
+2026-01-19 19:33:39,293 - INFO - {'user': 'umer', 'query': 'hello', 'message': 'User submitted chatbot query'}
+2026-01-19 19:33:39,296 - INFO - Streaming query: hello
+2026-01-19 19:33:39,296 - INFO - Graph not found, building new graph
+2026-01-19 19:33:39,296 - INFO - 📈 Building workflow
+2026-01-19 19:33:39,309 - INFO - ✅ Graph built successfully
+2026-01-19 19:33:39,309 - INFO - Graph initialized
+2026-01-19 19:33:39,411 - INFO - 🔄 (Re)configuring LLM → openai/gpt-oss-120b
+2026-01-19 19:33:39,941 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-19 19:33:40,244 - INFO - 💬 LLM response: Hello! 👋 How can I assist you today?  
+✅ Browse the menu, place an order, check a status, or anything else?  
+
+Anything else I can help with? 😊
+2026-01-19 19:33:40,258 - INFO - 💬 Q&A logged
+2026-01-19 19:33:40,258 - INFO - {'user': 'umer', 'response': 'Hello! 👋 How can I assist you today?  \n✅ Browse the menu, place an order, check a status, or anything else?  \n\nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2026-01-19 19:33:57,368 - INFO - {'user': 'umer', 'query': 'i want a thousand pepsi and fresh Orange juice', 'message': 'User submitted chatbot query'}
+2026-01-19 19:33:57,380 - INFO - Streaming query: i want a thousand pepsi and fresh Orange juice
+2026-01-19 19:33:57,425 - INFO - Retrying request to /openai/v1/chat/completions in 0.383120 seconds
+2026-01-19 19:33:58,091 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-19 19:33:58,469 - INFO - 💬 LLM response: 
+2026-01-19 19:33:58,469 - INFO - Tool calls: [{'name': 'get_prices_for_items', 'args': {'items': ['Pepsi', 'fresh Orange juice']}, 'id': 'fc_09a8e58c-6299-475c-a2f1-a2ecc62abdf3', 'type': 'tool_call'}]
+2026-01-19 19:33:58,475 - INFO - ✅ Connected to SQLite database (Async)
+2026-01-19 19:33:58,477 - INFO - 🍔 Fetched menu items (Async)
+2026-01-19 19:33:58,477 - INFO - 💰 Prices fetched for 2 items
+2026-01-19 19:33:58,477 - INFO - 🔐 Database connection closed (Async)
+2026-01-19 19:33:58,894 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-19 19:34:00,136 - INFO - 💬 LLM response: Got it! 🥤✨ Just to confirm:
+
+| Item               | Qty | Unit Price | Subtotal |
+|--------------------|-----|------------|----------|
+| Pepsi              | 1000| $2.49      | $2,490.00|
+| Fresh Orange Juice | 1   | $4.99      | $4.99    |
+
+**Total: $2,494.99**
+
+Does everything look correct? ✅  
+
+If you’d like to adjust the quantity of the orange juice or add anything else, just let me know!  
+
+Anything else I can help with? 😊
+2026-01-19 19:34:00,142 - INFO - 💬 Q&A logged
+2026-01-19 19:34:00,142 - INFO - {'user': 'umer', 'response': 'Got it! 🥤✨ Just to confirm:\n\n| Item               | Qty | Unit Price | Subtotal |\n|--------------------|-----|------------|----------|\n| Pepsi              | 1000| $2.49      | $2,490.00|\n| Fresh Orange Juice | 1   | $4.99      | $4.99    |\n\n**Total: $2,494.99**\n\nDoes everything look correct? ✅  \n\nIf you’d like to adjust the quantity of the orange juice or add anything else, just let me know!  \n\nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2026-01-19 19:34:11,372 - INFO - {'user': 'umer', 'query': 'no 100 orange juice', 'message': 'User submitted chatbot query'}
+2026-01-19 19:34:11,375 - INFO - Streaming query: no 100 orange juice
+2026-01-19 19:34:11,407 - INFO - Retrying request to /openai/v1/chat/completions in 0.452437 seconds
+2026-01-19 19:34:12,459 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-19 19:34:12,888 - INFO - 💬 LLM response: 
+2026-01-19 19:34:12,890 - INFO - Tool calls: [{'name': 'get_prices_for_items', 'args': {'items': ['Pepsi', 'Fresh Orange Juice']}, 'id': 'fc_7c788742-4a1e-407e-888e-d317972c496b', 'type': 'tool_call'}]
+2026-01-19 19:34:12,895 - INFO - ✅ Connected to SQLite database (Async)
+2026-01-19 19:34:12,896 - INFO - 🍔 Fetched menu items (Async)
+2026-01-19 19:34:12,896 - INFO - 💰 Prices fetched for 2 items
+2026-01-19 19:34:12,897 - INFO - 🔐 Database connection closed (Async)
+2026-01-19 19:34:13,053 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-19 19:34:13,717 - INFO - 💬 LLM response: Sure! Let’s update the order to **100 Fresh Orange Juice** while keeping the **1,000 Pepsi**.
+
+| Item               | Qty | Unit Price | Subtotal |
+|--------------------|-----|------------|----------|
+| Pepsi              | 1000| $2.49      | $2,490.00|
+| Fresh Orange Juice | 100 | $4.99      | $499.00 |
+**Total: $2,989.00**
+
+Does this look good? ✅  
+
+If everything’s correct, I’ll go ahead and save the order for you.  
+
+Anything else I can help with? 😊
+2026-01-19 19:34:13,743 - INFO - 💬 Q&A logged
+2026-01-19 19:34:13,743 - INFO - {'user': 'umer', 'response': 'Sure! Let’s update the order to **100\u202fFresh\u202fOrange\u202fJuice** while keeping the **1,000\u202fPepsi**.\n\n| Item               | Qty | Unit Price | Subtotal |\n|--------------------|-----|------------|----------|\n| Pepsi              | 1000| $2.49      | $2,490.00|\n| Fresh Orange Juice | 100 | $4.99      | $499.00 |\n**Total: $2,989.00**\n\nDoes this look good? ✅  \n\nIf everything’s correct, I’ll go ahead and save the order for you.  \n\nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2026-01-19 19:34:21,082 - INFO - {'user': 'umer', 'query': '1000 pleas', 'message': 'User submitted chatbot query'}
+2026-01-19 19:34:21,085 - INFO - Streaming query: 1000 pleas
+2026-01-19 19:34:21,095 - INFO - 🔄 (Re)configuring LLM → openai/gpt-oss-120b
+2026-01-19 19:34:21,364 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-19 19:34:26,735 - INFO - ✅ Conversation summarized. New summary length: 440 chars
+2026-01-19 19:34:26,753 - INFO - Retrying request to /openai/v1/chat/completions in 0.422556 seconds
+2026-01-19 19:34:28,941 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-19 19:34:29,462 - INFO - 💬 LLM response: Got it! Just to be sure, would you like to order:
+
+- **Pepsi – 1,000 units**  
+
+(And would you still like the **100 Fresh Orange Juice**, or should we adjust that as well?)
+
+Please confirm the items and quantities you’d like to place. ✅  
+
+Anything else I can help with? 😊
+2026-01-19 19:34:29,471 - INFO - 💬 Q&A logged
+2026-01-19 19:34:29,471 - INFO - {'user': 'umer', 'response': '- Pending item: Pepsi – quantity 1000.  \n- Pending item: Fresh Orange Juice – quantity 100.  \n- No confirmed orders have been saved yet.  \n- User requested 1000 Pepsi and 100 Fresh Orange Juice.  \n- Awaiting user confirmation before finalizing the order.  \n- All items are pending and can still be modified.  \n- No allergies, preferences, or special requests have been mentioned.  \n- Please confirm the quantities to proceed with the order.Got it! Just to be sure, would you like to order:\n\n- **Pepsi – 1,000\u202funits**  \n\n(And would you still like the **100\u202fFresh\u202fOrange\u202fJuice**, or should we adjust that as well?)\n\nPlease confirm the items and quantities you’d like to place. ✅  \n\nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2026-01-19 19:34:59,646 - INFO - {'user': 'umer', 'query': 'yes', 'message': 'User submitted chatbot query'}
+2026-01-19 19:34:59,649 - INFO - Streaming query: yes
+2026-01-19 19:34:59,685 - INFO - Retrying request to /openai/v1/chat/completions in 0.415962 seconds
+2026-01-19 19:35:01,198 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-19 19:35:02,538 - INFO - 💬 LLM response: 
+2026-01-19 19:35:02,539 - INFO - Tool calls: [{'name': 'save_order', 'args': {'order_details': '{"items": {"Pepsi": 1000, "Fresh Orange Juice": 100}, "total_price": 2989.0}'}, 'id': 'fc_51e28b35-4653-4bef-abc8-1895225bebf3', 'type': 'tool_call'}]
+2026-01-19 19:35:02,544 - INFO - 💾 Received order
+2026-01-19 19:35:02,545 - INFO - 🍽️ Items found
+2026-01-19 19:35:02,546 - INFO - ✅ Connected to SQLite database (Async)
+2026-01-19 19:35:02,590 - INFO - ✅ Order stored (Async)
+2026-01-19 19:35:02,591 - INFO - ✅ Order saved
+2026-01-19 19:35:02,591 - INFO - 🔐 Database connection closed (Async)
+2026-01-19 19:35:02,735 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-19 19:35:04,071 - INFO - 💬 LLM response: ✅ Your order has been placed successfully!
+
+**Order #366**  
+- Pepsi: 1,000 × $2.49 = $2,490.00  
+- Fresh Orange Juice: 100 × $4.99 = $499.00  
+
+**Total:** $2,989.00  
+**Estimated delivery:** 40 minutes.
+
+If you need anything else—track the order, make changes, or add more items—just let me know! 😊
+2026-01-19 19:35:04,080 - INFO - 💬 Q&A logged
+2026-01-19 19:35:04,081 - INFO - {'user': 'umer', 'response': '✅ Your order has been placed successfully!\n\n**Order\u202f#366**  \n- Pepsi: 1,000\u202f×\u202f$2.49 = $2,490.00  \n- Fresh Orange Juice: 100\u202f×\u202f$4.99 = $499.00  \n\n**Total:** $2,989.00  \n**Estimated delivery:** 40\u202fminutes.\n\nIf you need anything else—track the order, make changes, or add more items—just let me know! 😊', 'message': 'Chatbot response generated'}
+2026-01-19 19:35:11,693 - INFO - {'user': 'umer', 'query': 'make 1000 juice', 'message': 'User submitted chatbot query'}
+2026-01-19 19:35:11,695 - INFO - Streaming query: make 1000 juice
+2026-01-19 19:35:11,707 - INFO - Retrying request to /openai/v1/chat/completions in 0.483912 seconds
+2026-01-19 19:35:14,101 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-19 19:35:16,696 - INFO - ✅ Conversation summarized. New summary length: 536 chars
+2026-01-19 19:35:16,762 - INFO - Retrying request to /openai/v1/chat/completions in 0.414202 seconds
+2026-01-19 19:35:17,329 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-19 19:35:17,803 - INFO - 💬 LLM response: 
+2026-01-19 19:35:17,803 - INFO - Tool calls: [{'name': 'get_prices_for_items', 'args': {'items': ['Fresh Orange Juice']}, 'id': 'fc_9c7056f6-0a6f-4912-a485-a21173838281', 'type': 'tool_call'}]
+2026-01-19 19:35:17,814 - INFO - ✅ Connected to SQLite database (Async)
+2026-01-19 19:35:17,815 - INFO - 🍔 Fetched menu items (Async)
+2026-01-19 19:35:17,815 - INFO - 💰 Prices fetched for 1 items
+2026-01-19 19:35:17,815 - INFO - 🔐 Database connection closed (Async)
+2026-01-19 19:35:17,936 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-19 19:35:19,252 - INFO - 💬 LLM response: Sure! Let’s add **1,000 Fresh Orange Juice** to a new order.
+
+| Item               | Qty  | Unit Price | Subtotal |
+|--------------------|------|------------|----------|
+| Fresh Orange Juice | 1,000| $4.99      | $4,990.00|
+
+**Total:** $4,990.00  
+
+Would you like to confirm this order? ✅  
+
+Anything else I can help with? 😊
+2026-01-19 19:35:19,259 - INFO - 💬 Q&A logged
+2026-01-19 19:35:19,259 - INFO - {'user': 'umer', 'response': '- Pending item: Pepsi – quantity 1000.  \n- Pending item: Fresh Orange Juice – quantity 100.  \n- No confirmed orders have been saved yet.  \n- User requested 1000 Pepsi and 100 Fresh Orange Juice.  \n- Awaiting user confirmation before finalizing the order.  \n- All items are pending and can still be modified.  \n- No allergies, preferences, or special requests have been mentioned.  \n- Please confirm the quantities to proceed with the order.  \n- User confirmed the pending items: Pepsi – quantity 1000, Fresh Orange Juice – quantity 100.Sure! Let’s add **1,000\u202fFresh Orange Juice** to a new order.\n\n| Item               | Qty  | Unit Price | Subtotal |\n|--------------------|------|------------|----------|\n| Fresh Orange Juice | 1,000| $4.99      | $4,990.00|\n\n**Total:** $4,990.00  \n\nWould you like to confirm this order? ✅  \n\nAnything else I can help with? 😊', 'message': 'Chatbot response generated'}
+2026-01-19 19:36:16,335 - INFO - {'order_id': '366', 'message': 'Fetching order details'}
+2026-01-19 19:36:16,336 - INFO - ✅ Connected to SQLite database
+2026-01-19 19:36:16,337 - INFO - {'order_id': 366, 'message': 'Order details fetched'}
+2026-01-19 19:36:16,337 - INFO - 🔐 Database connection closed

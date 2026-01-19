@@ -44,7 +44,7 @@ def register():
 
     col1, col2 = st.columns([1, 1], gap="small")
     with col1:
-        if st.button("✅ Register", use_container_width=True):
+        if st.button("✅ Register", width="stretch"):
             if not username or not password or not email:
                 st.warning("⚠ Please fill in **all fields** to continue.")
                 logger.warning({"message": "Incomplete registration fields"})
@@ -68,7 +68,7 @@ def register():
                 logger.error({"username": username, "email": email, "message": "Registration failed"})
 
     with col2:
-        if st.button("🔄 Go to Login", use_container_width=True):
+        if st.button("🔄 Go to Login", width="stretch"):
             st.experimental_set_query_params(page="login")
             time.sleep(1.2)
             st.rerun()

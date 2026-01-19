@@ -101,7 +101,7 @@ def show_kitchen_orders() -> None:
             "id": "📦 Order ID", "items": "🍲 Ordered Items", "total_price": "💰 Total Price ($)",
             "status": "🟢 Current Status", "time": "🕒 Order Time", "date": "🗓️ Date"
         }, inplace=True)
-        st.dataframe(df, use_container_width=True, hide_index=True)
+        st.dataframe(df, width="stretch", hide_index=True)
 
         if st.session_state.get("role") == "kitchen_staff":
             st.markdown("### 🔄 Update Order Status")
@@ -112,7 +112,7 @@ def show_kitchen_orders() -> None:
                 new_display_status = st.selectbox("🚀 New Status", list(status_mapping.keys()), help="Select new status")
                 new_status = status_mapping[new_display_status]
 
-            if st.button("✔ Update Status", use_container_width=True):
+            if st.button("✔ Update Status", width="stretch"):
                 with st.spinner("⏳ Updating status..."):
                     update_order_status(selected_order, new_status)
                     time.sleep(0.5)

@@ -202,7 +202,7 @@ elif page == "📶 Analysis":
 
 # ✅ Logout Button in Sidebar
 st.sidebar.divider()
-if st.sidebar.button("🚪 Logout", use_container_width=True):
+if st.sidebar.button("🚪 Logout", width="stretch"):
     st.success("🚪 Logging out...")
     logger.info({"user": st.session_state["username"], "message": "User logged out"})
     time.sleep(1.2)
