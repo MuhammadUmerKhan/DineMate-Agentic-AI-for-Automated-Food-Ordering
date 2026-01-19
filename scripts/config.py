@@ -40,12 +40,12 @@ LANGSMITH_ENDPOINT = os.getenv("LANGSMITH_ENDPOINT", "https://api.smith.langchai
 LANGSMITH_API_KEY = SecretStr(os.getenv("LANGSMITH_API_KEY") or "")
 
 # Short term memory handling
-SUMMARY_MESSAGE_THRESHOLD = 10     # trigger summary after this many messages
-KEEP_LAST_MESSAGES = 4               # always keep last N messages verbatim
+SUMMARY_MESSAGE_THRESHOLD = 15          # trigger summary after this many messages
+KEEP_LAST_MESSAGES = 4                  # always keep last N messages verbatim
 
 # Model configuration
 DEFAULT_MODEL_NAME = os.getenv("DEFAULT_MODEL_NAME", 'openai/gpt-oss-120b')
-MODEL_NAME = os.getenv("MODEL_NAME", "llama-3.3-70b-versatile")
+MODEL_NAME = os.getenv("MODEL_NAME", "qwen/qwen3-32b")
 
 def get_db_connection():
     """
