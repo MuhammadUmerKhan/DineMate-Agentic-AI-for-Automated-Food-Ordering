@@ -15,17 +15,26 @@ This module constructs the LangGraph workflow for the DineMate foodbot.
 """
 
 import os
-from langgraph.graph import StateGraph, START
+from langgraph.graph import StateGraph, START, END
 from langgraph.prebuilt import ToolNode, tools_condition
 from langgraph.checkpoint.memory import MemorySaver
-from scripts.state import State
-from scripts.agent import chatbot
-from scripts.tools import get_full_menu, get_prices_for_items, save_order, check_order_status, cancel_order, modify_order, get_order_details, introduce_developer
+from scripts.agent import chatbot, summarize_conversation
 from scripts.logger import get_logger
+from scripts.state import State
+from scripts.tools import (
+    get_full_menu, get_prices_for_items, save_order, 
+    check_order_status, cancel_order, modify_order, 
+    get_order_details, introduce_developer
+    )
 
 logger = get_logger(__name__)
-
 memory = MemorySaver()
+
+tools = [
+    get_full_menu, get_prices_for_items, save_order, 
+    check_order_status, cancel_order, modify_order, 
+    get_order_details, introduce_developer
+]
 
 def build_graph():
     """Construct the LangGraph workflow for the chatbot."""
@@ -36,12 +45,15 @@ def build_graph():
     
     # add nodes
     builder.add_node("chatbot", chatbot)
-    builder.add_node("tools", ToolNode([get_full_menu, get_prices_for_items, save_order, check_order_status, cancel_order, modify_order, get_order_details, introduce_developer]))
+    builder.add_node("tools", ToolNode(tools))
+    builder.add_node("summarizer", summarize_conversation)
 
     # add edges
-    builder.add_edge(START, "chatbot")
+    builder.add_edge(START, "summarizer")
+    builder.add_edge("summarizer", "chatbot")
     builder.add_conditional_edges("chatbot", tools_condition)
     builder.add_edge("tools", "chatbot")
+
     try:
         graph = builder.compile(checkpointer=memory)
         logger.info("✅ Graph built successfully")

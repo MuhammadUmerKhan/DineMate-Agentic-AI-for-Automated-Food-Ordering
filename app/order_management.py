@@ -225,8 +225,8 @@ def show_order_management() -> None:
     st.markdown("### 📝 Orders Overview")
     df = pd.DataFrame(orders)
     df.rename(columns={"id": "📦 Order ID", "items": "🍲 Items", "total_price": "💰 Total ($)",
-                        "status": "🟢 Status", "time": "🕒 Time", "date": "🗓️ Date"}, inplace=True)
-    st.dataframe(df, width="stretch", hide_index=True)
+                       "status": "🟢 Status", "time": "🕒 Time", "date": "🗓️ Date"}, inplace=True)
+    st.dataframe(df, use_container_width=True, hide_index=True)
 
     st.divider()
     st.markdown("### 🔍 Select Order to Modify")

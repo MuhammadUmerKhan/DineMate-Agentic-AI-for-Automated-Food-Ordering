@@ -19,7 +19,7 @@ from scripts.logger import get_logger
 logger = get_logger(__name__)
 
 @tool
-async def get_full_menu() -> str:
+async def get_full_menu() -> dict:
     """Fetch the full restaurant menu as a compact JSON string. Use ONLY when the user explicitly asks to see the entire menu."""
     async with AsyncDatabase() as db:
         menu = await db.load_menu()

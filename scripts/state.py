@@ -29,7 +29,8 @@ def prune_messages(left: list, right: list) -> list:
     return filtered
 
 class State(TypedDict):
-    messages: Annotated[list, prune_messages]  # Use custom reducer
+    messages: Annotated[list, add_messages]  # Use custom reducer
+    summary: str  # Store summary of conversation
     menu: dict  # Store menu as a dict, not in messages
 
     def __init__(self):

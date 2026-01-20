@@ -189,7 +189,7 @@ class Database:
                 return "⚠️ No items provided."
 
             menu = self.load_menu() or []
-            valid_items = {name.lower() for name in menu}
+            valid_items = {item["name"].lower() for item in menu}
             for item in items:
                 if item.lower() not in valid_items:
                     return f"⚠️ '{item}' not in menu."

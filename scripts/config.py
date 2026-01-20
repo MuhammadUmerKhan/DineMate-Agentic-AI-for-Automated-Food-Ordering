@@ -13,6 +13,8 @@ Dependencies:
 
 import os, sqlite3
 from dotenv import load_dotenv
+from pathlib import Path
+from pydantic import SecretStr
 from scripts.logger import get_logger
 
 # Load environment variables
@@ -22,24 +24,28 @@ load_dotenv()
 logger = get_logger(__name__)
 
 # Environment variables
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+GROQ_API_KEY = SecretStr(os.getenv("GROQ_API_KEY") or "")
 
 # Temperature for LLM responses
 TEMPERATURE = os.getenv("TEMPERATURE", 0.5)
 
 # Static paths
-DB_PATH = os.path.join("database", "dinemate.db")
-STATIC_CSS_PATH = os.path.join("static", "styles.css")
+DB_PATH = Path(__file__).parent.parent / "database" / "dinemate.db"
+STATIC_CSS_PATH =  Path(__file__).parent.parent / "static" / "styles.css"
 
 # langsmith configuration
-LANGCHAIN_PROJECT = os.getenv("LANGCHAIN_PROJECT", "DineMate")
-LANGCHAIN_TRACING_V2 = os.getenv("LANGCHAIN_TRACING_V2", "true")
-LANGCHAIN_API_KEY = os.getenv("LANGCHAIN_API_KEY")
-LANGCHAIN_ENDPOINT = os.getenv("LANGCHAIN_ENDPOINT", "https://api.smith.langchain.com")
-LANGCHAIN_API_KEY = os.getenv("LANGCHAIN_API_KEY")
+LANGSMITH_PROJECT = os.getenv("LANGSMITH_PROJECT", "DineMate")
+LANGSMITH_TRACING = os.getenv("LANGSMITH_TRACING", "true")
+LANGSMITH_ENDPOINT = os.getenv("LANGSMITH_ENDPOINT", "https://api.smith.langchain.com")
+LANGSMITH_API_KEY = SecretStr(os.getenv("LANGSMITH_API_KEY") or "")
+
+# Short term memory handling
+SUMMARY_MESSAGE_THRESHOLD = 15          # trigger summary after this many messages
+KEEP_LAST_MESSAGES = 4                  # always keep last N messages verbatim
 
 # Model configuration
-DEFAULT_MODEL_NAME = os.getenv("MODEL_NAME", 'openai/gpt-oss-120b')
+DEFAULT_MODEL_NAME = os.getenv("DEFAULT_MODEL_NAME", 'openai/gpt-oss-120b')
+MODEL_NAME = os.getenv("MODEL_NAME", "qwen/qwen3-32b")
 
 def get_db_connection():
     """

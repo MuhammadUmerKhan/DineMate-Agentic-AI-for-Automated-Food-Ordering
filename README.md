@@ -232,6 +232,7 @@ streamlit run main.py
 - 🗄️ **SQLite Transition**: Replaced MySQL with SQLite for simplified deployment and local testing.
 - 🤖 **Agent Improvements**: Enhanced `agent.py` and `graph.py` with LangGraph for multi-agent coordination (chatbot, kitchen, admin).
 - 📊 **Analytics Upgrade**: Added `preprocesser.py` and `visualizers.py` for advanced data processing and Plotly charts.
+- 🧠 **Smart Context Management**: Implemented short-term memory via dynamic conversation summarization (triggered after 10 messages) to optimize token usage while preserving long-term coherence.
 - 🛠️ **Script Modularity**: Expanded `scripts` with `state.py`, `tool.py`, and `__init__.py` for better state management and utilities.
 
 ---
@@ -245,7 +246,7 @@ streamlit run main.py
 ---
 
 ## 📽️ **Live Demo**
-- [Click Here](https://dinemate.streamlit.app/?embed_options=dark_theme)
+- [Click Here](https://dinemate-ai-powered-conversational-ai-agent-for-food-ordering.streamlit.app/?embed_options=dark_theme)
 
 ---
 
