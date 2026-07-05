@@ -48,7 +48,7 @@ DEFAULT_MODEL_NAME = os.getenv("DEFAULT_MODEL_NAME", 'openai/gpt-oss-120b')
 MODEL_NAME = os.getenv("MODEL_NAME", "qwen/qwen3-32b")
 
 # Prompt guard configuration
-GUARDRAIL_MODEL_NAME = os.getenv("GUARDRAIL_MODEL_NAME", "meta-llama/llama-prompt-guard-2-22m")
+GUARDRAIL_MODEL_NAME = os.getenv("GUARDRAIL_MODEL_NAME", "meta-llama/llama-prompt-guard-2-86m")
 GUARDRAIL_BLOCK_THRESHOLD = float(os.getenv("GUARDRAIL_BLOCK_THRESHOLD", "0.55"))
 GUARDRAIL_BORDERLINE_THRESHOLD = float(os.getenv("GUARDRAIL_BORDERLINE_THRESHOLD", "0.35"))
 GUARDRAIL_TIMEOUT_SECONDS = float(os.getenv("GUARDRAIL_TIMEOUT_SECONDS", "2.5"))
