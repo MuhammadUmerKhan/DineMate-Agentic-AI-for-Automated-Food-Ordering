@@ -15,10 +15,12 @@ This module constructs the LangGraph workflow for the DineMate foodbot.
 """
 
 import os
+from langchain_core.messages import AIMessage
 from langgraph.graph import StateGraph, START, END
 from langgraph.prebuilt import ToolNode, tools_condition
 from langgraph.checkpoint.memory import MemorySaver
 from scripts.agent import chatbot, summarize_conversation
+from scripts.guardrails import guardrail_node, should_continue_after_guardrails, BLOCKED_RESPONSE
 from scripts.logger import get_logger
 from scripts.state import State
 from scripts.tools import (
@@ -36,6 +38,13 @@ tools = [
     get_order_details, introduce_developer
 ]
 
+def blocked_response_node(state: State) -> dict:
+    """Terminal node reached when the guardrail blocks a message.
+    Surfaces a generic refusal instead of silently dropping the turn."""
+    logger.warning("Guardrail BLOCK path reached — returning refusal to user")
+    return {"messages": [AIMessage(content=BLOCKED_RESPONSE)]}
+
+
 def build_graph():
     """Construct the LangGraph workflow for the chatbot."""
     logger.info("📈 Building workflow")
@@ -44,12 +53,29 @@ def build_graph():
     builder = StateGraph(State)
     
     # add nodes
+    builder.add_node("guardrails", guardrail_node)
+    builder.add_node("blocked", blocked_response_node)
     builder.add_node("chatbot", chatbot)
     builder.add_node("tools", ToolNode(tools))
     builder.add_node("summarizer", summarize_conversation)
 
     # add edges
-    builder.add_edge(START, "summarizer")
+    # Guardrail runs first, before the costlier summarizer/chatbot calls,
+    # so a blocked message never reaches the LLM agent or its tools.
+    builder.add_edge(START, "guardrails")
+    builder.add_conditional_edges(
+        "guardrails",
+        should_continue_after_guardrails,
+        {
+            "PASS": "summarizer",
+            "BLOCK": "blocked",
+            # Fail-open on classifier error: this is a defense-in-depth layer,
+            # not the only control (see tools.py/db.py fixes), so an
+            # unavailable guardrail shouldn't take down ordering entirely.
+            "ERROR": "summarizer",
+        },
+    )
+    builder.add_edge("blocked", END)
     builder.add_edge("summarizer", "chatbot")
     builder.add_conditional_edges("chatbot", tools_condition)
     builder.add_edge("tools", "chatbot")

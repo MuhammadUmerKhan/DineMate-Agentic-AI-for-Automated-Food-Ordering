@@ -11,3 +11,6 @@ wheels/
 
 # enviroment variables
 .env
+
+# eval
+.eval

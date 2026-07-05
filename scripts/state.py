@@ -32,6 +32,8 @@ class State(TypedDict):
     messages: Annotated[list, add_messages]  # Use custom reducer
     summary: str  # Store summary of conversation
     menu: dict  # Store menu as a dict, not in messages
+    guardrail_status: str
+    guardrail_score: float
 
     def __init__(self):
         logger.info("🍽️ State initialized")
