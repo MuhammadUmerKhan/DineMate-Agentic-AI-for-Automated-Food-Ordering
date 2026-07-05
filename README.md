@@ -250,6 +250,13 @@ streamlit run main.py
 
 ---
 
+## 🔐 **AI Security — Red-Teamed & Hardened**
+DineMate's agentic order-management tools were red-teamed against the **OWASP LLM Top 10** and **MITRE ATLAS**, covering prompt injection, excessive agency, system prompt/tool-schema leakage, IDOR, and unbounded consumption. Confirmed findings included a critical price-tampering bug (agent-writable order totals, now fixed with server-side recomputation) and a critical IDOR gap (accepted as a documented residual risk), plus a Prompt Guard 2 input guardrail added ahead of the agent.
+
+📄 **Full report, methodology, findings table, before/after results, and screenshots:** [`SECURITY.md`](./SECURITY.md)
+
+---
+
 ## 🤝 **Contributions**
 Contributions are welcome! Fork, submit pull requests, or suggest improvements.
 
