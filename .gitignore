@@ -11,3 +11,8 @@ wheels/
 
 # enviroment variables
 .env
+
+# eval
+.evaldatabase/dinemate.db
+logs/*.log
+*.log
