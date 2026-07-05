@@ -85,7 +85,7 @@ _llm_instance, _current_model = None, None
 
 @st.cache_resource(show_spinner=False)
 @traceable(run_type="llm", project_name=LANGSMITH_PROJECT)
-def configure_llm(model_name: str, force_reload: bool = False):
+def configure_llm(model_name: str, force_reload: bool = False, streaming: bool = True):
     global _llm_instance, _current_model
     
     if force_reload or _llm_instance is None or _current_model != model_name:
@@ -94,6 +94,8 @@ def configure_llm(model_name: str, force_reload: bool = False):
             model_name=model_name,
             temperature=TEMPERATURE,
             groq_api_key=GROQ_API_KEY.get_secret_value(),
+            streaming=streaming
+            
         )
         _current_model = model_name
     
