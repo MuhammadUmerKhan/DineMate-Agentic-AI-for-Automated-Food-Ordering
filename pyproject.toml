@@ -17,6 +17,7 @@ dependencies = [
     "numpy>=2.3.3",
     "pillow>=11.3.0",
     "plotly>=6.3.0",
+    "pytest>=9.1.1",
     "python-dotenv>=1.1.1",
     "streamlit>=1.49.1",
     "streamlit-autorefresh>=1.0.1",
