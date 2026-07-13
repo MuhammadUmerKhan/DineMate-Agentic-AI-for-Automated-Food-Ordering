@@ -4,7 +4,7 @@
 **DineMate** is an **AI-driven, agent-based food ordering system** designed to streamline **ordering, tracking, and management** for customers, kitchen staff, and restaurant admins. Built with **Large Language Models (LLMs)**, **LangChain**, **LangGraph**, and **Streamlit**, it offers a **fully automated, real-time food ordering experience** with an intelligent chatbot, kitchen dashboard, and admin analytics. Recently enhanced with a centralized dark theme (via `static/styles.css`) and SQLite database integration, DineMate provides a cohesive, food-inspired UI and robust backend support.
 
 ---
-![](https://www.streebo.com/blog/wp-content/uploads/2020/02/restaurant-chatbot-thumbnail.jpg)
+![Secure DineMate Hero Image](assets/hero-thumbnail.png)
 
 ## 🚀 **Key Features**
 
@@ -109,7 +109,10 @@ DineMate-Food-Ordering-Chatbot/
 
 ---
 
-## 🛠️ **Agent-Based AI System**
+## 🛠️ **Agent-Based AI System & Architecture**
+
+![DineMate System Architecture](assets/whiteboard-architecture.png)
+
 **DineMate leverages a multi-agent system** for dynamic automation:
 
 - 🤖 **Chatbot Agent**: Extracts order details and handles queries.
